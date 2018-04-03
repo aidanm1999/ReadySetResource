@@ -83,3 +83,7 @@ C:\Users\Aidan Marshall\Documents\Projects\ReadySetResource\Implementation\Ready
 C:\Users\Aidan Marshall\Documents\Projects\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\obj\Debug\ReadySetResource.Migrations.AddedInitialModels.resources
 C:\Users\Aidan Marshall\Documents\Projects\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\obj\Debug\ReadySetResource.Migrations.AddedInitialModels2.resources
 C:\Users\Aidan Marshall\Documents\Projects\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\obj\Debug\ReadySetResource.Migrations.AddModels3.resources
+C:\Users\Aidan Marshall\Documents\Projects\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\obj\Debug\ReadySetResource.Migrations.AddErrorModel.resources
+C:\Users\Aidan Marshall\Documents\Projects\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\obj\Debug\ReadySetResource.Migrations.AddErrorModel2.resources
+C:\Users\Aidan Marshall\Documents\Projects\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\obj\Debug\ReadySetResource.Migrations.AddIdeaModel.resources
+C:\Users\Aidan Marshall\Documents\Projects\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\obj\Debug\ReadySetResource.Migrations.AddIdeaModel2.resources

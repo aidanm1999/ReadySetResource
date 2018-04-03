@@ -222,9 +222,27 @@
     <Compile Include="Migrations\201804021940120_AddModels3.Designer.cs">
       <DependentUpon>201804021940120_AddModels3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804031238551_AddErrorModel.cs" />
+    <Compile Include="Migrations\201804031238551_AddErrorModel.Designer.cs">
+      <DependentUpon>201804031238551_AddErrorModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804031240372_AddErrorModel2.cs" />
+    <Compile Include="Migrations\201804031240372_AddErrorModel2.Designer.cs">
+      <DependentUpon>201804031240372_AddErrorModel2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804031256054_AddIdeaModel.cs" />
+    <Compile Include="Migrations\201804031256054_AddIdeaModel.Designer.cs">
+      <DependentUpon>201804031256054_AddIdeaModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804031257133_AddIdeaModel2.cs" />
+    <Compile Include="Migrations\201804031257133_AddIdeaModel2.Designer.cs">
+      <DependentUpon>201804031257133_AddIdeaModel2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Business.cs" />
     <Compile Include="Models\BusinessUserType.cs" />
     <Compile Include="Models\EmployeeType.cs" />
+    <Compile Include="Models\Error.cs" />
+    <Compile Include="Models\Idea.cs" />
     <Compile Include="Models\Password.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -333,6 +351,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804021940120_AddModels3.resx">
       <DependentUpon>201804021940120_AddModels3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804031238551_AddErrorModel.resx">
+      <DependentUpon>201804031238551_AddErrorModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804031240372_AddErrorModel2.resx">
+      <DependentUpon>201804031240372_AddErrorModel2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804031256054_AddIdeaModel.resx">
+      <DependentUpon>201804031256054_AddIdeaModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804031257133_AddIdeaModel2.resx">
+      <DependentUpon>201804031257133_AddIdeaModel2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

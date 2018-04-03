@@ -33,6 +33,8 @@ namespace ReadySetResource.Models
         public DbSet<EmployeeType> EmployeeTypes { get; set; }
         public DbSet<BusinessUserType> BusinessUserTypes { get; set; }
         public DbSet<Business> Businesses { get; set; }
+        public DbSet<Error> Errors { get; set; }
+        public DbSet<Idea> Ideas { get; set; }
 
 
         public static ApplicationDbContext Create()
