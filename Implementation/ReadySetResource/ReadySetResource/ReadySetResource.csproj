@@ -242,6 +242,14 @@
     <Compile Include="Migrations\201804031322352_AddShiftModel.Designer.cs">
       <DependentUpon>201804031322352_AddShiftModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804031349026_AddUserInterestModel.cs" />
+    <Compile Include="Migrations\201804031349026_AddUserInterestModel.Designer.cs">
+      <DependentUpon>201804031349026_AddUserInterestModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804031350452_AddUserInterestModel2.cs" />
+    <Compile Include="Migrations\201804031350452_AddUserInterestModel2.Designer.cs">
+      <DependentUpon>201804031350452_AddUserInterestModel2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Business.cs" />
     <Compile Include="Models\BusinessUserType.cs" />
     <Compile Include="Models\EmployeeType.cs" />
@@ -261,6 +269,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Shift.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserInterest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -371,6 +380,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804031322352_AddShiftModel.resx">
       <DependentUpon>201804031322352_AddShiftModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804031349026_AddUserInterestModel.resx">
+      <DependentUpon>201804031349026_AddUserInterestModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804031350452_AddUserInterestModel2.resx">
+      <DependentUpon>201804031350452_AddUserInterestModel2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -36,6 +36,7 @@ namespace ReadySetResource.Models
         public DbSet<Error> Errors { get; set; }
         public DbSet<Idea> Ideas { get; set; }
         public DbSet<Shift> Shifts { get; set; }
+        public DbSet<UserInterest> UserInterests { get; set; }
 
 
         public static ApplicationDbContext Create()
