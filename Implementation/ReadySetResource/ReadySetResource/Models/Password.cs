@@ -5,7 +5,7 @@ using System.Web;
 using System.ComponentModel.DataAnnotations;
 using ReadySetResource.Models;
 
-namespace ReadySetResource.Controllers
+namespace ReadySetResource.Models
 {
     public class Password
     {

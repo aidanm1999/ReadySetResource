@@ -20,13 +20,20 @@ namespace ReadySetResource.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public DbSet<User> Users { get; set; }
+        
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
-    
+
+
+        public DbSet<User> Users { get; set; }
+        public DbSet<Password> Passwords { get; set; }
+        public DbSet<EmployeeType> EmployeeTypes { get; set; }
+        public DbSet<BusinessUserType> BusinessUserTypes { get; set; }
+        public DbSet<Business> Businesses { get; set; }
+
 
         public static ApplicationDbContext Create()
         {

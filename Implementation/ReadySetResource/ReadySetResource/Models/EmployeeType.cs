@@ -17,9 +17,8 @@ namespace ReadySetResource.Models
         public string Title { get; set; }
 
         [MaxLength(255)]
-        public bool Description { get; set; }
+        public string Description { get; set; }
 
-        [MaxLength(6)]
         public int BaseSalary { get; set; }
     }
 }

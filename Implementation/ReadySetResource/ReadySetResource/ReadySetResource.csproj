@@ -210,6 +210,18 @@
     <Compile Include="Migrations\201803292147156_AddModels1.Designer.cs">
       <DependentUpon>201803292147156_AddModels1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804021542134_AddedInitialModels.cs" />
+    <Compile Include="Migrations\201804021542134_AddedInitialModels.Designer.cs">
+      <DependentUpon>201804021542134_AddedInitialModels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804021920241_AddedInitialModels2.cs" />
+    <Compile Include="Migrations\201804021920241_AddedInitialModels2.Designer.cs">
+      <DependentUpon>201804021920241_AddedInitialModels2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804021940120_AddModels3.cs" />
+    <Compile Include="Migrations\201804021940120_AddModels3.Designer.cs">
+      <DependentUpon>201804021940120_AddModels3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Business.cs" />
     <Compile Include="Models\BusinessUserType.cs" />
     <Compile Include="Models\EmployeeType.cs" />
@@ -312,6 +324,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803292147156_AddModels1.resx">
       <DependentUpon>201803292147156_AddModels1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804021542134_AddedInitialModels.resx">
+      <DependentUpon>201804021542134_AddedInitialModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804021920241_AddedInitialModels2.resx">
+      <DependentUpon>201804021920241_AddedInitialModels2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804021940120_AddModels3.resx">
+      <DependentUpon>201804021940120_AddModels3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

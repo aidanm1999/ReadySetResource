@@ -54,14 +54,14 @@ namespace ReadySetResource.Models
         [MinLength(4)]
         public string CardType { get; set; }
 
-        [StringLength(10)]
+        [MaxLength(16)]
         public string CardNumber { get; set; }
 
         [StringLength(2)]
-        public int ExpiryMonth { get; set; }
+        public string ExpiryMonth { get; set; }
 
         [StringLength(2)]
-        public int ExpiryYear { get; set; }
+        public string ExpiryYear { get; set; }
 
         [StringLength(3)]
         public string SecuriyNumber { get; set; }

@@ -55,7 +55,7 @@ namespace ReadySetResource.Models
         [Required]
         public bool Blocked { get; set; }
 
-        [Required] [MaxLength(10)]
+        [Required] 
         public int TimesLoggedIn { get; set; }
 
         public char Sex { get; set; }
@@ -67,11 +67,9 @@ namespace ReadySetResource.Models
         [Phone]
         [Display(Name = "Emergency Number")]
         public string EmergencyContact { get; set; }
-
-        [MaxLength(5)]
+        
         public float Raise { get; set; }
 
-        [MaxLength(1)]
         public int Strikes { get; set; }
 
         
