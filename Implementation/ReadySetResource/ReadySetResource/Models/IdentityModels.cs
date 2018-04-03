@@ -35,6 +35,7 @@ namespace ReadySetResource.Models
         public DbSet<Business> Businesses { get; set; }
         public DbSet<Error> Errors { get; set; }
         public DbSet<Idea> Ideas { get; set; }
+        public DbSet<Shift> Shifts { get; set; }
 
 
         public static ApplicationDbContext Create()
