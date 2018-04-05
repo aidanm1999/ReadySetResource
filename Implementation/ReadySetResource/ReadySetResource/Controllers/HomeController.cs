@@ -13,17 +13,53 @@ namespace ReadySetResource.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult OurStory()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult Solutions()
         {
-            ViewBag.Message = "Your contact page.";
+            return View();
+        }
 
+        public ActionResult LogIn()
+        {
+            return View();
+        }
+
+        public ActionResult LogInStage2()
+        {
+            return View();
+        }
+
+        public ActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        public ActionResult CreateNewPassword()
+        {
+            return View();
+        }
+
+        public ActionResult SecurityQuestions()
+        {
+            return View();
+        }
+
+        public ActionResult JobOpportunities()
+        {
+            return View();
+        }
+
+        public ActionResult Credits()
+        {
+            return View();
+        }
+
+        public ActionResult SiteMap()
+        {
             return View();
         }
     }
