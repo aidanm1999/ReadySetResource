@@ -20,7 +20,7 @@ namespace ReadySetResource.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        
+
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
@@ -37,6 +37,18 @@ namespace ReadySetResource.Models
         public DbSet<Idea> Ideas { get; set; }
         public DbSet<Shift> Shifts { get; set; }
         public DbSet<UserInterest> UserInterests { get; set; }
+        public DbSet<Case> Cases { get; set; }
+        public DbSet<Holiday> Holidays { get; set; }
+        public DbSet<DataTransferRate> DataTransferRates { get; set; }
+        public DbSet<Item> Items { get; set; }
+        public DbSet<Update> Updates { get; set; }
+        public DbSet<DataOverTime> DataOverTimes { get; set; }
+        public DbSet<Question> Questions { get; set; }
+        public DbSet<Answer> Answers { get; set; }
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
+
+
 
 
         public static ApplicationDbContext Create()
