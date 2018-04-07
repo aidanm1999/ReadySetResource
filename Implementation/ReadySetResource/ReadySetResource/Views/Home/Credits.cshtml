@@ -4,5 +4,61 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Credits</h2>
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
 
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+
+
+
+<div>
+    <h2 style="text-align:center;">Credits</h2>
+    <table style="width:100%">
+        <thead>
+            <tr>
+                <th width="10%">Material No.</th>
+                <th width="30%">Page</th>
+                <th width="60%">Source</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Home</td>
+                <td><a href="https://google.com">https://google.com</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <hr/>
+
+
+    <h2 style="text-align:center;">A huge thanks to...</h2>
+    <table style="width:100%">
+        <thead>
+            <tr>
+                <th width="20%">Person</th>
+                <th width="80%">Reason</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Emily Paton</td>
+                <td>For hello</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

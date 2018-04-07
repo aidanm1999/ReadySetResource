@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - RSR</title>
     @Styles.Render("~/Content/css")
@@ -9,7 +9,7 @@
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-fixed-top navbar" style="background-color:#ffffff; border-color:#ffffff">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -17,13 +17,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("RSR", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("RSR", "Index", "Home", new { area = "" }, new { style= "color:#428bca", @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Our Story", "OurStory", "Home")</li>
-                    <li>@Html.ActionLink("Solutions", "Solutions", "Home")</li>
+                    <li>@Html.ActionLink("Home", "Index", "Home", null, new { style = "color: #428bca" })</li>
+                    <li>@Html.ActionLink("Our Story", "OurStory", "Home", null, new { style = "color: #428bca" })</li>
+                    <li>@Html.ActionLink("Solutions", "Solutions", "Home", null, new { style = "color: #428bca" })</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -32,10 +32,10 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer class="navbar navbar-fixed-bottom" style="background-color:#428bca">
+        <footer class="navbar" style="background-color:#428bca">
             <p style="text-align:center; padding-top:15px; color:#ffffff">
-                @Html.ActionLink("Job Opportunities", "JobOpportunities", "Home", null, new { style = "color: #ffffff" }) | 
-                <a href="~/Legal/Index" style="color:#ffffff">&copy; @DateTime.Now.Year</a> | 
+                @Html.ActionLink("Job Opportunities", "JobOpportunities", "Home", null, new { style = "color: #ffffff" }) |
+                <a href="~/Legal/Index" style="color:#ffffff">&copy; @DateTime.Now.Year</a> |
                 @Html.ActionLink(" ReadySetResource", "Index", "Home", null, new { style = "color: #ffffff" }) |
                 @Html.ActionLink("Credits", "Credits", "Home", null, new { style = "color: #ffffff" }) |
                 @Html.ActionLink("Site Map", "SiteMap", "Home", null, new { style = "color: #ffffff" })
