@@ -8,59 +8,124 @@ namespace ReadySetResource.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        #region Index
+        [HttpGet]
+        [AllowAnonymous]
+        public ViewResult Index()
         {
             return View();
         }
+        #endregion
 
-        public ActionResult OurStory()
-        {
-            return View();
-        }
 
-        public ActionResult Solutions()
+        #region OurStory
+        [HttpGet]
+        [AllowAnonymous]
+        public ViewResult OurStory()
         {
             return View();
         }
+        #endregion
 
-        public ActionResult LogIn()
-        {
-            return View();
-        }
 
-        public ActionResult LogInStage2()
+        #region Solutions
+        [HttpGet]
+        [AllowAnonymous]
+        public ViewResult Solutions()
         {
             return View();
         }
+        #endregion
 
-        public ActionResult ForgotPassword()
-        {
-            return View();
-        }
 
-        public ActionResult CreateNewPassword()
+        #region LogIn
+        [HttpGet]
+        [AllowAnonymous]
+        public ViewResult LogIn()
         {
             return View();
         }
+        #endregion
 
-        public ActionResult SecurityQuestions()
-        {
-            return View();
-        }
 
-        public ActionResult JobOpportunities()
+        #region LogInStage2
+        [HttpGet]
+        [AllowAnonymous]
+        public ViewResult LogInStage2()
         {
             return View();
         }
+        #endregion
 
-        public ActionResult Credits()
-        {
-            return View();
-        }
 
-        public ActionResult SiteMap()
+        #region ForgotPassword
+        [HttpGet]
+        [AllowAnonymous]
+        public ViewResult ForgotPassword()
         {
             return View();
         }
+        #endregion
+
+
+        #region CreateNewPassword
+        [HttpGet]
+        [AllowAnonymous]
+        public ViewResult CreateNewPassword()
+        {
+            return View();
+        }
+        #endregion
+
+
+        #region SecurityQuestions
+        [HttpGet]
+        [AllowAnonymous]
+        public ViewResult SecurityQuestions()
+        {
+            return View();
+        }
+        #endregion
+
+
+        #region JobOpportunities
+        [HttpGet]
+        [AllowAnonymous]
+        public ViewResult JobOpportunities()
+        {
+            return View();
+        }
+        #endregion
+
+
+        #region Credits
+        [HttpGet]
+        [AllowAnonymous]
+        public ViewResult Credits()
+        {
+            return View();
+        }
+        #endregion
+
+
+        #region SiteMap
+        [HttpGet]
+        [AllowAnonymous]
+        public ViewResult SiteMap()
+        {
+            return View();
+        }
+        #endregion
+
+
+
+        #region ConfirmEmail
+        [HttpGet]
+        [AllowAnonymous]
+        public ViewResult ConfirmEmail()
+        {
+            return View();
+        }
+        #endregion
     }
 }

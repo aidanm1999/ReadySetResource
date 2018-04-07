@@ -201,6 +201,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LegalController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Migrations\201803292039588_AddUserModelAndPasswordModel.cs" />
     <Compile Include="Migrations\201803292039588_AddUserModelAndPasswordModel.Designer.cs">
@@ -334,6 +335,10 @@
     <Compile Include="Migrations\201804051416139_AddTransactionModel2.Designer.cs">
       <DependentUpon>201804051416139_AddTransactionModel2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804071008596_AddEmailVerifToUser.cs" />
+    <Compile Include="Migrations\201804071008596_AddEmailVerifToUser.Designer.cs">
+      <DependentUpon>201804071008596_AddEmailVerifToUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\DataOverTime.cs" />
     <Compile Include="Models\DataTransferRate.cs" />
@@ -370,6 +375,9 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\legal\terms.png" />
+    <Content Include="Content\Images\legal\copyright.png" />
+    <Content Include="Content\Images\legal\privacy.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -432,6 +440,8 @@
     <Content Include="Views\Home\JobOpportunities.cshtml" />
     <Content Include="Views\Home\Credits.cshtml" />
     <Content Include="Views\Home\SiteMap.cshtml" />
+    <Content Include="Views\Home\ConfirmEmail.cshtml" />
+    <Content Include="Views\Legal\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -551,6 +561,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804051416139_AddTransactionModel2.resx">
       <DependentUpon>201804051416139_AddTransactionModel2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804071008596_AddEmailVerifToUser.resx">
+      <DependentUpon>201804071008596_AddEmailVerifToUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

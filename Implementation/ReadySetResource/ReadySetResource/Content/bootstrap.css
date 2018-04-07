@@ -3343,6 +3343,11 @@ input[type="button"].btn-block {
   content: "";
 }
 
+.navbar-unfixed-bottom {
+    width: 100%;
+    
+}
+
 .dropup .dropdown-menu,
 .navbar-fixed-bottom .dropdown .dropdown-menu {
   top: auto;

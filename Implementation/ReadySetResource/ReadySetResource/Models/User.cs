@@ -33,6 +33,9 @@ namespace ReadySetResource.Models
         [Display(Name = "Email Address")]
         public string Email { get; set; }
 
+        [Required]
+        public bool EmailConfirmed { get; set; } // Added this attribute for verification 
+
         [EmailAddress]
         [Display(Name = "Back-up Email")]
         public string BackupEmail { get; set; }
