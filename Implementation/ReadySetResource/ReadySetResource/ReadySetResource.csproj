@@ -376,6 +376,13 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\home\backgroud.jpg" />
+    <Content Include="Content\Images\home\cogwheels.png" />
+    <Content Include="Content\Images\home\ideas.png" />
+    <Content Include="Content\Images\home\meetings.png" />
+    <Content Include="Content\Images\home\messages.png" />
+    <Content Include="Content\Images\home\rota.png" />
+    <Content Include="Content\Images\home\store.png" />
+    <Content Include="Content\Images\home\update.png" />
     <Content Include="Content\Images\legal\terms.png" />
     <Content Include="Content\Images\legal\copyright.png" />
     <Content Include="Content\Images\legal\privacy.png" />

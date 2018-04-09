@@ -1,31 +1,95 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Home";
 }
 
-<div class="jumbotron" style="color:#4ba2ed; background: url(../../Content/Images/home/backgroud.jpg) no-repeat center center fixed; background-size:100%; padding-bottom:300px; text-align:center">
+<div class="jumbotron" style="color:#4ba2ed; background: url(../../Content/Images/home/backgroud.jpg) no-repeat center center fixed; background-size:1024px; padding-bottom:100px; text-align:center">
     <h1>Ready Set Resource</h1>
     <p class="lead">Resource allocation made easy.</p>
-    <p style="padding-top:200px"><a href="#OurService" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    <p style="padding-top:200px"><a href="#TheFutureOfManaging" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
 </div>
 
-<div class="row" id ="OurService">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
+
+<div class="row" id="TheFutureOfManaging" style="padding-bottom:25px;">
+    <h2 style="text-align:center">Managing, the future.</h2>
+    <div class="col-md-4" style="height:300px; align-content:center;">
+        <img src="~/Content/Images/home/cogwheels.png" style=" height:100%; display:block; margin-left:auto; margin-right:auto;">
+    </div>
+    <div class="col-md-8" style="text-align:justify">
+        
+        <p style="padding-top:25px;">
+            With many years in the retail industry, our team have pinpointed many flaws in backend operations of
+            different companies and through extensive market research we have analysed and targeted the biggest issues.
         </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        <p>
+            We decided to come together to design and develop a website that we hope will help your company thrive in
+            an ever incresing competitive market by allowing you to focus on more important tasks and increase productivity.
+        </p>
+        <p>
+            To get to know us a bit better why don't you head over to our story and get introduced to our team...
+        </p>
+        <p>
+            @Html.ActionLink("Get to know us!", "OurStory", "Home", null, new { @class = "btn btn-primary" })
+        </p>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+</div>
+<hr>
+<div style="padding-top:50px">
+    <h2 style="text-align:center">Our Solution</h2>
+    <p style="text-align:center">
+        We decided to create powerful but simple to use apps that can help your company excel.
+    </p>
+    <div class="row" style="text-align:justify">
+        <div class="col-md-4">
+            <img src="~/Content/Images/home/rota.png" style=" padding-top:10px; padding-bottom:10px; width:auto; display:block; margin-left:auto; margin-right:auto;">
+            <p>
+                The rota app is a great way for everyone to track their shifts and other's too!
+                With an inbuilt holiday planner everone can request holidays and the managers
+                can accept or decline them giving control to only the people you want.
+            </p>
+        </div>
+        <div class="col-md-4">
+            <img src="~/Content/Images/home/messages.png" style=" padding-top:30px; padding-bottom:30px; width:auto; display:block; margin-left:auto; margin-right:auto;">
+            <p>
+                Messages allows you to chat with others in your workplace. Enabling you to
+                connect with peers and share moments as well as plan shift swaps or plan
+                meetings.
+            </p>
+        </div>
+        <div class="col-md-4">
+            <img src="~/Content/Images/home/meetings.png" style=" padding-top:22px; padding-bottom:20px; width:auto; display:block; margin-left:auto; margin-right:auto;">
+            <p>
+                Meetings enables you to set company meetings. It allows you to set date, times
+                and even topics of discussions. It can show you past, present and future meetings
+                so you can manage your time most efficiently.
+            </p>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+
+    <div class="row" style="text-align:justify">
+        <div class="col-md-4">
+            <img src="~/Content/Images/home/ideas.png" style="padding-top:20px; padding-bottom:20px; width:auto; display:block; margin-left:auto; margin-right:auto;">
+            <p>
+                This is the heart and community of your company. Ideas allows your employees
+                to voice their opinions and add ideas on how to improve your business.
+            </p>
+        </div>
+        <div class="col-md-4">
+            <img src="~/Content/Images/home/store.png" style=" padding-top:18px; padding-bottom:18px;width:auto; display:block; margin-left:auto; margin-right:auto;">
+            <p>
+                The store is where you can upload products that you may provide to your employees
+                such as stationary or uniforms and they may request for these items to use.
+            </p>
+        </div>
+        <div class="col-md-4">
+            <img src="~/Content/Images/home/update.png" style=" padding-top:22px; padding-bottom:22px;width:auto; display:block; margin-left:auto; margin-right:auto;">
+            <p>
+                Updates are where you can send company wide announcements to you employees
+                notifying them on sales drives and campaign updates making sure all staff
+                members are on the same page.
+            </p>
+        </div>
     </div>
+    <div style="text-align:center">
+    @Html.ActionLink("Learn more!", "Solutions", "Home", null, new { @class = "btn btn-default" })
+        </div>
 </div>
