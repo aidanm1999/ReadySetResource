@@ -1,17 +1,127 @@
 ﻿@{
-    ViewBag.Title = "Contact";
+    ViewBag.Title = "Solutions";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+<div id="Plans" style="text-align:center">
+    <div style="padding-top:50px">
+        <h2 >Plans</h2>
+        <div class="row" style="text-align:justify">
+            <div class="col-md-4" style="text-align:center">
+                <h3>Small</h3>
+                <p>
+                    - 99% Up-Time Guarantee
+                </p>
+                <p>
+                    - Unlimited Storage
+                </p>
+                <p>
+                    - RSR Bundle
+                </p>
+                <p>
+                    - Up to 10 People
+                </p>
+                <p>
+                    @Html.ActionLink("Choose!", "StageOne", "SignUp", null, new { @class = "btn btn-primary" })
+                </p>
+            </div>
+            <div class="col-md-4" style="text-align:center">
+                <h3>Medium</h3>
+                <p>
+                    - 99% Up-Time Guarantee
+                </p>
+                <p>
+                    - Unlimited Storage
+                </p>
+                <p>
+                    - RSR Bundle
+                </p>
+                <p>
+                    - Up to 20 People
+                </p>
+                <p>
+                    @Html.ActionLink("Choose!", "StageOne", "SignUp", null, new { @class = "btn btn-primary" })
+                </p>
+            </div>
+            <div class="col-md-4" style="text-align:center">
+                <h3>Large</h3>
+                <p>
+                    - 99% Up-Time Guarantee
+                </p>
+                <p>
+                    - Unlimited Storage
+                </p>
+                <p>
+                    - RSR Bundle
+                </p>
+                <p>
+                    - Up to 40 People
+                </p>
+                <p>
+                    @Html.ActionLink("Choose!", "StageOne", "SignUp", null, new { @class = "btn btn-primary" })
+                </p>
+            </div>
+        </div>
+    </div>
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+    <div id="Apps">
+        <div style="padding-top:50px">
+            <h2 style="text-align:center">Our Solution</h2>
+            <p style="text-align:center">
+                We decided to create powerful but simple to use apps that can help your company excel.
+            </p>
+            <div class="row" style="text-align:justify">
+                <div class="col-md-4">
+                    <img src="~/Content/Images/home/rota.png" style=" padding-top:10px; padding-bottom:10px; width:auto; display:block; margin-left:auto; margin-right:auto;">
+                    <p>
+                        The rota app is a great way for everyone to track their shifts and other's too!
+                        With an inbuilt holiday planner everone can request holidays and the managers
+                        can accept or decline them giving control to only the people you want.
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <img src="~/Content/Images/home/messages.png" style=" padding-top:30px; padding-bottom:30px; width:auto; display:block; margin-left:auto; margin-right:auto;">
+                    <p>
+                        Messages allows you to chat with others in your workplace. Enabling you to
+                        connect with peers and share moments as well as plan shift swaps or plan
+                        meetings.
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <img src="~/Content/Images/home/meetings.png" style=" padding-top:22px; padding-bottom:20px; width:auto; display:block; margin-left:auto; margin-right:auto;">
+                    <p>
+                        Meetings enables you to set company meetings. It allows you to set date, times
+                        and even topics of discussions. It can show you past, present and future meetings
+                        so you can manage your time most efficiently.
+                    </p>
+                </div>
+            </div>
+
+            <div class="row" style="text-align:justify">
+                <div class="col-md-4">
+                    <img src="~/Content/Images/home/ideas.png" style="padding-top:20px; padding-bottom:20px; width:auto; display:block; margin-left:auto; margin-right:auto;">
+                    <p>
+                        This is the heart and community of your company. Ideas allows your employees
+                        to voice their opinions and add ideas on how to improve your business.
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <img src="~/Content/Images/home/store.png" style=" padding-top:18px; padding-bottom:18px;width:auto; display:block; margin-left:auto; margin-right:auto;">
+                    <p>
+                        The store is where you can upload products that you may provide to your employees
+                        such as stationary or uniforms and they may request for these items to use.
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <img src="~/Content/Images/home/update.png" style=" padding-top:22px; padding-bottom:22px;width:auto; display:block; margin-left:auto; margin-right:auto;">
+                    <p>
+                        Updates are where you can send company wide announcements to you employees
+                        notifying them on sales drives and campaign updates making sure all staff
+                        members are on the same page.
+                    </p>
+                </div>
+            </div>
+            <div style="text-align:center">
+            </div>
+        </div>
+
+    </div>
