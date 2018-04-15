@@ -21,7 +21,7 @@ namespace ReadySetResource.Models
         public bool Accepted { get; set; }
 
         public int UserId { get; set; }
-        public User User { get; set; }
+        public SystemUser User { get; set; }
 
 
     }

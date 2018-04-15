@@ -23,7 +23,7 @@ namespace ReadySetResource.Models
         public int Views { get; set; }
 
         public int UserId { get; set; }
-        public User User { get; set; }
+        public SystemUser User { get; set; }
 
 
     }

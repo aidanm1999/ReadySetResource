@@ -22,6 +22,6 @@ namespace ReadySetResource.Models
         //Idea -> User -> UserType -> Business
 
         public int UserId { get; set; }
-        public User User { get; set; }
+        public SystemUser User { get; set; }
     }
 }

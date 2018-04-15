@@ -339,6 +339,10 @@
     <Compile Include="Migrations\201804071008596_AddEmailVerifToUser.Designer.cs">
       <DependentUpon>201804071008596_AddEmailVerifToUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804151503579_ChangedUserToSystemUser.cs" />
+    <Compile Include="Migrations\201804151503579_ChangedUserToSystemUser.Designer.cs">
+      <DependentUpon>201804151503579_ChangedUserToSystemUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\DataOverTime.cs" />
     <Compile Include="Models\DataTransferRate.cs" />
@@ -367,7 +371,7 @@
     <Compile Include="Models\Shift.cs" />
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Models\Update.cs" />
-    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\SystemUser.cs" />
     <Compile Include="Models\UserInterest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -378,6 +382,8 @@
     <Content Include="Content\Images\home\backgroud.jpg" />
     <Content Include="Content\Images\home\cogwheels.png" />
     <Content Include="Content\Images\home\ideas.png" />
+    <Content Include="Content\Images\home\logo.png" />
+    <Content Include="Content\Images\home\LogoWhite.png" />
     <Content Include="Content\Images\home\meetings.png" />
     <Content Include="Content\Images\home\messages.png" />
     <Content Include="Content\Images\home\rota.png" />
@@ -395,6 +401,18 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="fonts\Mosk\Mosk Bold 700.ttf" />
+    <Content Include="fonts\Mosk\Mosk Extra-Bold 800.ttf" />
+    <Content Include="fonts\Mosk\Mosk Extra-Light 200.ttf" />
+    <Content Include="fonts\Mosk\Mosk Light 300.ttf" />
+    <Content Include="fonts\Mosk\Mosk Medium 500.ttf" />
+    <Content Include="fonts\Mosk\Mosk-Normal-400.ttf" />
+    <Content Include="fonts\Mosk\Mosk Semi-Bold 600.ttf" />
+    <Content Include="fonts\Mosk\Mosk Thin 100.ttf" />
+    <Content Include="fonts\Mosk\Mosk Ultra-Bold 900.ttf" />
+    <Content Include="Content\SystemFiles\legal\CopyrightPolicy.pdf" />
+    <Content Include="Content\SystemFiles\legal\PrivacyPolicy.pdf" />
+    <Content Include="Content\SystemFiles\legal\TermsAndConditions.pdf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -572,6 +590,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804071008596_AddEmailVerifToUser.resx">
       <DependentUpon>201804071008596_AddEmailVerifToUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804151503579_ChangedUserToSystemUser.resx">
+      <DependentUpon>201804151503579_ChangedUserToSystemUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

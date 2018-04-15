@@ -21,6 +21,6 @@ namespace ReadySetResource.Models
         public string PhotoPath { get; set; }
 
         public int UserId { get; set; }
-        public User User { get; set; }
+        public SystemUser User { get; set; }
     }
 }

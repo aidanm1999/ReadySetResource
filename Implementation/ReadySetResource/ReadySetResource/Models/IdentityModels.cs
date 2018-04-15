@@ -28,7 +28,7 @@ namespace ReadySetResource.Models
         }
 
 
-        public DbSet<User> Users { get; set; }
+        public DbSet<SystemUser> SystemUsers { get; set; }
         public DbSet<Password> Passwords { get; set; }
         public DbSet<EmployeeType> EmployeeTypes { get; set; }
         public DbSet<BusinessUserType> BusinessUserTypes { get; set; }
