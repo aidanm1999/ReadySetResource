@@ -50,8 +50,15 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Stripe.net, Version=15.3.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stripe.net.15.3.2\lib\net45\Stripe.net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -113,9 +120,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http.Formatting">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
@@ -200,6 +204,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\GetController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LegalController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -343,6 +348,10 @@
     <Compile Include="Migrations\201804151503579_ChangedUserToSystemUser.Designer.cs">
       <DependentUpon>201804151503579_ChangedUserToSystemUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804152104539_RemovedPlanConstraints.cs" />
+    <Compile Include="Migrations\201804152104539_RemovedPlanConstraints.Designer.cs">
+      <DependentUpon>201804152104539_RemovedPlanConstraints.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\DataOverTime.cs" />
     <Compile Include="Models\DataTransferRate.cs" />
@@ -468,9 +477,12 @@
     <Content Include="Views\Home\SiteMap.cshtml" />
     <Content Include="Views\Home\ConfirmEmail.cshtml" />
     <Content Include="Views\Legal\Index.cshtml" />
+    <Content Include="Views\Get\Solutions.cshtml" />
+    <Content Include="Views\Get\BusinessInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -593,6 +605,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804151503579_ChangedUserToSystemUser.resx">
       <DependentUpon>201804151503579_ChangedUserToSystemUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804152104539_RemovedPlanConstraints.resx">
+      <DependentUpon>201804152104539_RemovedPlanConstraints.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

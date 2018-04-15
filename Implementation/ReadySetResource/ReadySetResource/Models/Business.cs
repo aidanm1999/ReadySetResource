@@ -66,8 +66,6 @@ namespace ReadySetResource.Models
         [StringLength(3)]
         public string SecuriyNumber { get; set; }
 
-        [MaxLength(10)]
-        [MinLength(4)]
         public string Plan { get; set; }
 
 
