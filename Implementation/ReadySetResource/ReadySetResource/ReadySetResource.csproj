@@ -483,14 +483,9 @@
     <Content Include="Views\Home\SiteMap.cshtml" />
     <Content Include="Views\Home\ConfirmEmail.cshtml" />
     <Content Include="Views\Legal\Index.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\Get\Solutions.cshtml" />
     <Content Include="Views\Get\BusinessInfo.cshtml" />
     <Content Include="Views\Get\ManagerDetails.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-=======
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -503,7 +498,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
->>>>>>> parent of c5567d2... Added Stripe.NET
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

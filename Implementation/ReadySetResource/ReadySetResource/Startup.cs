@@ -1,6 +1,5 @@
 ﻿using Microsoft.Owin;
 using Owin;
-using Stripe;
 
 [assembly: OwinStartupAttribute(typeof(ReadySetResource.Startup))]
 namespace ReadySetResource
