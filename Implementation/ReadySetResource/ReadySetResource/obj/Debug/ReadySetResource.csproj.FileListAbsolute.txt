@@ -113,5 +113,8 @@ C:\Users\Aidan Marshall\Documents\Projects\ReadySetResource\Implementation\Ready
 C:\Users\Aidan Marshall\Documents\Projects\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\obj\Debug\ReadySetResource.Migrations.AddTransactionModel2.resources
 C:\Users\Aidan Marshall\Documents\Projects\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\obj\Debug\ReadySetResource.Migrations.AddEmailVerifToUser.resources
 C:\Users\Aidan Marshall\Documents\Projects\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\obj\Debug\ReadySetResource.Migrations.ChangedUserToSystemUser.resources
+<<<<<<< HEAD
 C:\Users\Aidan Marshall\Documents\Projects\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\obj\Debug\ReadySetResource.Migrations.RemovedPlanConstraints.resources
 C:\Users\Aidan Marshall\Documents\Projects\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\Stripe.net.dll
+=======
+>>>>>>> parent of c5567d2... Added Stripe.NET
