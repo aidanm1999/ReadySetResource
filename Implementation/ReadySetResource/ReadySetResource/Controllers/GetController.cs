@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ReadySetResource.Models;
-using Stripe;
 using ReadySetResource.ViewModels;
 
 namespace ReadySetResource.Controllers
@@ -40,7 +39,7 @@ namespace ReadySetResource.Controllers
             if (plan == 1) { ViewBag.Title = "Small Business"; model.Plan = "Small"; }
             else if (plan == 2) { ViewBag.Title = "Medium Business"; model.Plan = "Medium"; }
             else if (plan == 3) { ViewBag.Title = "Large Business"; model.Plan = "Large"; }
-            
+
 
             return View(model);
         }
@@ -65,7 +64,7 @@ namespace ReadySetResource.Controllers
                 };
                 return View(viewModel);
             }
-            
+
         }
 
 
@@ -73,9 +72,9 @@ namespace ReadySetResource.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddBusiness(Business business)
         {
-            if (business.Plan == "1") {  business.Plan = "Small"; }
-            else if (business.Plan == "2") {  business.Plan = "Medium"; }
-            else if (business.Plan == "3") {  business.Plan = "Large"; }
+            if (business.Plan == "1") { business.Plan = "Small"; }
+            else if (business.Plan == "2") { business.Plan = "Medium"; }
+            else if (business.Plan == "3") { business.Plan = "Large"; }
 
             business.StartDate = DateTime.Now;
             business.EndDate = DateTime.Now;
@@ -85,12 +84,12 @@ namespace ReadySetResource.Controllers
             if (!ModelState.IsValid)
             {
                 var viewModel = new Business();
-                return View("BusinessInfo",viewModel);
+                return View("BusinessInfo", viewModel);
             }
 
             if (business.Id == 0)
             {
-                
+
                 _context.Businesses.Add(business);
             }
             else
@@ -102,7 +101,7 @@ namespace ReadySetResource.Controllers
             }
 
             _context.SaveChanges();
-            return RedirectToAction("ManagerInfo", "Get");
+            return RedirectToAction("ManagerDetails", "Get");
         }
     }
 }

@@ -1,0 +1,89 @@
+﻿-﻿@model ReadySetResource.Models.Business
+@{
+    //ViewBag.Title = "BusinessInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Business Info</h2>
+
+@using (Html.BeginForm("AddBusiness", "Get"))
+{
+    @Html.ValidationSummary(true, "Please fix the following errors.")
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Type)
+        @Html.TextBoxFor(m => m.Type, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Type)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.AddressLine1)
+        @Html.TextBoxFor(m => m.AddressLine1, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.AddressLine1)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.AddressLine2)
+        @Html.TextBoxFor(m => m.AddressLine2, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.AddressLine2)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Postcode)
+        @Html.TextBoxFor(m => m.Postcode, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Postcode)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Town)
+        @Html.TextBoxFor(m => m.Town, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Town)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Region)
+        @Html.TextBoxFor(m => m.Region, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Region)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Country)
+        @Html.TextBoxFor(m => m.Country, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Country)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.CardType)
+        @Html.TextBoxFor(m => m.CardType, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.CardType)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.CardNumber)
+        @Html.TextBoxFor(m => m.CardNumber, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.CardNumber)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ExpiryMonth)
+        @Html.TextBoxFor(m => m.ExpiryMonth, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.ExpiryMonth)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ExpiryYear)
+        @Html.TextBoxFor(m => m.ExpiryYear, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.ExpiryYear)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.SecuriyNumber)
+        @Html.TextBoxFor(m => m.SecuriyNumber, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.SecuriyNumber)
+    </div>
+
+
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.StartDate)
+    @Html.HiddenFor(m => m.EndDate)
+    @Html.HiddenFor(m => m.Plan)
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-primary">Save</button>
+}
+@*Generating client side validation*@
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
