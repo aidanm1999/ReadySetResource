@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ReadySetResource.Models;
+using Stripe;
+using ReadySetResource.ViewModels;
 
 namespace ReadySetResource.Controllers
 {
@@ -16,6 +18,8 @@ namespace ReadySetResource.Controllers
             _context = new ApplicationDbContext();
 
         }
+
+
 
         protected override void Dispose(bool disposing)
         {
@@ -40,6 +44,30 @@ namespace ReadySetResource.Controllers
 
             return View(model);
         }
+
+
+        [HttpGet]
+        public ActionResult ManagerDetails(int businessId)
+        {
+            var business = _context.Businesses.SingleOrDefault(c => c.Id == businessId);
+
+            if (business == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+
+                var viewModel = new ManagerDetailsViewModel
+                {
+                    NewBusiness = business,
+                    NewManager = new SystemUser(),
+                };
+                return View(viewModel);
+            }
+            
+        }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
