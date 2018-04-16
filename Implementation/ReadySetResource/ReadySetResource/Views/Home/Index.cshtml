@@ -1,12 +1,15 @@
 ﻿@{
-    ViewBag.Title = "Home";
+ViewBag.Title = "Home";
 }
 
+
 <div class="jumbotron" style="color:#4ba2ed; background: url(../../Content/Images/home/backgroud.jpg) no-repeat center center fixed; background-size:1024px; padding-bottom:100px; text-align:center">
-    <h1>Ready Set Resource</h1>
-    <p class="lead">Resource allocation made easy.</p>
-    <p style="padding-top:200px"><a href="#TheFutureOfManaging" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+    <div class="animated fadeInUp">
+        <h1>Ready Set Resource</h1>
+        <p class="lead">Resource allocation made easy.</p>
+    </div>
+        <p style="padding-top:200px"><a href="#TheFutureOfManaging" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    </div>
 
 
 <div class="row" id="TheFutureOfManaging" style="padding-bottom:25px;">
@@ -15,7 +18,7 @@
         <img src="~/Content/Images/home/cogwheels.png" style=" height:100%; display:block; margin-left:auto; margin-right:auto;">
     </div>
     <div class="col-md-8" style="text-align:justify">
-        
+
         <p style="padding-top:25px;">
             With many years in the retail industry, our team have pinpointed many flaws in backend operations of
             different companies and through extensive market research we have analysed and targeted the biggest issues.
@@ -90,6 +93,6 @@
         </div>
     </div>
     <div style="text-align:center">
-    @Html.ActionLink("Learn more!", "Solutions", "Home", null, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Learn more!", "Solutions", "Home", null, new { @class = "btn btn-primary" })
     </div>
 </div>

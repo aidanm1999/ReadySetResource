@@ -17,7 +17,7 @@ namespace ReadySetResource.Models
 
         [Required]
         [Display(Name = "First Name")]
-        [RegularExpression(@"^(([A-za-z]+[\s]+{1}[A-za-z]+)|([A-Za-z]+))$", ErrorMessage = "Please provide letters only for your name")]
+        //[RegularExpression(@"^(([A-za-z]+[\s]+{1}[A-za-z]+)|([A-Za-z]+))$", ErrorMessage = "Please provide letters only for your name")]
         public string FirstName { get; set; }
 
         [Required]

@@ -101,7 +101,7 @@ namespace ReadySetResource.Controllers
             }
 
             _context.SaveChanges();
-            return RedirectToAction("ManagerDetails", "Get");
+            return RedirectToAction("ManagerDetails", business.Id);
         }
     }
 }
