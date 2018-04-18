@@ -3,57 +3,77 @@
     ViewBag.Title = "Manager Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<<<<<<< HEAD
 <div>
     <div style="text-align:center;">
         <h2>A little about you</h2>
         <p>Let's get to know the first (and best) employee of @Model.NewBusiness.Name</p>
     </div>
 
+=======
+>>>>>>> parent of 597a048... Continued on the company setup pages
+
+<h2>Manager Details</h2>
 
 
-    @using (Html.BeginForm("AddManager", "Get"))
-    {
-        @Html.ValidationSummary(true, "Please fix the following errors.")
-        <div class="form-group">
-            @Html.LabelFor(m => m.NewManager.FirstName)
-            @Html.TextBoxFor(m => m.NewManager.FirstName, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.NewManager.FirstName)
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.NewManager.LastName)
-            @Html.TextBoxFor(m => m.NewManager.LastName, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.NewManager.LastName)
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.NewManager.DateOfBirth)
+@using (Html.BeginForm("AddManager", "Get"))
+{
+    @Html.ValidationSummary(true, "Please fix the following errors.")
+    <div class="form-group">
+        @Html.LabelFor(m => m.NewManager.FirstName)
+        @Html.TextBoxFor(m => m.NewManager.FirstName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.NewManager.FirstName)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.NewManager.LastName)
+        @Html.TextBoxFor(m => m.NewManager.LastName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.NewManager.LastName)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.NewManager.DateOfBirth)
+        <div class="input-group-date">
             @Html.TextBoxFor(m => m.NewManager.DateOfBirth)
-            @Html.ValidationMessageFor(m => m.NewManager.DateOfBirth)
+        </div>
+        @Html.ValidationMessageFor(m => m.NewManager.DateOfBirth)
+    </div>
+    <div class="form-group">
+        @*@Html.LabelFor(m => m.AddressLine2)
+            @Html.TextBoxFor(m => m.AddressLine2, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.AddressLine2)
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.NewManager.Email)
-            @Html.TextBoxFor(m => m.NewManager.Email, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.NewManager.Email)
+            @Html.LabelFor(m => m.Postcode)
+            @Html.TextBoxFor(m => m.Postcode, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Postcode)
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.NewManager.BackupEmail)
-            @Html.TextBoxFor(m => m.NewManager.BackupEmail, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.NewManager.BackupEmail)
+            @Html.LabelFor(m => m.Town)
+            @Html.TextBoxFor(m => m.Town, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Town)
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.NewManager.PhoneNumber)
-            @Html.TextBoxFor(m => m.NewManager.PhoneNumber, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.NewManager.PhoneNumber)
+            @Html.LabelFor(m => m.Region)
+            @Html.TextBoxFor(m => m.Region, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Region)
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.NewManager.AddressLine1)
-            @Html.TextBoxFor(m => m.NewManager.AddressLine1, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.NewManager.AddressLine1)
+            @Html.LabelFor(m => m.Country)
+            @Html.TextBoxFor(m => m.Country, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Country)
+        </div>
+<<<<<<< HEAD
+=======
+        <div class="form-group">
+            @Html.LabelFor(m => m.CardType)
+            @Html.TextBoxFor(m => m.CardType, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.CardType)
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.NewManager.AddressLine2)
-            @Html.TextBoxFor(m => m.NewManager.AddressLine2, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.NewManager.AddressLine2)
+            @Html.LabelFor(m => m.CardNumber)
+            @Html.TextBoxFor(m => m.CardNumber, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.CardNumber)
         </div>
+>>>>>>> parent of 597a048... Continued on the company setup pages
         <div class="form-group">
             @Html.LabelFor(m => m.NewManager.Postcode)
             @Html.TextBoxFor(m => m.NewManager.Postcode, new { @class = "form-control" })
@@ -66,6 +86,7 @@
         </div>
 
 
+<<<<<<< HEAD
         @Html.HiddenFor(m => m.NewManager.Blocked)
         @Html.HiddenFor(m => m.NewManager.TimesLoggedIn)
         @Html.HiddenFor(m => m.NewManager.NIN)
@@ -76,8 +97,28 @@
 
         @Html.AntiForgeryToken()
         <button type="submit" class="btn btn-primary">Save</button>
+=======
+        @Html.HiddenFor(m => m.Id)
+        @Html.HiddenFor(m => m.StartDate)
+        @Html.HiddenFor(m => m.EndDate)
+        @Html.HiddenFor(m => m.Plan)
+        *@ 
+    </div>
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-primary">Save</button>
+>>>>>>> parent of 597a048... Continued on the company setup pages
     }
-</div>
+
+<script>
+    $('body .input-group.date').datepicker({
+        format: "dd/mm/yy",
+        weekStart: 1,
+        todayBtn: "linked",
+        autoClose: true,
+        todayHighlight: true
+    });
+</script>
+    
     
 @*Generating client side validation*@
 @section scripts
