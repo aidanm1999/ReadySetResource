@@ -22,7 +22,6 @@ namespace ReadySetResource.Models
         [Required]
         public int Views { get; set; }
 
-        public int UserId { get; set; }
         public SystemUser User { get; set; }
 
 

@@ -10,7 +10,7 @@ namespace ReadySetResource.Models
     public class SystemUser
     {
         [Key]
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         public string Title { get; set; }
@@ -76,10 +76,10 @@ namespace ReadySetResource.Models
         public int Strikes { get; set; }
 
         
-        public int EmployeeTypeId { get; set; }
+        
         public EmployeeType EmployeeType { get; set; }
 
-        public int BusinessUserTypeId { get; set; }
+        
         public BusinessUserType BusinessUserType { get; set; }
 
 

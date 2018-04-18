@@ -17,7 +17,6 @@ namespace ReadySetResource.Models
         [Required]
         public float MemoryMB { get; set; }
 
-        public int BusinessId { get; set; }
         public Business Business { get; set; }
     }
 }

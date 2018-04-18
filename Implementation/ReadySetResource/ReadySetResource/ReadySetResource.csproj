@@ -205,157 +205,9 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LegalController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Migrations\201803292039588_AddUserModelAndPasswordModel.cs" />
-    <Compile Include="Migrations\201803292039588_AddUserModelAndPasswordModel.Designer.cs">
-      <DependentUpon>201803292039588_AddUserModelAndPasswordModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803292147156_AddModels1.cs" />
-    <Compile Include="Migrations\201803292147156_AddModels1.Designer.cs">
-      <DependentUpon>201803292147156_AddModels1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804021542134_AddedInitialModels.cs" />
-    <Compile Include="Migrations\201804021542134_AddedInitialModels.Designer.cs">
-      <DependentUpon>201804021542134_AddedInitialModels.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804021920241_AddedInitialModels2.cs" />
-    <Compile Include="Migrations\201804021920241_AddedInitialModels2.Designer.cs">
-      <DependentUpon>201804021920241_AddedInitialModels2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804021940120_AddModels3.cs" />
-    <Compile Include="Migrations\201804021940120_AddModels3.Designer.cs">
-      <DependentUpon>201804021940120_AddModels3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804031238551_AddErrorModel.cs" />
-    <Compile Include="Migrations\201804031238551_AddErrorModel.Designer.cs">
-      <DependentUpon>201804031238551_AddErrorModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804031240372_AddErrorModel2.cs" />
-    <Compile Include="Migrations\201804031240372_AddErrorModel2.Designer.cs">
-      <DependentUpon>201804031240372_AddErrorModel2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804031256054_AddIdeaModel.cs" />
-    <Compile Include="Migrations\201804031256054_AddIdeaModel.Designer.cs">
-      <DependentUpon>201804031256054_AddIdeaModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804031257133_AddIdeaModel2.cs" />
-    <Compile Include="Migrations\201804031257133_AddIdeaModel2.Designer.cs">
-      <DependentUpon>201804031257133_AddIdeaModel2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804031322352_AddShiftModel.cs" />
-    <Compile Include="Migrations\201804031322352_AddShiftModel.Designer.cs">
-      <DependentUpon>201804031322352_AddShiftModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804031349026_AddUserInterestModel.cs" />
-    <Compile Include="Migrations\201804031349026_AddUserInterestModel.Designer.cs">
-      <DependentUpon>201804031349026_AddUserInterestModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804031350452_AddUserInterestModel2.cs" />
-    <Compile Include="Migrations\201804031350452_AddUserInterestModel2.Designer.cs">
-      <DependentUpon>201804031350452_AddUserInterestModel2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804031901091_AddHolidayModel.cs" />
-    <Compile Include="Migrations\201804031901091_AddHolidayModel.Designer.cs">
-      <DependentUpon>201804031901091_AddHolidayModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804031906110_AddActualHoliday.cs" />
-    <Compile Include="Migrations\201804031906110_AddActualHoliday.Designer.cs">
-      <DependentUpon>201804031906110_AddActualHoliday.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804031906578_AddActualHolidays.cs" />
-    <Compile Include="Migrations\201804031906578_AddActualHolidays.Designer.cs">
-      <DependentUpon>201804031906578_AddActualHolidays.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804032125587_AddDataTransferRateModel.cs" />
-    <Compile Include="Migrations\201804032125587_AddDataTransferRateModel.Designer.cs">
-      <DependentUpon>201804032125587_AddDataTransferRateModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804032139251_AddDataTransferRateModel2.cs" />
-    <Compile Include="Migrations\201804032139251_AddDataTransferRateModel2.Designer.cs">
-      <DependentUpon>201804032139251_AddDataTransferRateModel2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804032152101_AddDataTransferRateModel3.cs" />
-    <Compile Include="Migrations\201804032152101_AddDataTransferRateModel3.Designer.cs">
-      <DependentUpon>201804032152101_AddDataTransferRateModel3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804032159126_AddDataTransferRateModel4.cs" />
-    <Compile Include="Migrations\201804032159126_AddDataTransferRateModel4.Designer.cs">
-      <DependentUpon>201804032159126_AddDataTransferRateModel4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804032206063_AddDataTransferRateModel5.cs" />
-    <Compile Include="Migrations\201804032206063_AddDataTransferRateModel5.Designer.cs">
-      <DependentUpon>201804032206063_AddDataTransferRateModel5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804032208288_AddDataTransferRateModel6.cs" />
-    <Compile Include="Migrations\201804032208288_AddDataTransferRateModel6.Designer.cs">
-      <DependentUpon>201804032208288_AddDataTransferRateModel6.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804032218018_AddDataTransferRateModel7.cs" />
-    <Compile Include="Migrations\201804032218018_AddDataTransferRateModel7.Designer.cs">
-      <DependentUpon>201804032218018_AddDataTransferRateModel7.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804032227392_AddDataTransferRateModel8.cs" />
-    <Compile Include="Migrations\201804032227392_AddDataTransferRateModel8.Designer.cs">
-      <DependentUpon>201804032227392_AddDataTransferRateModel8.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804032236238_AddDataTransferRateModel9.cs" />
-    <Compile Include="Migrations\201804032236238_AddDataTransferRateModel9.Designer.cs">
-      <DependentUpon>201804032236238_AddDataTransferRateModel9.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804051040333_AddItemModel.cs" />
-    <Compile Include="Migrations\201804051040333_AddItemModel.Designer.cs">
-      <DependentUpon>201804051040333_AddItemModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804051054017_AddUpdateModel.cs" />
-    <Compile Include="Migrations\201804051054017_AddUpdateModel.Designer.cs">
-      <DependentUpon>201804051054017_AddUpdateModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804051150392_AddUpdateModel2.cs" />
-    <Compile Include="Migrations\201804051150392_AddUpdateModel2.Designer.cs">
-      <DependentUpon>201804051150392_AddUpdateModel2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804051206132_AddDataOverTimeModel.cs" />
-    <Compile Include="Migrations\201804051206132_AddDataOverTimeModel.Designer.cs">
-      <DependentUpon>201804051206132_AddDataOverTimeModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804051224199_AddQuestionModel.cs" />
-    <Compile Include="Migrations\201804051224199_AddQuestionModel.Designer.cs">
-      <DependentUpon>201804051224199_AddQuestionModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804051232006_AddAnswerModel.cs" />
-    <Compile Include="Migrations\201804051232006_AddAnswerModel.Designer.cs">
-      <DependentUpon>201804051232006_AddAnswerModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804051302472_AddMessageModel.cs" />
-    <Compile Include="Migrations\201804051302472_AddMessageModel.Designer.cs">
-      <DependentUpon>201804051302472_AddMessageModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804051415113_AddTransactionModel.cs" />
-    <Compile Include="Migrations\201804051415113_AddTransactionModel.Designer.cs">
-      <DependentUpon>201804051415113_AddTransactionModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804051416139_AddTransactionModel2.cs" />
-    <Compile Include="Migrations\201804051416139_AddTransactionModel2.Designer.cs">
-      <DependentUpon>201804051416139_AddTransactionModel2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804071008596_AddEmailVerifToUser.cs" />
-    <Compile Include="Migrations\201804071008596_AddEmailVerifToUser.Designer.cs">
-      <DependentUpon>201804071008596_AddEmailVerifToUser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804151503579_ChangedUserToSystemUser.cs" />
-    <Compile Include="Migrations\201804151503579_ChangedUserToSystemUser.Designer.cs">
-      <DependentUpon>201804151503579_ChangedUserToSystemUser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804161328537_UpdateModels.cs" />
-    <Compile Include="Migrations\201804161328537_UpdateModels.Designer.cs">
-      <DependentUpon>201804161328537_UpdateModels.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804161352569_UpdateBusinessPlanSize.cs" />
-    <Compile Include="Migrations\201804161352569_UpdateBusinessPlanSize.Designer.cs">
-      <DependentUpon>201804161352569_UpdateBusinessPlanSize.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804181220205_ChangedSystemUserIdToInt.cs" />
-    <Compile Include="Migrations\201804181220205_ChangedSystemUserIdToInt.Designer.cs">
-      <DependentUpon>201804181220205_ChangedSystemUserIdToInt.cs</DependentUpon>
+    <Compile Include="Migrations\201804181335144_Initial.cs" />
+    <Compile Include="Migrations\201804181335144_Initial.Designer.cs">
+      <DependentUpon>201804181335144_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\DataOverTime.cs" />
@@ -372,10 +224,6 @@
     <Compile Include="Models\Password.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803291912191_InitialMigration.cs" />
-    <Compile Include="Migrations\201803291912191_InitialMigration.Designer.cs">
-      <DependentUpon>201803291912191_InitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -546,129 +394,15 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201803291912191_InitialMigration.resx">
-      <DependentUpon>201803291912191_InitialMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803292039588_AddUserModelAndPasswordModel.resx">
-      <DependentUpon>201803292039588_AddUserModelAndPasswordModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803292147156_AddModels1.resx">
-      <DependentUpon>201803292147156_AddModels1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804021542134_AddedInitialModels.resx">
-      <DependentUpon>201804021542134_AddedInitialModels.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804021920241_AddedInitialModels2.resx">
-      <DependentUpon>201804021920241_AddedInitialModels2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804021940120_AddModels3.resx">
-      <DependentUpon>201804021940120_AddModels3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804031238551_AddErrorModel.resx">
-      <DependentUpon>201804031238551_AddErrorModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804031240372_AddErrorModel2.resx">
-      <DependentUpon>201804031240372_AddErrorModel2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804031256054_AddIdeaModel.resx">
-      <DependentUpon>201804031256054_AddIdeaModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804031257133_AddIdeaModel2.resx">
-      <DependentUpon>201804031257133_AddIdeaModel2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804031322352_AddShiftModel.resx">
-      <DependentUpon>201804031322352_AddShiftModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804031349026_AddUserInterestModel.resx">
-      <DependentUpon>201804031349026_AddUserInterestModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804031350452_AddUserInterestModel2.resx">
-      <DependentUpon>201804031350452_AddUserInterestModel2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804031901091_AddHolidayModel.resx">
-      <DependentUpon>201804031901091_AddHolidayModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804031906110_AddActualHoliday.resx">
-      <DependentUpon>201804031906110_AddActualHoliday.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804031906578_AddActualHolidays.resx">
-      <DependentUpon>201804031906578_AddActualHolidays.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804032125587_AddDataTransferRateModel.resx">
-      <DependentUpon>201804032125587_AddDataTransferRateModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804032139251_AddDataTransferRateModel2.resx">
-      <DependentUpon>201804032139251_AddDataTransferRateModel2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804032152101_AddDataTransferRateModel3.resx">
-      <DependentUpon>201804032152101_AddDataTransferRateModel3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804032159126_AddDataTransferRateModel4.resx">
-      <DependentUpon>201804032159126_AddDataTransferRateModel4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804032206063_AddDataTransferRateModel5.resx">
-      <DependentUpon>201804032206063_AddDataTransferRateModel5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804032208288_AddDataTransferRateModel6.resx">
-      <DependentUpon>201804032208288_AddDataTransferRateModel6.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804032218018_AddDataTransferRateModel7.resx">
-      <DependentUpon>201804032218018_AddDataTransferRateModel7.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804032227392_AddDataTransferRateModel8.resx">
-      <DependentUpon>201804032227392_AddDataTransferRateModel8.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804032236238_AddDataTransferRateModel9.resx">
-      <DependentUpon>201804032236238_AddDataTransferRateModel9.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804051040333_AddItemModel.resx">
-      <DependentUpon>201804051040333_AddItemModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804051054017_AddUpdateModel.resx">
-      <DependentUpon>201804051054017_AddUpdateModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804051150392_AddUpdateModel2.resx">
-      <DependentUpon>201804051150392_AddUpdateModel2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804051206132_AddDataOverTimeModel.resx">
-      <DependentUpon>201804051206132_AddDataOverTimeModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804051224199_AddQuestionModel.resx">
-      <DependentUpon>201804051224199_AddQuestionModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804051232006_AddAnswerModel.resx">
-      <DependentUpon>201804051232006_AddAnswerModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804051302472_AddMessageModel.resx">
-      <DependentUpon>201804051302472_AddMessageModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804051415113_AddTransactionModel.resx">
-      <DependentUpon>201804051415113_AddTransactionModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804051416139_AddTransactionModel2.resx">
-      <DependentUpon>201804051416139_AddTransactionModel2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804071008596_AddEmailVerifToUser.resx">
-      <DependentUpon>201804071008596_AddEmailVerifToUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804151503579_ChangedUserToSystemUser.resx">
-      <DependentUpon>201804151503579_ChangedUserToSystemUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804161328537_UpdateModels.resx">
-      <DependentUpon>201804161328537_UpdateModels.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804161352569_UpdateBusinessPlanSize.resx">
-      <DependentUpon>201804161352569_UpdateBusinessPlanSize.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804181220205_ChangedSystemUserIdToInt.resx">
-      <DependentUpon>201804181220205_ChangedSystemUserIdToInt.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201804181335144_Initial.resx">
+      <DependentUpon>201804181335144_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

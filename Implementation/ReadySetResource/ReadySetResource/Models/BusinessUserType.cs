@@ -37,6 +37,5 @@ namespace ReadySetResource.Models
         public char Ideas { get; set; }
 
         public Business Business { get; set; }
-        public int BusinessId { get; set; }
     }
 }

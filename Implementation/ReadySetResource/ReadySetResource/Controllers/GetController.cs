@@ -125,7 +125,7 @@ namespace ReadySetResource.Controllers
 
                 var errors = ModelState.Values.SelectMany(v => v.Errors);
 
-                if (managerVM.NewManager.Id == "0")
+                if (managerVM.NewManager.Id == 0)
                 {
 
 
