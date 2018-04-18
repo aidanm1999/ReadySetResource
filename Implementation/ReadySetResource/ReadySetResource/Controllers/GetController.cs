@@ -140,6 +140,7 @@ namespace ReadySetResource.Controllers
 
 
             _context.SaveChanges();
+
             return RedirectToAction("Welcome", managerVM);
         }
     }
