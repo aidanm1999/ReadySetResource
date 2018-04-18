@@ -17,12 +17,10 @@ namespace ReadySetResource.Models
 
         [Required]
         [Display(Name = "First Name")]
-        //[RegularExpression(@"^(([A-za-z]+[\s]+{1}[A-za-z]+)|([A-Za-z]+))$", ErrorMessage = "Please provide letters only for your name")]
         public string FirstName { get; set; }
 
         [Required]
         [Display(Name = "Last Name")]
-        [RegularExpression("^[A-Za-z]$", ErrorMessage = "Please provide letters only for your name")]
         public string LastName { get; set; }
 
         [Required]
@@ -63,7 +61,6 @@ namespace ReadySetResource.Models
 
         public char Sex { get; set; }
 
-        [RegularExpression("(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9])$", ErrorMessage = "NIN must have letters, numbers and no special characters.")]
         [Display(Name = "National Insurance Number")]
         public string NIN { get; set; }
 

@@ -109,46 +109,38 @@ namespace ReadySetResource.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddManagerOne(ManagerDetailsViewModel managerVM)
         {
+
+            //Setting the unset attributes - excluding some like NIN which are optional
+            managerVM.NewManager.Blocked = false;
+            managerVM.NewManager.TimesLoggedIn = 0;
+            managerVM.NewManager.Raise = 0;
+            managerVM.NewManager.Strikes = 0;
+
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
+
             //Checking to see if the model is valid
             if (!ModelState.IsValid)
             {
                 var viewModel = new ManagerDetailsViewModel();
+                viewModel.NewBusiness = managerVM.NewBusiness;
                 return View("ManagerDetails", viewModel);
             }
             else
             {
-                //Setting the unset attributes - excluding some like NIN which are optional
-                managerVM.NewManager.Blocked = false;
-                managerVM.NewManager.TimesLoggedIn = 0;
-                managerVM.NewManager.Raise = 0;
-                managerVM.NewManager.Strikes = 0;
-
-                var errors = ModelState.Values.SelectMany(v => v.Errors);
-
                 if (managerVM.NewManager.Id == 0)
                 {
-
-
-                  //  _context.Businesses.Add(business);
+                    _context.SystemUsers.Add(managerVM.NewManager);
                 }
                 else
                 {
-                   // var businessInDb = _context.Businesses.Single(c => c.Id == business.Id);
-
-                //    businessInDb.Name = business.Name;
-
+                    var managerInDb = _context.SystemUsers.Single(c => c.Id == managerVM.NewManager.Id);
+                    managerInDb = managerVM.NewManager;
                 }
             }
 
 
-
-
-
-
-
-
-            //_context.SaveChanges();
-            return RedirectToAction("ManagerDetails");
+            _context.SaveChanges();
+            return RedirectToAction("Welcome", managerVM);
         }
     }
 }
