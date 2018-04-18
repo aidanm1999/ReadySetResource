@@ -103,5 +103,52 @@ namespace ReadySetResource.Controllers
             _context.SaveChanges();
             return RedirectToAction("ManagerDetails", business.Id);
         }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddManagerOne(ManagerDetailsViewModel managerVM)
+        {
+            //Checking to see if the model is valid
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new ManagerDetailsViewModel();
+                return View("ManagerDetails", viewModel);
+            }
+            else
+            {
+                //Setting the unset attributes - excluding some like NIN which are optional
+                managerVM.NewManager.Blocked = false;
+                managerVM.NewManager.TimesLoggedIn = 0;
+                managerVM.NewManager.Raise = 0;
+                managerVM.NewManager.Strikes = 0;
+
+                var errors = ModelState.Values.SelectMany(v => v.Errors);
+
+                if (managerVM.NewManager.Id == "0")
+                {
+
+
+                  //  _context.Businesses.Add(business);
+                }
+                else
+                {
+                   // var businessInDb = _context.Businesses.Single(c => c.Id == business.Id);
+
+                //    businessInDb.Name = business.Name;
+
+                }
+            }
+
+
+
+
+
+
+
+
+            //_context.SaveChanges();
+            return RedirectToAction("ManagerDetails");
+        }
     }
 }

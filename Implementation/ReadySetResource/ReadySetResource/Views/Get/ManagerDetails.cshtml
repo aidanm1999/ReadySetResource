@@ -8,7 +8,7 @@
         <h2>A little about you</h2>
         <p>Let's get to know the first (and best) employee of @Model.NewBusiness.Name</p>
     </div>
-    
+
 
 
     @using (Html.BeginForm("AddManager", "Get"))
@@ -54,41 +54,28 @@
             @Html.TextBoxFor(m => m.NewManager.AddressLine2, new { @class = "form-control" })
             @Html.ValidationMessageFor(m => m.NewManager.AddressLine2)
         </div>
-        @*<div class="form-group">
-            @Html.LabelFor(m => m.CardType)
-            @Html.TextBoxFor(m => m.CardType, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.CardType)
+        <div class="form-group">
+            @Html.LabelFor(m => m.NewManager.Postcode)
+            @Html.TextBoxFor(m => m.NewManager.Postcode, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.NewManager.Postcode)
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.CardNumber)
-            @Html.TextBoxFor(m => m.CardNumber, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.CardNumber)
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.ExpiryMonth)
-            @Html.TextBoxFor(m => m.ExpiryMonth, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.ExpiryMonth)
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.ExpiryYear)
-            @Html.TextBoxFor(m => m.ExpiryYear, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.ExpiryYear)
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.SecuriyNumber)
-            @Html.TextBoxFor(m => m.SecuriyNumber, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.SecuriyNumber)
+            @Html.LabelFor(m => m.NewManager.Sex)
+            @Html.TextBoxFor(m => m.NewManager.Sex)
+            @Html.ValidationMessageFor(m => m.NewManager.Sex)
         </div>
 
 
-        @Html.HiddenFor(m => m.Id)
-        @Html.HiddenFor(m => m.StartDate)
-        @Html.HiddenFor(m => m.EndDate)
-        @Html.HiddenFor(m => m.Plan)
-        *@ 
-    
-    @Html.AntiForgeryToken()
-    <button type="submit" class="btn btn-primary">Save</button>
+        @Html.HiddenFor(m => m.NewManager.Blocked)
+        @Html.HiddenFor(m => m.NewManager.TimesLoggedIn)
+        @Html.HiddenFor(m => m.NewManager.NIN)
+        @Html.HiddenFor(m => m.NewManager.EmergencyContact)
+        @Html.HiddenFor(m => m.NewManager.Raise)
+        @Html.HiddenFor(m => m.NewManager.Strikes)
+
+
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn btn-primary">Save</button>
     }
 </div>
     

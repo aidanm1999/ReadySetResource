@@ -353,6 +353,10 @@
     <Compile Include="Migrations\201804161352569_UpdateBusinessPlanSize.Designer.cs">
       <DependentUpon>201804161352569_UpdateBusinessPlanSize.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804181220205_ChangedSystemUserIdToInt.cs" />
+    <Compile Include="Migrations\201804181220205_ChangedSystemUserIdToInt.Designer.cs">
+      <DependentUpon>201804181220205_ChangedSystemUserIdToInt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\DataOverTime.cs" />
     <Compile Include="Models\DataTransferRate.cs" />
@@ -655,6 +659,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804161352569_UpdateBusinessPlanSize.resx">
       <DependentUpon>201804161352569_UpdateBusinessPlanSize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804181220205_ChangedSystemUserIdToInt.resx">
+      <DependentUpon>201804181220205_ChangedSystemUserIdToInt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
