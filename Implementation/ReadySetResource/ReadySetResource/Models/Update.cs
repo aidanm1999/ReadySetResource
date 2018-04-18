@@ -18,7 +18,7 @@ namespace ReadySetResource.Models
 
         public string Description { get; set; }
 
-        public int BusinessId { get; set; }
+        
         public Business Business { get; set; }
     }
 }

@@ -23,7 +23,6 @@ namespace ReadySetResource.Models
         public int UserId { get; set; }
         public SystemUser User { get; set; }
 
-        public int QuestionId { get; set; }
         public Question Question { get; set; }
     }
 }

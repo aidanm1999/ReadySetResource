@@ -31,10 +31,10 @@ namespace ReadySetResource.Models
         
 
 
-        public int SenderId { get; set; }
+        
         public Business Sender { get; set; }
 
-        public int RecipientId { get; set; }
+        
         public Business Recipient { get; set; }
     }
 }

@@ -20,7 +20,6 @@ namespace ReadySetResource.Models
         [Required]
         public bool Accepted { get; set; }
 
-        public int UserId { get; set; }
         public SystemUser User { get; set; }
 
 

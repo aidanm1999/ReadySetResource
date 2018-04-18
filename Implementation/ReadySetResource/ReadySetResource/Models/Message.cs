@@ -26,7 +26,6 @@ namespace ReadySetResource.Models
         public int SenderId { get; set; }
         public SystemUser Sender { get; set; }
 
-        public int RecipientId { get; set; }
         public SystemUser Recipient { get; set; }
     }
 }
