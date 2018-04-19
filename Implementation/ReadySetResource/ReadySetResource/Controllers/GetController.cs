@@ -143,5 +143,15 @@ namespace ReadySetResource.Controllers
 
             return RedirectToAction("Welcome", managerVM);
         }
+
+
+
+
+
+        [HttpGet]
+        public ActionResult Welcome()
+        {
+            return View();
+        }
     }
 }
