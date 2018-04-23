@@ -80,7 +80,19 @@
     @Html.HiddenFor(m => m.EndDate)
     @Html.HiddenFor(m => m.Plan)
     @Html.AntiForgeryToken()
-    <button type="submit" class="btn btn-primary">Save</button>
+
+    <small>
+        By continuing you agree to our @Html.ActionLink("Terms and Conditions", "Index", "Legal"),
+        you also agree that by selecting the
+
+        @if (Request.Params["plan"] == "1") { <text>One Store</text> }
+        else if (Request.Params["plan"] == "2") { <text>Chain</text> }
+        else if (Request.Params["plan"] == "3") { <text>Enterprise</text> }
+        else { Response.Redirect("~/"); }
+            Plan,
+        you will be charged monthly at a rate of
+    </small>
+    <button type="submit" class="btn btn-primary">Continue</button>
 }
 @*Generating client side validation*@
 @section scripts

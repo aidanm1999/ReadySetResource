@@ -148,7 +148,7 @@ namespace ReadySetResource.Controllers
 
 
 
-        [HttpGet]
+        [HttpPost]
         public ActionResult Welcome()
         {
             return View();
