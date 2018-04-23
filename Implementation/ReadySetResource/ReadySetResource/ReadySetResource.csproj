@@ -246,7 +246,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\ManagerDetailsViewModel.cs" />
+    <Compile Include="ViewModels\SignUpViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\animate.css" />
@@ -254,6 +254,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\dashboard\cog.png" />
+    <Content Include="Content\Images\dashboard\user.png" />
     <Content Include="Content\Images\home\backgroud.jpg" />
     <Content Include="Content\Images\home\cogwheels.png" />
     <Content Include="Content\Images\home\ideas.png" />
@@ -384,6 +386,7 @@
     <Content Include="Views\Get\Welcome.cshtml" />
     <Content Include="Views\Dashboard\Home.cshtml" />
     <Content Include="Views\Dashboard\UnderConstruction.cshtml" />
+    <Content Include="Views\Shared\_DashLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

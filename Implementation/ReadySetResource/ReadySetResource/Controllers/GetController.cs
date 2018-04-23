@@ -5,12 +5,22 @@ using System.Web;
 using System.Web.Mvc;
 using ReadySetResource.Models;
 using ReadySetResource.ViewModels;
+using System.Globalization;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace ReadySetResource.Controllers
 {
     public class GetController : Controller
     {
+        #region Initialization and StartUp
         private ApplicationDbContext _context;
+        private ApplicationSignInManager _signInManager;
+        private ApplicationUserManager _userManager;
         
 
         public GetController()
@@ -18,15 +28,41 @@ namespace ReadySetResource.Controllers
             _context = new ApplicationDbContext();
 
         }
+        
 
+
+        public ApplicationSignInManager SignInManager
+        {
+            get
+            {
+                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+            }
+            private set
+            {
+                _signInManager = value;
+            }
+        }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
 
 
         protected override void Dispose(bool disposing)
         {
             _context.Dispose();
         }
+        #endregion
 
-        // GET: Get/Solutions
+        
         [HttpGet]
         [AllowAnonymous]
         public ActionResult Solutions()
@@ -61,7 +97,7 @@ namespace ReadySetResource.Controllers
             else
             {
 
-                var viewModel = new ManagerDetailsViewModel
+                var viewModel = new SignUpViewModel
                 {
                     NewBusiness = business,
                     NewManager = new ApplicationUser(),
@@ -75,7 +111,7 @@ namespace ReadySetResource.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult AddBusiness(Business business)
+        public void AddBusiness(Business business)
         {
             if (business.Plan == "1") { business.Plan = "Small"; }
             else if (business.Plan == "2") { business.Plan = "Medium"; }
@@ -84,12 +120,10 @@ namespace ReadySetResource.Controllers
             business.StartDate = DateTime.Now;
             business.EndDate = DateTime.Now;
 
-            var errors = ModelState.Values.SelectMany(v => v.Errors);
-
             if (!ModelState.IsValid)
             {
                 var viewModel = new Business();
-                return View("BusinessInfo", viewModel);
+                BusinessInfo(viewModel.Id);
             }
 
             if (business.Id == 0)
@@ -106,55 +140,75 @@ namespace ReadySetResource.Controllers
             }
 
             _context.SaveChanges();
-            return RedirectToAction("ManagerDetails", business.Id);
+            ManagerDetails(business.Id);
         }
 
 
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult AddManagerOne(ManagerDetailsViewModel managerVM)
+        public async Task<ActionResult> AddManagerOne(SignUpViewModel signUpVM)
         {
 
             //Setting the unset attributes - excluding some like NIN which are optional
-            managerVM.NewManager.Blocked = false;
-            managerVM.NewManager.TimesLoggedIn = 0;
-            managerVM.NewManager.Raise = 0;
-            managerVM.NewManager.Strikes = 0;
+            //Id is already set
+            //Title is already set
+            //FirstName is already set
+            //LastName is already set
+            //DateOfBirth is already set
+            signUpVM.NewManager.Blocked = false;
+            signUpVM.NewManager.TimesLoggedIn = 0;
+            signUpVM.NewManager.Raise = 0;
+            signUpVM.NewManager.Strikes = 0;
+            signUpVM.NewManager.UserName = signUpVM.NewManager.FirstName + " " + signUpVM.NewManager.LastName;
+            //Email is already set
+            //Rest are nullable and unnecessary
+
 
             var errors = ModelState.Values.SelectMany(v => v.Errors);
+            var viewModel = new SignUpViewModel();
 
-            //Checking to see if the model is valid
+            //Checking to see if the model state is valid
             if (!ModelState.IsValid)
             {
-                var viewModel = new ManagerDetailsViewModel();
-                viewModel.NewBusiness = managerVM.NewBusiness;
+                viewModel = new SignUpViewModel
+                {
+                    NewBusiness = signUpVM.NewBusiness,
+                };
                 return View("ManagerDetails", viewModel);
             }
             else
-            {
-                if (managerVM.NewManager.Id == "0")
+            { 
+                try
                 {
-                    _context.Users.Add(managerVM.NewManager);
+                    viewModel = new SignUpViewModel
+                    {
+                        NewBusiness = signUpVM.NewBusiness,
+                        NewManager = signUpVM.NewManager,
+                    };
 
-
+                    //Register the user to the database
+                    var result = await UserManager.CreateAsync(signUpVM.NewManager, signUpVM.Password);
+                    if (result.Succeeded)
+                    {
+                        await SignInManager.SignInAsync(signUpVM.NewManager, isPersistent: false, rememberBrowser: false);
+                        
+                    }
                 }
-                else
-                {
-                    var managerInDb = _context.Users.Single(c => c.Id == managerVM.NewManager.Id);
-                    managerInDb = managerVM.NewManager;
+                catch
+                {  
+                    return View("Solutions");
                 }
             }
 
-
+            //Update changes
             _context.SaveChanges();
 
-            return RedirectToAction("Welcome", managerVM);
+            return RedirectToAction("Welcome");
         }
 
 
-
-        [HttpPost]
+        [HttpGet]
         [Authorize]
         public ActionResult Welcome()
         {

@@ -13,6 +13,7 @@ namespace ReadySetResource.Models
     {
 
         //[Required]
+        [Display(Name = "Name")]
         public string Title { get; set; }
 
         //[Required]
