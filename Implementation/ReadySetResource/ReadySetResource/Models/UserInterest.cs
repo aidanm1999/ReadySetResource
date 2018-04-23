@@ -18,6 +18,6 @@ namespace ReadySetResource.Models
         public DateTime DateTime { get; set; } //Changed from int to DateTime
 
         
-        public SystemUser User { get; set; }
+        public ApplicationUser User { get; set; }
     }
 }

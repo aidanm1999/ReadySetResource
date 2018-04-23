@@ -127,5 +127,6 @@ C:\Users\Aidan Marshall\Documents\Projects\ReadySetResource\Implementation\Ready
 C:\Users\Aidan Marshall\Documents\Projects\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\System.Diagnostics.DiagnosticSource.dll
 C:\Users\Aidan Marshall\Documents\Projects\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\Microsoft.AspNet.TelemetryCorrelation.xml
 C:\Users\Aidan Marshall\Documents\Projects\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\System.Diagnostics.DiagnosticSource.xml
-C:\Users\Aidan Marshall\Documents\Projects\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\obj\Debug\ReadySetResource.Migrations.Initial.resources
+C:\Users\Aidan Marshall\Documents\Projects\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\obj\Debug\ReadySetResource.Migrations.InitialMigration.resources
 C:\Users\Aidan Marshall\Documents\Projects\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\obj\Debug\ReadySetResource.csproj.GenerateResource.cache
+C:\Users\Aidan Marshall\Documents\Projects\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\obj\Debug\ReadySetResource.Migrations.UserTest.resources

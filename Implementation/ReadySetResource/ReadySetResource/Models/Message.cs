@@ -23,9 +23,8 @@ namespace ReadySetResource.Models
         public string ContentImagePath { get; set; }
 
 
-        public int SenderId { get; set; }
-        public SystemUser Sender { get; set; }
+        public ApplicationUser Sender { get; set; }
 
-        public SystemUser Recipient { get; set; }
+        public ApplicationUser Recipient { get; set; }
     }
 }

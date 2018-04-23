@@ -118,7 +118,6 @@ namespace ReadySetResource.Controllers
         #endregion
 
 
-
         #region ConfirmEmail
         [HttpGet]
         [AllowAnonymous]

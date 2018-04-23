@@ -25,6 +25,6 @@ namespace ReadySetResource.Models
 
         public string Description { get; set; }
 
-        public SystemUser User { get; set; }
+        public ApplicationUser User { get; set; }
     }
 }

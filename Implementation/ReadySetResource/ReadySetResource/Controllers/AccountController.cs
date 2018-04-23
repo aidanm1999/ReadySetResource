@@ -152,6 +152,8 @@ namespace ReadySetResource.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var errors = ModelState.Values.SelectMany(v => v.Errors);
+                user.DateOfBirth = new DateTime(2000, 1, 1);
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

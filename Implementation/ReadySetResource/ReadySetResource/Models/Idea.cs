@@ -21,6 +21,6 @@ namespace ReadySetResource.Models
         //Decided to remove Business Id as it is derivable data from user id
         //Idea -> User -> UserType -> Business
 
-        public SystemUser User { get; set; }
+        public ApplicationUser User { get; set; }
     }
 }

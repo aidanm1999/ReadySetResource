@@ -201,13 +201,18 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\GetController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LegalController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Migrations\201804181335144_Initial.cs" />
-    <Compile Include="Migrations\201804181335144_Initial.Designer.cs">
-      <DependentUpon>201804181335144_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201804231020469_InitialMigration.cs" />
+    <Compile Include="Migrations\201804231020469_InitialMigration.Designer.cs">
+      <DependentUpon>201804231020469_InitialMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804231126316_UserTest.cs" />
+    <Compile Include="Migrations\201804231126316_UserTest.Designer.cs">
+      <DependentUpon>201804231126316_UserTest.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\DataOverTime.cs" />
@@ -233,7 +238,6 @@
     <Compile Include="Models\Shift.cs" />
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Models\Update.cs" />
-    <Compile Include="Models\SystemUser.cs" />
     <Compile Include="Models\UserInterest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -378,6 +382,8 @@
     <Content Include="Views\Get\Solutions.cshtml" />
     <Content Include="Views\Get\BusinessInfo.cshtml" />
     <Content Include="Views\Get\Welcome.cshtml" />
+    <Content Include="Views\Dashboard\Home.cshtml" />
+    <Content Include="Views\Dashboard\UnderConstruction.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -401,8 +407,11 @@
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201804181335144_Initial.resx">
-      <DependentUpon>201804181335144_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201804231020469_InitialMigration.resx">
+      <DependentUpon>201804231020469_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804231126316_UserTest.resx">
+      <DependentUpon>201804231126316_UserTest.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

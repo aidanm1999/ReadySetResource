@@ -8,7 +8,7 @@ namespace ReadySetResource.ViewModels
 {
     public class ManagerDetailsViewModel
     {
-        public SystemUser NewManager { get; set; }
+        public ApplicationUser NewManager { get; set; }
         public Business NewBusiness { get; set; }
     }
 }

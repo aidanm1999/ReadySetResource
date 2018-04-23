@@ -21,7 +21,7 @@ namespace ReadySetResource.Models
         public bool Valid { get; set; }
 
         //Foreign Key
-        public SystemUser User { get; set; }
+        public ApplicationUser User { get; set; }
 
 
     }

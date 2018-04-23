@@ -11,6 +11,7 @@ namespace ReadySetResource.Controllers
     public class GetController : Controller
     {
         private ApplicationDbContext _context;
+        
 
         public GetController()
         {
@@ -27,12 +28,14 @@ namespace ReadySetResource.Controllers
 
         // GET: Get/Solutions
         [HttpGet]
+        [AllowAnonymous]
         public ActionResult Solutions()
         {
             return View();
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public ActionResult BusinessInfo(int plan)
         {
             var model = new Business();
@@ -46,6 +49,7 @@ namespace ReadySetResource.Controllers
 
 
         [HttpGet]
+        [AllowAnonymous]
         public ActionResult ManagerDetails(int businessId)
         {
             var business = _context.Businesses.SingleOrDefault(c => c.Id == businessId);
@@ -60,7 +64,7 @@ namespace ReadySetResource.Controllers
                 var viewModel = new ManagerDetailsViewModel
                 {
                     NewBusiness = business,
-                    NewManager = new SystemUser(),
+                    NewManager = new ApplicationUser(),
                 };
                 return View(viewModel);
             }
@@ -69,6 +73,7 @@ namespace ReadySetResource.Controllers
 
 
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult AddBusiness(Business business)
         {
@@ -106,6 +111,7 @@ namespace ReadySetResource.Controllers
 
 
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult AddManagerOne(ManagerDetailsViewModel managerVM)
         {
@@ -127,13 +133,15 @@ namespace ReadySetResource.Controllers
             }
             else
             {
-                if (managerVM.NewManager.Id == 0)
+                if (managerVM.NewManager.Id == "0")
                 {
-                    _context.SystemUsers.Add(managerVM.NewManager);
+                    _context.Users.Add(managerVM.NewManager);
+
+
                 }
                 else
                 {
-                    var managerInDb = _context.SystemUsers.Single(c => c.Id == managerVM.NewManager.Id);
+                    var managerInDb = _context.Users.Single(c => c.Id == managerVM.NewManager.Id);
                     managerInDb = managerVM.NewManager;
                 }
             }
@@ -146,9 +154,8 @@ namespace ReadySetResource.Controllers
 
 
 
-
-
         [HttpPost]
+        [Authorize]
         public ActionResult Welcome()
         {
             return View();

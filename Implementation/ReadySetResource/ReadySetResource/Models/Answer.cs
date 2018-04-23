@@ -20,8 +20,7 @@ namespace ReadySetResource.Models
         public int Points { get; set; }
 
 
-        public int UserId { get; set; }
-        public SystemUser User { get; set; }
+        public ApplicationUser User { get; set; }
 
         public Question Question { get; set; }
     }

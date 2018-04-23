@@ -20,6 +20,6 @@ namespace ReadySetResource.Models
 
         public string PhotoPath { get; set; }
 
-        public SystemUser User { get; set; }
+        public ApplicationUser User { get; set; }
     }
 }
