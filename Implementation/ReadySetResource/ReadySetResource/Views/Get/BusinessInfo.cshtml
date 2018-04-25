@@ -82,15 +82,24 @@
     @Html.AntiForgeryToken()
 
     <small>
-        By continuing you agree to our @Html.ActionLink("Terms and Conditions", "Index", "Legal"),
-        you also agree that by selecting the
-
-        @if (Request.Params["plan"] == "1") { <text>One Store</text> }
-        else if (Request.Params["plan"] == "2") { <text>Chain</text> }
-        else if (Request.Params["plan"] == "3") { <text>Enterprise</text> }
-        else { Response.Redirect("~/"); }
+        <p>
+            By continuing you agree to our @Html.ActionLink("Terms and Conditions", "Index", "Legal"),
+        </p>
+        <p>
+            you also agree that by selecting the
+            @if (Request.Params["plan"] == "1") { <text>One Store</text> }
+            else if (Request.Params["plan"] == "2") { <text>Chain</text> }
+            else if (Request.Params["plan"] == "3") { <text>Enterprise</text> }
+            else { Response.Redirect("~/"); }
             Plan,
-        you will be charged monthly at a rate of
+        </p>
+        <p> 
+            you will be charged monthly at a rate of
+            @if (Request.Params["plan"] == "1") { <text>£10</text> }
+            else if (Request.Params["plan"] == "2") { <text>£20</text> }
+            else if (Request.Params["plan"] == "3") { <text>£40</text> }
+            else { Response.Redirect("~/"); }
+        </p>
     </small>
     <button type="submit" class="btn btn-primary">Continue</button>
 }

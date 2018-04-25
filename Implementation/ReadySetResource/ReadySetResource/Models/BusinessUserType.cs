@@ -16,26 +16,27 @@ namespace ReadySetResource.Models
         public string Name { get; set; }
 
         [Required]
-        public char Administrator { get; set; }
+        public string Administrator { get; set; }
 
         [Required]
-        public char Rota { get; set; }
+        public string Rota { get; set; }
 
         [Required]
-        public char Sales { get; set; }
+        public string Updates { get; set; }
 
         [Required]
-        public char Store { get; set; }
+        public string Store { get; set; }
 
         [Required]
-        public char Messenger { get; set; }
+        public string Messenger { get; set; }
 
         [Required]
-        public char Meetings { get; set; }
+        public string Meetings { get; set; }
 
         [Required]
-        public char Ideas { get; set; }
+        public string Ideas { get; set; }
 
+        public int BusinessId { get; set; }
         public Business Business { get; set; }
     }
 }

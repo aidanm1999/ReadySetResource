@@ -1,4 +1,4 @@
-﻿
+﻿@model ReadySetResource.Models.ApplicationUser
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,22 +25,13 @@
                 </a>
 
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        @Html.ActionLink("Settings", "Settings", "Dashboard", routeValues: null, htmlAttributes: new { title = "Settings", style = "color:#ffffff" })
-                    </li>
-                </ul>
-            </div>
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            @Html.ActionLink("Business Settings", "BusinessSettings", "Dashboard", null, new { @class = "btn btn-primary", style = "float:left" })
-
-            @Html.ActionLink("Account Settings", "Settings", "Dashboard", null, new { @class = "btn btn-primary", style = "float:right" })
+            @Html.Partial("_DashPartial")
         </footer>
     </div>
 

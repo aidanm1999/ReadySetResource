@@ -66,11 +66,10 @@ namespace ReadySetResource.Models
 
         public int Strikes { get; set; }
 
-
-
+        public int EmployeeTypeId { get; set; }
         public EmployeeType EmployeeType { get; set; }
 
-
+        public int BusinessUserTypeId { get; set; }
         public BusinessUserType BusinessUserType { get; set; }
 
 

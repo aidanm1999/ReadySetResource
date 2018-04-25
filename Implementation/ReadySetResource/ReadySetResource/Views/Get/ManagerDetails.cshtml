@@ -46,6 +46,26 @@
 
         @Html.HiddenFor(m => m.NewManager.Id)
 
+        @Html.HiddenFor(m => m.NewBusiness.Id)
+        @Html.HiddenFor(m => m.NewBusiness.Plan)
+
+        @Html.HiddenFor(m => m.NewBusiness.Name)
+        @Html.HiddenFor(m => m.NewBusiness.Type)
+        @Html.HiddenFor(m => m.NewBusiness.AddressLine1)
+        @Html.HiddenFor(m => m.NewBusiness.AddressLine2)
+        @Html.HiddenFor(m => m.NewBusiness.Postcode)
+        @Html.HiddenFor(m => m.NewBusiness.Town)
+        @Html.HiddenFor(m => m.NewBusiness.Region)
+        @Html.HiddenFor(m => m.NewBusiness.Country)
+        @Html.HiddenFor(m => m.NewBusiness.CardType)
+        @Html.HiddenFor(m => m.NewBusiness.CardNumber)
+        @Html.HiddenFor(m => m.NewBusiness.ExpiryMonth)
+        @Html.HiddenFor(m => m.NewBusiness.ExpiryYear)
+        @Html.HiddenFor(m => m.NewBusiness.SecuriyNumber)
+        @Html.HiddenFor(m => m.NewBusiness.StartDate)
+        @Html.HiddenFor(m => m.NewBusiness.EndDate)
+
+
 
         @Html.AntiForgeryToken()
         <button type="submit" class="btn btn-primary">Continue</button>

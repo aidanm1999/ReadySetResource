@@ -18,6 +18,12 @@ namespace ReadySetResource
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "Business",
+                url: "{controller}/{action}/{businessId}",
+                defaults: new { controller = "Get", action = "ManagerDetails", businessId = UrlParameter.Optional }
+            );
         }
     }
 }

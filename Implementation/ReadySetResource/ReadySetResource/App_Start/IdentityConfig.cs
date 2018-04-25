@@ -12,6 +12,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using ReadySetResource.Models;
 
+
 namespace ReadySetResource
 {
     public class EmailService : IIdentityMessageService
