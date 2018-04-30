@@ -1,4 +1,4 @@
-﻿@model ReadySetResource.Models.ApplicationUser
+﻿
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,7 +31,7 @@
         @RenderBody()
         <hr />
         <footer>
-            @Html.Partial("_DashPartial")
+            @if (Request.Url.AbsolutePath.ToString() == "/Dashboard/Home") { @Html.Partial("_DashPartial") }
         </footer>
     </div>
 

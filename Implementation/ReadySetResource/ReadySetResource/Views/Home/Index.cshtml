@@ -8,8 +8,15 @@ ViewBag.Title = "Home";
         <h1>Ready Set Resource</h1>
         <p class="lead">Resource allocation made easy.</p>
     </div>
+    @if (User.Identity.IsAuthenticated)
+    {
+    <p style="padding-top:200px">@Html.ActionLink("Launch Dashboard!", "Home", "Dashboard", null, new { @class = "btn btn-primary" })</p>
+    }
+    else
+    {
         <p style="padding-top:200px"><a href="#TheFutureOfManaging" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-    </div>
+    }
+</div>
 
 
 <div class="row" id="TheFutureOfManaging" style="padding-bottom:25px;">

@@ -134,7 +134,7 @@ namespace ReadySetResource.Controllers
         [AllowAnonymous]
         public ActionResult ManagerDetails(int businessId)
         {
-            var businessInDb = _context.Businesses.Single(c => c.Id == businessId);
+            var businessInDb = _context.Businesses.SingleOrDefault(c => c.Id == businessId);
 
             if (businessInDb == null)
             {

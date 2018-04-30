@@ -250,6 +250,14 @@
     <Compile Include="Migrations\201804251845246_AddBusinessUserTypesForeignIdKey.Designer.cs">
       <DependentUpon>201804251845246_AddBusinessUserTypesForeignIdKey.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804261010177_AddedForeignKeyIdToShift.cs" />
+    <Compile Include="Migrations\201804261010177_AddedForeignKeyIdToShift.Designer.cs">
+      <DependentUpon>201804261010177_AddedForeignKeyIdToShift.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804261045543_AddedForeignKeyIdToShift2.cs" />
+    <Compile Include="Migrations\201804261045543_AddedForeignKeyIdToShift2.Designer.cs">
+      <DependentUpon>201804261045543_AddedForeignKeyIdToShift2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\DataOverTime.cs" />
     <Compile Include="Models\DataTransferRate.cs" />
@@ -283,6 +291,7 @@
     </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\EmailVerificationViewModel.cs" />
+    <Compile Include="ViewModels\RotaViewModel.cs" />
     <Compile Include="ViewModels\SignUpViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -484,6 +493,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804251845246_AddBusinessUserTypesForeignIdKey.resx">
       <DependentUpon>201804251845246_AddBusinessUserTypesForeignIdKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804261010177_AddedForeignKeyIdToShift.resx">
+      <DependentUpon>201804261010177_AddedForeignKeyIdToShift.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804261045543_AddedForeignKeyIdToShift2.resx">
+      <DependentUpon>201804261045543_AddedForeignKeyIdToShift2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

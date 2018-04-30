@@ -1,4 +1,4 @@
-﻿
+﻿@model ReadySetResource.Models.ApplicationUser
 @{
     Layout = "~/Views/Shared/_DashLayout.cshtml";
     ViewBag.Title = "Dashboard";
@@ -12,7 +12,7 @@
         <title>Dashboard</title>
     </head>
     <body id="Apps">
-        <h2 style="text-align:center">Welcome, @User.Identity.Name</h2>
+        <h2 style="text-align:center">Welcome, @Model.FirstName @Model.LastName</h2>
         <div class="row" style="text-align:center">
             <div class="col-md-4 animated fadeIn" style="animation-delay:0.2s" id="Rota">
                 <img src="~/Content/Images/home/rota.png" style=" padding-top:10px; padding-bottom:10px; width:auto; display:block; margin-left:auto; margin-right:auto;">
