@@ -3,8 +3,22 @@
     ViewBag.Title = "Rota";
     Layout = "~/Views/Shared/_DashLayout.cshtml";
 }
+<link rel="stylesheet" type="text/css" href="~/Content/Site.css">
 
-<h2>Rota - For Week @Model.ActiveWeekCommenceDate.Day/@Model.ActiveWeekCommenceDate.Month to @Model.ActiveWeekCommenceDate.AddDays(6).Day/@Model.ActiveWeekCommenceDate.AddDays(6).Month </h2>
+
+@if (Model.CurrentUserType.Rota == "E")
+{
+    <h2>
+        Rota - For Week @Model.ActiveWeekCommenceDate.Day/@Model.ActiveWeekCommenceDate.Month to @Model.ActiveWeekCommenceDate.AddDays(6).Day/@Model.ActiveWeekCommenceDate.AddDays(6).Month
+        @Html.ActionLink("Add Shift", "AddShift", "Dashboard", null, new { @class = "btn btn-primary" })
+    </h2>
+}
+else
+{
+    <h2>Rota - For Week @Model.ActiveWeekCommenceDate.Day/@Model.ActiveWeekCommenceDate.Month to @Model.ActiveWeekCommenceDate.AddDays(6).Day/@Model.ActiveWeekCommenceDate.AddDays(6).Month </h2>
+
+}
+
 
 @if (Model.Employees.Count() == 0)
 {
@@ -16,36 +30,7 @@ else if (Model.Shifts.Count() == 0)
 }
 else
 {
-    <style>
-        #rota {
-            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-            text-align: center;
-            border-collapse: collapse;
-            width: 100%;
-        }
 
-            #rota td, #customers th {
-                border: 1px solid #ddd;
-                padding: 6px;
-                width: 1%;
-            }
-
-            #rota tr:nth-child(even) {
-                background-color: #f2f2f2;
-            }
-
-            #rota tr:hover {
-                background-color: #ddd;
-            }
-
-            #rota th {
-                padding-top: 12px;
-                padding-bottom: 12px;
-                text-align: center;
-                background-color: #428bca;
-                color: white;
-            }
-    </style>
     <table id="rota">
         <thead>
             <tr>
@@ -79,7 +64,7 @@ else
             @foreach (var employee in Model.Employees)
             {
                 <tr>
-                    <td align="left" style="table-layout:fixed;">@employee.FirstName @employee.LastName</td>
+                    <td align="left" style=" white-space: nowrap;table-layout:fixed;">@employee.FirstName @employee.LastName</td>
 
                     @{
                         var empShifts = Model.Shifts;
@@ -91,40 +76,82 @@ else
 
                     @foreach (var empShift in empShifts)
                     {
-                        if (empShift == null)
+                        if (Model.CurrentUserType.Rota == "V")
                         {
-                            <td></td>
-                            <td></td>
+                            if (empShift == null)
+                            {
+                                <td></td>
+                                <td></td>
+                            }
+                            else if (empShift.UserId == employee.Id)
+                            {
+                                <td style="white-space: nowrap;">
+                                    @empShift.StartDateTime.Hour :
+                                    @if (empShift.StartDateTime.Minute < 10)
+                                    {<text>0</text>@empShift.StartDateTime.Minute }
+                                else
+                                { @empShift.StartDateTime.Minute}
+                                </td>
+                                <td style="white-space: nowrap;">
+                                    @empShift.EndDateTime.Hour :
+                                    @if (empShift.EndDateTime.Minute < 10)
+                                    {<text>0</text>@empShift.EndDateTime.Minute }
+                                else
+                                { @empShift.EndDateTime.Minute}
+                                </td>
+                            }
                         }
-                        else if (empShift.UserId == employee.Id)
+                        else if (Model.CurrentUserType.Rota == "E")
                         {
-                            <td>
-                                @empShift.StartDateTime.Hour :
-                                @if (empShift.StartDateTime.Minute < 10)
-                                {<text>0</text>@empShift.StartDateTime.Minute }
-                            else
-                            { @empShift.StartDateTime.Minute}
-                            </td>
-                            <td>
-                                @empShift.EndDateTime.Hour :
-                                @if (empShift.EndDateTime.Minute < 10)
-                                {<text>0</text>@empShift.EndDateTime.Minute }
-                            else
-                            { @empShift.EndDateTime.Minute}
-                            </td>
+                            if (empShift == null)
+                            {
+                                <td colspan="2"><a href="@Url.Action("AddShift","Dashboard")">+</a></td>
+                            }
+                            else if (empShift.UserId == employee.Id)
+                            {
+                                <td style="white-space: nowrap;">
+                                    <a href="@Url.Action("AddShift","Dashboard", new { date = empShift.StartDateTime } )">
+                                        <div style="height:100%;width:100%">
+                                            @empShift.StartDateTime.Hour :
+                                            @if (empShift.StartDateTime.Minute < 10)
+                                            {<text>0</text>@empShift.StartDateTime.Minute }
+                                        else
+                                        { @empShift.StartDateTime.Minute}
+                                        </div>
+                                    </a>
+                                </td>
+                                <td style="white-space: nowrap;">
+                                    <a href="@Url.Action("BusinessInfo","Get", new { date = empShift.StartDateTime} )">
+                                        <div style="height:100%;width:100%">
+                                            @empShift.EndDateTime.Hour :
+                                            @if (empShift.EndDateTime.Minute < 10)
+                                            {<text>0</text>@empShift.EndDateTime.Minute }
+                                        else
+                                        { @empShift.EndDateTime.Minute}
+                                        </div>
+                                    </a>
+                                </td>
+                            }
+                        }
+                        else
+                        {
+
                         }
                     }
-
                 </tr>
             }
+
+
+
+
         </tbody>
 
     </table>
 }
 
 
-    <footer style="text-align:center; align-content:center; padding-top:20px">
-        @Html.ActionLink("< Last Week", "Rota", "Dashboard", new { week = ( Model.ActiveWeekCommenceDate.AddDays(-7).Date ) }, new { @class = "btn btn-primary" })
-        @Html.ActionLink("Today", "Rota", "Dashboard", null, new { @class = "btn btn-primary" })
-        @Html.ActionLink("Next Week >", "Rota", "Dashboard", new { week = (Model.ActiveWeekCommenceDate.AddDays(7).Date) }, new { @class = "btn btn-primary" })
-    </footer>
+<footer style="text-align:center; align-content:center; padding-top:20px">
+    @Html.ActionLink("< Last Week", "Rota", "Dashboard", new { week = (Model.ActiveWeekCommenceDate.AddDays(-7).Date) }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Today", "Rota", "Dashboard", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Next Week >", "Rota", "Dashboard", new { week = (Model.ActiveWeekCommenceDate.AddDays(7).Date) }, new { @class = "btn btn-primary" })
+</footer>

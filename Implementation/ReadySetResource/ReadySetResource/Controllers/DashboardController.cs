@@ -54,12 +54,18 @@ namespace ReadySetResource.Controllers
         }
 
 
+
+
+
         private RotaViewModel PopulateRota (DateTime weekBeginDate)
         {
-            //1 - Get BusinessUserType from current user 
+            //1 - Get BusinessUserType from current user and sets current user as rota.cshtml needs to check for business user type
             var currUserId = User.Identity.GetUserId();
-            var currBusinessUserTypeId = _context.Users.SingleOrDefault(c => c.Id == currUserId).BusinessUserTypeId;
-            var currBusinessId = _context.BusinessUserTypes.SingleOrDefault(c => c.Id == currBusinessUserTypeId).BusinessId;
+            var currBusinessUser = _context.Users.SingleOrDefault(c => c.Id == currUserId);
+            var currBusinessUserTypeId = currBusinessUser.BusinessUserTypeId;
+            var currBusinessUserType = _context.BusinessUserTypes.SingleOrDefault(c => c.Id == currBusinessUserTypeId);
+            var currBusinessId = currBusinessUserType.BusinessId;
+            
 
             //2 - Get Business from BusinessUserType
             var currBusiness = _context.Businesses.SingleOrDefault(c => c.Id == currBusinessId);
@@ -68,7 +74,8 @@ namespace ReadySetResource.Controllers
             //3 - Load all employees in that business and initialize rotaVM
             var rotaVM = new RotaViewModel
             {
-                Employees = _context.Users.Where(e => e.BusinessUserType.BusinessId == currBusiness.Id).ToList()
+                Employees = _context.Users.Where(e => e.BusinessUserType.BusinessId == currBusiness.Id).ToList(),
+                CurrentUserType = currBusinessUserType,
             };
 
 
@@ -90,147 +97,204 @@ namespace ReadySetResource.Controllers
             var activeWeekEndDate = rotaVM.ActiveWeekCommenceDate.AddDays(7).AddSeconds(-1);
             rotaVM.Shifts = _context.Shifts.Where(s => s.StartDateTime >= rotaVM.ActiveWeekCommenceDate && s.EndDateTime <= activeWeekEndDate).ToList();
 
-
-
-            //7 - Sorted all the employees in ascending order from Last name
-            rotaVM.Employees = rotaVM.Employees.OrderBy(e => e.Id).ToList();
-
-
-
-            //8 - Sorted all the shifts in order of date and then in order of employees
-            rotaVM.Shifts = rotaVM.Shifts.OrderBy(s => s.UserId).ThenBy(s => s.StartDateTime).ToList();
-
-
-            List<string> daysOfWeek = new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
-
-
-            //9 - Added null elemets so that all employees have 7 entries for Mon - Sun
-            var copyOfShifts = rotaVM.Shifts.ToList();
-            foreach (var employee in rotaVM.Employees)
+            //Checks to see if there are any shifts
+            //If not it will return an empty array
+            if (rotaVM.Shifts != null)
             {
-                foreach (var shift in copyOfShifts)
+                //7 - Sorted all the employees in ascending order from Last name
+                rotaVM.Employees = rotaVM.Employees.OrderBy(e => e.Id).ToList();
+
+
+
+                //8 - Sorted all the shifts in order of date and then in order of employees
+                rotaVM.Shifts = rotaVM.Shifts.OrderBy(s => s.UserId).ThenBy(s => s.StartDateTime).ToList();
+
+
+                List<string> daysOfWeek = new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
+
+
+                //9 - Added null elemets so that all employees have 7 entries for Mon - Sun
+                var copyOfShifts = rotaVM.Shifts.ToList();
+
+
+                foreach (var employee in rotaVM.Employees)
                 {
-                    //Checks if the shift belogs to the current employee
-                    if (shift.UserId == employee.Id)
+                    //This boolean checks to see if an employee has any shifts
+                    //If they haven't it'll add 7 null entries.
+                    bool noShifts = true;
+                    foreach (var shift in copyOfShifts)
                     {
-                        //Gets the day of the week of the current shift in number form
-                        int dayOfWeekIndex = daysOfWeek.IndexOf(shift.StartDateTime.DayOfWeek.ToString());
-
-                        //Gets the next element user id for the else if part of the statement as it may break the code
-                        //If the code breaks that means that it is the last instance of the list
-                        string nextElemUserId;
-                        try { nextElemUserId = copyOfShifts[copyOfShifts.IndexOf(shift) + 1].UserId; }
-                        catch (Exception ex) { nextElemUserId = "LAST"; }
-
-
-                        //Sees if the shift is the first elemet in the list
-                        //If so it gets the weekday and adds appropriate amount of days before
-                        if (shift == copyOfShifts.ElementAt(0))
+                        //Checks if the shift belogs to the current employee
+                        if (shift.UserId == employee.Id)
                         {
-                            for (int i = 0; i < dayOfWeekIndex; i++)
+                            //Sets noShifts to false as employee has a shift
+                            noShifts = false;
+
+                            //Gets the day of the week of the current shift in number form
+                            int dayOfWeekIndex = daysOfWeek.IndexOf(shift.StartDateTime.DayOfWeek.ToString());
+
+                            //Gets the next element user id for the else if part of the statement as it may break the code
+                            //If the code breaks that means that it is the last instance of the list
+                            string nextElemUserId;
+                            try { nextElemUserId = copyOfShifts[copyOfShifts.IndexOf(shift) + 1].UserId; }
+                            catch (Exception ex) { nextElemUserId = "LAST"; }
+
+
+                            //Sees if the shift is the first elemet in the list
+                            //If so it gets the weekday and adds appropriate amount of days before
+                            if (shift == copyOfShifts.ElementAt(0))
                             {
-                                rotaVM.Shifts.Insert(0, null);
-                            }
-                        }
-
-
-                        //Sees if its the next shift's user is the same as the current shift's user
-                        //If it isn't then it needs to add all elements between current day and sunday 
-                        //(as it is the last shift for that person for that week)
-                        //It also add the aprropriate amount of days before
-                        if (nextElemUserId != shift.UserId && nextElemUserId != "LAST")
-                        {
-                            for (int i = dayOfWeekIndex; i < 6; i++)
-                            {
-                                rotaVM.Shifts.Insert(rotaVM.Shifts.IndexOf(shift) + 1, null);
-                            }
-
-                            if (shift != copyOfShifts.ElementAt(0))
-                            {
-                                var prevShift = copyOfShifts[copyOfShifts.IndexOf(shift) - 1];
-                                var shiftDifference = dayOfWeekIndex - daysOfWeek.IndexOf(prevShift.StartDateTime.DayOfWeek.ToString());
-
-
-                                for (int i = 1; i < shiftDifference; i++)
+                                for (int i = 0; i < dayOfWeekIndex; i++)
                                 {
-                                    //Get the current element again as shift position has changed
-                                    rotaVM.Shifts.Insert(rotaVM.Shifts.IndexOf(shift), null);
+                                    rotaVM.Shifts.Insert(0, null);
                                 }
 
+                                
                             }
 
-                        }
 
+                            //Sees if its the next shift's user is the same as the current shift's user
+                            //If it isn't then it needs to add all elements between current day and sunday 
+                            //(as it is the last shift for that person for that week)
+                            //It also add the aprropriate amount of days before
+                            if (nextElemUserId != shift.UserId && nextElemUserId != "LAST")
+                            {
+                                for (int i = dayOfWeekIndex; i < 6; i++)
+                                {
+                                    rotaVM.Shifts.Insert(rotaVM.Shifts.IndexOf(shift) + 1, null);
+                                }
 
-                        //Sees if its the next shift's user is the same as the current shift's user
-                        //If it is then it doesn't need to add all elements between current day and sunday
-                        //(as it is not the last shift for that person for that week)
-                        //But will add the aprropriate amount of days before
-                        else if (nextElemUserId == shift.UserId || nextElemUserId == "LAST")
-                        {
-                            if (shift != copyOfShifts.ElementAt(0))
-                            {   
-                                //Checks to see if the last shift's user Id is equal to the current's
-                                if (copyOfShifts[copyOfShifts.IndexOf(shift) - 1].UserId == shift.UserId)
+                                if (shift != copyOfShifts.ElementAt(0))
                                 {
                                     var prevShift = copyOfShifts[copyOfShifts.IndexOf(shift) - 1];
                                     var shiftDifference = dayOfWeekIndex - daysOfWeek.IndexOf(prevShift.StartDateTime.DayOfWeek.ToString());
 
-                                    if (nextElemUserId == "LAST")
-                                    {
-                                        var endNullAdditions = 7 - dayOfWeekIndex;
 
-                                        for (int i = 1; i < endNullAdditions; i++)
-                                        {
-                                            //Get the current element again as shift position has changed
-                                            rotaVM.Shifts.Insert(rotaVM.Shifts.IndexOf(shift) + 1, null);
-                                            
-                                        }
-                                        //MUST ALSO ADD THE NULLS BEFORE
-                                        for (int i = 1; i < shiftDifference; i++)
-                                        {
-                                            rotaVM.Shifts.Insert(rotaVM.Shifts.IndexOf(shift), null);
-                                        }
-
-                                    }
-                                    else
-                                    {
-                                        for (int i = 1; i < shiftDifference; i++)
-                                        {
-                                            rotaVM.Shifts.Insert(rotaVM.Shifts.IndexOf(shift), null);
-                                        }
-                                    }
-                                }
-                                else
-                                {
-
-                                    //Adds the days before
-                                    for (int i = 0; i < dayOfWeekIndex; i++)
+                                    for (int i = 1; i < shiftDifference; i++)
                                     {
                                         //Get the current element again as shift position has changed
                                         rotaVM.Shifts.Insert(rotaVM.Shifts.IndexOf(shift), null);
                                     }
 
+                                }
+
+                            }
+
+
+                            //Sees if its the next shift's user is the same as the current shift's user
+                            //If it is then it doesn't need to add all elements between current day and sunday
+                            //(as it is not the last shift for that person for that week)
+                            //But will add the aprropriate amount of days before
+                            else if (nextElemUserId == shift.UserId || nextElemUserId == "LAST")
+                            {
+                                if (shift != copyOfShifts.ElementAt(0))
+                                {
+                                    //Checks to see if the last shift's user Id is equal to the current's
+                                    if (copyOfShifts[copyOfShifts.IndexOf(shift) - 1].UserId == shift.UserId)
+                                    {
+                                        var prevShift = copyOfShifts[copyOfShifts.IndexOf(shift) - 1];
+                                        var shiftDifference = dayOfWeekIndex - daysOfWeek.IndexOf(prevShift.StartDateTime.DayOfWeek.ToString());
+
+                                        if (nextElemUserId == "LAST")
+                                        {
+                                            var endNullAdditions = 7 - dayOfWeekIndex;
+
+                                            for (int i = 1; i < endNullAdditions; i++)
+                                            {
+                                                //Get the current element again as shift position has changed
+                                                rotaVM.Shifts.Insert(rotaVM.Shifts.IndexOf(shift) + 1, null);
+
+                                            }
+                                            //MUST ALSO ADD THE NULLS BEFORE
+                                            for (int i = 1; i < shiftDifference; i++)
+                                            {
+                                                rotaVM.Shifts.Insert(rotaVM.Shifts.IndexOf(shift), null);
+                                            }
+
+                                        }
+                                        else
+                                        {
+                                            for (int i = 1; i < shiftDifference; i++)
+                                            {
+                                                rotaVM.Shifts.Insert(rotaVM.Shifts.IndexOf(shift), null);
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+
+                                        //Adds the days before
+                                        for (int i = 0; i < dayOfWeekIndex; i++)
+                                        {
+                                            //Get the current element again as shift position has changed
+                                            rotaVM.Shifts.Insert(rotaVM.Shifts.IndexOf(shift), null);
+                                        }
+
+                                        if (nextElemUserId == "LAST")
+                                        {
+                                            //Adds the days after
+                                            var endNullAdditions = 7 - dayOfWeekIndex;
+
+                                            for (int i = 1; i < endNullAdditions; i++)
+                                            {
+                                                //Get the current element again as shift position has changed
+                                                rotaVM.Shifts.Insert(rotaVM.Shifts.IndexOf(shift) + 1, null);
+                                            }
+                                        }
+                                    }
+                                }
+                                //This means that it is the first and last shift
+                                else
+                                {
                                     if (nextElemUserId == "LAST")
                                     {
-                                        //Adds the days after
                                         var endNullAdditions = 7 - dayOfWeekIndex;
 
                                         for (int i = 1; i < endNullAdditions; i++)
                                         {
                                             //Get the current element again as shift position has changed
                                             rotaVM.Shifts.Insert(rotaVM.Shifts.IndexOf(shift) + 1, null);
+
                                         }
                                     }
                                 }
                             }
                         }
+                    };
+
+                    if (noShifts == true)
+                    {
+                        for (int i = 0; i < 7; i++)
+                        {
+                            //MUST CHANGEEEEEEeeEEEEeEEEeeeEEEEEeeeEEEeEEEEE AS CANNOT INSERT AT INDEX 0 FOR ALL STAFF
+                            rotaVM.Shifts.Insert(0,null);
+                        }
                     }
                 };
-            };
+            }
 
             return rotaVM;
         }
+
+
+
+
+        #region AddShift
+        // GET: Dashboard/AddShift
+        [HttpGet]
+        [Authorize]
+        public ActionResult Add() //DateTime.Date
+        {
+            //DateTime shiftDate;
+            //if (date != null) { shiftDate = date.Value; }
+            //else { shiftDate = DateTime.Now.Date; }
+            
+            //1 - Start view with the ViewModel (rotaVM) 
+            return View();
+        }
+        #endregion
+
+
 
 
         #endregion

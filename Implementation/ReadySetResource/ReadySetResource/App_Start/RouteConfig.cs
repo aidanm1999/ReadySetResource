@@ -13,10 +13,27 @@ namespace ReadySetResource
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+
+            routes.MapRoute(
+                name: "AddShift",
+                url: "{controller}/Rota/Add",
+                defaults: new { controller = "Dashboard", action = "AddShift"}
+
+
+            );
+
+            routes.MapRoute(
+                "ArtistsImages",
+                "{surveys}/{surveyid}/employees/{action}",
+                new { surveys = "Surveys", surveyid = "2", controller = "employees", action = "[someaction]" }
+            );
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+            
+            
             );
 
             routes.MapRoute(

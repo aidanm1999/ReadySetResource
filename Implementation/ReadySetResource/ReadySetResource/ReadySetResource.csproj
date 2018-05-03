@@ -290,6 +290,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\AddShiftViewModel.cs" />
+    <Compile Include="ViewModels\BusinessSettingsViewModel.cs" />
     <Compile Include="ViewModels\EmailVerificationViewModel.cs" />
     <Compile Include="ViewModels\RotaViewModel.cs" />
     <Compile Include="ViewModels\SignUpViewModel.cs" />
@@ -438,9 +440,11 @@
     <Content Include="Views\Dashboard\Rota.cshtml" />
     <Content Include="Views\Dashboard\BusinessSettings.cshtml" />
     <Content Include="Views\Dashboard\Settings.cshtml" />
+    <Content Include="Views\Dashboard\Rota\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
