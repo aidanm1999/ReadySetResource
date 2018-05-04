@@ -7,7 +7,7 @@
 
     <ul class="nav navbar-nav navbar-right" >
         <li>
-            @Html.ActionLink("Launch Dashboard!", "Home", "Dashboard", routeValues: null, htmlAttributes: new { title = "Launch Dashboard", style = "color:#ffffff" })
+            @Html.ActionLink("Launch Dashboard!", "Index", "Dashboard", new { area = "Apps" }, htmlAttributes: new { title = "Launch Dashboard", style = "color:#ffffff" })
         </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()" style="color:#ffffff">Log off</a></li>
     </ul>

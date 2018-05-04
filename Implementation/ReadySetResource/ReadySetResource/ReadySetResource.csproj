@@ -200,8 +200,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Apps\Controllers\RotaController.cs" />
+    <Compile Include="Areas\Apps\AppsAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Apps\Controllers\DashboardController.cs" />
     <Compile Include="Controllers\GetController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LegalController.cs" />
@@ -290,11 +292,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\AddShiftViewModel.cs" />
-    <Compile Include="ViewModels\BusinessSettingsViewModel.cs" />
-    <Compile Include="ViewModels\EmailVerificationViewModel.cs" />
-    <Compile Include="ViewModels\RotaViewModel.cs" />
-    <Compile Include="ViewModels\SignUpViewModel.cs" />
+    <Compile Include="Areas\Apps\ViewModels\Rota\AddShiftViewModel.cs" />
+    <Compile Include="ViewModels\Get\BusinessSettingsViewModel.cs" />
+    <Compile Include="ViewModels\Get\EmailVerificationViewModel.cs" />
+    <Compile Include="Areas\Apps\ViewModels\Rota\RotaViewModel.cs" />
+    <Compile Include="ViewModels\Get\SignUpViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\animate.css" />
@@ -336,6 +338,14 @@
     <Content Include="Content\SystemFiles\legal\CopyrightPolicy.pdf" />
     <Content Include="Content\SystemFiles\legal\PrivacyPolicy.pdf" />
     <Content Include="Content\SystemFiles\legal\TermsAndConditions.pdf" />
+    <Content Include="Areas\Apps\Views\web.config" />
+    <Content Include="Areas\Apps\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Apps\Views\Shared\_DashLayout.cshtml" />
+    <Content Include="Areas\Apps\Views\Shared\_DashPartial.cshtml" />
+    <Content Include="Areas\Apps\Views\Shared\Lockout.cshtml" />
+    <Content Include="Areas\Apps\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Apps\Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Areas\Apps\Views\Shared\Error.cshtml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -432,19 +442,19 @@
     <Content Include="Views\Get\Solutions.cshtml" />
     <Content Include="Views\Get\BusinessInfo.cshtml" />
     <Content Include="Views\Get\Welcome.cshtml" />
-    <Content Include="Views\Dashboard\Home.cshtml" />
-    <Content Include="Views\Dashboard\UnderConstruction.cshtml" />
+    <Content Include="Areas\Apps\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\Apps\Views\Dashboard\UnderConstruction.cshtml" />
     <Content Include="Views\Shared\_DashLayout.cshtml" />
     <Content Include="Views\Get\EmailVerification.cshtml" />
     <Content Include="Views\Shared\_DashPartial.cshtml" />
-    <Content Include="Views\Dashboard\Rota.cshtml" />
-    <Content Include="Views\Dashboard\BusinessSettings.cshtml" />
-    <Content Include="Views\Dashboard\Settings.cshtml" />
-    <Content Include="Views\Dashboard\Rota\Add.cshtml" />
+    <Content Include="Areas\Apps\Views\Rota\Index.cshtml" />
+    <Content Include="Areas\Apps\Views\Dashboard\BusinessSettings.cshtml" />
+    <Content Include="Areas\Apps\Views\Dashboard\Settings.cshtml" />
+    <Content Include="Areas\Apps\Views\Rota\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\" />
+    <Folder Include="Areas\Apps\Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

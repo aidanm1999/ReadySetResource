@@ -1,0 +1,49 @@
+﻿@model ReadySetResource.ViewModels.AddShiftViewModel
+@{
+
+    Layout = "~/Views/Shared/_DashLayout.cshtml";
+    ViewBag.Title = "Add Shift";
+}
+
+<h2>Add Shift</h2>
+
+<div class="col-md-3">
+    @using (Html.BeginForm("AddShift", "Rota"))
+    {
+        @Html.ValidationSummary(true, "Please fix the following errors.")
+        <div class="form-group">
+            @Html.LabelFor(m => m.Shift.StartDateTime)
+            @Html.EditorFor(m => m.Shift.StartDateTime, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Shift.StartDateTime)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Shift.EndDateTime)
+            @Html.EditorFor(m => m.Shift.EndDateTime, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Shift.EndDateTime)
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(m => m.Employees)
+            @Html.DropDownListFor(m => m.Shift.UserId, Model.Employees)
+            @Html.ValidationMessageFor(m => m.Employees)
+        </div>
+        
+        @Html.AntiForgeryToken()
+        <p>
+            @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-danger", style = "float:left" })
+            <button type="submit" class="btn btn-primary" style="float:right">Save</button>
+        </p>
+        @Html.HiddenFor(m => m.EmployeesHolidays)
+        @Html.HiddenFor(m => m.Shift.Id)
+        @Html.HiddenFor(m => m.Employees)
+        @Html.HiddenFor(m => m.Shift.User)
+        @Html.HiddenFor(m => m.Shift.UserId)
+    }
+</div>
+
+
+@*Generating client side validation*@
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}

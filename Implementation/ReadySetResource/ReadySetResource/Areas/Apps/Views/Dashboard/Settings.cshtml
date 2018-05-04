@@ -1,0 +1,51 @@
+﻿@model ReadySetResource.Models.ApplicationUser
+@{
+    ViewBag.Title = "Business Settings";
+    Layout = "~/Views/Shared/_DashLayout.cshtml";
+}
+
+<h2>Account Settings</h2>
+
+@using (Html.BeginForm("AddManagerOne", "Get"))
+{
+    @Html.ValidationSummary(true, "Please fix the following errors.")
+    <div class="col-md-6 animated fadeInUp" style="animation-duration:1s">
+        <h3>Basic Details</h3>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Title)
+            @Html.TextBoxFor(m => m.Title, new { @class = "form-control"})
+            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control"})
+            @Html.ValidationMessageFor(m => m.Title)
+            @Html.ValidationMessageFor(m => m.FirstName)
+            @Html.ValidationMessageFor(m => m.LastName)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.DateOfBirth)
+            @Html.TextBoxFor(m => m.DateOfBirth)
+            @Html.ValidationMessageFor(m => m.DateOfBirth)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Email)
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Email)
+        </div>
+        <div class="form-group"></div>
+    </div>
+    <div class="col-md-6 animated fadeInUp" style="animation-delay:1s; animation-duration:1s">
+        <h3>Extra Details</h3>
+
+    </div>
+
+        @Html.HiddenFor(m => m.Id)
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn btn-primary">Update Details</button>
+}
+
+
+@*Generating client side validation*@
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+
+}

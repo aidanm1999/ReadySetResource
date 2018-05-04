@@ -10,7 +10,7 @@ ViewBag.Title = "Home";
     </div>
     @if (User.Identity.IsAuthenticated)
     {
-    <p style="padding-top:200px">@Html.ActionLink("Launch Dashboard!", "Home", "Dashboard", null, new { @class = "btn btn-primary" })</p>
+    <p style="padding-top:200px">@Html.ActionLink("Launch Dashboard!", "Index", "Dashboard", new { area = "Apps" }, new { @class = "btn btn-primary" })</p>
     }
     else
     {
