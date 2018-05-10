@@ -9,7 +9,11 @@
     a:link {
         color: inherit;
     }
+    a:visited {
+        color: inherit;
+    }
 </style>
+<link rel="stylesheet" type="text/css" href="~/Content/Site.css">
 
 
 @if (Model.CurrentUserType.Calendar == "E")
@@ -36,13 +40,11 @@ else if (Model.Holidays.Count() == 0)
 }
 else
 {
-
-
-    <link rel="stylesheet" type="text/css" href="~/Content/Site.css">
+    
     <table id="rota">
         <thead>
             <tr>
-                <th>Employee </th>
+                <th>Employee</th>
                 <th colspan="2">Holiday</th>
                 <th rowspan="2">Status</th>
                 <th colspan="3">Actions</th>
@@ -58,48 +60,37 @@ else
                         @holiday.User.LastName
                     </td>
                     <td>
-                        @holiday.StartDateTime
+                        @Html.ActionLink(holiday.StartDateTime.ToString(), "Edit", new { holiday = holiday.Id })
                     </td>
                     <td>
-                        @holiday.EndDateTime
+                        @Html.ActionLink(holiday.EndDateTime.ToString(), "Edit", new { holiday = holiday.Id })
                     </td>
                     <td>
-                        @if (@holiday.Accepted == true)
-                        {
-                            <text>Accepted</text>
-                        }
-                        else if (holiday.Accepted == false)
-                        {
-                            <text>Declined</text>
-                        }
-                        else
-                        {
-                            <text>Pending</text>
-                        }
+                        @holiday.Accepted
 
                     </td>
 
-                    @if (holiday.Accepted != true)
+                    @if (holiday.Accepted != "Accepted")
                     {
                         <td>
-                            @Html.ActionLink("Accept", "AcceptHoliday")
+                            @Html.ActionLink("Accept", "AcceptHoliday", new { holiday = holiday.Id })
                         </td>
                     }
                     else
                     {
                         <td>
-                            @Html.ActionLink("Rescind", "DeclineHoliday")
+                            @Html.ActionLink("Rescind", "DeclineHoliday", new { holiday = holiday.Id })
                         </td>
                     }
 
                     <td>
-                        @if (holiday.Accepted != true)
+                        @if (holiday.Accepted == "Pending")
                         {
-                            @Html.ActionLink("Decline", "DeclineHoliday")
+                            @Html.ActionLink("Decline", "DeclineHoliday", new { holiday = holiday.Id })
                         }
                     </td>
                     <td>
-                        @Html.ActionLink("Delete", "DeleteHoliday")
+                        @Html.ActionLink("Delete", "DeleteHoliday", new { holiday = holiday.Id })
                     </td>
                 </tr>
             }
@@ -110,7 +101,7 @@ else
 
 
 <footer style="text-align:center; color:white; align-content:center; padding-top:20px">
-    @Html.ActionLink("< Last Week", "Holidays", "Calendar", new { week = (Model.ActiveWeekCommenceDate.AddDays(-7).Date) }, new { @class = "btn btn-primary" })
-    @Html.ActionLink("Today", "Holidays", "Calendar", null, new { @class = "btn btn-primary" })
-    @Html.ActionLink("Next Week >", "Holidays", "Calendar", new { week = (Model.ActiveWeekCommenceDate.AddDays(7).Date) }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("< Last Week", "Index", "Holidays", new { week = (Model.ActiveWeekCommenceDate.AddDays(-7).Date) }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Today", "Index", "Holidays", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Next Week >", "Index", "Holidays", new { week = (Model.ActiveWeekCommenceDate.AddDays(7).Date) }, new { @class = "btn btn-primary" })
 </footer>

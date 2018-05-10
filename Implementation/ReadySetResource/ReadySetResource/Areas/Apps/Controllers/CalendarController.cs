@@ -464,7 +464,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
         
 
-        //MUST COMPLETE
+        
         #region EditShift
         // POST: Calendar/AddShift
         [HttpPost]
@@ -583,13 +583,6 @@ namespace ReadySetResource.Areas.Apps.Controllers
         #endregion
 
 
-        [HttpGet]
-        [Route("calendar/get/date")]
-        public string H ()
-        {
-            return DateTime.Now.ToString();
-        }
-
 
 
         #region DeleteShift
@@ -604,17 +597,6 @@ namespace ReadySetResource.Areas.Apps.Controllers
             return RedirectToAction("Index", "Calendar", new { week = ActualShift.StartDateTime });
         }
         #endregion
-
-
-
-
-
-
-
-
-
-
-
 
 
     }

@@ -16,9 +16,9 @@ namespace ReadySetResource.Models
 
         [Required]
         public DateTime EndDateTime { get; set; }
-
+        
         [Required]
-        public bool Accepted { get; set; }
+        public string Accepted { get; set; }
 
         public string UserId { get; set; }
         public ApplicationUser User { get; set; }

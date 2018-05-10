@@ -203,7 +203,9 @@
     <Compile Include="Areas\Apps\Controllers\HolidaysController.cs" />
     <Compile Include="Areas\Apps\Controllers\CalendarController.cs" />
     <Compile Include="Areas\Apps\AppsAreaRegistration.cs" />
-    <Compile Include="Areas\Apps\ViewModels\Calendar\HolidaysViewModel.cs" />
+    <Compile Include="Areas\Apps\ViewModels\Dashboard\SettingsViewModel.cs" />
+    <Compile Include="Areas\Apps\ViewModels\Holidays\HolidaysViewModel.cs" />
+    <Compile Include="Areas\Apps\ViewModels\Holidays\HolidayViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Areas\Apps\Controllers\DashboardController.cs" />
     <Compile Include="Controllers\GetController.cs" />
@@ -269,6 +271,14 @@
     <Compile Include="Migrations\201805081031291_ChangedRotaToCalendar.cs" />
     <Compile Include="Migrations\201805081031291_ChangedRotaToCalendar.Designer.cs">
       <DependentUpon>201805081031291_ChangedRotaToCalendar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805101751046_RemovedRequiredFromAcceptedAttributeInHoliday.cs" />
+    <Compile Include="Migrations\201805101751046_RemovedRequiredFromAcceptedAttributeInHoliday.Designer.cs">
+      <DependentUpon>201805101751046_RemovedRequiredFromAcceptedAttributeInHoliday.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805101801329_ChangedAcceptedHoliday.cs" />
+    <Compile Include="Migrations\201805101801329_ChangedAcceptedHoliday.Designer.cs">
+      <DependentUpon>201805101801329_ChangedAcceptedHoliday.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\DataOverTime.cs" />
@@ -358,6 +368,8 @@
     <Content Include="Areas\Apps\Views\Shared\EditorTemplate\Date.cshtml" />
     <Content Include="Areas\Apps\Views\Calendar\Edit.cshtml" />
     <Content Include="Areas\Apps\Views\Holidays\Index.cshtml" />
+    <Content Include="Areas\Apps\Views\Holidays\Add.cshtml" />
+    <Content Include="Areas\Apps\Views\Holidays\Edit.cshtml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -530,6 +542,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805081031291_ChangedRotaToCalendar.resx">
       <DependentUpon>201805081031291_ChangedRotaToCalendar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805101751046_RemovedRequiredFromAcceptedAttributeInHoliday.resx">
+      <DependentUpon>201805101751046_RemovedRequiredFromAcceptedAttributeInHoliday.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805101801329_ChangedAcceptedHoliday.resx">
+      <DependentUpon>201805101801329_ChangedAcceptedHoliday.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
