@@ -212,7 +212,7 @@ namespace ReadySetResource.Controllers
                         {
                             Name = "Admin",
                             Administrator = "E",
-                            Rota = "E",
+                            Calendar = "E",
                             Messenger = "E",
                             Meetings = "E",
                             Ideas = "E",

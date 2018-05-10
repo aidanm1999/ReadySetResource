@@ -592,7 +592,7 @@ for (let i = 0; i < longerTimeoutBrowsers.length; i += 1) {
   }
 }
 
-function microtaskDebounce(fn) {
+function micCalendarskDebounce(fn) {
   let called = false;
   return () => {
     if (called) {
@@ -619,7 +619,7 @@ function taskDebounce(fn) {
   };
 }
 
-const supportsMicroTasks = isBrowser && window.Promise;
+const supportsMicCalendarsks = isBrowser && window.Promise;
 
 /**
 * Create a debounced version of a method, that's asynchronously deferred
@@ -630,7 +630,7 @@ const supportsMicroTasks = isBrowser && window.Promise;
 * @argument {Function} fn
 * @returns {Function}
 */
-var debounce = supportsMicroTasks ? microtaskDebounce : taskDebounce;
+var debounce = supportsMicCalendarsks ? micCalendarskDebounce : taskDebounce;
 
 /**
  * Mimics the `find` method of Array

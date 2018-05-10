@@ -8,7 +8,7 @@ namespace ReadySetResource.Migrations
         public override void Up()
         {
             AddColumn("dbo.BusinessUserTypes", "Administrator", c => c.String(nullable: false));
-            AddColumn("dbo.BusinessUserTypes", "Rota", c => c.String(nullable: false));
+            AddColumn("dbo.BusinessUserTypes", "Calendar", c => c.String(nullable: false));
             AddColumn("dbo.BusinessUserTypes", "Updates", c => c.String(nullable: false));
             AddColumn("dbo.BusinessUserTypes", "Store", c => c.String(nullable: false));
             AddColumn("dbo.BusinessUserTypes", "Messenger", c => c.String(nullable: false));
@@ -23,7 +23,7 @@ namespace ReadySetResource.Migrations
             DropColumn("dbo.BusinessUserTypes", "Messenger");
             DropColumn("dbo.BusinessUserTypes", "Store");
             DropColumn("dbo.BusinessUserTypes", "Updates");
-            DropColumn("dbo.BusinessUserTypes", "Rota");
+            DropColumn("dbo.BusinessUserTypes", "Calendar");
             DropColumn("dbo.BusinessUserTypes", "Administrator");
         }
     }

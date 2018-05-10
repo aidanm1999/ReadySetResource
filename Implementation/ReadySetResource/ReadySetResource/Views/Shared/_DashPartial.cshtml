@@ -1,8 +1,0 @@
-﻿@model ReadySetResource.Models.ApplicationUser
-<hr />
-@if (Model.BusinessUserType.Administrator == "E")
-{
-
-    @Html.ActionLink("Business Settings", "BusinessSettings", "Dashboard", null, new { @class = "btn btn-primary", style = "float:left" })
-}
-@Html.ActionLink("Account Settings", "Settings", "Dashboard", null, new { @class = "btn btn-primary", style = "float:right" })

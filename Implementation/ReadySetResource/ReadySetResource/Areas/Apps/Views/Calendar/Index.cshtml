@@ -1,21 +1,23 @@
-﻿@model ReadySetResource.ViewModels.RotaViewModel
+﻿@model ReadySetResource.ViewModels.CalendarViewModel
 @{
-    ViewBag.Title = "Rota";
-    Layout = "~/Views/Shared/_DashLayout.cshtml";
+    ViewBag.Title = "Calendar";
+    Layout = "~/Areas/Apps/Views/Shared/_Layout.cshtml";
 }
+
 <link rel="stylesheet" type="text/css" href="~/Content/Site.css">
 
 
-@if (Model.CurrentUserType.Rota == "E")
+
+@if (Model.CurrentUserType.Calendar == "E")
 {
     <h2>
-        Rota - For Week @Model.ActiveWeekCommenceDate.Day/@Model.ActiveWeekCommenceDate.Month to @Model.ActiveWeekCommenceDate.AddDays(6).Day/@Model.ActiveWeekCommenceDate.AddDays(6).Month
-        @Html.ActionLink("Add Shift", "Add", "Rota", null, new { @class = "btn btn-primary" })
+        Calendar - For Week @Model.ActiveWeekCommenceDate.Day/@Model.ActiveWeekCommenceDate.Month to @Model.ActiveWeekCommenceDate.AddDays(6).Day/@Model.ActiveWeekCommenceDate.AddDays(6).Month
+        @Html.ActionLink("Add Shift", "Add", "Calendar", null, new { @class = "btn btn-default" })
     </h2>
 }
 else
 {
-    <h2>Rota - For Week @Model.ActiveWeekCommenceDate.Day/@Model.ActiveWeekCommenceDate.Month to @Model.ActiveWeekCommenceDate.AddDays(6).Day/@Model.ActiveWeekCommenceDate.AddDays(6).Month </h2>
+    <h2>Calendar - For Week @Model.ActiveWeekCommenceDate.Day/@Model.ActiveWeekCommenceDate.Month to @Model.ActiveWeekCommenceDate.AddDays(6).Day/@Model.ActiveWeekCommenceDate.AddDays(6).Month </h2>
 
 }
 
@@ -76,7 +78,7 @@ else
 
                     @foreach (var empShift in empShifts)
                     {
-                        if (Model.CurrentUserType.Rota == "V")
+                        if (Model.CurrentUserType.Calendar == "V")
                         {
                             if (empShift == null)
                             {
@@ -101,16 +103,16 @@ else
                                 </td>
                             }
                         }
-                        else if (Model.CurrentUserType.Rota == "E")
+                        else if (Model.CurrentUserType.Calendar == "E")
                         {
                             if (empShift == null)
                             {
-                                <td colspan="2"><a href="@Url.Action("Add","Rota")">+</a></td>
+                                <td colspan="2"><a href="@Url.Action("Add","Calendar")">+</a></td>
                             }
                             else if (empShift.UserId == employee.Id)
                             {
                                 <td style="white-space: nowrap;">
-                                    <a href="@Url.Action("AddShift","Dashboard", new { date = empShift.StartDateTime } )">
+                                    <a href="@Url.Action("Edit","Calendar", new { shift = empShift.Id } )">
                                         <div style="height:100%;width:100%">
                                             @empShift.StartDateTime.Hour :
                                             @if (empShift.StartDateTime.Minute < 10)
@@ -121,7 +123,7 @@ else
                                     </a>
                                 </td>
                                 <td style="white-space: nowrap;">
-                                    <a href="@Url.Action("BusinessInfo","Get", new { date = empShift.StartDateTime} )">
+                                    <a href="@Url.Action("Edit","Calendar", new { shift = empShift.Id } )">
                                         <div style="height:100%;width:100%">
                                             @empShift.EndDateTime.Hour :
                                             @if (empShift.EndDateTime.Minute < 10)
@@ -151,7 +153,7 @@ else
 
 
 <footer style="text-align:center; align-content:center; padding-top:20px">
-    @Html.ActionLink("< Last Week", "Index", "Rota", new { week = (Model.ActiveWeekCommenceDate.AddDays(-7).Date) }, new { @class = "btn btn-primary" })
-    @Html.ActionLink("Today", "Index", "Rota", null, new { @class = "btn btn-primary" })
-    @Html.ActionLink("Next Week >", "Index", "Rota", new { week = (Model.ActiveWeekCommenceDate.AddDays(7).Date) }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("< Last Week", "Index", "Calendar", new { week = (Model.ActiveWeekCommenceDate.AddDays(-7).Date) }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Today", "Index", "Calendar", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Next Week >", "Index", "Calendar", new { week = (Model.ActiveWeekCommenceDate.AddDays(7).Date) }, new { @class = "btn btn-primary" })
 </footer>

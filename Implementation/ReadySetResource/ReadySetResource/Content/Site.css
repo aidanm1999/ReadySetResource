@@ -35,28 +35,59 @@ textarea {
     width: 100%;
 }
 
-#rota td, #customers th {
+
+
+    #rota td, #rota th {
+        border: 1px solid #ddd;
+        padding: 6px;
+        width: 1%;
+    }
+
+    #rota tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    #rota tr:hover {
+        background-color: #ddd;
+    }
+
+    #rota th {
+        padding-top: 6px;
+        padding-bottom: 6px;
+        text-align: center;
+        background-color: #428bca;
+        color: white;
+    }
+
+
+#calendar {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    text-align: center;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#calendar td, #customers th {
     border: 1px solid #ddd;
     padding: 6px;
     width: 1%;
 }
 
-#rota tr:nth-child(even) {
+#calendar tr:nth-child(even) {
     background-color: #f2f2f2;
 }
 
-#rota tr:hover {
+#calendar tr:hover {
     background-color: #ddd;
 }
 
-#rota th {
+#calendar th {
     padding-top: 6px;
     padding-bottom: 6px;
     text-align: center;
     background-color: #428bca;
     color: white;
 }
-
 
 
 

@@ -44,7 +44,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
         
 
         #region Settings
-        // GET: Dashboard/Rota
+        // GET: Dashboard/Calendar
         [HttpGet]
         [Authorize]
         public ActionResult Settings()
@@ -60,7 +60,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
 
         #region BusinessSettings
-        // GET: Dashboard/Rota
+        // GET: Dashboard/Calendar
         [HttpGet]
         [Authorize]
         public ActionResult BusinessSettings()

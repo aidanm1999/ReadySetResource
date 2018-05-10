@@ -16,7 +16,7 @@ namespace ReadySetResource
 
             routes.MapRoute(
                 name: "AddShift",
-                url: "{controller}/Rota/Add",
+                url: "{controller}/Calendar/Add",
                 defaults: new { controller = "Dashboard", action = "AddShift"}
 
 

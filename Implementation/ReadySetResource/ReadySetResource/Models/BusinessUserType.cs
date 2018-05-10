@@ -19,7 +19,7 @@ namespace ReadySetResource.Models
         public string Administrator { get; set; }
 
         [Required]
-        public string Rota { get; set; }
+        public string Calendar { get; set; }
 
         [Required]
         public string Updates { get; set; }

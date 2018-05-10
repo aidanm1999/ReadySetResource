@@ -39,7 +39,7 @@ for (var i = 0; i < longerTimeoutBrowsers.length; i += 1) {
   }
 }
 
-function microtaskDebounce(fn) {
+function micCalendarskDebounce(fn) {
   var called = false;
   return function () {
     if (called) {
@@ -66,7 +66,7 @@ function taskDebounce(fn) {
   };
 }
 
-var supportsMicroTasks = isBrowser && window.Promise;
+var supportsMicCalendarsks = isBrowser && window.Promise;
 
 /**
 * Create a debounced version of a method, that's asynchronously deferred
@@ -77,7 +77,7 @@ var supportsMicroTasks = isBrowser && window.Promise;
 * @argument {Function} fn
 * @returns {Function}
 */
-var debounce = supportsMicroTasks ? microtaskDebounce : taskDebounce;
+var debounce = supportsMicCalendarsks ? micCalendarskDebounce : taskDebounce;
 
 /**
  * Check if the given variable is a function

@@ -200,8 +200,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Areas\Apps\Controllers\RotaController.cs" />
+    <Compile Include="Areas\Apps\Controllers\HolidaysController.cs" />
+    <Compile Include="Areas\Apps\Controllers\CalendarController.cs" />
     <Compile Include="Areas\Apps\AppsAreaRegistration.cs" />
+    <Compile Include="Areas\Apps\ViewModels\Calendar\HolidaysViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Areas\Apps\Controllers\DashboardController.cs" />
     <Compile Include="Controllers\GetController.cs" />
@@ -260,6 +262,14 @@
     <Compile Include="Migrations\201804261045543_AddedForeignKeyIdToShift2.Designer.cs">
       <DependentUpon>201804261045543_AddedForeignKeyIdToShift2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805061416464_AddFKToHolidays.cs" />
+    <Compile Include="Migrations\201805061416464_AddFKToHolidays.Designer.cs">
+      <DependentUpon>201805061416464_AddFKToHolidays.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805081031291_ChangedRotaToCalendar.cs" />
+    <Compile Include="Migrations\201805081031291_ChangedRotaToCalendar.Designer.cs">
+      <DependentUpon>201805081031291_ChangedRotaToCalendar.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\DataOverTime.cs" />
     <Compile Include="Models\DataTransferRate.cs" />
@@ -292,10 +302,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
-    <Compile Include="Areas\Apps\ViewModels\Rota\AddShiftViewModel.cs" />
+    <Compile Include="Areas\Apps\ViewModels\Calendar\ShiftViewModel.cs" />
     <Compile Include="ViewModels\Get\BusinessSettingsViewModel.cs" />
     <Compile Include="ViewModels\Get\EmailVerificationViewModel.cs" />
-    <Compile Include="Areas\Apps\ViewModels\Rota\RotaViewModel.cs" />
+    <Compile Include="Areas\Apps\ViewModels\Calendar\CalendarViewModel.cs" />
     <Compile Include="ViewModels\Get\SignUpViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -307,13 +317,14 @@
     <Content Include="Content\Images\dashboard\cog.png" />
     <Content Include="Content\Images\dashboard\user.png" />
     <Content Include="Content\Images\home\backgroud.jpg" />
+    <Content Include="Content\Images\home\calendar.png" />
     <Content Include="Content\Images\home\cogwheels.png" />
+    <Content Include="Content\Images\home\holidays.png" />
     <Content Include="Content\Images\home\ideas.png" />
     <Content Include="Content\Images\home\logo.png" />
     <Content Include="Content\Images\home\LogoWhite.png" />
     <Content Include="Content\Images\home\meetings.png" />
     <Content Include="Content\Images\home\messages.png" />
-    <Content Include="Content\Images\home\rota.png" />
     <Content Include="Content\Images\home\store.png" />
     <Content Include="Content\Images\home\update.png" />
     <Content Include="Content\Images\legal\terms.png" />
@@ -340,18 +351,20 @@
     <Content Include="Content\SystemFiles\legal\TermsAndConditions.pdf" />
     <Content Include="Areas\Apps\Views\web.config" />
     <Content Include="Areas\Apps\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Apps\Views\Shared\_DashLayout.cshtml" />
-    <Content Include="Areas\Apps\Views\Shared\_DashPartial.cshtml" />
+    <Content Include="Areas\Apps\Views\Shared\_Partial.cshtml" />
     <Content Include="Areas\Apps\Views\Shared\Lockout.cshtml" />
     <Content Include="Areas\Apps\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Apps\Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Areas\Apps\Views\Shared\Error.cshtml" />
+    <Content Include="Areas\Apps\Views\Shared\EditorTemplate\Date.cshtml" />
+    <Content Include="Areas\Apps\Views\Calendar\Edit.cshtml" />
+    <Content Include="Areas\Apps\Views\Holidays\Index.cshtml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\datepicker.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
@@ -444,13 +457,11 @@
     <Content Include="Views\Get\Welcome.cshtml" />
     <Content Include="Areas\Apps\Views\Dashboard\Index.cshtml" />
     <Content Include="Areas\Apps\Views\Dashboard\UnderConstruction.cshtml" />
-    <Content Include="Views\Shared\_DashLayout.cshtml" />
     <Content Include="Views\Get\EmailVerification.cshtml" />
-    <Content Include="Views\Shared\_DashPartial.cshtml" />
-    <Content Include="Areas\Apps\Views\Rota\Index.cshtml" />
+    <Content Include="Areas\Apps\Views\Calendar\Index.cshtml" />
     <Content Include="Areas\Apps\Views\Dashboard\BusinessSettings.cshtml" />
     <Content Include="Areas\Apps\Views\Dashboard\Settings.cshtml" />
-    <Content Include="Areas\Apps\Views\Rota\Add.cshtml" />
+    <Content Include="Areas\Apps\Views\Calendar\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -513,6 +524,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804261045543_AddedForeignKeyIdToShift2.resx">
       <DependentUpon>201804261045543_AddedForeignKeyIdToShift2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805061416464_AddFKToHolidays.resx">
+      <DependentUpon>201805061416464_AddFKToHolidays.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805081031291_ChangedRotaToCalendar.resx">
+      <DependentUpon>201805081031291_ChangedRotaToCalendar.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
