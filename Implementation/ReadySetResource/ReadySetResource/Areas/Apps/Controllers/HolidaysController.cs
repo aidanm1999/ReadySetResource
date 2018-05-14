@@ -174,6 +174,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
             {
                 Employees = _context.Users.Where(e => e.BusinessUserType.BusinessId == currBusiness.Id).ToList(),
                 CurrentUserType = currBusinessUserType,
+                CurrentUser = currBusinessUser,
             };
 
 

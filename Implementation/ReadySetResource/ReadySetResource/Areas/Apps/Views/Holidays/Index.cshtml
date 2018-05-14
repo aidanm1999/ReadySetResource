@@ -9,6 +9,7 @@
     a:link {
         color: inherit;
     }
+
     a:visited {
         color: inherit;
     }
@@ -25,7 +26,7 @@
 }
 else
 {
-    <h2>Holidays - For Week @Model.ActiveWeekCommenceDate.Day/@Model.ActiveWeekCommenceDate.Month to @Model.ActiveWeekCommenceDate.AddDays(6).Day/@Model.ActiveWeekCommenceDate.AddDays(6).Month </h2>
+    <h2> Your Holidays - For Week @Model.ActiveWeekCommenceDate.Day/@Model.ActiveWeekCommenceDate.Month to @Model.ActiveWeekCommenceDate.AddDays(6).Day/@Model.ActiveWeekCommenceDate.AddDays(6).Month </h2>
 
 }
 
@@ -40,62 +41,99 @@ else if (Model.Holidays.Count() == 0)
 }
 else
 {
-    
-    <table id="rota">
-        <thead>
-            <tr>
-                <th>Employee</th>
-                <th colspan="2">Holiday</th>
-                <th rowspan="2">Status</th>
-                <th colspan="3">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var holiday in Model.Holidays)
-            {
+    if (Model.CurrentUserType.Calendar == "E")
+    {
+        <table id="rota">
+            <thead>
                 <tr>
-                    <td>
-                        @holiday.User.FirstName
-
-                        @holiday.User.LastName
-                    </td>
-                    <td>
-                        @Html.ActionLink(holiday.StartDateTime.ToString(), "Edit", new { holiday = holiday.Id })
-                    </td>
-                    <td>
-                        @Html.ActionLink(holiday.EndDateTime.ToString(), "Edit", new { holiday = holiday.Id })
-                    </td>
-                    <td>
-                        @holiday.Accepted
-
-                    </td>
-
-                    @if (holiday.Accepted != "Accepted")
-                    {
-                        <td>
-                            @Html.ActionLink("Accept", "AcceptHoliday", new { holiday = holiday.Id })
-                        </td>
-                    }
-                    else
-                    {
-                        <td>
-                            @Html.ActionLink("Rescind", "DeclineHoliday", new { holiday = holiday.Id })
-                        </td>
-                    }
-
-                    <td>
-                        @if (holiday.Accepted == "Pending")
-                        {
-                            @Html.ActionLink("Decline", "DeclineHoliday", new { holiday = holiday.Id })
-                        }
-                    </td>
-                    <td>
-                        @Html.ActionLink("Delete", "DeleteHoliday", new { holiday = holiday.Id })
-                    </td>
+                    <th>Employee</th>
+                    <th colspan="2">Holiday</th>
+                    <th rowspan="2">Status</th>
+                    <th colspan="3">Actions</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var holiday in Model.Holidays)
+                {
+                    
+                    <tr>
+                        <td>
+                            @holiday.User.FirstName
+
+                            @holiday.User.LastName
+                        </td>
+                        <td>
+                            @Html.ActionLink(holiday.StartDateTime.ToString(), "Edit", new { holiday = holiday.Id })
+                        </td>
+                        <td>
+                            @Html.ActionLink(holiday.EndDateTime.ToString(), "Edit", new { holiday = holiday.Id })
+                        </td>
+                        <td>
+                            @holiday.Accepted
+
+                        </td>
+
+                        @if (holiday.Accepted != "Accepted")
+                        {
+                            <td>
+                                @Html.ActionLink("Accept", "AcceptHoliday", new { holiday = holiday.Id })
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @Html.ActionLink("Rescind", "DeclineHoliday", new { holiday = holiday.Id })
+                            </td>
+                        }
+
+                        <td>
+                            @if (holiday.Accepted == "Pending")
+                            {
+                                @Html.ActionLink("Decline", "DeclineHoliday", new { holiday = holiday.Id })
+                            }
+                        </td>
+                        <td>
+                            @Html.ActionLink("Delete", "DeleteHoliday", new { holiday = holiday.Id })
+                        </td>
+                     </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <table id="rota">
+            <thead>
+                <tr>
+                    <th colspan="2">Holiday</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var holiday in Model.Holidays)
+                {
+                    if (holiday.UserId == Model.CurrentUser.Id)
+                    {
+                        <tr>
+                            <td>
+                                @Html.ActionLink(holiday.StartDateTime.ToString(), "Edit", new { holiday = holiday.Id })
+                            </td>
+                            <td>
+                                @Html.ActionLink(holiday.EndDateTime.ToString(), "Edit", new { holiday = holiday.Id })
+                            </td>
+                            <td>
+                                @holiday.Accepted
+                            </td>
+                            <td>
+                                @Html.ActionLink("Delete", "DeleteHoliday", new { holiday = holiday.Id })
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    }
 
 }
 
