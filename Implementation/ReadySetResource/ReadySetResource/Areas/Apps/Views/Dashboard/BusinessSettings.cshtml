@@ -1,4 +1,4 @@
-﻿
+﻿@model ReadySetResource.Areas.Apps.ViewModels.Dashboard.BusinessSettingsViewModel
 @{
     ViewBag.Title = "Business Settings";
     Layout = "~/Areas/Apps/Views/Shared/_Layout.cshtml";
@@ -8,7 +8,30 @@
 
 <div class="col-md-6 animated fadeInUp" style="animation-duration:2s">
     <h3>Employee Types</h3>
+    <table id="rota">
+        <tbody>
+            @foreach (var type in Model.BusinessUserTypes)
+            {
+                <tr>
+                    <td>@type.Name</td>
+                    <td>@Html.ActionLink("Edit", "EditType", new { type.Id })</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
 <div class="col-md-6 animated fadeInUp" style="animation-delay:1s; animation-duration:2s">
     <h3>Employees</h3>
+    <table id="rota">
+        <tbody>
+            @foreach (var employee in Model.Employees)
+            {
+                <tr>
+                    <td>@employee.FirstName @employee.LastName</td>
+                    <td>@employee.BusinessUserType.Name</td>
+                    <td>@Html.ActionLink("Edit", "EditType", new { employee.Id })</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>

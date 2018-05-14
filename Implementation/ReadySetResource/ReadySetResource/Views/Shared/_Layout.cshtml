@@ -38,13 +38,14 @@
         @RenderBody()
         <hr />
         <footer class="navbar" style="background-color:#428bca">
-            <p style="text-align:center; padding-top:15px; color:#ffffff">
+            <div style="text-align:center; padding-top:15px; color:#ffffff">
                 @Html.ActionLink("Job Opportunities", "JobOpportunities", "Home", null, new { style = "color: #ffffff" }) |
                 <a href="~/Legal/Index" style="color:#ffffff">&copy; @DateTime.Now.Year</a> |
                 @Html.ActionLink(" ReadySetResource", "Index", "Home", null, new { style = "color: #ffffff" }) |
                 @Html.ActionLink("Credits", "Credits", "Home", null, new { style = "color: #ffffff" }) |
-                @Html.ActionLink("Site Map", "SiteMap", "Home", null, new { style = "color: #ffffff" })
-            </p>
+                @Html.ActionLink("Site Map", "SiteMap", "Home", null, new { style = "color: #ffffff" }) |
+                @Html.ActionLink("Donate!", "Donate", "Home", null, new { style = "color: #ffffff" })
+            </div>
         </footer>
     </div>
 

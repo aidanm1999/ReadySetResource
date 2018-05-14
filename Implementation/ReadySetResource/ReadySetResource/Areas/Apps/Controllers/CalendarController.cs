@@ -263,7 +263,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
                                     var shiftDifference = dayOfWeekIndex - daysOfWeek.IndexOf(prevShift.StartDateTime.DayOfWeek.ToString());
 
 
-                                    for (int i = 1; i < shiftDifference; i++)
+                                    for (int i = 0; i < shiftDifference; i++)
                                     {
                                         //Get the current element again as shift position has changed
                                         CalendarVM.Shifts.Insert(CalendarVM.Shifts.IndexOf(shift), null);

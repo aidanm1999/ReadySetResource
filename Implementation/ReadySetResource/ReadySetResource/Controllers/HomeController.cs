@@ -3,11 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ReadySetResource.Models;
 
 namespace ReadySetResource.Controllers
 {
     public class HomeController : Controller
     {
+        #region Context
+        
+        private ApplicationDbContext _context;
+
+        
+        public HomeController()
+        {
+            _context = new ApplicationDbContext();
+
+        }
+        #endregion
+
+
         #region Index
         [HttpGet]
         [AllowAnonymous]
@@ -126,5 +140,23 @@ namespace ReadySetResource.Controllers
             return View();
         }
         #endregion
+
+
+        #region Donate
+        [HttpGet]
+        [AllowAnonymous]
+        public ViewResult Donate()
+        {
+            ApplicationUser user = new ApplicationUser();
+
+            if(User.Identity.IsAuthenticated)
+            {
+                user = _context.Users.SingleOrDefault(u => u.UserName == User.Identity.Name);
+            }
+            
+
+            return View(user);
+        }
+#endregion
     }
 }

@@ -71,7 +71,28 @@ namespace ReadySetResource.Areas.Apps.Controllers
         [Authorize]
         public ActionResult BusinessSettings()
         {
-            return View();
+            //1 - Get BusinessUserType from current user and sets current user as Calendar.cshtml needs to check for business user type
+            var currUserId = User.Identity.GetUserId();
+            var currBusinessUser = _context.Users.SingleOrDefault(c => c.Id == currUserId);
+            var currBusinessUserTypeId = currBusinessUser.BusinessUserTypeId;
+            var currBusinessUserType = _context.BusinessUserTypes.SingleOrDefault(c => c.Id == currBusinessUserTypeId);
+            var currBusinessId = currBusinessUserType.BusinessId;
+
+
+            //2 - Get Business from BusinessUserType
+            var currBusiness = _context.Businesses.SingleOrDefault(c => c.Id == currBusinessId);
+
+
+            //3 - Load all employees in that business and initialize settingsVM
+            BusinessSettingsViewModel settingsVM = new BusinessSettingsViewModel
+            {
+                Employees = _context.Users.Where(e => e.BusinessUserType.BusinessId == currBusiness.Id).ToList(),
+                BusinessUserTypes = _context.BusinessUserTypes.Where(e => e.BusinessId == currBusiness.Id).ToList(),
+            };
+            
+
+            
+            return View(settingsVM);
         }
         #endregion
 
@@ -90,7 +111,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
 
         //HTTPPOST
-        #region Settings
+        #region UpdateSettings
         // GET: Dashboard/Calendar
         [HttpPost]
         [Authorize]

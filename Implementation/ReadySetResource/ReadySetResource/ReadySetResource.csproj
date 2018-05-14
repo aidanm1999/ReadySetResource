@@ -203,6 +203,7 @@
     <Compile Include="Areas\Apps\Controllers\HolidaysController.cs" />
     <Compile Include="Areas\Apps\Controllers\CalendarController.cs" />
     <Compile Include="Areas\Apps\AppsAreaRegistration.cs" />
+    <Compile Include="Areas\Apps\ViewModels\Dashboard\BusinessSettingsViewModel.cs" />
     <Compile Include="Areas\Apps\ViewModels\Dashboard\SettingsViewModel.cs" />
     <Compile Include="Areas\Apps\ViewModels\Holidays\HolidaysViewModel.cs" />
     <Compile Include="Areas\Apps\ViewModels\Holidays\HolidayViewModel.cs" />
@@ -474,6 +475,7 @@
     <Content Include="Areas\Apps\Views\Dashboard\BusinessSettings.cshtml" />
     <Content Include="Areas\Apps\Views\Dashboard\Settings.cshtml" />
     <Content Include="Areas\Apps\Views\Calendar\Add.cshtml" />
+    <Content Include="Views\Home\Donate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

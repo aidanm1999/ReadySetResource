@@ -19,9 +19,18 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="@Url.Action("Index", "Dashboard")">
-                    <img src="~/Content/Images/home/logoWhite.png" width="50" style="margin-right:15px; margin-left:15px;" />
-                </a>
+                @if (Request.Url.AbsolutePath.ToString() == "/Apps/Dashboard" | Request.Url.AbsolutePath.ToString() == "/Apps/Dashboard/Index")
+                {
+                    <a href="@Url.Action("Index", "Home", new { area = "" })">
+                        <img src="~/Content/Images/home/logoWhite.png" width="50" style="margin-right:15px; margin-left:15px;" />
+                    </a>
+                }
+                else
+                {
+                    <a href="@Url.Action("Index", "Dashboard")">
+                        <img src="~/Content/Images/home/logoWhite.png" width="50" style="margin-right:15px; margin-left:15px;" />
+                    </a>
+                }
 
             </div>
         </div>
