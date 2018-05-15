@@ -235,6 +235,7 @@
     <Compile Include="Areas\Apps\Controllers\CalendarController.cs" />
     <Compile Include="Areas\Apps\AppsAreaRegistration.cs" />
     <Compile Include="Areas\Apps\ViewModels\Dashboard\BusinessSettingsViewModel.cs" />
+    <Compile Include="Areas\Apps\ViewModels\Dashboard\BusinessUserTypeViewModel.cs" />
     <Compile Include="Areas\Apps\ViewModels\Dashboard\SettingsViewModel.cs" />
     <Compile Include="Areas\Apps\ViewModels\Holidays\HolidaysViewModel.cs" />
     <Compile Include="Areas\Apps\ViewModels\Holidays\HolidayViewModel.cs" />
@@ -402,6 +403,8 @@
     <Content Include="Areas\Apps\Views\Holidays\Index.cshtml" />
     <Content Include="Areas\Apps\Views\Holidays\Add.cshtml" />
     <Content Include="Areas\Apps\Views\Holidays\Edit.cshtml" />
+    <Content Include="Areas\Apps\Views\Dashboard\AddType.cshtml" />
+    <Content Include="Areas\Apps\Views\Dashboard\AddUser.cshtml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

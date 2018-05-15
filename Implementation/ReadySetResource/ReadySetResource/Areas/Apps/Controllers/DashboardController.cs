@@ -4,9 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ReadySetResource.Models;
-using ReadySetResource.Areas.Apps.ViewModels.Dashboard;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using ReadySetResource.Areas.Apps.ViewModels.Dashboard;
 
 
 namespace ReadySetResource.Areas.Apps.Controllers
@@ -110,6 +110,72 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
 
 
+
+
+
+
+        #region AddBusinessUserType
+        // GET: Dashboard/Calendar
+        [HttpGet]
+        [Authorize]
+        public ActionResult AddType()
+        {
+
+            //1 - Get BusinessUserType from current user and sets current user as .cshtml needs to check for business user type
+            var currUserId = User.Identity.GetUserId();
+            var currBusinessUser = _context.Users.SingleOrDefault(c => c.Id == currUserId);
+            var currBusinessUserTypeId = currBusinessUser.BusinessUserTypeId;
+            var currBusinessUserType = _context.BusinessUserTypes.SingleOrDefault(c => c.Id == currBusinessUserTypeId);
+            var currBusinessId = currBusinessUserType.BusinessId;
+            var currBusiness = _context.Businesses.SingleOrDefault(c => c.Id == currBusinessId);
+
+            BusinessUserTypeViewModel typeVM = new BusinessUserTypeViewModel
+            {
+                BusinessUserType = new BusinessUserType(),
+                Options = new List<SelectListItem>(),
+            };
+
+            typeVM.BusinessUserType.Business = currBusiness;
+            typeVM.BusinessUserType.BusinessId = currBusinessId;
+
+
+            //Gets the list of all options and changes them to a SelectedListItem
+            
+            
+            SelectListItem selectListItem = new SelectListItem() { Text = "View", Value = "V" };
+            typeVM.Options.Add(selectListItem);
+            selectListItem = new SelectListItem() { Text = "Edit", Value = "E" };
+            typeVM.Options.Add(selectListItem);
+            selectListItem = new SelectListItem() { Text = "Neither", Value = "N" };
+            typeVM.Options.Add(selectListItem);
+
+           
+
+            //1 - Start view with the ViewModel (typeVM) 
+            return View(typeVM);
+        }
+        #endregion
+
+
+
+        #region AddBusinessUser
+        // GET: Dashboard/Calendar
+        [HttpGet]
+        [Authorize]
+        public ActionResult AddUser()
+        {
+
+            return View();
+        }
+        #endregion
+
+
+
+
+
+
+
+
         //HTTPPOST
         #region UpdateSettings
         // GET: Dashboard/Calendar
@@ -202,5 +268,9 @@ namespace ReadySetResource.Areas.Apps.Controllers
         #endregion
 
 
+
+
+
+        
     }
 }

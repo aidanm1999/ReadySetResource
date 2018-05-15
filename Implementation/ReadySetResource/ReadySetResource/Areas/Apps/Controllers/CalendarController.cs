@@ -1,42 +1,17 @@
-﻿using System;
+﻿#region Usings
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using ReadySetResource.Models;
 using ReadySetResource.ViewModels;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using PdfSharp;
-using PdfSharp.Drawing;
-using PdfSharp.Pdf;
-using PdfSharp.Pdf.IO;
-using System.Diagnostics;
 using System.IO;
-using MigraDoc;
-using MigraDoc.DocumentObjectModel.IO;
 using MigraDoc.DocumentObjectModel;
-using MigraDoc.DocumentObjectModel.Fields;
-using MigraDoc.DocumentObjectModel.Internals;
 using MigraDoc.DocumentObjectModel.Tables;
 using MigraDoc.DocumentObjectModel.Shapes;
-using MigraDoc.DocumentObjectModel.Visitors;
-using MigraDoc.Rendering.ChartMapper;
 using MigraDoc.Rendering;
-using MigraDoc.Rendering.Forms;
-using MigraDoc.RtfRendering;
-using PdfSharp.Charting;
-using PdfSharp.Fonts;
-using PdfSharp.Internal;
-using System.Xml.XPath;
-
-
-
-
-
-
-
-
+#endregion
 
 
 namespace ReadySetResource.Areas.Apps.Controllers
