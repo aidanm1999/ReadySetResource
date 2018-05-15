@@ -7,13 +7,47 @@ using ReadySetResource.Models;
 using ReadySetResource.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using PdfSharp;
+using PdfSharp.Drawing;
+using PdfSharp.Pdf;
+using PdfSharp.Pdf.IO;
+using System.Diagnostics;
+using System.IO;
+using MigraDoc;
+using MigraDoc.DocumentObjectModel.IO;
+using MigraDoc.DocumentObjectModel;
+using MigraDoc.DocumentObjectModel.Fields;
+using MigraDoc.DocumentObjectModel.Internals;
+using MigraDoc.DocumentObjectModel.Tables;
+using MigraDoc.DocumentObjectModel.Shapes;
+using MigraDoc.DocumentObjectModel.Visitors;
+using MigraDoc.Rendering.ChartMapper;
+using MigraDoc.Rendering;
+using MigraDoc.Rendering.Forms;
+using MigraDoc.RtfRendering;
+using PdfSharp.Charting;
+using PdfSharp.Fonts;
+using PdfSharp.Internal;
+using System.Xml.XPath;
+
+
+
+
+
+
+
+
+
 
 namespace ReadySetResource.Areas.Apps.Controllers
 {
     public class CalendarController : Controller
     {
-        #region Context
+        #region Context and Global Variables
         private ApplicationDbContext _context;
+        private Document migraDocument;
+        private TextFrame addressFrame;
+        private Table table;
 
         public CalendarController()
         {
@@ -74,14 +108,14 @@ namespace ReadySetResource.Areas.Apps.Controllers
             //Gets the list of all employees and changes them to a SelectedListItem
             var employeesList = _context.Users.Where(e => e.BusinessUserType.BusinessId == currBusinessId).ToList().OrderBy(e => e.Id).ToList();
 
-            for(int i = 0; i < employeesList.Count; i++)
+            for (int i = 0; i < employeesList.Count; i++)
             {
                 SelectListItem selectListItem = new SelectListItem() { Text = employeesList[i].FirstName + " " + employeesList[i].LastName, Value = employeesList[i].Id };
                 shiftVM.Employees.Add(selectListItem);
             }
 
 
-            
+
 
             //1 - Start view with the ViewModel (CalendarVM) 
             return View(shiftVM);
@@ -96,7 +130,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
         [Authorize]
         public ActionResult Edit(int shift)
         {
-            
+
 
             //1 - Get BusinessUserType from current user and sets current user as .cshtml needs to check for business user type
             var currUserId = User.Identity.GetUserId();
@@ -124,7 +158,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
 
                 Employees = new List<SelectListItem>(),
-                
+
             };
 
 
@@ -137,8 +171,8 @@ namespace ReadySetResource.Areas.Apps.Controllers
                 shiftVM.Employees.Add(selectListItem);
             }
 
-            
-            
+
+
 
             //3 - Start view with the ViewModel (CalendarVM) 
             return View(shiftVM);
@@ -260,17 +294,28 @@ namespace ReadySetResource.Areas.Apps.Controllers
                                 if (shift != copyOfShifts.ElementAt(0))
                                 {
                                     var prevShift = copyOfShifts[copyOfShifts.IndexOf(shift) - 1];
-                                    var shiftDifference = dayOfWeekIndex - daysOfWeek.IndexOf(prevShift.StartDateTime.DayOfWeek.ToString());
-
-
-                                    for (int i = 0; i < shiftDifference; i++)
+                                    if (prevShift.UserId == shift.UserId)
                                     {
-                                        //Get the current element again as shift position has changed
-                                        CalendarVM.Shifts.Insert(CalendarVM.Shifts.IndexOf(shift), null);
+                                        var shiftDifference = dayOfWeekIndex - daysOfWeek.IndexOf(prevShift.StartDateTime.DayOfWeek.ToString());
+
+
+                                        for (int i = 1; i < shiftDifference; i++)
+                                        {
+                                            //Get the current element again as shift position has changed
+                                            CalendarVM.Shifts.Insert(CalendarVM.Shifts.IndexOf(shift), null);
+                                        }
                                     }
+                                    else
+                                    {
 
+
+                                        for (int i = 0; i < dayOfWeekIndex; i++)
+                                        {
+                                            //Get the current element again as shift position has changed
+                                            CalendarVM.Shifts.Insert(CalendarVM.Shifts.IndexOf(shift), null);
+                                        }
+                                    }
                                 }
-
                             }
 
 
@@ -419,7 +464,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
             {
                 if (shift.StartDateTime.Date == shiftVM.Shifts[i].StartDateTime.Date && shift.UserId == shiftVM.Shifts[i].UserId)
                 {
-                    
+
                     shiftAlready = true;
                 }
             }
@@ -446,7 +491,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
             if (shiftAlready == false)
             {
-                
+
 
                 _context.Shifts.Add(shift);
                 _context.SaveChanges();
@@ -457,14 +502,14 @@ namespace ReadySetResource.Areas.Apps.Controllers
             else
             {
                 shiftVM.ErrorMessage = "Shift already there.";
-                return View("Add", shiftVM );
+                return View("Add", shiftVM);
             }
         }
         #endregion
 
-        
 
-        
+
+
         #region EditShift
         // POST: Calendar/AddShift
         [HttpPost]
@@ -485,7 +530,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
 
 
-            
+
             //Sets remaining attributes for the shift
             shift.StartDateTime = shift.StartDateTime.AddHours(Convert.ToDouble(shiftVM.StartHour));
             shift.StartDateTime = shift.StartDateTime.AddMinutes(Convert.ToDouble(shiftVM.EndMinute));
@@ -577,7 +622,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
                 }
 
             }
-            
+
 
         }
         #endregion
@@ -597,6 +642,317 @@ namespace ReadySetResource.Areas.Apps.Controllers
             return RedirectToAction("Index", "Calendar", new { week = ActualShift.StartDateTime });
         }
         #endregion
+
+
+
+
+
+        #region CreatePDF
+        // POST: Calendar/PDF
+        [Authorize]
+        public void PDF(DateTime? week)
+        {
+
+            #region 1 -Populates CalendarVM
+            DateTime weekBeginDate;
+            if (week != null) { weekBeginDate = week.Value; }
+            else { weekBeginDate = DateTime.Now.Date; }
+            CalendarViewModel calendarVM = PopulateCalendar(weekBeginDate);
+            #endregion
+
+            #region 2 - Creates migraDocument
+
+            #region 2.0 - Creates Document Main Method
+            Document CreateDocument()
+            {
+
+                // Create a new migraDocument 
+                migraDocument = new Document();
+                migraDocument.Info.Title = "Calendar - For Week " + calendarVM.ActiveWeekCommenceDate.Day + "/" + calendarVM.ActiveWeekCommenceDate.Month + " to " + calendarVM.ActiveWeekCommenceDate.AddDays(6).Day + "/" + calendarVM.ActiveWeekCommenceDate.AddDays(6).Month;
+                migraDocument.Info.Subject = "Calendar for the week between " + calendarVM.ActiveWeekCommenceDate.Day + "/" + calendarVM.ActiveWeekCommenceDate.Month + " and " + calendarVM.ActiveWeekCommenceDate.AddDays(6).Day + "/" + calendarVM.ActiveWeekCommenceDate.AddDays(6).Month;
+                migraDocument.Info.Author = "ReadySetResource";
+                migraDocument.DefaultPageSetup.Orientation = Orientation.Landscape;
+
+                DefineStyles();
+
+                CreatePage();
+
+                FillContent();
+
+                return migraDocument;
+            }
+            #endregion
+
+            #region 2.1 - DefineStyles
+            void DefineStyles()
+            {
+                // Get the predefined style Normal.
+                Style style = migraDocument.Styles["Normal"];
+                // Because all styles are derived from Normal, the next line changes the 
+                // font of the whole document. Or, more exactly, it changes the font of
+                // all styles and paragraphs that do not redefine the font.
+                style.Font.Name = "Verdana";
+
+                style = migraDocument.Styles[StyleNames.Header];
+                style.ParagraphFormat.AddTabStop("1cm", TabAlignment.Right);
+
+                style = migraDocument.Styles[StyleNames.Footer];
+                style.ParagraphFormat.AddTabStop("8cm", TabAlignment.Center);
+
+                // Create a new style called Table based on style Normal
+                style = migraDocument.Styles.AddStyle("Table", "Normal");
+                style.Font.Name = "Verdana";
+                style.Font.Size = 12;
+
+                // Create a new style called Reference based on style Normal
+                style = migraDocument.Styles.AddStyle("Reference", "Normal");
+                style.ParagraphFormat.SpaceBefore = "5mm";
+                style.ParagraphFormat.SpaceAfter = "5mm";
+                style.ParagraphFormat.TabStops.AddTabStop("1cm", TabAlignment.Right);
+            }
+            #endregion
+
+            #region 2.2 - CreatePage
+            void CreatePage()
+            {
+                // Each MigraDoc document needs at least one section.
+                Section section = migraDocument.AddSection();
+
+                // Create footer
+                Paragraph paragraph = section.Footers.Primary.AddParagraph();
+                paragraph.AddText("Powered by ReadySetResource");
+                paragraph.Format.Font.Size = 9;
+                paragraph.Format.Alignment = ParagraphAlignment.Center;
+
+                // Create the text frame for the address
+                addressFrame = section.AddTextFrame();
+                addressFrame.Height = "1.0cm";
+                addressFrame.Width = "20.0cm";
+                addressFrame.Left = ShapePosition.Left;
+                addressFrame.RelativeHorizontal = RelativeHorizontal.Margin;
+                addressFrame.Top = "1.2cm";
+                addressFrame.RelativeVertical = RelativeVertical.Page;
+
+                // Put sender in address frame
+                paragraph = addressFrame.AddParagraph("Calendar - For Week " + calendarVM.ActiveWeekCommenceDate.Day + "/" + calendarVM.ActiveWeekCommenceDate.Month + " to " + calendarVM.ActiveWeekCommenceDate.AddDays(6).Day + "/" + calendarVM.ActiveWeekCommenceDate.AddDays(6).Month);
+                paragraph.Format.Font.Name = "Verdana";
+                paragraph.Format.Font.Size = 18;
+                paragraph.Format.SpaceAfter = 3;
+
+                // Create the item table
+                this.table = section.AddTable();
+                this.table.Style = "Table";
+                table.Format.Font.Color = new Color(255, 255, 255);
+                this.table.Borders.Color = new Color(170, 170, 170);
+                this.table.Borders.Width = 0.25;
+                this.table.Borders.Left.Width = 0.5;
+                this.table.Borders.Right.Width = 0.5;
+                this.table.Rows.LeftIndent = 0;
+
+                // Before you can add a row, you must define the columns
+                Column column = this.table.AddColumn("4cm");
+                column.Format.Alignment = ParagraphAlignment.Left;
+
+                column = this.table.AddColumn("1.5cm");
+                column.Format.Alignment = ParagraphAlignment.Center;
+
+                column = this.table.AddColumn("1.5cm");
+                column.Format.Alignment = ParagraphAlignment.Center;
+
+                column = this.table.AddColumn("1.5cm");
+                column.Format.Alignment = ParagraphAlignment.Center;
+
+                column = this.table.AddColumn("1.5cm");
+                column.Format.Alignment = ParagraphAlignment.Center;
+
+                column = this.table.AddColumn("1.5cm");
+                column.Format.Alignment = ParagraphAlignment.Center;
+
+                column = this.table.AddColumn("1.5cm");
+                column.Format.Alignment = ParagraphAlignment.Center;
+
+                column = this.table.AddColumn("1.5cm");
+                column.Format.Alignment = ParagraphAlignment.Center;
+
+                column = this.table.AddColumn("1.5cm");
+                column.Format.Alignment = ParagraphAlignment.Center;
+
+                column = this.table.AddColumn("1.5cm");
+                column.Format.Alignment = ParagraphAlignment.Center;
+
+                column = this.table.AddColumn("1.5cm");
+                column.Format.Alignment = ParagraphAlignment.Center;
+
+                column = this.table.AddColumn("1.5cm");
+                column.Format.Alignment = ParagraphAlignment.Center;
+
+                column = this.table.AddColumn("1.5cm");
+                column.Format.Alignment = ParagraphAlignment.Center;
+
+                column = this.table.AddColumn("1.5cm");
+                column.Format.Alignment = ParagraphAlignment.Center;
+
+                column = this.table.AddColumn("1.5cm");
+                column.Format.Alignment = ParagraphAlignment.Center;
+
+                // Create the header of the table
+                Row row = table.AddRow();
+                row.HeadingFormat = true;
+                row.Format.Alignment = ParagraphAlignment.Center;
+                row.Format.Font.Bold = true;
+                row.Shading.Color = new Color(66, 139, 202);
+                row.Cells[0].AddParagraph("Employee");
+                row.Cells[0].VerticalAlignment = MigraDoc.DocumentObjectModel.Tables.VerticalAlignment.Center;
+                row.Cells[0].MergeDown = 1;
+                row.Cells[1].AddParagraph("Monday");
+                row.Cells[1].Format.Alignment = ParagraphAlignment.Center;
+                row.Cells[1].MergeRight = 1;
+                row.Cells[3].AddParagraph("Tuesday");
+                row.Cells[3].Format.Alignment = ParagraphAlignment.Center;
+                row.Cells[3].MergeRight = 1;
+                row.Cells[5].AddParagraph("Wednesday");
+                row.Cells[5].Format.Alignment = ParagraphAlignment.Center;
+                row.Cells[5].MergeRight = 1;
+                row.Cells[7].AddParagraph("Thursday");
+                row.Cells[7].Format.Alignment = ParagraphAlignment.Center;
+                row.Cells[7].MergeRight = 1;
+                row.Cells[9].AddParagraph("Friday");
+                row.Cells[9].Format.Alignment = ParagraphAlignment.Center;
+                row.Cells[9].MergeRight = 1;
+                row.Cells[11].AddParagraph("Saturday");
+                row.Cells[11].Format.Alignment = ParagraphAlignment.Center;
+                row.Cells[11].MergeRight = 1;
+                row.Cells[13].AddParagraph("Sunday");
+                row.Cells[13].Format.Alignment = ParagraphAlignment.Center;
+                row.Cells[13].MergeRight = 1;
+
+                row = table.AddRow();
+                row.HeadingFormat = true;
+                row.Format.Alignment = ParagraphAlignment.Center;
+                row.Format.Font.Bold = true;
+                row.Shading.Color = new Color(66, 139, 202);
+                row.Cells[1].AddParagraph("Start");
+                row.Cells[1].Format.Alignment = ParagraphAlignment.Left;
+                row.Cells[2].AddParagraph("End");
+                row.Cells[2].Format.Alignment = ParagraphAlignment.Left;
+                row.Cells[3].AddParagraph("Start");
+                row.Cells[3].Format.Alignment = ParagraphAlignment.Left;
+                row.Cells[4].AddParagraph("End");
+                row.Cells[4].Format.Alignment = ParagraphAlignment.Left;
+                row.Cells[5].AddParagraph("Start");
+                row.Cells[5].Format.Alignment = ParagraphAlignment.Left;
+                row.Cells[6].AddParagraph("End");
+                row.Cells[6].Format.Alignment = ParagraphAlignment.Left;
+                row.Cells[7].AddParagraph("Start");
+                row.Cells[7].Format.Alignment = ParagraphAlignment.Left;
+                row.Cells[8].AddParagraph("End");
+                row.Cells[8].Format.Alignment = ParagraphAlignment.Left;
+                row.Cells[9].AddParagraph("Start");
+                row.Cells[9].Format.Alignment = ParagraphAlignment.Left;
+                row.Cells[10].AddParagraph("End");
+                row.Cells[10].Format.Alignment = ParagraphAlignment.Left;
+                row.Cells[11].AddParagraph("Start");
+                row.Cells[11].Format.Alignment = ParagraphAlignment.Left;
+                row.Cells[12].AddParagraph("End");
+                row.Cells[12].Format.Alignment = ParagraphAlignment.Left;
+                row.Cells[13].AddParagraph("Start");
+                row.Cells[13].Format.Alignment = ParagraphAlignment.Left;
+                row.Cells[14].AddParagraph("End");
+                row.Cells[14].Format.Alignment = ParagraphAlignment.Left;
+                table.Rows.Height = 20;
+
+                this.table.SetEdge(0, 0, 6, 2, Edge.Box, BorderStyle.Single, 0.75, Color.Empty);
+            }
+            #endregion
+
+            #region 2.3 - FillContent
+            void FillContent()
+            {
+
+                foreach(var employee in calendarVM.Employees)
+                {
+                    Row newRow = this.table.AddRow();
+                    newRow.Cells[0].AddParagraph(employee.FirstName + " " + employee.LastName);
+                    newRow.Cells[0].Format.Font.Color = new Color(66, 139, 202);
+                    int index = 1;
+
+                    var empShifts = calendarVM.Shifts;
+                    int currEmpIndex = calendarVM.Employees.IndexOf(employee);
+                    int prevEmpIndex = calendarVM.Employees.IndexOf(employee) - 1;
+                    int currMinElement = (prevEmpIndex * 7) + 7;
+                    empShifts = calendarVM.Shifts.ToList().GetRange(currMinElement, 7);
+
+                    foreach (var shift in empShifts)
+                    {
+                        if(shift == null)
+                        {
+                            newRow.Cells[index].AddParagraph("  ");
+                            newRow.Cells[index + 1].AddParagraph("  ");
+                        }
+                        else if(shift.UserId == employee.Id)
+                        {
+                            string startMinute;
+                            string endMinute;
+                            if (shift.StartDateTime.Minute < 10)
+                            { startMinute = "0" + shift.StartDateTime.Minute.ToString(); }
+                            else { startMinute = shift.StartDateTime.Minute.ToString(); }
+                            if (shift.EndDateTime.Minute < 10)
+                            { endMinute = "0" + shift.EndDateTime.Minute.ToString(); }
+                            else { endMinute = shift.EndDateTime.Minute.ToString(); }
+
+
+                            newRow.Cells[index].AddParagraph(shift.StartDateTime.Hour + ":" + startMinute);
+                            newRow.Cells[index].Format.Font.Color = new Color(66, 139, 202);
+                            newRow.Cells[index + 1].AddParagraph(shift.StartDateTime.Hour + ":" + endMinute);
+                            newRow.Cells[index + 1].Format.Font.Color = new Color(66, 139, 202);
+                        }
+
+                        index += 2;
+                    }
+
+                }
+
+                this.table.SetEdge(0, this.table.Rows.Count - 2, 6, 2, Edge.Box, BorderStyle.Single, 0.75);
+                //}
+
+                // Add an invisible row as a space line to the table
+                Row row = this.table.AddRow();
+                row.Borders.Visible = false;
+
+            }
+            #endregion
+
+            #endregion
+            
+            #region 3 - Gets migraDocument
+            migraDocument = CreateDocument();
+            #endregion
+
+            #region 4 - Creates Table With MigraDoc 
+            PdfDocumentRenderer pdfRenderer = new PdfDocumentRenderer(false);
+            pdfRenderer.Document = migraDocument;
+            // Renders the document
+            pdfRenderer.RenderDocument();
+            #endregion
+
+            #region 5 - Streams the PDF to the customer
+            //string fileName = "heyfile.pdf";
+            //pdfRenderer.PdfDocument.Save("C:/Users/Aidan Marshall/Documents/Projects/ReadySetResource/Implementation/ReadySetResource/ReadySetResource/Content/PDF/" + fileName);
+            using (MemoryStream stream = new MemoryStream())
+            {
+                pdfRenderer.PdfDocument.Save(stream, false);
+                Response.ContentType = "application/pdf";
+                Response.AddHeader("Content-Length", stream.Length.ToString());
+                stream.WriteTo(Response.OutputStream);
+            }
+            //Process.Start("C:/Users/Aidan Marshall/Documents/Projects/ReadySetResource/Implementation/ReadySetResource/ReadySetResource/Content/PDF/" + fileName);
+            Response.End();
+            #endregion
+
+
+        }
+        #endregion
+
 
 
     }

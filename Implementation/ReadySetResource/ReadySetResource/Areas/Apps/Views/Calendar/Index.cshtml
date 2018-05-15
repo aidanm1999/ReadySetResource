@@ -13,11 +13,15 @@
     <h2>
         Calendar - For Week @Model.ActiveWeekCommenceDate.Day/@Model.ActiveWeekCommenceDate.Month to @Model.ActiveWeekCommenceDate.AddDays(6).Day/@Model.ActiveWeekCommenceDate.AddDays(6).Month
         @Html.ActionLink("Add Shift", "Add", "Calendar", null, new { @class = "btn btn-default" })
+        @Html.ActionLink("Print", "PDF", "Calendar", new { week = Model.ActiveWeekCommenceDate }, new { @class = "btn btn-default" })
     </h2>
 }
 else
 {
-    <h2>Calendar - For Week @Model.ActiveWeekCommenceDate.Day/@Model.ActiveWeekCommenceDate.Month to @Model.ActiveWeekCommenceDate.AddDays(6).Day/@Model.ActiveWeekCommenceDate.AddDays(6).Month </h2>
+    <h2>
+        Calendar - For Week @Model.ActiveWeekCommenceDate.Day/@Model.ActiveWeekCommenceDate.Month to @Model.ActiveWeekCommenceDate.AddDays(6).Day/@Model.ActiveWeekCommenceDate.AddDays(6).Month
+        @Html.ActionLink("Print", "PDF", "Calendar", null, new { @class = "btn btn-default" })
+    </h2>
 
 }
 
