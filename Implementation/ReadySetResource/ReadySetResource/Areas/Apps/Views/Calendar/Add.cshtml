@@ -8,7 +8,7 @@
 <h2>Add Shift</h2>
 
 <div class="col-md-3">
-    
+
     @Model.ErrorMessage
 
     @using (Html.BeginForm("AddShift", "Calendar"))
@@ -33,12 +33,13 @@
             @Html.TextBoxFor(m => m.EndHour, new { @class = "form-control", style = "width: 50px" }) :
             @Html.TextBoxFor(m => m.EndMinute, new { @class = "form-control", style = "width: 50px" })
         </div>
-
-        <div class="form-group" style="padding-top:20px">
-            @Html.LabelFor(m => m.Employees)
-            @Html.DropDownListFor(m => m.UserId, Model.Employees)
-            @Html.ValidationMessageFor(m => m.Employees)
-        </div>
+        
+            <div class="form-group" style="padding-top:20px">
+                @Html.LabelFor(m => m.Employees)
+                @Html.DropDownListFor(m => m.UserId, Model.Employees)
+                @Html.ValidationMessageFor(m => m.Employees)
+            </div>
+        
 
         @Html.AntiForgeryToken()
         <p>
@@ -46,7 +47,7 @@
             <button type="submit" class="btn btn-primary" style="float:right">Save</button>
         </p>
         @Html.HiddenFor(m => m.EmployeesHolidays)
-        
+
     }
 </div>
 

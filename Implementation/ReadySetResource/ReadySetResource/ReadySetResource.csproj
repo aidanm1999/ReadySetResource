@@ -236,6 +236,7 @@
     <Compile Include="Areas\Apps\AppsAreaRegistration.cs" />
     <Compile Include="Areas\Apps\ViewModels\Dashboard\BusinessSettingsViewModel.cs" />
     <Compile Include="Areas\Apps\ViewModels\Dashboard\BusinessUserTypeViewModel.cs" />
+    <Compile Include="Areas\Apps\ViewModels\Dashboard\BusinessUserViewModel.cs" />
     <Compile Include="Areas\Apps\ViewModels\Dashboard\SettingsViewModel.cs" />
     <Compile Include="Areas\Apps\ViewModels\Holidays\HolidaysViewModel.cs" />
     <Compile Include="Areas\Apps\ViewModels\Holidays\HolidayViewModel.cs" />
@@ -312,6 +313,10 @@
     <Compile Include="Migrations\201805101801329_ChangedAcceptedHoliday.cs" />
     <Compile Include="Migrations\201805101801329_ChangedAcceptedHoliday.Designer.cs">
       <DependentUpon>201805101801329_ChangedAcceptedHoliday.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805151443038_ChangedIdeaToHolidayInBusinessUserType.cs" />
+    <Compile Include="Migrations\201805151443038_ChangedIdeaToHolidayInBusinessUserType.Designer.cs">
+      <DependentUpon>201805151443038_ChangedIdeaToHolidayInBusinessUserType.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\DataOverTime.cs" />
@@ -405,6 +410,7 @@
     <Content Include="Areas\Apps\Views\Holidays\Edit.cshtml" />
     <Content Include="Areas\Apps\Views\Dashboard\AddType.cshtml" />
     <Content Include="Areas\Apps\Views\Dashboard\AddUser.cshtml" />
+    <Content Include="Areas\Apps\Views\Dashboard\EditType.cshtml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -585,6 +591,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805101801329_ChangedAcceptedHoliday.resx">
       <DependentUpon>201805101801329_ChangedAcceptedHoliday.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805151443038_ChangedIdeaToHolidayInBusinessUserType.resx">
+      <DependentUpon>201805151443038_ChangedIdeaToHolidayInBusinessUserType.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

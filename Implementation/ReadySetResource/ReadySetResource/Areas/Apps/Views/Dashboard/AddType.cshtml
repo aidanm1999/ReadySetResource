@@ -1,6 +1,6 @@
-﻿@model 
+﻿@model ReadySetResource.Areas.Apps.ViewModels.Dashboard.BusinessUserTypeViewModel
 @{
-    ViewBag.Title = "AddType";
+    ViewBag.Title = "Add Type";
     Layout = "~/Areas/Apps/Views/Shared/_Layout.cshtml";
 }
 
@@ -10,41 +10,60 @@
 
     @Model.ErrorMessage
 
-    @using (Html.BeginForm("AddShiftPost"))
+    @using (Html.BeginForm("AddTypePost", "Dashboard"))
     {
         @Html.ValidationSummary(true, "Please fix the following errors.")
+
         <div class="form-group">
-            @Html.LabelFor(m => m.TempDate)
-            @Html.EditorFor(m => m.TempDate, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.TempDate)
+            @Html.LabelFor(m => m.BusinessUserType.Name)
+            @Html.TextBoxFor(m => m.BusinessUserType.Name, new { @class = "form-control", style = "padding:10px" })
+            @Html.ValidationMessageFor(m => m.BusinessUserType.Name)
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.StartHour)
+            @Html.LabelFor(m => m.BusinessUserType.Administrator)
+            @Html.DropDownListFor(m => m.BusinessUserType.Administrator, Model.Options, new { style = "float:right;" })
+            @Html.ValidationMessageFor(m => m.Options)
         </div>
-        <div class="form-inline">
-            @Html.TextBoxFor(m => m.StartHour, new { @class = "form-control", style = "width: 50px" }) :
-            @Html.TextBoxFor(m => m.StartMinute, new { @class = "form-control", style = "width: 50px" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.BusinessUserType.Calendar)
+            @Html.DropDownListFor(m => m.BusinessUserType.Calendar, Model.Options, new { style = "float:right;" })
+            @Html.ValidationMessageFor(m => m.Options)
         </div>
-        <div class="form-group" style="padding-top:20px">
-            @Html.LabelFor(m => m.EndHour)
+        <div class="form-group">
+            @Html.LabelFor(m => m.BusinessUserType.Holidays)
+            @Html.DropDownListFor(m => m.BusinessUserType.Holidays, Model.Options, new { style = "float:right;" })
+            @Html.ValidationMessageFor(m => m.Options)
         </div>
-        <div class="form-inline">
-            @Html.TextBoxFor(m => m.EndHour, new { @class = "form-control", style = "width: 50px" }) :
-            @Html.TextBoxFor(m => m.EndMinute, new { @class = "form-control", style = "width: 50px" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.BusinessUserType.Meetings)
+            @Html.DropDownListFor(m => m.BusinessUserType.Meetings, Model.Options, new { style = "float:right;" })
+            @Html.ValidationMessageFor(m => m.Options)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.BusinessUserType.Messenger)
+            @Html.DropDownListFor(m => m.BusinessUserType.Messenger, Model.Options, new { style = "float:right;" })
+            @Html.ValidationMessageFor(m => m.Options)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.BusinessUserType.Store)
+            @Html.DropDownListFor(m => m.BusinessUserType.Store, Model.Options, new { style = "float:right;" })
+            @Html.ValidationMessageFor(m => m.Options)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.BusinessUserType.Updates)
+            @Html.DropDownListFor(m => m.BusinessUserType.Updates, Model.Options, new { style = "float:right;" })
+            @Html.ValidationMessageFor(m => m.Options)
         </div>
 
-        <div class="form-group" style="padding-top:20px">
-            @Html.LabelFor(m => m.Employees)
-            @Html.DropDownListFor(m => m.UserId, Model.Employees)
-            @Html.ValidationMessageFor(m => m.Employees)
-        </div>
+
 
         @Html.AntiForgeryToken()
         <p>
             @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default", style = "float:left" })
             <button type="submit" class="btn btn-primary" style="float:right">Save</button>
         </p>
-        @Html.HiddenFor(m => m.EmployeesHolidays)
+        @Html.HiddenFor(m => m.BusinessUserType.Id)
+        @Html.HiddenFor(m => m.BusinessUserType.BusinessId)
 
     }
 </div>
@@ -55,22 +74,3 @@
 {
     @Scripts.Render("~/bundles/jqueryval")
 }
-<script>
-    jQuery(function ($) {
-        $.validator.addMethod('date',
-            function (value, element) {
-                if (this.optional(element)) {
-                    return true;
-                }
-
-                var ok = true;
-                try {
-                    $.datepicker.parseDate('dd/mm/yy', value);
-                }
-                catch (err) {
-                    ok = false;
-                }
-                return ok;
-            });
-    });
-</script>

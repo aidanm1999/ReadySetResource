@@ -34,7 +34,7 @@ namespace ReadySetResource.Models
         public string Meetings { get; set; }
 
         [Required]
-        public string Ideas { get; set; }
+        public string Holidays { get; set; }
 
         public int BusinessId { get; set; }
         public Business Business { get; set; }

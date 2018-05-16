@@ -69,9 +69,12 @@ namespace ReadySetResource.Areas.Apps.Controllers
                 EndDate = holidayDate,
                 EndHour = holidayDate.Date.Hour.ToString(),
                 EndMinute = holidayDate.Date.Minute.ToString(),
-
+                User = currBusinessUser,
                 Employees = new List<SelectListItem>(),
             };
+
+            holidayVM.User.BusinessUserType = currBusinessUserType;
+
 
 
             //Gets the list of all employees and changes them to a SelectedListItem
@@ -212,6 +215,10 @@ namespace ReadySetResource.Areas.Apps.Controllers
         public ActionResult AddHoliday(HolidayViewModel holidayVM)
         {
             ApplicationUser user = new ApplicationUser();
+            if(holidayVM.UserId == null)
+            {
+                holidayVM.UserId = User.Identity.GetUserId();
+            }
             user = _context.Users.SingleOrDefault(u => u.Id == holidayVM.UserId);
             Holiday holiday = new Holiday();
             holiday.User = user;

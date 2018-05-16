@@ -215,7 +215,7 @@ namespace ReadySetResource.Controllers
                             Calendar = "E",
                             Messenger = "E",
                             Meetings = "E",
-                            Ideas = "E",
+                            Holidays = "E",
                             Store = "E",
                             Updates = "E",
                             Business = signUpVM.NewBusiness,

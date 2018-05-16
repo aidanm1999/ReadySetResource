@@ -38,12 +38,14 @@
             @Html.TextBoxFor(m => m.EndHour, new { @class = "form-control", style = "width: 50px" }) :
             @Html.TextBoxFor(m => m.EndMinute, new { @class = "form-control", style = "width: 50px" })
         </div>
-
-        <div class="form-group" style="padding-top:20px">
-            @Html.LabelFor(m => m.Employees)
-            @Html.DropDownListFor(m => m.UserId, Model.Employees)
-            @Html.ValidationMessageFor(m => m.Employees)
-        </div>
+        if (Model.User.BusinessUserType.Holidays == "E")
+        {
+            <div class="form-group" style="padding-top:20px">
+                @Html.LabelFor(m => m.Employees)
+                @Html.DropDownListFor(m => m.UserId, Model.Employees)
+                @Html.ValidationMessageFor(m => m.Employees)
+            </div>
+        }
 
         @Html.AntiForgeryToken()
         <p>

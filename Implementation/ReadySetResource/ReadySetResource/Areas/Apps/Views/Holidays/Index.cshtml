@@ -17,18 +17,10 @@
 <link rel="stylesheet" type="text/css" href="~/Content/Site.css">
 
 
-@if (Model.CurrentUserType.Calendar == "E")
-{
-    <h2>
-        Holidays - For Week @Model.ActiveWeekCommenceDate.Day/@Model.ActiveWeekCommenceDate.Month to @Model.ActiveWeekCommenceDate.AddDays(6).Day/@Model.ActiveWeekCommenceDate.AddDays(6).Month
-        @Html.ActionLink("Add Holiday", "Add", "Holidays", null, new { @class = "btn btn-default" })
-    </h2>
-}
-else
-{
-    <h2> Your Holidays - For Week @Model.ActiveWeekCommenceDate.Day/@Model.ActiveWeekCommenceDate.Month to @Model.ActiveWeekCommenceDate.AddDays(6).Day/@Model.ActiveWeekCommenceDate.AddDays(6).Month </h2>
-
-}
+<h2>
+    Holidays - For Week @Model.ActiveWeekCommenceDate.Day/@Model.ActiveWeekCommenceDate.Month to @Model.ActiveWeekCommenceDate.AddDays(6).Day/@Model.ActiveWeekCommenceDate.AddDays(6).Month
+    @Html.ActionLink("Add Holiday", "Add", "Holidays", null, new { @class = "btn btn-default" })
+</h2>
 
 
 @if (Model.Employees.Count() == 0)
@@ -41,7 +33,7 @@ else if (Model.Holidays.Count() == 0)
 }
 else
 {
-    if (Model.CurrentUserType.Calendar == "E")
+    if (Model.CurrentUserType.Holidays == "E")
     {
         <table id="rota">
             <thead>

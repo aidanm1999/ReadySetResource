@@ -13,5 +13,6 @@ namespace ReadySetResource.Areas.Apps.ViewModels.Dashboard
         public string ErrorMessage { get; set; }
         public List<SelectListItem> Options { get; set; }
         public BusinessUserType BusinessUserType { get; set; }
+        public string PreviousName { get; set; }
     }
 }

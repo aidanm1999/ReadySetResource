@@ -38,6 +38,7 @@ namespace ReadySetResource.ViewModels
         public String EndMinute { get; set; }
 
         public string UserId { get; set; }
+        public ApplicationUser User { get; set; }
         public int HolidayId { get; set; }
 
         [Display(Name = "Select Employee")]

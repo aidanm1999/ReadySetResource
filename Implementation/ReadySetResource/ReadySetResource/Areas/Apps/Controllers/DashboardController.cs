@@ -114,7 +114,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
 
 
-        #region AddBusinessUserType
+        #region AddType
         // GET: Dashboard/Calendar
         [HttpGet]
         [Authorize]
@@ -158,14 +158,123 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
 
 
+        #region EditType
+        // GET: Dashboard/Calendar
+        [HttpGet]
+        [Authorize]
+        public ActionResult EditType(int type)
+        {
+
+            //1 - Get BusinessUserType from current user and sets current user as .cshtml needs to check for business user type
+            var currUserId = User.Identity.GetUserId();
+            var currBusinessUser = _context.Users.SingleOrDefault(c => c.Id == currUserId);
+            var currBusinessUserTypeId = currBusinessUser.BusinessUserTypeId;
+            var currBusinessUserType = _context.BusinessUserTypes.SingleOrDefault(c => c.Id == currBusinessUserTypeId);
+            var currBusinessId = currBusinessUserType.BusinessId;
+            var currBusiness = _context.Businesses.SingleOrDefault(c => c.Id == currBusinessId);
+            var businessUserType = _context.BusinessUserTypes.SingleOrDefault(c => c.Id == type);
+
+            BusinessUserTypeViewModel typeVM = new BusinessUserTypeViewModel
+            {
+                BusinessUserType = businessUserType,
+                Options = new List<SelectListItem>(),
+            };
+
+            typeVM.BusinessUserType.Business = currBusiness;
+            typeVM.BusinessUserType.BusinessId = currBusinessId;
+
+
+            //Gets the list of all options and changes them to a SelectedListItem
+
+
+            SelectListItem selectListItem = new SelectListItem() { Text = "View", Value = "V" };
+            typeVM.Options.Add(selectListItem);
+            selectListItem = new SelectListItem() { Text = "Edit", Value = "E" };
+            typeVM.Options.Add(selectListItem);
+            selectListItem = new SelectListItem() { Text = "Neither", Value = "N" };
+            typeVM.Options.Add(selectListItem);
+
+
+
+            //1 - Start view with the ViewModel (typeVM) 
+            return View(typeVM);
+        }
+        #endregion
+
+
+
         #region AddBusinessUser
         // GET: Dashboard/Calendar
         [HttpGet]
         [Authorize]
         public ActionResult AddUser()
         {
+            //1 - Get BusinessUserType from current user and sets current user as .cshtml needs to check for business user type
+            var currUserId = User.Identity.GetUserId();
+            var currBusinessUser = _context.Users.SingleOrDefault(c => c.Id == currUserId);
+            var currBusinessUserTypeId = currBusinessUser.BusinessUserTypeId;
+            var currBusinessUserType = _context.BusinessUserTypes.SingleOrDefault(c => c.Id == currBusinessUserTypeId);
+            var currBusinessId = currBusinessUserType.BusinessId;
+            var currBusiness = _context.Businesses.SingleOrDefault(c => c.Id == currBusinessId);
 
-            return View();
+            BusinessUserViewModel userVM = new BusinessUserViewModel
+            {
+                BusinessUser = new ApplicationUser(),
+                Honorifics = new List<SelectListItem>(),
+                SenderOptions = new List<SelectListItem>(),
+            };
+            
+
+
+            //Gets the list of all options and changes them to a SelectedListItem
+
+
+            SelectListItem honorificsSelectListItem = new SelectListItem() { Text = "Mr", Value = "Mr" };
+            userVM.Honorifics.Add(honorificsSelectListItem);
+            honorificsSelectListItem = new SelectListItem() { Text = "Mrs", Value = "Mrs" };
+            userVM.Honorifics.Add(honorificsSelectListItem);
+            honorificsSelectListItem = new SelectListItem() { Text = "Miss", Value = "Miss" };
+            userVM.Honorifics.Add(honorificsSelectListItem);
+
+
+            SelectListItem senderSelectListItem = new SelectListItem()
+            {
+                Text = currBusinessUser.Title + " " + currBusinessUser.FirstName + " " + currBusinessUser.LastName,
+                Value = currBusinessUser.Title + " " + currBusinessUser.FirstName + " " + currBusinessUser.LastName
+            };
+            userVM.SenderOptions.Add(senderSelectListItem);
+
+            senderSelectListItem = new SelectListItem()
+            {
+                Text = currBusinessUser.Title + " " + currBusinessUser.LastName,
+                Value = currBusinessUser.Title + " " + currBusinessUser.LastName
+            };
+            userVM.SenderOptions.Add(senderSelectListItem);
+
+            senderSelectListItem = new SelectListItem()
+            {
+                Text = currBusinessUser.FirstName + " " + currBusinessUser.LastName,
+                Value = currBusinessUser.FirstName + " " + currBusinessUser.LastName
+            };
+            userVM.SenderOptions.Add(senderSelectListItem);
+
+            senderSelectListItem = new SelectListItem()
+            {
+                Text = currBusinessUser.FirstName,
+                Value = currBusinessUser.FirstName
+            };
+            userVM.SenderOptions.Add(senderSelectListItem);
+
+            senderSelectListItem = new SelectListItem()
+            {
+                Text = "A colleague",
+                Value = "A colleague"
+            };
+            userVM.SenderOptions.Add(senderSelectListItem);
+
+
+            //1 - Start view with the ViewModel (userVM) 
+            return View(userVM);
         }
         #endregion
 
@@ -268,9 +377,137 @@ namespace ReadySetResource.Areas.Apps.Controllers
         #endregion
 
 
+        #region AddTypePost
+        // POST: Calendar/AddTypePost
+        [HttpPost]
+        [Authorize]
+        public ActionResult AddTypePost(BusinessUserTypeViewModel typeVM)
+        {
+            bool nameTaken = false;
+            
+            foreach (var type in _context.BusinessUserTypes.Where(t => t.BusinessId == typeVM.BusinessUserType.BusinessId).ToList())
+            {
+                if (type.Name == typeVM.BusinessUserType.Name)
+                {
+                    nameTaken = true;
+                }
+
+            }
+            
+            
+
+            if (nameTaken == false)
+            {
+                typeVM.BusinessUserType.Business = _context.Businesses.FirstOrDefault(b => b.Id == typeVM.BusinessUserType.BusinessId);
+
+                _context.BusinessUserTypes.Add(typeVM.BusinessUserType);
+                _context.SaveChanges();
+
+
+                return RedirectToAction("BusinessSettings", "Dashboard");
+            }
+            else
+            {
+                typeVM.ErrorMessage = "There is already a user type with that name";
+                return View("AddType", typeVM);
+            }
+        }
+        #endregion
 
 
 
-        
+        #region EditTypePost
+        // POST: Calendar/EditTypePost
+        [HttpPost]
+        [Authorize]
+        public ActionResult EditTypePost(BusinessUserTypeViewModel typeVM)
+        {
+
+            bool nameTaken = false;
+
+            typeVM.PreviousName = _context.BusinessUserTypes.SingleOrDefault(t => t.Id == typeVM.BusinessUserType.Id).Name;
+
+            if (typeVM.PreviousName != typeVM.BusinessUserType.Name)
+            {
+
+                foreach (var type in _context.BusinessUserTypes.Where(t => t.BusinessId == typeVM.BusinessUserType.BusinessId).ToList())
+                {
+                    if (type.Name == typeVM.BusinessUserType.Name)
+                    {
+                        nameTaken = true;
+                    }
+
+                }
+            }
+
+            if (nameTaken == false)
+            {
+                 typeVM.BusinessUserType.Business = _context.Businesses.FirstOrDefault(b => b.Id == typeVM.BusinessUserType.BusinessId);
+
+                var businessUserTypeInDb = _context.BusinessUserTypes.FirstOrDefault(b => b.Id == typeVM.BusinessUserType.Id);
+
+                businessUserTypeInDb.Administrator = typeVM.BusinessUserType.Administrator;
+                businessUserTypeInDb.Calendar = typeVM.BusinessUserType.Calendar;
+                businessUserTypeInDb.Holidays = typeVM.BusinessUserType.Holidays;
+                businessUserTypeInDb.Meetings = typeVM.BusinessUserType.Meetings;
+                businessUserTypeInDb.Messenger = typeVM.BusinessUserType.Messenger;
+                businessUserTypeInDb.Store = typeVM.BusinessUserType.Store;
+                businessUserTypeInDb.Updates = typeVM.BusinessUserType.Updates;
+
+                _context.SaveChanges();
+
+
+                return RedirectToAction("BusinessSettings", "Dashboard");
+            }
+            else
+            {
+                //1 - Get BusinessUserType from current user and sets current user as .cshtml needs to check for business user type
+                var currUserId = User.Identity.GetUserId();
+                var currBusinessUser = _context.Users.SingleOrDefault(c => c.Id == currUserId);
+                var currBusinessUserTypeId = currBusinessUser.BusinessUserTypeId;
+                var currBusinessUserType = _context.BusinessUserTypes.SingleOrDefault(c => c.Id == currBusinessUserTypeId);
+                var currBusinessId = currBusinessUserType.BusinessId;
+                var currBusiness = _context.Businesses.SingleOrDefault(c => c.Id == currBusinessId);
+
+                typeVM.Options = new List<SelectListItem>();
+                
+
+                typeVM.BusinessUserType.Business = currBusiness;
+                typeVM.BusinessUserType.BusinessId = currBusinessId;
+
+
+                //Gets the list of all options and changes them to a SelectedListItem
+
+
+                SelectListItem selectListItem = new SelectListItem() { Text = "View", Value = "V" };
+                typeVM.Options.Add(selectListItem);
+                selectListItem = new SelectListItem() { Text = "Edit", Value = "E" };
+                typeVM.Options.Add(selectListItem);
+                selectListItem = new SelectListItem() { Text = "Neither", Value = "N" };
+                typeVM.Options.Add(selectListItem);
+
+                typeVM.ErrorMessage = "There is already a user type with that name";
+                return View("EditType", typeVM);
+            }
+        }
+        #endregion
+
+
+
+
+        #region DeleteShift
+        // POST: Calendar/DeleteShift
+        [Authorize]
+        public ActionResult DeleteShift(int shift)
+        {
+            Shift ActualShift = _context.Shifts.SingleOrDefault(s => s.Id == shift);
+            _context.Shifts.Remove(ActualShift);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index", "Calendar", new { week = ActualShift.StartDateTime });
+        }
+        #endregion
+
+
     }
 }

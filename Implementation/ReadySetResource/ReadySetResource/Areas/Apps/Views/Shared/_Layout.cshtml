@@ -37,7 +37,7 @@
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
+        
         <footer>
             @if (Request.Url.AbsolutePath.ToString() == "/Apps/Dashboard" | Request.Url.AbsolutePath.ToString() == "/Apps/Dashboard/Index")
             {@Html.Partial("_Partial")}

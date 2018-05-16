@@ -77,8 +77,10 @@ namespace ReadySetResource.Areas.Apps.Controllers
                 EndHour = shiftDate.Date.Hour.ToString(),
                 EndMinute = shiftDate.Date.Minute.ToString(),
                 Employees = new List<SelectListItem>(),
+
             };
 
+            
 
             //Gets the list of all employees and changes them to a SelectedListItem
             var employeesList = _context.Users.Where(e => e.BusinessUserType.BusinessId == currBusinessId).ToList().OrderBy(e => e.Id).ToList();
