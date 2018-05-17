@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using ReadySetResource.Models;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace ReadySetResource.Areas.Apps.ViewModels.Dashboard
 {
@@ -15,6 +16,7 @@ namespace ReadySetResource.Areas.Apps.ViewModels.Dashboard
         public DateTime TempBirthDate { get; set; }
 
         public ApplicationUser User { get; set;  }
+        public List<SelectListItem> TitleOptions { get; set; }
 
         public string ErrorMessage { get; set; }
     }

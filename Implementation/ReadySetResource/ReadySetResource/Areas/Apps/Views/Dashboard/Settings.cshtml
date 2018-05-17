@@ -15,7 +15,7 @@
         <h3>Basic Details</h3>
         <div class="form-group">
             @Html.LabelFor(m => m.User.Title)
-            @Html.TextBoxFor(m => m.User.Title, new { @class = "form-control" })
+            @Html.DropDownListFor(m => m.User.Title, Model.TitleOptions)
             @Html.TextBoxFor(m => m.User.FirstName, new { @class = "form-control" })
             @Html.TextBoxFor(m => m.User.LastName, new { @class = "form-control" })
             @Html.ValidationMessageFor(m => m.User.Title)
@@ -27,40 +27,32 @@
             @Html.EditorFor(m => m.TempBirthDate, new { date = Model.TempBirthDate })
             @Html.ValidationMessageFor(m => m.User.DateOfBirth)
         </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.User.Email)
-            @Html.TextBoxFor(m => m.User.Email, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.User.Email)
-        </div>
-        <div class="form-group"></div>
+
+        @Html.HiddenFor(m => m.User.AccessFailedCount)
+        @Html.HiddenFor(m => m.User.AddressLine1)
+        @Html.HiddenFor(m => m.User.AddressLine2)
+        @Html.HiddenFor(m => m.User.BackupEmail)
+        @Html.HiddenFor(m => m.User.Blocked)
+        @Html.HiddenFor(m => m.User.Email)
+        @Html.HiddenFor(m => m.User.BusinessUserType)
+        @Html.HiddenFor(m => m.User.BusinessUserTypeId)
+        @Html.HiddenFor(m => m.User.Claims)
+        @Html.HiddenFor(m => m.User.EmailConfirmed)
+        @Html.HiddenFor(m => m.User.EmergencyContact)
+        @Html.HiddenFor(m => m.User.EmployeeType)
+        @Html.HiddenFor(m => m.User.EmployeeTypeId)
+        @Html.HiddenFor(m => m.User.Id)
+        @Html.HiddenFor(m => m.User.LockoutEnabled)
+        @Html.HiddenFor(m => m.User.LockoutEndDateUtc)
+        @Html.HiddenFor(m => m.User.Logins)
+        @Html.HiddenFor(m => m.User.TimesLoggedIn)
+        @Html.HiddenFor(m => m.User.TwoFactorEnabled)
+        @Html.HiddenFor(m => m.User.UserName)
+
+
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn btn-primary">Update Details</button>
     </div>
-    <div class="col-md-6 animated fadeInUp" style="animation-delay:1s; animation-duration:1s">
-        <h3>Extra Details</h3>
-
-    </div>
-    @Html.HiddenFor(m => m.User.AccessFailedCount)
-    @Html.HiddenFor(m => m.User.AddressLine1)
-    @Html.HiddenFor(m => m.User.AddressLine2)
-    @Html.HiddenFor(m => m.User.BackupEmail)
-    @Html.HiddenFor(m => m.User.Blocked)
-    @Html.HiddenFor(m => m.User.BusinessUserType)
-    @Html.HiddenFor(m => m.User.BusinessUserTypeId)
-    @Html.HiddenFor(m => m.User.Claims)
-    @Html.HiddenFor(m => m.User.EmailConfirmed)
-    @Html.HiddenFor(m => m.User.EmergencyContact)
-    @Html.HiddenFor(m => m.User.EmployeeType)
-    @Html.HiddenFor(m => m.User.EmployeeTypeId)
-    @Html.HiddenFor(m => m.User.Id)
-    @Html.HiddenFor(m => m.User.LockoutEnabled)
-    @Html.HiddenFor(m => m.User.LockoutEndDateUtc)
-    @Html.HiddenFor(m => m.User.Logins)
-    @Html.HiddenFor(m => m.User.TimesLoggedIn)
-    @Html.HiddenFor(m => m.User.TwoFactorEnabled)
-    @Html.HiddenFor(m => m.User.UserName)
-
-
-    @Html.AntiForgeryToken()
-    <button type="submit" class="btn btn-primary">Update Details</button>
 }
 
 

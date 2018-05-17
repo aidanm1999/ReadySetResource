@@ -102,7 +102,17 @@ namespace ReadySetResource.Areas.Apps.Controllers
             {
                 User = user,
                 TempBirthDate = user.DateOfBirth,
+                TitleOptions = new List<SelectListItem>(),
             };
+
+
+            //Gets the list of all options and changes them to a SelectedListItem
+            SelectListItem selectListItem = new SelectListItem() { Text = "Mr", Value = "Mr" };
+            settingsVM.TitleOptions.Add(selectListItem);
+            selectListItem = new SelectListItem() { Text = "Mrs", Value = "Mrs" };
+            settingsVM.TitleOptions.Add(selectListItem);
+            selectListItem = new SelectListItem() { Text = "Miss", Value = "Miss" };
+            settingsVM.TitleOptions.Add(selectListItem);
             return View(settingsVM);
         }
         #endregion
