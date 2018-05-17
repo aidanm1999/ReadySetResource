@@ -351,6 +351,7 @@
     </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="Areas\Apps\ViewModels\Calendar\ShiftViewModel.cs" />
+    <Compile Include="ViewModels\Account\InviteViewModel.cs" />
     <Compile Include="ViewModels\Get\BusinessSettingsViewModel.cs" />
     <Compile Include="ViewModels\Get\EmailVerificationViewModel.cs" />
     <Compile Include="Areas\Apps\ViewModels\Calendar\CalendarViewModel.cs" />
@@ -516,6 +517,7 @@
     <Content Include="Areas\Apps\Views\Dashboard\Settings.cshtml" />
     <Content Include="Areas\Apps\Views\Calendar\Add.cshtml" />
     <Content Include="Views\Home\Donate.cshtml" />
+    <Content Include="Views\Account\Invite.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

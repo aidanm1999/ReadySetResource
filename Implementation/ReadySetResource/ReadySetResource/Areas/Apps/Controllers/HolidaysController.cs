@@ -160,7 +160,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
         #region Populate Holidays Method
         private HolidaysViewModel PopulateHolidays(DateTime weekBeginDate)
         {
-            //1 - Get BusinessUserType from current user and sets current user as Calendar.cshtml needs to check for business user type
+            //1 - Get BusinessUserType from current user and sets current user as holidays.cshtml needs to check for business user type
             var currUserId = User.Identity.GetUserId();
             var currBusinessUser = _context.Users.SingleOrDefault(c => c.Id == currUserId);
             var currBusinessUserTypeId = currBusinessUser.BusinessUserTypeId;
@@ -172,9 +172,10 @@ namespace ReadySetResource.Areas.Apps.Controllers
             var currBusiness = _context.Businesses.SingleOrDefault(c => c.Id == currBusinessId);
 
 
-            //3 - Load all employees in that business and initialize CalendarVM
+            //3 - Load all employees in that business and initialize holidaysVM
             var holidaysVM = new HolidaysViewModel
             {
+                Holidays = new List<Holiday>(),
                 Employees = _context.Users.Where(e => e.BusinessUserType.BusinessId == currBusiness.Id).ToList(),
                 CurrentUserType = currBusinessUserType,
                 CurrentUser = currBusinessUser,
@@ -197,8 +198,17 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
             //6 - Load all shifts from those employees in that business in that week (activeWeekCommenceDate)
             var activeWeekEndDate = holidaysVM.ActiveWeekCommenceDate.AddDays(7).AddSeconds(-1);
-            holidaysVM.Holidays = _context.Holidays.Where(s => s.StartDateTime >= holidaysVM.ActiveWeekCommenceDate && s.EndDateTime <= activeWeekEndDate).ToList();
-
+            var tempHolidays = _context.Holidays.Where(s => s.StartDateTime >= holidaysVM.ActiveWeekCommenceDate && s.EndDateTime <= activeWeekEndDate).ToList();
+            foreach (var employee in holidaysVM.Employees)
+            {
+                foreach (var holiday in tempHolidays)
+                {
+                    if (employee.Id == holiday.UserId)
+                    {
+                        holidaysVM.Holidays.Add(holiday);
+                    }
+                }
+            }
 
 
             return holidaysVM;

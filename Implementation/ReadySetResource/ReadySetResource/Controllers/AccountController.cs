@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ReadySetResource.Models;
+using ReadySetResource.ViewModels.Account;
 
 namespace ReadySetResource.Controllers
 {
@@ -17,9 +18,11 @@ namespace ReadySetResource.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext _context;
 
         public AccountController()
         {
+            _context = new ApplicationDbContext();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -425,6 +428,72 @@ namespace ReadySetResource.Controllers
 
             base.Dispose(disposing);
         }
+
+
+
+
+
+
+
+
+        // GET: /Account/Login
+        [AllowAnonymous]
+        [HttpGet]
+        public ActionResult Invite(string inviteCode)
+        {
+            var user = _context.Users.SingleOrDefault(u => u.Id == inviteCode);
+            if(user == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                InviteViewModel inviteVM = new InviteViewModel
+                {
+                    NewUser = user,
+                };
+                return View(inviteVM);
+            }
+            
+        }
+
+        // GET: /Account/Login
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<ActionResult> InvitePost(InviteViewModel inviteVM)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View(inviteVM);
+            }
+             
+
+            // This doesn't count login failures towards account lockout
+            // To enable password failures to trigger account lockout, change to shouldLockout: true
+            var result = await SignInManager.PasswordSignInAsync(inviteVM.NewUser.Email, inviteVM.TempPass, false, shouldLockout: false);
+            switch (result)
+            {
+                case SignInStatus.Success:
+                    var userId = User.Identity.GetUserId();
+                    var userInDb = _context.Users.SingleOrDefault(c => c.Id == userId);
+                    userInDb.EmailConfirmed = true;
+                    _context.SaveChanges();
+                    return RedirectToAction("Index", "Dashboard", new { area = "Apps" } );
+                case SignInStatus.LockedOut:
+                    return View("Lockout");
+                case SignInStatus.Failure:
+                default:
+                    ModelState.AddModelError("", "Invalid login attempt.");
+                    return RedirectToAction("Invite", new { inviteCode = inviteVM.InviteCode });
+            }
+
+        }
+
+
+
+
+
 
         #region Helpers
         // Used for XSRF protection when adding external logins

@@ -13,8 +13,10 @@ namespace ReadySetResource.Areas.Apps.ViewModels.Dashboard
         public string ErrorMessage { get; set; }
         public List<SelectListItem> Honorifics { get; set; }
         public List<SelectListItem> SenderOptions { get; set; }
+        public List<SelectListItem> TypeOptions { get; set; }
         public string Sender { get; set; }
         public ApplicationUser BusinessUser { get; set; }
+        public string TempPassword { get; set; }
         public string Link { get; set; }
         public string AdditionalText { get; set; }
     }

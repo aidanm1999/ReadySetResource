@@ -331,7 +331,7 @@ namespace ReadySetResource.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EmailAuthorisation(EmailVerificationViewModel verificationVM)
         {
-            //Check viewmodel
+            //Checks viewmodel to see if the code entered is the same as the code sent
             if (verificationVM.ActualCode == verificationVM.AttemptedCode)
             {
                 var userId = User.Identity.GetUserId();

@@ -1,4 +1,5 @@
 ﻿using System;
+#region Usages
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,6 +8,15 @@ using ReadySetResource.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using ReadySetResource.Areas.Apps.ViewModels.Dashboard;
+using System.Net;
+using System.Net.Mail;
+using ReadySetResource.ViewModels;
+using System.Globalization;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using Microsoft.Owin.Security;
+using Microsoft.AspNet.Identity.EntityFramework;
+#endregion
 
 
 namespace ReadySetResource.Areas.Apps.Controllers
@@ -14,13 +24,48 @@ namespace ReadySetResource.Areas.Apps.Controllers
     public class DashboardController : Controller
     {
 
-        #region Context
+        #region Initialization and StartUp
         private ApplicationDbContext _context;
+        private ApplicationSignInManager _signInManager;
+        private ApplicationUserManager _userManager;
+
 
         public DashboardController()
         {
             _context = new ApplicationDbContext();
 
+        }
+
+
+
+        public ApplicationSignInManager SignInManager
+        {
+            get
+            {
+                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+            }
+            private set
+            {
+                _signInManager = value;
+            }
+        }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+
+
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
         }
         #endregion
 
@@ -84,7 +129,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
 
             //3 - Load all employees in that business and initialize settingsVM
-            BusinessSettingsViewModel settingsVM = new BusinessSettingsViewModel
+            ViewModels.Dashboard.BusinessSettingsViewModel settingsVM = new ViewModels.Dashboard.BusinessSettingsViewModel
             {
                 Employees = _context.Users.Where(e => e.BusinessUserType.BusinessId == currBusiness.Id).ToList(),
                 BusinessUserTypes = _context.BusinessUserTypes.Where(e => e.BusinessId == currBusiness.Id).ToList(),
@@ -162,7 +207,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
         // GET: Dashboard/Calendar
         [HttpGet]
         [Authorize]
-        public ActionResult EditType(int type)
+        public ActionResult EditType(int type, string errorMessage)
         {
 
             //1 - Get BusinessUserType from current user and sets current user as .cshtml needs to check for business user type
@@ -176,6 +221,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
             BusinessUserTypeViewModel typeVM = new BusinessUserTypeViewModel
             {
+                ErrorMessage = errorMessage,
                 BusinessUserType = businessUserType,
                 Options = new List<SelectListItem>(),
             };
@@ -203,12 +249,13 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
 
 
-        #region AddBusinessUser
-        // GET: Dashboard/Calendar
+        #region AddUser
+        // GET: Dashboard/AddUser
         [HttpGet]
         [Authorize]
-        public ActionResult AddUser()
+        public ActionResult AddUser(string errorMsg)
         {
+
             //1 - Get BusinessUserType from current user and sets current user as .cshtml needs to check for business user type
             var currUserId = User.Identity.GetUserId();
             var currBusinessUser = _context.Users.SingleOrDefault(c => c.Id == currUserId);
@@ -219,58 +266,72 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
             BusinessUserViewModel userVM = new BusinessUserViewModel
             {
+                ErrorMessage = errorMsg,
                 BusinessUser = new ApplicationUser(),
                 Honorifics = new List<SelectListItem>(),
                 SenderOptions = new List<SelectListItem>(),
+                TypeOptions = new List<SelectListItem>(),
             };
             
 
 
             //Gets the list of all options and changes them to a SelectedListItem
+            SelectListItem selectListItem = new SelectListItem() { Text = "Mr", Value = "Mr" };
+            userVM.Honorifics.Add(selectListItem);
+            selectListItem = new SelectListItem() { Text = "Mrs", Value = "Mrs" };
+            userVM.Honorifics.Add(selectListItem);
+            selectListItem = new SelectListItem() { Text = "Miss", Value = "Miss" };
+            userVM.Honorifics.Add(selectListItem);
 
 
-            SelectListItem honorificsSelectListItem = new SelectListItem() { Text = "Mr", Value = "Mr" };
-            userVM.Honorifics.Add(honorificsSelectListItem);
-            honorificsSelectListItem = new SelectListItem() { Text = "Mrs", Value = "Mrs" };
-            userVM.Honorifics.Add(honorificsSelectListItem);
-            honorificsSelectListItem = new SelectListItem() { Text = "Miss", Value = "Miss" };
-            userVM.Honorifics.Add(honorificsSelectListItem);
-
-
-            SelectListItem senderSelectListItem = new SelectListItem()
+            //Adds all the sender options
+            selectListItem = new SelectListItem()
             {
                 Text = currBusinessUser.Title + " " + currBusinessUser.FirstName + " " + currBusinessUser.LastName,
                 Value = currBusinessUser.Title + " " + currBusinessUser.FirstName + " " + currBusinessUser.LastName
             };
-            userVM.SenderOptions.Add(senderSelectListItem);
+            userVM.SenderOptions.Add(selectListItem);
 
-            senderSelectListItem = new SelectListItem()
+            selectListItem = new SelectListItem()
             {
                 Text = currBusinessUser.Title + " " + currBusinessUser.LastName,
                 Value = currBusinessUser.Title + " " + currBusinessUser.LastName
             };
-            userVM.SenderOptions.Add(senderSelectListItem);
+            userVM.SenderOptions.Add(selectListItem);
 
-            senderSelectListItem = new SelectListItem()
+            selectListItem = new SelectListItem()
             {
                 Text = currBusinessUser.FirstName + " " + currBusinessUser.LastName,
                 Value = currBusinessUser.FirstName + " " + currBusinessUser.LastName
             };
-            userVM.SenderOptions.Add(senderSelectListItem);
+            userVM.SenderOptions.Add(selectListItem);
 
-            senderSelectListItem = new SelectListItem()
+            selectListItem = new SelectListItem()
             {
                 Text = currBusinessUser.FirstName,
                 Value = currBusinessUser.FirstName
             };
-            userVM.SenderOptions.Add(senderSelectListItem);
+            userVM.SenderOptions.Add(selectListItem);
 
-            senderSelectListItem = new SelectListItem()
+            selectListItem = new SelectListItem()
             {
                 Text = "A colleague",
                 Value = "A colleague"
             };
-            userVM.SenderOptions.Add(senderSelectListItem);
+            userVM.SenderOptions.Add(selectListItem);
+
+
+            //Adds all the business user types options
+            foreach (var type in _context.BusinessUserTypes.Where(t => t.BusinessId == currBusinessId))
+            {
+                selectListItem = new SelectListItem()
+                {
+                    Text = type.Name,
+                    Value = type.Id.ToString(),
+                };
+
+                userVM.TypeOptions.Add(selectListItem);
+            }
 
 
             //1 - Start view with the ViewModel (userVM) 
@@ -495,16 +556,169 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
 
 
-        #region DeleteShift
-        // POST: Calendar/DeleteShift
+        #region DeleteType
+        // POST: Calendar/DeleteType
         [Authorize]
-        public ActionResult DeleteShift(int shift)
+        public ActionResult DeleteType(int type)
         {
-            Shift ActualShift = _context.Shifts.SingleOrDefault(s => s.Id == shift);
-            _context.Shifts.Remove(ActualShift);
-            _context.SaveChanges();
+            BusinessUserType userType = _context.BusinessUserTypes.SingleOrDefault(s => s.Id == type);
+            List<ApplicationUser> employees = _context.Users.Where(b => b.BusinessUserTypeId == userType.Id).ToList();
 
-            return RedirectToAction("Index", "Calendar", new { week = ActualShift.StartDateTime });
+            if(employees.Count == 0)
+            {
+                _context.BusinessUserTypes.Remove(userType);
+                _context.SaveChanges();
+
+                return RedirectToAction("BusinessSettings", "Dashboard");
+            }
+            else
+            {
+                return RedirectToAction("EditType", "Dashboard", new { type , errorMessage = "Some employees have this type. Please modify before deleting this."});
+            }
+            
+        }
+        #endregion
+
+
+
+        #region AddTypePost
+        // POST: Calendar/AddTypePost
+        [HttpPost]
+        [Authorize]
+        public async Task<ActionResult> AddUserPost(BusinessUserViewModel userVM)
+        {
+
+            //Checks to see if there is a user in the system already with this email
+            bool emailTaken = false;
+
+            foreach (var user in _context.Users.Where(u => u.Email == userVM.BusinessUser.Email).ToList())
+            {
+                if (user.Email == userVM.BusinessUser.Email)
+                {
+                    emailTaken = true;
+                }
+
+            }
+
+
+            
+            if (emailTaken == false)
+            {
+                //Fill in extra details for the user
+                userVM.BusinessUser.Blocked = false;
+                userVM.BusinessUser.TimesLoggedIn = 0;
+                userVM.BusinessUser.Raise = 0;
+                userVM.BusinessUser.Strikes = 0;
+                userVM.BusinessUser.EmailConfirmed = false;
+                userVM.BusinessUser.PhoneNumberConfirmed = false;
+                userVM.BusinessUser.TwoFactorEnabled = false;
+                userVM.BusinessUser.LockoutEnabled = false;
+                userVM.BusinessUser.AccessFailedCount = 0;
+                userVM.BusinessUser.UserName = userVM.BusinessUser.Email;
+                userVM.BusinessUser.EmployeeTypeId = 1;
+                userVM.BusinessUser.DateOfBirth = DateTime.Now;
+
+                //Sets a temporary password
+                var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+                var stringChars = new char[14];
+                var random = new Random();
+
+                for (int i = 0; i < stringChars.Length; i++)
+                {
+                    stringChars[i] = chars[random.Next(chars.Length)];
+                }
+
+                userVM.TempPassword = new String(stringChars); ;
+
+
+                //Creates user with default values and saves to db (Email confirmed = false)
+                //Register the user to the database
+                try
+                {
+                    var result = await UserManager.CreateAsync(userVM.BusinessUser, userVM.TempPassword);
+                    if (result.Succeeded)
+                    {
+                        await SignInManager.SignInAsync(userVM.BusinessUser, isPersistent: false, rememberBrowser: false);
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    string errorMessage = ex.InnerException.InnerException.Message;
+                }
+
+                var currUser = _context.Users.SingleOrDefault(u => u.Email == userVM.BusinessUser.Email);
+
+                //Send email to get confirmation that that user exists
+
+                //Creates a personalised link based on their user id
+                userVM.Link = "http://localhost:57785/Account/Invite?inviteCode=" + currUser.Id;
+
+
+                //Email user the code
+                MailMessage msg = new MailMessage();
+                msg.From = new MailAddress("readysetresource@gmail.com");
+                msg.To.Add(currUser.Email);
+                msg.Subject = userVM.Sender + " has invited you to join RSR!";
+                msg.IsBodyHtml = true;
+                if(userVM.AdditionalText == null | userVM.AdditionalText == "")
+                {
+                    msg.Body = "<html>" +
+                    "<p>Dear " + currUser.Title + " " + currUser.FirstName + " " + currUser.LastName + ",</p>" +
+                    "<p>" + userVM.Sender + " has invited you to RSR, " +
+                    "where you can see your shifts, book holidays and more!</p>" +
+
+                    "<p>Your email:" + currUser.Email + "</p>" +
+                    "<p>Your temporary password:" + userVM.TempPassword + "</p>" +
+
+                    "<p>Please click the following link to get started:</p>" +
+                    "<p><b><a href='" + userVM.Link + "'>Click me!</a></b></p>" +
+                    userVM.Sender + "<p>'s Message:</p>" + "<p>" + userVM.AdditionalText + "</p></html>";
+                }
+                else
+                {
+                    msg.Body = "<html>" +
+                    "<p>Dear " + currUser.Title + " " + currUser.FirstName + " " + currUser.LastName + ",</p>" +
+                    userVM.Sender + "<p> has invited you to RSR, " +
+                    "where you can see your shifts, book holidays and more!</p>" +
+
+                    "<p>Your email:" + currUser.Email + "</p>" +
+                    "<p>Your temporary password:" + userVM.TempPassword + "</p>" +
+
+                    "<p>Please click the following link to get started:</p>" +
+                    "<p><b><a href='" + userVM.Link + "'>Click me!</a></b></p></html>";
+                }
+                
+                SmtpClient client = new SmtpClient();
+                client.UseDefaultCredentials = true;
+                client.Host = "smtp.gmail.com";
+                client.Port = 587;
+                client.EnableSsl = true;
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.Credentials = new NetworkCredential("readysetresource@gmail.com", "Ready1Set2Resource3");
+                client.Timeout = 20000;
+                try
+                {
+                    client.Send(msg);
+                }
+                catch (Exception ex)
+                {
+                    string errorMsg = "Fail Has error " + ex.Message;
+                }
+                finally
+                {
+                    msg.Dispose();
+                }
+                
+
+
+                return RedirectToAction("BusinessSettings", "Dashboard");
+            }
+            else
+            {
+                //If there is a user with that email, an error message is displayed
+                return RedirectToAction("AddUser", new { errorMsg = "There is already a user type with that email" });
+            }
         }
         #endregion
 

@@ -199,7 +199,18 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
             //6 - Load all shifts from those employees in that business in that week (activeWeekCommenceDate)
             var activeWeekEndDate = CalendarVM.ActiveWeekCommenceDate.AddDays(7).AddSeconds(-1);
-            CalendarVM.Shifts = _context.Shifts.Where(s => s.StartDateTime >= CalendarVM.ActiveWeekCommenceDate && s.EndDateTime <= activeWeekEndDate).ToList();
+            CalendarVM.Shifts = new List<Shift>();
+            var tempShifts = _context.Shifts.Where(s => s.StartDateTime >= CalendarVM.ActiveWeekCommenceDate && s.EndDateTime <= activeWeekEndDate).ToList();
+            foreach(var employee in CalendarVM.Employees)
+            {
+                foreach(var shift in tempShifts)
+                {
+                    if(employee.Id == shift.UserId)
+                    {
+                        CalendarVM.Shifts.Add(shift);
+                    }
+                }
+            }
 
             //Checks to see if there are any shifts
             //If not it will return an empty array
@@ -386,6 +397,15 @@ namespace ReadySetResource.Areas.Apps.Controllers
                         }
                     }
                 };
+            }
+            else
+            {
+                var numOfShifts = CalendarVM.Employees.Count * 7;
+                for (int i = 0; i < numOfShifts; i++)
+                {
+                    //Staff Id + 1 * 7 - 7 gives the first element of the staffs part of the array
+                    CalendarVM.Shifts.Insert(0, null);
+                }
             }
 
             return CalendarVM;

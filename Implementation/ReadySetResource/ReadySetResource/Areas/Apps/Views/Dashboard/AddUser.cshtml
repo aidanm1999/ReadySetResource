@@ -6,7 +6,7 @@
 
 <h2>Add Employee</h2>
 
-<div class="col-md-7" style="font: 20px Helvetica, sans-serif; padding-top:20px; border:2px dotted black;">
+<div class="col-md-7 animated bounceInUp" style="font: 20px Helvetica, sans-serif; padding-top:20px; padding-bottom:20px; border:1px double #428bca;">
 
     @Model.ErrorMessage
 
@@ -14,6 +14,11 @@
     {
         @Html.ValidationSummary(true, "Please fix the following errors:")
         @Html.ValidationMessageFor(m => m.BusinessUser.FirstName)
+        <span>
+            <text>To:</text> @Html.TextBoxFor(m => m.BusinessUser.Email, new { placeholder = "Email Address", style = "width:200px;" })
+            <text> as a </text> @Html.DropDownListFor(m => m.BusinessUser.BusinessUserTypeId, Model.TypeOptions)
+        </span>
+        <div style="padding:10px;"></div>
         <span style="padding:10px;">
             <text>Dear </text> @Html.DropDownListFor(m => m.BusinessUser.Title, Model.Honorifics)
             @Html.TextBoxFor(m => m.BusinessUser.FirstName, new { placeholder="First Name", style = "width:120px;" })
@@ -38,7 +43,7 @@
 
         @Html.AntiForgeryToken()
         <p style="padding-top:20px;">
-            @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default", style = "float:left" })
+            @Html.ActionLink("Cancel", "BusinessSettings", null, new { @class = "btn btn-default", style = "float:left" })
             <button type="submit" class="btn btn-primary" style="float:right">Send Invite</button>
         </p>
         @Html.HiddenFor(m => m.BusinessUser.Id)

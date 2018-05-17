@@ -30,7 +30,7 @@ else
 {
     <text>You have no employees!</text>
 }
-else if (Model.Shifts.Count() == 0)
+else if (Model.Shifts.Count() == 0 | Model.Shifts == null)
 {
     <text>You have no shifts for this week!</text>
 }
