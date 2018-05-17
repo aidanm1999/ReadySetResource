@@ -249,7 +249,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
 
             holiday.StartDateTime = holiday.StartDateTime.AddHours(Convert.ToDouble(holidayVM.StartHour));
-            holiday.StartDateTime = holiday.StartDateTime.AddMinutes(Convert.ToDouble(holidayVM.EndMinute));
+            holiday.StartDateTime = holiday.StartDateTime.AddMinutes(Convert.ToDouble(holidayVM.StartMinute));
 
             holiday.StartDateTime = holiday.StartDateTime.AddDays(holidayVM.StartDate.Day - 1);
             holiday.StartDateTime = holiday.StartDateTime.AddMonths(holidayVM.StartDate.Month - 1);
@@ -274,6 +274,8 @@ namespace ReadySetResource.Areas.Apps.Controllers
                 }
             }
 
+            
+
 
             var currUserId = User.Identity.GetUserId();
             var currBusinessUser = _context.Users.SingleOrDefault(c => c.Id == currUserId);
@@ -292,7 +294,23 @@ namespace ReadySetResource.Areas.Apps.Controllers
                 holidayVM.Employees.Add(selectListItem);
             }
 
+            holidayVM.User = currBusinessUser;
 
+            if (Int32.Parse(holidayVM.EndMinute) >= 60 | Int32.Parse(holidayVM.StartMinute) >= 60)
+            {
+                holidayVM.ErrorMessage = "Minute must be between 0 and 59";
+                return View("Add", holidayVM);
+            }
+            else if (Int32.Parse(holidayVM.EndHour) >= 24 | Int32.Parse(holidayVM.StartHour) >= 24)
+            {
+                holidayVM.ErrorMessage = "Hour must be between 0 and 23";
+                return View("Add", holidayVM);
+            }
+            else if (holiday.EndDateTime <= holiday.StartDateTime)
+            {
+                holidayVM.ErrorMessage = "Start date is later than end date";
+                return View("Add", holidayVM);
+            }
 
             if (holidayAlready == false)
             {
@@ -371,51 +389,59 @@ namespace ReadySetResource.Areas.Apps.Controllers
             }
 
 
-            if (changesMade == true && holidayAlready == false)
+            //Populates the employees 
+            var currUserId = User.Identity.GetUserId();
+            var currBusinessUser = _context.Users.SingleOrDefault(c => c.Id == currUserId);
+            var currBusinessUserTypeId = currBusinessUser.BusinessUserTypeId;
+            var currBusinessUserType = _context.BusinessUserTypes.SingleOrDefault(c => c.Id == currBusinessUserTypeId);
+            var currBusinessId = currBusinessUserType.BusinessId;
+
+            holidayVM.Employees = new List<SelectListItem>();
+
+            //Gets the list of all employees and changes them to a SelectedListItem
+            var employeesList = _context.Users.Where(e => e.BusinessUserType.BusinessId == currBusinessId).ToList().OrderBy(e => e.Id).ToList();
+
+            for (int i = 0; i < employeesList.Count; i++)
             {
+                SelectListItem selectListItem = new SelectListItem() { Text = employeesList[i].FirstName + " " + employeesList[i].LastName, Value = employeesList[i].Id };
+                holidayVM.Employees.Add(selectListItem);
+            }
 
+            holidayVM.User = currBusinessUser;
 
+            if (changesMade == false)
+            {
+                holidayVM.ErrorMessage = "No changes were made";
+                return View("Edit", holidayVM);
+            }
+            else if (holidayAlready == true)
+            {
+                holidayVM.ErrorMessage = "Holiday already there.";
+                return View("Edit", holidayVM);
+            }
+            if (Int32.Parse(holidayVM.EndMinute) >= 60 | Int32.Parse(holidayVM.StartMinute) >= 60)
+            {
+                holidayVM.ErrorMessage = "Minute must be between 0 and 59";
+                return View("Add", holidayVM);
+            }
+            else if (Int32.Parse(holidayVM.EndHour) >= 24 | Int32.Parse(holidayVM.StartHour) >= 24)
+            {
+                holidayVM.ErrorMessage = "Hour must be between 0 and 23";
+                return View("Add", holidayVM);
+            }
+            else if (holiday.EndDateTime <= holiday.StartDateTime)
+            {
+                holidayVM.ErrorMessage = "Start date is later than end date";
+                return View("Add", holidayVM);
+            }
+            else
+            {
                 _context.SaveChanges();
 
                 return RedirectToAction("Index", "Holidays", new { week = holidayVM.StartDate.Date });
             }
-            else
-            {
-                //Populates the employees 
-                var currUserId = User.Identity.GetUserId();
-                var currBusinessUser = _context.Users.SingleOrDefault(c => c.Id == currUserId);
-                var currBusinessUserTypeId = currBusinessUser.BusinessUserTypeId;
-                var currBusinessUserType = _context.BusinessUserTypes.SingleOrDefault(c => c.Id == currBusinessUserTypeId);
-                var currBusinessId = currBusinessUserType.BusinessId;
 
-                holidayVM.Employees = new List<SelectListItem>();
-
-                //Gets the list of all employees and changes them to a SelectedListItem
-                var employeesList = _context.Users.Where(e => e.BusinessUserType.BusinessId == currBusinessId).ToList().OrderBy(e => e.Id).ToList();
-
-                for (int i = 0; i < employeesList.Count; i++)
-                {
-                    SelectListItem selectListItem = new SelectListItem() { Text = employeesList[i].FirstName + " " + employeesList[i].LastName, Value = employeesList[i].Id };
-                    holidayVM.Employees.Add(selectListItem);
-                }
-
-                if (changesMade == false)
-                {
-                    holidayVM.ErrorMessage = "No changes were made";
-                    return View("Edit", holidayVM);
-                }
-                else if (holidayAlready == true)
-                {
-                    holidayVM.ErrorMessage = "Holiday already there.";
-                    return View("Edit", holidayVM);
-                }
-                else
-                {
-                    holidayVM.ErrorMessage = "An error occured.";
-                    return View("Edit", holidayVM);
-                }
-
-            }
+            
 
 
         }

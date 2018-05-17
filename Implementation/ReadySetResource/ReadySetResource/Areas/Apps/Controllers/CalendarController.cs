@@ -441,7 +441,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
 
             shift.StartDateTime = shift.StartDateTime.AddHours(Convert.ToDouble(shiftVM.StartHour));
-            shift.StartDateTime = shift.StartDateTime.AddMinutes(Convert.ToDouble(shiftVM.EndMinute));
+            shift.StartDateTime = shift.StartDateTime.AddMinutes(Convert.ToDouble(shiftVM.StartMinute));
 
             shift.StartDateTime = shift.StartDateTime.AddDays(shiftVM.TempDate.Day - 1);
             shift.StartDateTime = shift.StartDateTime.AddMonths(shiftVM.TempDate.Month - 1);
@@ -484,7 +484,23 @@ namespace ReadySetResource.Areas.Apps.Controllers
                 shiftVM.Employees.Add(selectListItem);
             }
 
+            shiftVM.User = _context.Users.SingleOrDefault(u => u.Id == shiftVM.UserId);
 
+            if (Int32.Parse(shiftVM.EndMinute) >= 60 | Int32.Parse(shiftVM.StartMinute) >= 60)
+            {
+                shiftVM.ErrorMessage = "Minute must be between 0 and 59";
+                return View("Add", shiftVM);
+            }
+            else if (Int32.Parse(shiftVM.EndHour) >= 24 | Int32.Parse(shiftVM.StartHour) >= 24)
+            {
+                shiftVM.ErrorMessage = "Hour must be between 0 and 23";
+                return View("Add", shiftVM);
+            }
+            else if (shift.EndDateTime <= shift.StartDateTime)
+            {
+                shiftVM.ErrorMessage = "Start date is later than end date";
+                return View("Add", shiftVM);
+            }
 
             if (shiftAlready == false)
             {
@@ -530,7 +546,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
             //Sets remaining attributes for the shift
             shift.StartDateTime = shift.StartDateTime.AddHours(Convert.ToDouble(shiftVM.StartHour));
-            shift.StartDateTime = shift.StartDateTime.AddMinutes(Convert.ToDouble(shiftVM.EndMinute));
+            shift.StartDateTime = shift.StartDateTime.AddMinutes(Convert.ToDouble(shiftVM.StartMinute));
 
             shift.StartDateTime = shift.StartDateTime.AddDays(shiftVM.TempDate.Day - 1);
             shift.StartDateTime = shift.StartDateTime.AddMonths(shiftVM.TempDate.Month - 1);
@@ -544,16 +560,8 @@ namespace ReadySetResource.Areas.Apps.Controllers
             shift.EndDateTime = shift.EndDateTime.AddMonths(shiftVM.TempDate.Month - 1);
             shift.EndDateTime = shift.EndDateTime.AddYears(shiftVM.TempDate.Year - 1);
 
-            //int shiftCount = shiftVM.Shifts.Count;
 
-            //for (int i = 0; i < shiftCount; i++)
-            //{
-            //    if (shift.StartDateTime.Date == shiftVM.Shifts[i].StartDateTime.Date && shift.UserId == shiftVM.Shifts[i].UserId)
-            //    {
-
-            //        shiftAlready = true;
-            //    }
-            //}
+            
 
 
 
@@ -573,8 +581,9 @@ namespace ReadySetResource.Areas.Apps.Controllers
                 shiftInDb.UserId = shift.UserId;
             }
 
+            
 
-            if (changesMade == true && shiftAlready == false)
+            if (changesMade == true && shiftAlready == false && shift.EndDateTime > shift.StartDateTime)
             {
 
 
@@ -610,6 +619,21 @@ namespace ReadySetResource.Areas.Apps.Controllers
                 else if (shiftAlready == true)
                 {
                     shiftVM.ErrorMessage = "Shift already there.";
+                    return View("Edit", shiftVM);
+                }
+                else if (Int32.Parse(shiftVM.EndMinute) >= 60 | Int32.Parse(shiftVM.StartMinute) >= 60)
+                {
+                    shiftVM.ErrorMessage = "Minute must be between 0 and 59";
+                    return View("Add", shiftVM);
+                }
+                else if (Int32.Parse(shiftVM.EndHour) >= 24 | Int32.Parse(shiftVM.StartHour) >= 24)
+                {
+                    shiftVM.ErrorMessage = "Hour must be between 0 and 23";
+                    return View("Add", shiftVM);
+                }
+                else if (shift.EndDateTime <= shift.StartDateTime)
+                {
+                    shiftVM.ErrorMessage = "Start date is later than end date";
                     return View("Edit", shiftVM);
                 }
                 else
@@ -900,7 +924,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
                             newRow.Cells[index].AddParagraph(shift.StartDateTime.Hour + ":" + startMinute);
                             newRow.Cells[index].Format.Font.Color = new Color(66, 139, 202);
-                            newRow.Cells[index + 1].AddParagraph(shift.StartDateTime.Hour + ":" + endMinute);
+                            newRow.Cells[index + 1].AddParagraph(shift.EndDateTime.Hour + ":" + endMinute);
                             newRow.Cells[index + 1].Format.Font.Color = new Color(66, 139, 202);
                         }
 

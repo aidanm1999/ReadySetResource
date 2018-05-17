@@ -48,6 +48,7 @@ else
                 <th colspan="2">Friday</th>
                 <th colspan="2">Saturday</th>
                 <th colspan="2">Sunday</th>
+                <th rowspan="2">Totals</th>
             </tr>
             <tr>
                 <th>Start</th>
@@ -67,6 +68,18 @@ else
             </tr>
         </thead>
         <tbody>
+            @{ 
+                double totalHours = 0;
+
+                List<double> dailyHours = new List<double>();
+                for(int i = 0; i < 7; i++)
+                {
+                    dailyHours.Add(0);
+                }
+                int day = 0;
+
+            }
+
             @foreach (var employee in Model.Employees)
             {
                 <tr>
@@ -78,6 +91,8 @@ else
                         int prevEmpIndex = Model.Employees.IndexOf(employee) - 1;
                         int currMinElement = (prevEmpIndex * 7) + 7;
                         empShifts = Model.Shifts.ToList().GetRange(currMinElement, 7);
+                        double totalEmployeeHours = 0;
+                        
                     }
 
                     @foreach (var empShift in empShifts)
@@ -91,6 +106,19 @@ else
                             }
                             else if (empShift.UserId == employee.Id)
                             {
+
+                                totalHours += (empShift.EndDateTime - empShift.StartDateTime).TotalHours;
+                                totalEmployeeHours += (empShift.EndDateTime - empShift.StartDateTime).TotalHours;
+                                if(empShift.EndDateTime.DayOfWeek.ToString() == "Monday") { day = 0; }
+                                else if (empShift.EndDateTime.DayOfWeek.ToString() == "Tuesday") { day = 1; }
+                                else if (empShift.EndDateTime.DayOfWeek.ToString() == "Wednesday") { day = 2; }
+                                else if (empShift.EndDateTime.DayOfWeek.ToString() == "Thursday") { day = 3; }
+                                else if (empShift.EndDateTime.DayOfWeek.ToString() == "Friday") { day = 4; }
+                                else if (empShift.EndDateTime.DayOfWeek.ToString() == "Saturday") { day = 5; }
+                                else if (empShift.EndDateTime.DayOfWeek.ToString() == "Sunday") { day = 6; }
+
+                                dailyHours[day] = dailyHours[day] + (empShift.EndDateTime - empShift.StartDateTime).TotalHours;
+
                                 <td style="white-space: nowrap;">
                                     @empShift.StartDateTime.Hour :
                                     @if (empShift.StartDateTime.Minute < 10)
@@ -115,6 +143,19 @@ else
                             }
                             else if (empShift.UserId == employee.Id)
                             {
+
+                                totalHours += (empShift.EndDateTime - empShift.StartDateTime).TotalHours;
+                                totalEmployeeHours += (empShift.EndDateTime - empShift.StartDateTime).TotalHours;
+                                if (empShift.EndDateTime.DayOfWeek.ToString() == "Monday") { day = 0; }
+                                else if (empShift.EndDateTime.DayOfWeek.ToString() == "Tuesday") { day = 1; }
+                                else if (empShift.EndDateTime.DayOfWeek.ToString() == "Wednesday") { day = 2; }
+                                else if (empShift.EndDateTime.DayOfWeek.ToString() == "Thursday") { day = 3; }
+                                else if (empShift.EndDateTime.DayOfWeek.ToString() == "Friday") { day = 4; }
+                                else if (empShift.EndDateTime.DayOfWeek.ToString() == "Saturday") { day = 5; }
+                                else if (empShift.EndDateTime.DayOfWeek.ToString() == "Sunday") { day = 6; }
+
+                                dailyHours[day] = dailyHours[day] + (empShift.EndDateTime - empShift.StartDateTime).TotalHours;
+
                                 <td style="white-space: nowrap;">
                                     <a href="@Url.Action("Edit","Calendar", new { shift = empShift.Id } )">
                                         <div style="height:100%;width:100%">
@@ -144,13 +185,31 @@ else
 
                         }
                     }
+                    <td>
+                        @Math.Round(totalEmployeeHours, 1)
+                    </td>
                 </tr>
+
             }
+            
 
 
 
 
         </tbody>
+        <tfoot>
+            <tr style="color:black">
+                <td>Totals</td>
+                @foreach(var dailyTotal in dailyHours)
+                {
+                    <td colspan="2">@Math.Round(@dailyTotal, 1)</td>
+                }
+                
+
+                <td>@Math.Round(totalHours, 1)</td>
+
+            </tr>
+        </tfoot>
 
     </table>
 }
