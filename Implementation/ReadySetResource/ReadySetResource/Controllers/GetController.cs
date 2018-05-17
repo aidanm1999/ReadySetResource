@@ -77,7 +77,7 @@ namespace ReadySetResource.Controllers
             try
             {
                 var userId = User.Identity.GetUserId();
-                if (userId != null) { RedirectToAction("Index", "Dashboard", new { area = "Apps" }); }
+                if (userId != null) { return RedirectToAction("Index", "Dashboard", new { area = "Apps" }); }
             } catch {  }
             
             return View();
@@ -98,7 +98,7 @@ namespace ReadySetResource.Controllers
             try
             {
                 var userId = User.Identity.GetUserId();
-                if (userId != null) { RedirectToAction("Index", "Dashboard", new { area = "Apps" }); }
+                if (userId != null) { return RedirectToAction("Index", "Dashboard", new { area = "Apps" }); }
             }
             catch { }
 
@@ -212,7 +212,7 @@ namespace ReadySetResource.Controllers
             try
             {
                 var userId = User.Identity.GetUserId();
-                if (userId != null) { RedirectToAction("Index", "Dashboard", new { area = "Apps" }); }
+                if (userId != null) { return RedirectToAction("Index", "Dashboard", new { area = "Apps" }); }
             }
             catch { }
 
@@ -261,7 +261,7 @@ namespace ReadySetResource.Controllers
             try
             {
                 var userId = User.Identity.GetUserId();
-                if (userId != null) { RedirectToAction("Index", "Dashboard", new { area = "Apps" }); }
+                if (userId != null) { return RedirectToAction("Index", "Dashboard", new { area = "Apps" }); }
             }
             catch { }
 
@@ -318,7 +318,7 @@ namespace ReadySetResource.Controllers
             try
             {
                 var userId = User.Identity.GetUserId();
-                if (userId != null) { RedirectToAction("Index", "Dashboard", new { area = "Apps" }); }
+                if (userId != null) { return RedirectToAction("Index", "Dashboard", new { area = "Apps" }); }
             }
             catch { }
 
@@ -445,7 +445,7 @@ namespace ReadySetResource.Controllers
                     //This means that they already have verified their email
                     if(user.EmailConfirmed == true)
                     {
-                        RedirectToAction("Index", "Dashboard", new { area = "Apps" });
+                        return RedirectToAction("Index", "Dashboard", new { area = "Apps" });
                     }
                     
                 }
@@ -525,7 +525,7 @@ namespace ReadySetResource.Controllers
                     //This means that they already have verified their email
                     if (user.EmailConfirmed == true)
                     {
-                        RedirectToAction("Index", "Dashboard", new { area = "Apps" });
+                        return RedirectToAction("Index", "Dashboard", new { area = "Apps" });
                     }
 
                 }
