@@ -124,7 +124,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
         // GET: Dashboard/Calendar
         [HttpGet]
         [Authorize]
-        public ActionResult BusinessSettings()
+        public ActionResult BusinessSettings(string errorMsg)
         {
             //1 - Get BusinessUserType from current user and sets current user as Calendar.cshtml needs to check for business user type
             var currUserId = User.Identity.GetUserId();
@@ -141,6 +141,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
             //3 - Load all employees in that business and initialize settingsVM
             ViewModels.Dashboard.BusinessSettingsViewModel settingsVM = new ViewModels.Dashboard.BusinessSettingsViewModel
             {
+                ErrorMessage = errorMsg,
                 Employees = _context.Users.Where(e => e.BusinessUserType.BusinessId == currBusiness.Id).ToList(),
                 BusinessUserTypes = _context.BusinessUserTypes.Where(e => e.BusinessId == currBusiness.Id).ToList(),
             };
@@ -273,7 +274,28 @@ namespace ReadySetResource.Areas.Apps.Controllers
             var currBusinessUserType = _context.BusinessUserTypes.SingleOrDefault(c => c.Id == currBusinessUserTypeId);
             var currBusinessId = currBusinessUserType.BusinessId;
             var currBusiness = _context.Businesses.SingleOrDefault(c => c.Id == currBusinessId);
+            List<BusinessUserType> userTypes = _context.BusinessUserTypes.Where(c => c.BusinessId == currBusinessId).ToList();
+            int noOfUsers = 0;
+            foreach(var type in userTypes)
+            {
+                noOfUsers = noOfUsers + _context.Users.Where(c => c.BusinessUserTypeId == type.Id).Count();
+            }
 
+            
+
+            //Checks to see if they can add more employees
+            if(currBusiness.Plan == "Small" && noOfUsers > 10)
+            {
+                return RedirectToAction("BusinessSettings", new { errorMsg = "You have reached your limit of employees" });
+            }
+            else if (currBusiness.Plan == "Medium" && noOfUsers > 20)
+            {
+                return RedirectToAction("BusinessSettings", new { errorMsg = "You have reached your limit of employees" });
+            }
+            else if (currBusiness.Plan == "Large" && noOfUsers > 40)
+            {
+                return RedirectToAction("BusinessSettings", new { errorMsg = "You have reached your limit of employees" });
+            }
             BusinessUserViewModel userVM = new BusinessUserViewModel
             {
                 ErrorMessage = errorMsg,
