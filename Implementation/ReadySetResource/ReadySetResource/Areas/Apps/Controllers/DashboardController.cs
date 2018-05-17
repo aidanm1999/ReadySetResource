@@ -314,6 +314,14 @@ namespace ReadySetResource.Areas.Apps.Controllers
             userVM.Honorifics.Add(selectListItem);
             selectListItem = new SelectListItem() { Text = "Miss", Value = "Miss" };
             userVM.Honorifics.Add(selectListItem);
+            selectListItem = new SelectListItem() { Text = "Sir", Value = "Sir" };
+            userVM.Honorifics.Add(selectListItem);
+            selectListItem = new SelectListItem() { Text = "Dr", Value = "Dr" };
+            userVM.Honorifics.Add(selectListItem);
+            selectListItem = new SelectListItem() { Text = "Lady", Value = "Lady" };
+            userVM.Honorifics.Add(selectListItem);
+            selectListItem = new SelectListItem() { Text = "Lord", Value = "Lord" };
+            userVM.Honorifics.Add(selectListItem);
 
 
             //Adds all the sender options
@@ -753,6 +761,8 @@ namespace ReadySetResource.Areas.Apps.Controllers
             }
         }
         #endregion
+
+
 
 
     }

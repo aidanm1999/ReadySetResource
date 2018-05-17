@@ -30,7 +30,6 @@ namespace ReadySetResource.Controllers
         public GetController()
         {
             _context = new ApplicationDbContext();
-
         }
         
 
@@ -73,7 +72,17 @@ namespace ReadySetResource.Controllers
         [AllowAnonymous]
         public ActionResult Solutions()
         {
+            //Checks to see if the user is already logged In, 
+            //If they are, it redirects them to their home screen in dashboard
+            try
+            {
+                var userId = User.Identity.GetUserId();
+                if (userId != null) { RedirectToAction("Index", "Dashboard", new { area = "Apps" }); }
+            } catch {  }
+            
             return View();
+            
+            
         }
         #endregion
 
@@ -84,10 +93,106 @@ namespace ReadySetResource.Controllers
         [AllowAnonymous]
         public ActionResult BusinessInfo(int plan)
         {
-            var model = new Business();
-            if (plan == 1) { ViewBag.Title = "Small Business"; model.Plan = "Small"; }
-            else if (plan == 2) { ViewBag.Title = "Medium Business"; model.Plan = "Medium"; }
-            else if (plan == 3) { ViewBag.Title = "Large Business"; model.Plan = "Large"; }
+            //Checks to see if the user is already logged In, 
+            //If they are, it redirects them to their home screen in dashboard
+            try
+            {
+                var userId = User.Identity.GetUserId();
+                if (userId != null) { RedirectToAction("Index", "Dashboard", new { area = "Apps" }); }
+            }
+            catch { }
+
+            var model = new BusinessSettingsViewModel()
+            {
+                TempCountry = "",
+                TempCardType = "",
+                Business = new Business(),
+            };
+            
+            //Sets the size of the business plan
+            if (plan == 1) { ViewBag.Title = "Small Business"; model.Business.Plan = "Small"; }
+            else if (plan == 2) { ViewBag.Title = "Medium Business"; model.Business.Plan = "Medium"; }
+            else if (plan == 3) { ViewBag.Title = "Large Business"; model.Business.Plan = "Large"; }
+
+
+
+            //Sets all the instances of the select lists 
+            model.BusinessTypeOptions = new List<SelectListItem>();
+            model.CardTypeOptions = new List<SelectListItem>();
+            model.CountryOptions = new List<SelectListItem>();
+            model.ExpiryMonthOptions = new List<SelectListItem>();
+            model.ExpiryYearOptions = new List<SelectListItem>();
+
+
+            //Gets the list of all options and changes them to a SelectedListItem
+
+            //For - BusinessTypeOptions
+            SelectListItem selectListItem = new SelectListItem() { Text = "Service Business", Value = "Service" };
+            model.BusinessTypeOptions.Add(selectListItem);
+            selectListItem = new SelectListItem() { Text = "Merchendising Business", Value = "Merchendising" };
+            model.BusinessTypeOptions.Add(selectListItem);
+            selectListItem = new SelectListItem() { Text = "Manufacturing Business", Value = "Manufacturing" };
+            model.BusinessTypeOptions.Add(selectListItem);
+            selectListItem = new SelectListItem() { Text = "Other", Value = "Other" };
+            model.BusinessTypeOptions.Add(selectListItem);
+
+            //For - CardTypeOptions
+            selectListItem = new SelectListItem() { Text = "Visa", Value = "Visa" };
+            model.CardTypeOptions.Add(selectListItem);
+            selectListItem = new SelectListItem() { Text = "MasterCard", Value = "MasterCard" };
+            model.CardTypeOptions.Add(selectListItem);
+
+
+            //For - CountryOptions
+            selectListItem = new SelectListItem() { Text = "England", Value = "England" };
+            model.CountryOptions.Add(selectListItem);
+            selectListItem = new SelectListItem() { Text = "Scotland", Value = "Scotland" };
+            model.CountryOptions.Add(selectListItem);
+            selectListItem = new SelectListItem() { Text = "Wales", Value = "Wales" };
+            model.CountryOptions.Add(selectListItem);
+            selectListItem = new SelectListItem() { Text = "Northern Ireland", Value = "Northern Ireland" };
+            model.CountryOptions.Add(selectListItem);
+
+
+            //For - ExpiryMonthOptions
+            selectListItem = new SelectListItem() { Text = "Jan", Value = "01" };
+            model.ExpiryMonthOptions.Add(selectListItem);
+            selectListItem = new SelectListItem() { Text = "Feb", Value = "02" };
+            model.ExpiryMonthOptions.Add(selectListItem);
+            selectListItem = new SelectListItem() { Text = "Mar", Value = "03" };
+            model.ExpiryMonthOptions.Add(selectListItem);
+            selectListItem = new SelectListItem() { Text = "Apr", Value = "04" };
+            model.ExpiryMonthOptions.Add(selectListItem);
+            selectListItem = new SelectListItem() { Text = "May", Value = "05" };
+            model.ExpiryMonthOptions.Add(selectListItem);
+            selectListItem = new SelectListItem() { Text = "Jun", Value = "06" };
+            model.ExpiryMonthOptions.Add(selectListItem);
+            selectListItem = new SelectListItem() { Text = "Jul", Value = "07" };
+            model.ExpiryMonthOptions.Add(selectListItem);
+            selectListItem = new SelectListItem() { Text = "Aug", Value = "08" };
+            model.ExpiryMonthOptions.Add(selectListItem);
+            selectListItem = new SelectListItem() { Text = "Sep", Value = "09" };
+            model.ExpiryMonthOptions.Add(selectListItem);
+            selectListItem = new SelectListItem() { Text = "Oct", Value = "10" };
+            model.ExpiryMonthOptions.Add(selectListItem);
+            selectListItem = new SelectListItem() { Text = "Nov", Value = "11" };
+            model.ExpiryMonthOptions.Add(selectListItem);
+            selectListItem = new SelectListItem() { Text = "Dec", Value = "12" };
+            model.ExpiryMonthOptions.Add(selectListItem);
+
+
+
+            int currYear = DateTime.Now.Year % 100;
+
+            //For - ExpiryYearOptions
+            for (int i = currYear; i < currYear + 12; i++)
+            {
+                selectListItem = new SelectListItem() { Text = i.ToString(), Value = i.ToString() };
+                model.ExpiryYearOptions.Add(selectListItem);
+            }
+
+
+
 
 
             return View(model);
@@ -100,29 +205,46 @@ namespace ReadySetResource.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult AddBusiness(Business business)
+        public ActionResult AddBusiness(BusinessSettingsViewModel businessVM)
         {
-            if (business.Plan == "1") { business.Plan = "Small"; }
-            else if (business.Plan == "2") { business.Plan = "Medium"; }
-            else if (business.Plan == "3") { business.Plan = "Large"; }
+            //Checks to see if the user is already logged In, 
+            //If they are, it redirects them to their home screen in dashboard
+            try
+            {
+                var userId = User.Identity.GetUserId();
+                if (userId != null) { RedirectToAction("Index", "Dashboard", new { area = "Apps" }); }
+            }
+            catch { }
 
-            business.StartDate = DateTime.Now;
-            business.EndDate = DateTime.Now;
+            int tempPlan = 0;
+            if(businessVM.Business.Plan == "1" | businessVM.Business.Plan == "2" | businessVM.Business.Plan == "3")
+            {
+                tempPlan = Int32.Parse(businessVM.Business.Plan);
+                if (businessVM.Business.Plan == "1") { businessVM.Business.Plan = "Small"; }
+                else if (businessVM.Business.Plan == "2") { businessVM.Business.Plan = "Medium"; }
+                else if (businessVM.Business.Plan == "3") { businessVM.Business.Plan = "Large"; }
+            }
+            
+
+            businessVM.Business.StartDate = DateTime.Now;
+            businessVM.Business.EndDate = DateTime.Now.AddMonths(1);
+            businessVM.Business.CardType = businessVM.TempCardType;
+            businessVM.Business.Country = businessVM.TempCountry;
 
             if (!ModelState.IsValid)
             {
-                var viewModel = new Business();
-                BusinessInfo(viewModel.Id);
+                
+                BusinessInfo(tempPlan);
             }
 
-            if (business.Id == 0)
+            if (businessVM.Business.Id == 0)
             {
-                _context.Businesses.Add(business);
+                _context.Businesses.Add(businessVM.Business);
             }
 
             _context.SaveChanges();
-            var businessInDb = _context.Businesses.Single(c => c.Id == business.Id);
-            return RedirectToAction("ManagerDetails", new { businessId = business.Id });
+            var businessInDb = _context.Businesses.Single(c => c.Id == businessVM.Business.Id);
+            return RedirectToAction("ManagerDetails", new { businessId = businessVM.Business.Id });
             
         }
         #endregion
@@ -134,6 +256,15 @@ namespace ReadySetResource.Controllers
         [AllowAnonymous]
         public ActionResult ManagerDetails(int businessId)
         {
+            //Checks to see if the user is already logged In, 
+            //If they are, it redirects them to their home screen in dashboard
+            try
+            {
+                var userId = User.Identity.GetUserId();
+                if (userId != null) { RedirectToAction("Index", "Dashboard", new { area = "Apps" }); }
+            }
+            catch { }
+
             var businessInDb = _context.Businesses.SingleOrDefault(c => c.Id == businessId);
 
             if (businessInDb == null)
@@ -143,12 +274,32 @@ namespace ReadySetResource.Controllers
             else
             {
 
-                var viewModel = new SignUpViewModel
+                var signUpVM = new SignUpViewModel
                 {
                     NewBusiness = businessInDb,
                     NewManager = new ApplicationUser(),
+                    TempDate = DateTime.Now.Date.AddYears(-20),
+                    Titles = new List<SelectListItem>(),
                 };
-                return View(viewModel);
+
+                //Gets the list of all options and changes them to a SelectedListItem
+                SelectListItem selectListItem = new SelectListItem() { Text = "Mr", Value = "Mr" };
+                signUpVM.Titles.Add(selectListItem);
+                selectListItem = new SelectListItem() { Text = "Mrs", Value = "Mrs" };
+                signUpVM.Titles.Add(selectListItem);
+                selectListItem = new SelectListItem() { Text = "Miss", Value = "Miss" };
+                signUpVM.Titles.Add(selectListItem);
+                selectListItem = new SelectListItem() { Text = "Sir", Value = "Sir" };
+                signUpVM.Titles.Add(selectListItem);
+                selectListItem = new SelectListItem() { Text = "Dr", Value = "Dr" };
+                signUpVM.Titles.Add(selectListItem);
+                selectListItem = new SelectListItem() { Text = "Lady", Value = "Lady" };
+                signUpVM.Titles.Add(selectListItem);
+                selectListItem = new SelectListItem() { Text = "Lord", Value = "Lord" };
+                signUpVM.Titles.Add(selectListItem);
+
+
+                return View(signUpVM);
             }
 
         }
@@ -162,7 +313,14 @@ namespace ReadySetResource.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> AddManagerOne(SignUpViewModel signUpVM)
         {
-            
+            //Checks to see if the user is already logged In, 
+            //If they are, it redirects them to their home screen in dashboard
+            try
+            {
+                var userId = User.Identity.GetUserId();
+                if (userId != null) { RedirectToAction("Index", "Dashboard", new { area = "Apps" }); }
+            }
+            catch { }
 
             if (signUpVM.NewBusiness == null)
                 return View("Solutions");
@@ -179,6 +337,7 @@ namespace ReadySetResource.Controllers
             signUpVM.NewManager.Raise = 0;
             signUpVM.NewManager.Strikes = 0;
             signUpVM.NewManager.UserName = signUpVM.NewManager.Email; //Username must be set for login purposes
+            signUpVM.NewManager.DateOfBirth = signUpVM.TempDate;
 
             //Email is already set
             //Rest are nullable and unnecessary
@@ -273,6 +432,28 @@ namespace ReadySetResource.Controllers
         [Authorize]
         public ActionResult EmailVerification()
         {
+            //Checks to see if the user is already logged In, 
+            //Then checks to see if they have already verified their email
+            //If they have, they cannot access this, it redirects them to their home screen in dashboard
+            try
+            {
+                var userId = User.Identity.GetUserId();
+                if (userId != null)
+                {
+                    var user = _context.Users.SingleOrDefault(u => u.Id == userId);
+
+                    //This means that they already have verified their email
+                    if(user.EmailConfirmed == true)
+                    {
+                        RedirectToAction("Index", "Dashboard", new { area = "Apps" });
+                    }
+                    
+                }
+
+            }
+            catch { }
+
+
             //Create viewModel with actual verification code
             var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
             var stringChars = new char[8];
@@ -331,6 +512,26 @@ namespace ReadySetResource.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EmailAuthorisation(EmailVerificationViewModel verificationVM)
         {
+            //Checks to see if the user is already logged In, 
+            //Then checks to see if they have already verified their email
+            //If they have, they cannot access this, it redirects them to their home screen in dashboard
+            try
+            {
+                var userId = User.Identity.GetUserId();
+                if (userId != null)
+                {
+                    var user = _context.Users.SingleOrDefault(u => u.Id == userId);
+
+                    //This means that they already have verified their email
+                    if (user.EmailConfirmed == true)
+                    {
+                        RedirectToAction("Index", "Dashboard", new { area = "Apps" });
+                    }
+
+                }
+
+            }
+            catch { }
             //Checks viewmodel to see if the code entered is the same as the code sent
             if (verificationVM.ActualCode == verificationVM.AttemptedCode)
             {

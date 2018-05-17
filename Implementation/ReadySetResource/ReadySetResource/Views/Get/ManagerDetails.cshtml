@@ -14,19 +14,19 @@
     @using (Html.BeginForm("AddManagerOne", "Get"))
     {
         @Html.ValidationSummary(true, "Please fix the following errors.")
-        <div class="form-group">
+        <div class="form-inline" style="padding-bottom:20px;">
             @Html.LabelFor(m => m.NewManager.Title)
-            @Html.TextBoxFor(m => m.NewManager.Title, new { @class = "form-control" })
-            @Html.TextBoxFor(m => m.NewManager.FirstName, new { @class = "form-control" })
-            @Html.TextBoxFor(m => m.NewManager.LastName, new { @class = "form-control" })
+            @Html.DropDownListFor(m => m.NewManager.Title, Model.Titles)
+            @Html.TextBoxFor(m => m.NewManager.FirstName, new { @class = "form-control" , style = "width:150px" , placeholder = "First Name" })
+            @Html.TextBoxFor(m => m.NewManager.LastName, new { @class = "form-control", style = "width:150px", placeholder = "Last Name" })
             @Html.ValidationMessageFor(m => m.NewManager.Title)
             @Html.ValidationMessageFor(m => m.NewManager.FirstName)
             @Html.ValidationMessageFor(m => m.NewManager.LastName)
         </div>
         <div class="form-group">
             @Html.LabelFor(m => m.NewManager.DateOfBirth)
-            @Html.TextBoxFor(m => m.NewManager.DateOfBirth)
-            @Html.ValidationMessageFor(m => m.NewManager.DateOfBirth)
+            @Html.EditorFor(m => m.TempDate, new { date = Model.TempDate })
+            @Html.ValidationMessageFor(m => m.TempDate)
         </div>
         <div class="form-group">
             @Html.LabelFor(m => m.NewManager.Email)

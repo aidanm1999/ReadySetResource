@@ -10,6 +10,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ReadySetResource.Models;
 using ReadySetResource.ViewModels.Account;
+using System.Net;
+using System.Net.Mail;
 
 namespace ReadySetResource.Controllers
 {
@@ -211,16 +213,52 @@ namespace ReadySetResource.Controllers
                 var user = await UserManager.FindByNameAsync(model.Email);
                 if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
                 {
+                    
                     // Don't reveal that the user does not exist or is not confirmed
                     return View("ForgotPasswordConfirmation");
                 }
+                
 
                 // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+
+
+                //Email user the code
+                MailMessage msg = new MailMessage();
+                msg.From = new MailAddress("readysetresource@gmail.com");
+                msg.To.Add(model.Email);
+                msg.Subject = "RSR - Password Reset";
+                msg.IsBodyHtml = true;
+                msg.Body = "<html><p>To reset your password, please click the link below</p>" +
+                "<p><b>" +
+                "<a href=" + callbackUrl + ">Click me!</a>" +
+                "</b></p></html>";
+                SmtpClient client = new SmtpClient();
+                client.UseDefaultCredentials = true;
+                client.Host = "smtp.gmail.com";
+                client.Port = 587;
+                client.EnableSsl = true;
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.Credentials = new NetworkCredential("readysetresource@gmail.com", "Ready1Set2Resource3");
+                client.Timeout = 20000;
+                try
+                {
+                    client.Send(msg);
+                }
+                catch (Exception ex)
+                {
+                    string errorMsg = "Fail Has error " + ex.Message;
+                }
+                finally
+                {
+                    msg.Dispose();
+                }
+
+
+                await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // If we got this far, something failed, redisplay form
@@ -254,7 +292,16 @@ namespace ReadySetResource.Controllers
             {
                 return View(model);
             }
-            var user = await UserManager.FindByNameAsync(model.Email);
+            ApplicationUser user = new ApplicationUser();
+            try
+            {
+                user = await UserManager.FindByNameAsync(model.Email);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            
             if (user == null)
             {
                 // Don't reveal that the user does not exist

@@ -7,7 +7,7 @@
 <h2>Business Settings</h2> 
 @Model.ErrorMessage
 
-<div class="col-md-6 animated fadeInUp" style="animation-duration:2s">
+<div class="col-md-6 animated fadeInUp" style="animation-duration:1s">
     <h3>
         Employee Types
         @Html.ActionLink("Add Type", "AddType", "Dashboard", null, new { @class = "btn btn-default" })
@@ -24,7 +24,7 @@
         </tbody>
     </table>
 </div>
-<div class="col-md-6 animated fadeInUp" style="animation-delay:1s; animation-duration:2s">
+<div class="col-md-6 animated fadeInUp" style="animation-delay:0.5s; animation-duration:1s">
     <h3>
         Employees
         @Html.ActionLink("Add Employee", "AddUser", "Dashboard", null, new { @class = "btn btn-default" })
@@ -44,7 +44,6 @@
                         <td>@employee.BusinessUserType.Name</td>
                     }
                     
-                    <td>@Html.ActionLink("Edit", "EditUser", new { employee.Id })</td>
                 </tr>
             }
         </tbody>
