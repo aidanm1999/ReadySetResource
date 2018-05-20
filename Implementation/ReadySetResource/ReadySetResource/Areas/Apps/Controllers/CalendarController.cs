@@ -428,7 +428,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
             var shiftAlready = false;
 
-            var activeWeekCommenceDate = DateTime.Now;
+            var activeWeekCommenceDate = shiftVM.TempDate;
 
             while (activeWeekCommenceDate.DayOfWeek.ToString() != "Monday")
             {
@@ -483,6 +483,37 @@ namespace ReadySetResource.Areas.Apps.Controllers
                 SelectListItem selectListItem = new SelectListItem() { Text = employeesList[i].FirstName + " " + employeesList[i].LastName, Value = employeesList[i].Id };
                 shiftVM.Employees.Add(selectListItem);
             }
+
+
+            //Checks to see if any of that employee's holidays overlaps with that week
+            //shiftVM. 
+
+            ////6 - Load all holidays from those employees in that business in that week (activeWeekCommenceDate)
+
+            var tempHolidays = _context.Holidays.Where(s => s.StartDateTime >= activeWeekCommenceDate || s.EndDateTime <= activeWeekEndDate).ToList();
+
+
+            shiftVM.Holidays = new List<Holiday>();
+
+            foreach (var holiday in tempHolidays)
+            {
+                if (shiftVM.UserId == holiday.UserId && holiday.Accepted == "Accepted")
+                {
+                    shiftVM.Holidays.Add(holiday);
+                }
+            };
+
+            foreach(var userHoliday in shiftVM.Holidays)
+            {
+                if(userHoliday.StartDateTime <=shift.StartDateTime && userHoliday.EndDateTime >= shift.EndDateTime)
+                {
+                    shiftVM.ErrorMessage = "There is an accepted holiday then.";
+                    return View("Add", shiftVM);
+                }
+            }
+
+
+
 
             shiftVM.User = _context.Users.SingleOrDefault(u => u.Id == shiftVM.UserId);
 

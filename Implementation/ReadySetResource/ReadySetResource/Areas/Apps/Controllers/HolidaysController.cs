@@ -196,7 +196,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
 
 
-            //6 - Load all shifts from those employees in that business in that week (activeWeekCommenceDate)
+            //6 - Load all holidays from those employees in that business in that week (activeWeekCommenceDate)
             var activeWeekEndDate = holidaysVM.ActiveWeekCommenceDate.AddDays(7).AddSeconds(-1);
             var tempHolidays = _context.Holidays.Where(s => s.StartDateTime >= holidaysVM.ActiveWeekCommenceDate && s.EndDateTime <= activeWeekEndDate).ToList();
             foreach (var employee in holidaysVM.Employees)

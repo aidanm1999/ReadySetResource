@@ -39,6 +39,7 @@ namespace ReadySetResource.ViewModels
         public List<Holiday> EmployeesHolidays { get; set; }
         public string ErrorMessage { get; set; }
         public List<Shift> Shifts { get; set; }
+        public List<Holiday> Holidays { get; set; }
         public ApplicationUser User { get; set; }
         
     }
