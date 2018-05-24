@@ -144,6 +144,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
                 ErrorMessage = errorMsg,
                 Employees = _context.Users.Where(e => e.BusinessUserType.BusinessId == currBusiness.Id).ToList(),
                 BusinessUserTypes = _context.BusinessUserTypes.Where(e => e.BusinessId == currBusiness.Id).ToList(),
+                CurrUserType = currBusinessUserType,
             };
             
 
@@ -161,6 +162,31 @@ namespace ReadySetResource.Areas.Apps.Controllers
         public ActionResult UnderConstruction()
         {
             return View();
+        }
+        #endregion
+
+
+
+
+        #region NotAuthorised
+        // GET: Dashboard/Index
+        [HttpGet]
+        [Authorize]
+        public ActionResult NotAuthorised(string Uri)
+        {
+
+            if (Uri == null || Uri == "")
+            {
+                ViewBag.Message = "You are not authorised to use this app";
+            }
+            else
+            {
+                string app = Uri.Split('/').Last();
+                ViewBag.Message = "You are not allowed to use the " + app + " app.";
+            }
+
+            
+            return View("NotAuthorised");
         }
         #endregion
 
@@ -465,12 +491,12 @@ namespace ReadySetResource.Areas.Apps.Controllers
                 if (changesMade == false)
                 {
                     settingsVM.ErrorMessage = "No changes were made";
-                    return View("Edit", settingsVM);
+                    return View("Settings", settingsVM);
                 }
                 else
                 {
                     settingsVM.ErrorMessage = "An error occured.";
-                    return View("Edit", settingsVM);
+                    return View("Settings", settingsVM);
                 }
 
             }
@@ -621,8 +647,8 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
 
 
-        #region AddTypePost
-        // POST: Calendar/AddTypePost
+        #region AddUserPost
+        // POST: Calendar/AddUserPost
         [HttpPost]
         [Authorize]
         public async Task<ActionResult> AddUserPost(BusinessUserViewModel userVM)
@@ -659,16 +685,28 @@ namespace ReadySetResource.Areas.Apps.Controllers
                 userVM.BusinessUser.DateOfBirth = DateTime.Now;
 
                 //Sets a temporary password
-                var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+                var charsLettersUpper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                var charsLettersLower = "abcdefghijklmnopqrstuvwxyz";
+                var charsNums = "0123456789";
                 var stringChars = new char[14];
                 var random = new Random();
 
-                for (int i = 0; i < stringChars.Length; i++)
+                for (int i = 0; i <= 6 ; i++)
                 {
-                    stringChars[i] = chars[random.Next(chars.Length)];
-                }
+                    stringChars[i] = charsLettersUpper[random.Next(charsLettersUpper.Length)];
+                };
 
-                userVM.TempPassword = new String(stringChars); ;
+                for (int i = 7; i <= 12; i++)
+                {
+                    stringChars[i] = charsLettersLower[random.Next(charsLettersLower.Length)];
+                };
+
+                for (int i = 13; i < 14; i++)
+                {
+                    stringChars[i] = charsNums[random.Next(charsNums.Length)];
+                };
+
+                userVM.TempPassword = new String(stringChars);
 
 
                 //Creates user with default values and saves to db (Email confirmed = false)
@@ -681,6 +719,12 @@ namespace ReadySetResource.Areas.Apps.Controllers
                         await SignInManager.SignInAsync(userVM.BusinessUser, isPersistent: false, rememberBrowser: false);
 
                     }
+                    else
+                    {
+                        string errorMsg = "Fields are missing or in wrong format";
+                        return RedirectToAction("AddUser","Dashboard",new { errorMsg });
+                    }
+
                 }
                 catch (Exception ex)
                 {

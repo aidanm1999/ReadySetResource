@@ -234,6 +234,8 @@
     <Compile Include="Areas\Apps\Controllers\HolidaysController.cs" />
     <Compile Include="Areas\Apps\Controllers\CalendarController.cs" />
     <Compile Include="Areas\Apps\AppsAreaRegistration.cs" />
+    <Compile Include="Areas\Apps\ViewModels\Calendar\MyChartsViewModel.cs" />
+    <Compile Include="Areas\Apps\ViewModels\Calendar\ChartsViewModel.cs" />
     <Compile Include="Areas\Apps\ViewModels\Dashboard\BusinessSettingsViewModel.cs" />
     <Compile Include="Areas\Apps\ViewModels\Dashboard\BusinessUserTypeViewModel.cs" />
     <Compile Include="Areas\Apps\ViewModels\Dashboard\BusinessUserViewModel.cs" />
@@ -412,12 +414,16 @@
     <Content Include="Areas\Apps\Views\Dashboard\AddType.cshtml" />
     <Content Include="Areas\Apps\Views\Dashboard\AddUser.cshtml" />
     <Content Include="Areas\Apps\Views\Dashboard\EditType.cshtml" />
+    <Content Include="Areas\Apps\Views\Dashboard\NotAuthorised.cshtml" />
+    <Content Include="Areas\Apps\Views\Calendar\MyCharts.cshtml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Chart.js" />
+    <Content Include="Scripts\Chart.min.js" />
     <Content Include="Scripts\datepicker.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />

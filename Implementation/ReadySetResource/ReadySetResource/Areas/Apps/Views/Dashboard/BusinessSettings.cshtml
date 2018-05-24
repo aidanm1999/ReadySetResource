@@ -10,7 +10,11 @@
 <div class="col-md-6 animated fadeInUp" style="animation-duration:1s">
     <h3>
         Employee Types
-        @Html.ActionLink("Add Type", "AddType", "Dashboard", null, new { @class = "btn btn-default" })
+        @if(Model.CurrUserType.Administrator == "E")
+        {
+            @Html.ActionLink("Add Type", "AddType", "Dashboard", null, new { @class = "btn btn-default" })
+        }
+        
     </h3>
     <table id="rota">
         <tbody>
@@ -18,7 +22,10 @@
             {
                 <tr>
                     <td>@type.Name</td>
-                    <td>@Html.ActionLink("Edit", "EditType", new { type = type.Id })</td>
+                    @if (Model.CurrUserType.Administrator == "E")
+                    {
+                        <td>@Html.ActionLink("Edit", "EditType", new { type = type.Id })</td>
+                    }
                 </tr>
             }
         </tbody>
@@ -27,7 +34,10 @@
 <div class="col-md-6 animated fadeInUp" style="animation-delay:0.5s; animation-duration:1s">
     <h3>
         Employees
-        @Html.ActionLink("Add Employee", "AddUser", "Dashboard", null, new { @class = "btn btn-default" })
+        @if (Model.CurrUserType.Administrator == "E")
+        {
+            @Html.ActionLink("Add Employee", "AddUser", "Dashboard", null, new { @class = "btn btn-default" })
+        }
     </h3>
     <table id="rota">
         <tbody>

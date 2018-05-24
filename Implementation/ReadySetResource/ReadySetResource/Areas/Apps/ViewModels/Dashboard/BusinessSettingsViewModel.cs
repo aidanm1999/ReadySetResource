@@ -10,6 +10,7 @@ namespace ReadySetResource.Areas.Apps.ViewModels.Dashboard
     public class BusinessSettingsViewModel
     {
         public string ErrorMessage { get; set; }
+        public BusinessUserType CurrUserType { get; set; }
         public List<ApplicationUser> Employees { get; set; }
         public List<BusinessUserType> BusinessUserTypes { get; set; }
     }

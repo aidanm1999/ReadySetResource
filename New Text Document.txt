@@ -1,0 +1,16 @@
+            MyChartsViewModel chartsVM = new MyChartsViewModel();
+
+            var userTypesInBusiness = _context.BusinessUserTypes.Where(t => t.BusinessId == user.BusinessUserType.BusinessId).ToList();
+            var usersInBusiness = new List<ApplicationUser>();
+            foreach (var type in userTypesInBusiness)
+            {
+                usersInBusiness = _context.Users.Where(u => u.BusinessUserTypeId == type.Id).ToList();
+
+                foreach (var currUser in usersInBusiness)
+                {
+                    chartsVM.DoughnutUserNames.Add(currUser.FirstName + " " + currUser.LastName);
+                }
+            }
+
+            
+            return chartsVM;

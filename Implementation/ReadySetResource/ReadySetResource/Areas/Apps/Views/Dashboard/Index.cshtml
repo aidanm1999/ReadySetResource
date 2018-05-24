@@ -12,42 +12,60 @@
         <title>Dashboard</title>
     </head>
     
-    <body id="Apps" >
-        <h2 style="text-align:center; " >Welcome, @Model.FirstName @Model.LastName</h2>
+    <body id="Apps">
+        <h2 style="text-align:center; ">Welcome, @Model.FirstName @Model.LastName</h2>
         <div class="row" style="text-align:center">
-            <div class="col-md-4 animated fadeIn" style="animation-delay:0.2s" id="Calendar">
-                <a href="@Url.Action("Index", "Calendar")">
-                    <img src="~/Content/Images/home/Calendar.png" style=" padding-top:10px; padding-bottom:40px; width: 170px; display:block; margin-left:auto; margin-right:auto;">
-                </a>
-            </div>
-            <div class="col-md-4 animated fadeIn" style="animation-delay:0.4s" id="Ideas">
-                <a href="@Url.Action("Index", "Holidays")">
-                    <img src="~/Content/Images/home/holidays.png" style="padding-top:10px; padding-bottom:40px; width: 160px; display:block; margin-left:auto; margin-right:auto;">
-                </a>
-            </div>
-            
-            <div class="col-md-4 animated fadeIn" style="animation-delay:0.6s" id="Meetings">
-                <a href="@Url.Action("UnderConstruction")">
-                    <img src="~/Content/Images/home/meetings.png" style=" padding-top:12px; padding-bottom:40px; width:170px; display:block; margin-left:auto; margin-right:auto;">
-                </a>
-            </div>
+            @if (Model.BusinessUserType.Calendar != "N")
+            {
+                <div class="col-md-4 animated fadeIn" style="animation-delay:0.2s" id="Calendar">
+                    <a href="@Url.Action("Index", "Calendar")">
+                        <img src="~/Content/Images/home/Calendar.png" style=" padding-top:10px; padding-bottom:40px; width: 170px; display:block; margin-left:auto; margin-right:auto;">
+                    </a>
+                </div>
+            }
+
+            @if (Model.BusinessUserType.Holidays != "N")
+            {
+                <div class="col-md-4 animated fadeIn" style="animation-delay:0.4s" id="Ideas">
+                    <a href="@Url.Action("Index", "Holidays")">
+                        <img src="~/Content/Images/home/holidays.png" style="padding-top:10px; padding-bottom:40px; width: 160px; display:block; margin-left:auto; margin-right:auto;">
+                    </a>
+                </div>
+            }
+            @if (Model.BusinessUserType.Meetings != "N")
+            {
+                <div class="col-md-4 animated fadeIn" style="animation-delay:0.6s" id="Meetings">
+                    <a href="@Url.Action("UnderConstruction")">
+                        <img src="~/Content/Images/home/meetings.png" style=" padding-top:12px; padding-bottom:40px; width:170px; display:block; margin-left:auto; margin-right:auto;">
+                    </a>
+                </div>
+            }
         </div>
         <div class="row" style="text-align:center">
-            <div class="col-md-4 animated fadeIn" style="animation-delay:0.8s" id="Messages">
-                <a href="@Url.Action("UnderConstruction")">
-                    <img src="~/Content/Images/home/messages.png" style=" padding-top:40px; padding-bottom:40px; width:auto; display:block; margin-left:auto; margin-right:auto;">
-                </a>
-            </div>
-            <div class="col-md-4 animated fadeIn" style="animation-delay:1.0s" id="Store">
-                <a href="@Url.Action("UnderConstruction")">
-                    <img src="~/Content/Images/home/store.png" style=" padding-top:18px; padding-bottom:40px;width:auto; display:block; margin-left:auto; margin-right:auto;">
-                </a>
-            </div>
-            <div class="col-md-4 animated fadeIn" style="animation-delay:1.2s" id="Updates">
-                <a href="@Url.Action("UnderConstruction")">
-                    <img src="~/Content/Images/home/update.png" style=" padding-top:22px; padding-bottom:40px;width:auto; display:block; margin-left:auto; margin-right:auto;">
-                </a>
-            </div>
+            @if (Model.BusinessUserType.Messenger != "N")
+            {
+                <div class="col-md-4 animated fadeIn" style="animation-delay:0.8s" id="Messages">
+                    <a href="@Url.Action("UnderConstruction")">
+                        <img src="~/Content/Images/home/messages.png" style=" padding-top:40px; padding-bottom:40px; width:auto; display:block; margin-left:auto; margin-right:auto;">
+                    </a>
+                </div>
+            }
+            @if (Model.BusinessUserType.Store != "N")
+            {
+                <div class="col-md-4 animated fadeIn" style="animation-delay:1.0s" id="Store">
+                    <a href="@Url.Action("UnderConstruction")">
+                        <img src="~/Content/Images/home/store.png" style=" padding-top:18px; padding-bottom:40px;width:auto; display:block; margin-left:auto; margin-right:auto;">
+                    </a>
+                </div>
+            }
+            @if (Model.BusinessUserType.Updates != "N")
+            {
+                <div class="col-md-4 animated fadeIn" style="animation-delay:1.2s" id="Updates">
+                    <a href="@Url.Action("UnderConstruction")">
+                        <img src="~/Content/Images/home/update.png" style=" padding-top:22px; padding-bottom:40px;width:auto; display:block; margin-left:auto; margin-right:auto;">
+                    </a>
+                </div>
+            }
         </div>
     </body>
 </html>

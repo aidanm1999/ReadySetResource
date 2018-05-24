@@ -1,4 +1,4 @@
-﻿#region Usings
+﻿#region Usages
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,9 @@ using System.IO;
 using MigraDoc.DocumentObjectModel;
 using MigraDoc.DocumentObjectModel.Tables;
 using MigraDoc.DocumentObjectModel.Shapes;
-using MigraDoc.Rendering;
+using MigraDoc.Rendering; 
+using ReadySetResource.Areas.Apps.ViewModels.Calendar;
+using Newtonsoft.Json;
 #endregion
 
 
@@ -77,10 +79,15 @@ namespace ReadySetResource.Areas.Apps.Controllers
                 EndHour = shiftDate.Date.Hour.ToString(),
                 EndMinute = shiftDate.Date.Minute.ToString(),
                 Employees = new List<SelectListItem>(),
-
+                User = currBusinessUser,
             };
 
-            
+            if(currBusinessUserType.Calendar != "E")
+            {
+                return RedirectToAction("NotAuthorised", "Dashboard", new { Uri = "/Modify Calendar" });
+            }
+
+
 
             //Gets the list of all employees and changes them to a SelectedListItem
             var employeesList = _context.Users.Where(e => e.BusinessUserType.BusinessId == currBusinessId).ToList().OrderBy(e => e.Id).ToList();
@@ -138,6 +145,11 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
             };
 
+            if (currBusinessUserType.Calendar != "E")
+            {
+                return RedirectToAction("NotAuthorised", "Dashboard", new { Uri = "/Modify Calendar" });
+            }
+
 
             //2 -Gets the list of all employees and changes them to a SelectedListItem
             var employeesList = _context.Users.Where(e => e.BusinessUserType.BusinessId == currBusinessId).ToList().OrderBy(e => e.Id).ToList();
@@ -156,6 +168,98 @@ namespace ReadySetResource.Areas.Apps.Controllers
         }
         #endregion
 
+
+        #region MyCharts (View)
+        // GET: Apps/Calendar/MyCharts
+        [HttpGet]
+        [Authorize]
+        public ActionResult MyCharts(string user, DateTime? week)
+        {
+            //This method gets the personal charts of the individual
+            //If a user is passed in, and the user is not the same user as the current user, 
+            //This means that the current user is trying to access someone else's account and 
+            //Needs to be checked if they have the correct authority
+
+
+            //Gets the week that the charts will display
+            DateTime weekBeginDate;
+            if (week != null) { weekBeginDate = week.Value; }
+            else { weekBeginDate = DateTime.Now.Date; }
+
+
+
+            //Instanciates a new charts view model
+            MyChartsViewModel chartsVM = new MyChartsViewModel();
+
+
+            //1 - Get BusinessUser from current user and to check for authentication
+            var currUserId = User.Identity.GetUserId();
+            var currBusinessUser = _context.Users.SingleOrDefault(c => c.Id == currUserId);
+            var currBusinessUserType = _context.BusinessUserTypes.SingleOrDefault(t => t.Id == currBusinessUser.BusinessUserTypeId);
+            currBusinessUser.BusinessUserType = currBusinessUserType;
+            var userCharted = _context.Users.SingleOrDefault(c => c.Id == user);
+
+
+            //If user is null, the current user's chart will be shown
+            if (userCharted == null)
+            {
+                chartsVM = PopulateUserCharts(currBusinessUser, weekBeginDate);
+            }
+            //This means that the person is looking at their own details and don't need to be authorised
+            else if (user == currBusinessUser.Id)
+            {
+                chartsVM = PopulateUserCharts(currBusinessUser, weekBeginDate);
+            }
+            //Checks to see if both people aren't in the same business 
+            else 
+            {
+                var userChartedUserType = _context.BusinessUserTypes.SingleOrDefault(t => t.Id == userCharted.BusinessUserTypeId);
+                userCharted.BusinessUserType = userChartedUserType;
+
+
+                if (currBusinessUser.BusinessUserType.BusinessId != userCharted.BusinessUserType.BusinessId)
+                {
+                    return RedirectToAction("Index", new { week = weekBeginDate });
+                }
+                //Both people are in the same business. Authorises the user to see if they are able to view others details.
+                else
+                {
+                    if (currBusinessUser.BusinessUserType.Calendar == "E")
+                    {
+                        chartsVM = PopulateUserCharts(userCharted, weekBeginDate);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", new { week = weekBeginDate });
+
+                    }
+                }
+            }
+
+            chartsVM.LineAverageHoursJson = JsonConvert.SerializeObject(chartsVM.LineAverageHours);
+            chartsVM.LineUserHoursJson = JsonConvert.SerializeObject(chartsVM.LineUserHours);
+            chartsVM.DoughnutHoursWorkedJson = JsonConvert.SerializeObject(chartsVM.DoughnutHoursWorked);
+            chartsVM.DoughnutUserNamesJson = JsonConvert.SerializeObject(chartsVM.DoughnutUserNames);
+
+            chartsVM.DoughnutUserNamesJson = "['Aidan Marshall']";
+
+
+            //1 - Start view with the ViewModel (chartsVM) 
+            return View(chartsVM);
+        }
+        #endregion
+
+
+        #region Charts (View)
+        // GET: Apps/Calendar/Charts
+        [HttpGet]
+        [Authorize]
+        public ActionResult Charts(string user, DateTime? week)
+        {
+
+            return View();
+        }
+        #endregion
 
 
 
@@ -179,7 +283,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
             var CalendarVM = new CalendarViewModel
             {
                 Employees = _context.Users.Where(e => e.BusinessUserType.BusinessId == currBusiness.Id).ToList(),
-                CurrentUserType = currBusinessUserType,
+                CurrentUser = currBusinessUser,
             };
 
 
@@ -216,7 +320,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
             //If not it will return an empty array
             if (CalendarVM.Shifts != null)
             {
-                //7 - Sorted all the employees in ascending order from Last name
+                //7 - Sorted all the employees in ascending order from Id
                 CalendarVM.Employees = CalendarVM.Employees.OrderBy(e => e.Id).ToList();
 
 
@@ -252,7 +356,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
                             //If the code breaks that means that it is the last instance of the list
                             string nextElemUserId;
                             try { nextElemUserId = copyOfShifts[copyOfShifts.IndexOf(shift) + 1].UserId; }
-                            catch (Exception ex) { nextElemUserId = "LAST"; }
+                            catch { nextElemUserId = "LAST"; }
 
 
                             //Sees if the shift is the first elemet in the list
@@ -411,6 +515,151 @@ namespace ReadySetResource.Areas.Apps.Controllers
             return CalendarVM;
         }
         #endregion
+
+        
+
+        #region Populate MyCharts
+        private MyChartsViewModel PopulateUserCharts(ApplicationUser user, DateTime weekBeginDate)
+        {
+            MyChartsViewModel chartsVM = new MyChartsViewModel();
+
+            #region Populates Doughnut Chart
+
+            chartsVM = PopulateDoughnutChart(user, weekBeginDate, chartsVM);
+
+            #endregion
+
+            #region Populates Up or Down
+            //To populate Up or Down, we need to load the current user's total hours shifts 
+            //As we already have this weeks's. To do this we are going to Instanciate a new
+            //MyChartsViewModel, call the Populate Doughnut Chart method for that var
+            //and extract the total hours of that particular user
+
+            var lastWeekBeginDate = weekBeginDate.AddDays(-7);
+            MyChartsViewModel lastWeekChartsVM = new MyChartsViewModel();
+            lastWeekChartsVM = PopulateDoughnutChart(user, lastWeekBeginDate, lastWeekChartsVM);
+
+
+
+            //Loads the up or down section from the user
+            var index = lastWeekChartsVM.DoughnutUserNames.IndexOf(user.FirstName + " " + user.LastName);
+
+            chartsVM.UpOrDownLastHours = lastWeekChartsVM.DoughnutHoursWorked[index];
+            chartsVM.UpOrDownThisHours = chartsVM.DoughnutHoursWorked[index];
+
+            chartsVM.UpOrDownHours = chartsVM.UpOrDownThisHours - chartsVM.UpOrDownLastHours;
+            
+
+
+            #endregion
+            
+
+            return chartsVM;
+        }
+
+        #region Populates Doughnut Chart
+        private MyChartsViewModel PopulateDoughnutChart(ApplicationUser user, DateTime weekBeginDate, MyChartsViewModel chartsVM)
+        {
+            List<string> daysOfWeek = new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
+
+            #region Populates chartVM.DoughnutUserNames
+            //Gets the user types of that business
+            var userTypesInBusiness = _context.BusinessUserTypes.Where(t => t.BusinessId == user.BusinessUserType.BusinessId).ToList();
+            // this var will be a temporary one to store the users in that type
+            var usersInDb = new List<ApplicationUser>();
+            // this var will sort all the users when gotten
+            var usersInBusiness = new List<ApplicationUser>();
+
+            foreach (var type in userTypesInBusiness)
+            {
+                usersInDb = _context.Users.Where(u => u.BusinessUserTypeId == type.Id).ToList();
+
+                foreach (var currUser in usersInDb)
+                {
+                    usersInBusiness.Add(currUser);
+                }
+            }
+
+            usersInBusiness = usersInBusiness.OrderBy(e => e.Id).ToList();
+
+
+            foreach (var currUser in usersInBusiness)
+            {
+                chartsVM.DoughnutUserNames.Add(currUser.FirstName + " " + currUser.LastName);
+            }
+            #endregion
+
+            #region Populates chartVM.DoughnutHoursWorked
+
+            //Each user is already in order so the array does not need ordered
+            //In the foreach statement every user gets all their shifts loaded
+            //The difference is found between the start date and the end date of each shift
+            //And that is added to a counter which is finally added to 
+            var weekEndDate = weekBeginDate.AddDays(7);
+            
+
+            var totalHours = new List<double>()
+            {
+                0,0,0,0,0,0,0
+            };
+
+            foreach (var currUser in usersInBusiness)
+            {
+                double hourCounter = 0;
+                //Where Stmt 1 = this user ----- Where Stmt 2 = this week
+                var userShifts = _context.Shifts.Where(s => s.UserId == currUser.Id).Where(s => s.StartDateTime >= weekBeginDate && s.EndDateTime <= weekEndDate).OrderBy(s => s.StartDateTime).ToList();
+                
+
+                foreach (var currShift in userShifts)
+                {
+                    
+                    hourCounter += (currShift.EndDateTime - currShift.StartDateTime).TotalHours;
+
+                    int dayOfWeekIndex = daysOfWeek.IndexOf(currShift.StartDateTime.DayOfWeek.ToString());
+
+                    //Populates the Line chart with all the hours of each user then will divide by number of users to get the average
+
+
+                    totalHours[dayOfWeekIndex] += (currShift.EndDateTime - currShift.StartDateTime).TotalHours;
+
+                    if (currUser.Id == user.Id)
+                    {
+                        chartsVM.LineUserHours[dayOfWeekIndex] = (currShift.EndDateTime - currShift.StartDateTime).TotalHours;
+                    }
+                    
+                }
+                chartsVM.DoughnutHoursWorked.Add(hourCounter);
+            }
+
+
+            //Sets the average hours
+            for (int i = 0; i < 7; i++)
+            {
+                totalHours[i] = Convert.ToDouble(totalHours[i]) / usersInBusiness.Count();
+            }
+
+            chartsVM.LineAverageHours = totalHours;
+
+            #endregion
+
+
+            return chartsVM;
+        }
+
+        #endregion
+
+
+
+        #endregion
+
+
+        #region Copy To Next Week
+        public ActionResult CopyToNextWeek (DateTime week)
+        {
+            return RedirectToAction("Index", new { week });
+        }
+        #endregion
+
 
 
 

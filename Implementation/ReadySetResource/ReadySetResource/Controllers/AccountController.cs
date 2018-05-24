@@ -297,7 +297,7 @@ namespace ReadySetResource.Controllers
             {
                 user = await UserManager.FindByNameAsync(model.Email);
             }
-            catch (Exception ex)
+            catch
             {
 
             }

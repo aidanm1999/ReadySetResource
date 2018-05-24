@@ -9,7 +9,7 @@ namespace ReadySetResource.ViewModels
 {
     public class CalendarViewModel
     {
-        public BusinessUserType CurrentUserType  { get; set; }
+        public ApplicationUser CurrentUser  { get; set; }
         public List<ApplicationUser> Employees { get; set; }
         public List<Shift> Shifts { get; set; }
         public DateTime ActiveWeekCommenceDate { get; set; }

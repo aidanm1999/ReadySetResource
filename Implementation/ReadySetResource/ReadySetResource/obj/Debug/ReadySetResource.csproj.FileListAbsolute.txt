@@ -2,13 +2,13 @@ C:\Users\Aidan Marshall\Documents\Projects\ReadySetResource\Implementation\Ready
 C:\Users\Aidan Marshall\Documents\Projects\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\roslyn\Microsoft.CodeAnalysis.dll
 C:\Users\Aidan Marshall\Documents\Projects\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
 C:\Users\Aidan Marshall\Documents\Projects\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
-C:\Users\Aidan Marshall\Documents\Projects\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\roslyn\VBCSCompiler.exe
 C:\Users\Aidan Marshall\Documents\Projects\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\roslyn\System.Collections.Immutable.dll
 C:\Users\Aidan Marshall\Documents\Projects\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\roslyn\System.IO.FileSystem.dll
 C:\Users\Aidan Marshall\Documents\Projects\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\roslyn\System.IO.FileSystem.Primitives.dll
 C:\Users\Aidan Marshall\Documents\Projects\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\roslyn\System.Reflection.Metadata.dll
 C:\Users\Aidan Marshall\Documents\Projects\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\roslyn\System.Security.Cryptography.Primitives.dll
 C:\Users\Aidan Marshall\Documents\Projects\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\roslyn\System.ValueTuple.dll
+C:\Users\Aidan Marshall\Documents\Projects\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\roslyn\VBCSCompiler.exe
 C:\Users\Aidan Marshall\Documents\Projects\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\ApplicationInsights.config
 C:\Users\Aidan Marshall\Documents\Projects\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\ReadySetResource.dll.config
 C:\Users\Aidan Marshall\Documents\Projects\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\ReadySetResource.dll

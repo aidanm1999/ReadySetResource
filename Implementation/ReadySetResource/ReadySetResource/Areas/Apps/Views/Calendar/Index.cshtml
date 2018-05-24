@@ -8,21 +8,27 @@
 
 
 
-@if (Model.CurrentUserType.Calendar == "E")
+@if (Model.CurrentUser.BusinessUserType.Calendar == "E")
 {
-    <h2>
-        Calendar - For Week @Model.ActiveWeekCommenceDate.Day/@Model.ActiveWeekCommenceDate.Month to @Model.ActiveWeekCommenceDate.AddDays(6).Day/@Model.ActiveWeekCommenceDate.AddDays(6).Month
-        @Html.ActionLink("Add Shift", "Add", "Calendar", null, new { @class = "btn btn-default" })
-        @Html.ActionLink("Print", "PDF", "Calendar", new { week = Model.ActiveWeekCommenceDate }, new { @class = "btn btn-default" })
-    </h2>
+<h2>
+    Calendar - For Week @Model.ActiveWeekCommenceDate.Day/@Model.ActiveWeekCommenceDate.Month to @Model.ActiveWeekCommenceDate.AddDays(6).Day/@Model.ActiveWeekCommenceDate.AddDays(6).Month
+    @Html.ActionLink("Add Shift", "Add", "Calendar", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Print", "PDF", "Calendar", new { week = Model.ActiveWeekCommenceDate }, new { @class = "btn btn-default" })
+    @Html.ActionLink("Copy To Next Week", "CopyToNextWeek", "Calendar", new { week = Model.ActiveWeekCommenceDate.AddDays(7) }, new { @class = "btn btn-default", title = "This button copies all shifts from this week to the next week and deletes all shifts on that week!" })
+    
+</h2>
 }
-else
+else if (Model.CurrentUser.BusinessUserType.Calendar == "V")
 {
     <h2>
         Calendar - For Week @Model.ActiveWeekCommenceDate.Day/@Model.ActiveWeekCommenceDate.Month to @Model.ActiveWeekCommenceDate.AddDays(6).Day/@Model.ActiveWeekCommenceDate.AddDays(6).Month
         @Html.ActionLink("Print", "PDF", "Calendar", null, new { @class = "btn btn-default" })
     </h2>
 
+}
+else
+{
+    Response.Redirect(Url.Action("NotAuthorised", "Dashboard", new { Uri = HttpContext.Current.Request.Url.AbsolutePath }));
 }
 
 
@@ -83,7 +89,28 @@ else
             @foreach (var employee in Model.Employees)
             {
                 <tr>
-                    <td align="left" style=" white-space: nowrap;table-layout:fixed;">@employee.FirstName @employee.LastName</td>
+                    @if (Model.CurrentUser.BusinessUserType.Calendar == "V")
+                    {
+                        if(employee.Id == Model.CurrentUser.Id)
+                        {
+                            
+                            <td align="left" style=" white-space: nowrap;table-layout:fixed;">
+                                <a href="@Url.Action("MyCharts", "Calendar", new { week = Model.ActiveWeekCommenceDate })">
+                                    @employee.FirstName @employee.LastName
+                                </a>
+                            </td>
+
+                        }
+
+                    }
+                    else
+                    {
+                        <td align="left" style=" white-space: nowrap;table-layout:fixed;">
+                                <a href="@Url.Action("MyCharts", "Calendar", new { user = employee.Id, week = Model.ActiveWeekCommenceDate })">
+                                    @employee.FirstName @employee.LastName
+                                </a>
+                            </td>
+                    }
 
                     @{
                         var empShifts = Model.Shifts;
@@ -97,7 +124,7 @@ else
 
                     @foreach (var empShift in empShifts)
                     {
-                        if (Model.CurrentUserType.Calendar == "V")
+                        if (Model.CurrentUser.BusinessUserType.Calendar == "V")
                         {
                             if (empShift == null)
                             {
@@ -135,7 +162,7 @@ else
                                 </td>
                             }
                         }
-                        else if (Model.CurrentUserType.Calendar == "E")
+                        else if (Model.CurrentUser.BusinessUserType.Calendar == "E")
                         {
                             if (empShift == null)
                             {
