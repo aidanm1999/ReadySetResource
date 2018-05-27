@@ -701,21 +701,47 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
             shiftVM.Shifts = _context.Shifts.Where(s => s.StartDateTime >= activeWeekCommenceDate && s.EndDateTime <= activeWeekEndDate).ToList();
 
+            shiftVM.Employees = new List<SelectListItem>();
 
-            shift.StartDateTime = shift.StartDateTime.AddHours(Convert.ToDouble(shiftVM.StartHour));
-            shift.StartDateTime = shift.StartDateTime.AddMinutes(Convert.ToDouble(shiftVM.StartMinute));
+            var currUserId = User.Identity.GetUserId();
+            var currBusinessUser = _context.Users.SingleOrDefault(c => c.Id == currUserId);
+            var currBusinessUserTypeId = currBusinessUser.BusinessUserTypeId;
+            var currBusinessUserType = _context.BusinessUserTypes.SingleOrDefault(c => c.Id == currBusinessUserTypeId);
+            var currBusinessId = currBusinessUserType.BusinessId;
 
-            shift.StartDateTime = shift.StartDateTime.AddDays(shiftVM.TempDate.Day - 1);
-            shift.StartDateTime = shift.StartDateTime.AddMonths(shiftVM.TempDate.Month - 1);
-            shift.StartDateTime = shift.StartDateTime.AddYears(shiftVM.TempDate.Year - 1);
+            //Gets the list of all employees and changes them to a SelectedListItem
+            var employeesList = _context.Users.Where(e => e.BusinessUserType.BusinessId == currBusinessId).ToList().OrderBy(e => e.Id).ToList();
+
+            for (int i = 0; i < employeesList.Count; i++)
+            {
+                SelectListItem selectListItem = new SelectListItem() { Text = employeesList[i].FirstName + " " + employeesList[i].LastName, Value = employeesList[i].Id };
+                shiftVM.Employees.Add(selectListItem);
+            }
 
 
-            shift.EndDateTime = shift.EndDateTime.AddHours(Convert.ToDouble(shiftVM.EndHour));
-            shift.EndDateTime = shift.EndDateTime.AddMinutes(Convert.ToDouble(shiftVM.EndMinute));
 
-            shift.EndDateTime = shift.EndDateTime.AddDays(shiftVM.TempDate.Day - 1);
-            shift.EndDateTime = shift.EndDateTime.AddMonths(shiftVM.TempDate.Month - 1);
-            shift.EndDateTime = shift.EndDateTime.AddYears(shiftVM.TempDate.Year - 1);
+            try
+            {
+                shift.StartDateTime = shift.StartDateTime.AddHours(Convert.ToDouble(shiftVM.StartHour));
+                shift.StartDateTime = shift.StartDateTime.AddMinutes(Convert.ToDouble(shiftVM.StartMinute));
+
+                shift.StartDateTime = shift.StartDateTime.AddDays(shiftVM.TempDate.Day - 1);
+                shift.StartDateTime = shift.StartDateTime.AddMonths(shiftVM.TempDate.Month - 1);
+                shift.StartDateTime = shift.StartDateTime.AddYears(shiftVM.TempDate.Year - 1);
+
+
+                shift.EndDateTime = shift.EndDateTime.AddHours(Convert.ToDouble(shiftVM.EndHour));
+                shift.EndDateTime = shift.EndDateTime.AddMinutes(Convert.ToDouble(shiftVM.EndMinute));
+
+                shift.EndDateTime = shift.EndDateTime.AddDays(shiftVM.TempDate.Day - 1);
+                shift.EndDateTime = shift.EndDateTime.AddMonths(shiftVM.TempDate.Month - 1);
+                shift.EndDateTime = shift.EndDateTime.AddYears(shiftVM.TempDate.Year - 1);
+            }
+            catch
+            {
+                shiftVM.ErrorMessage = "Invalid input";
+                return View("Add", shiftVM);
+            }
 
             int shiftCount = shiftVM.Shifts.Count;
 
@@ -729,22 +755,9 @@ namespace ReadySetResource.Areas.Apps.Controllers
             }
 
 
-            var currUserId = User.Identity.GetUserId();
-            var currBusinessUser = _context.Users.SingleOrDefault(c => c.Id == currUserId);
-            var currBusinessUserTypeId = currBusinessUser.BusinessUserTypeId;
-            var currBusinessUserType = _context.BusinessUserTypes.SingleOrDefault(c => c.Id == currBusinessUserTypeId);
-            var currBusinessId = currBusinessUserType.BusinessId;
+            
 
-            shiftVM.Employees = new List<SelectListItem>();
-
-            //Gets the list of all employees and changes them to a SelectedListItem
-            var employeesList = _context.Users.Where(e => e.BusinessUserType.BusinessId == currBusinessId).ToList().OrderBy(e => e.Id).ToList();
-
-            for (int i = 0; i < employeesList.Count; i++)
-            {
-                SelectListItem selectListItem = new SelectListItem() { Text = employeesList[i].FirstName + " " + employeesList[i].LastName, Value = employeesList[i].Id };
-                shiftVM.Employees.Add(selectListItem);
-            }
+            
 
 
             //Checks to see if any of that employee's holidays overlaps with that week
