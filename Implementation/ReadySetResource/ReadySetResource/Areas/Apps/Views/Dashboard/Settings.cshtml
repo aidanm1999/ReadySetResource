@@ -80,6 +80,7 @@
         <div>
             To change your password, please log out, and click 'Forgot password?' when logging in.
         </div>
+        
 
         @Html.HiddenFor(m => m.User.AccessFailedCount)
         @Html.HiddenFor(m => m.User.AddressLine1)
@@ -107,6 +108,21 @@
         <button type="submit" class="btn btn-primary">Update Details</button>
     </div>
 }
+
+<div class="col-md-6 animated fadeInUp" style="animation-duration:1s">
+    <h2>Sync to Google Calendar</h2>
+    @if(Model.User.GoogleCalendarFilePath == null)
+    {
+        <text>Log In to Google Calendar to sync your shifts</text>
+        @Html.ActionLink("Log In", "LogIntoGoogleCalendar", "Calendar",null, new { @class="btn btn-default" });
+    }
+    else
+    {
+        @Html.ActionLink("Disable", "LogOutOfGoogleCalendar", "Calendar", null ,new { @class = "btn btn-default" });
+    } 
+    
+</div>
+
 
 
 @*Generating client side validation*@

@@ -66,6 +66,8 @@ namespace ReadySetResource.Models
 
         public int Strikes { get; set; }
 
+        public string GoogleCalendarFilePath { get; set; }
+
         public int EmployeeTypeId { get; set; }
         public EmployeeType EmployeeType { get; set; }
 

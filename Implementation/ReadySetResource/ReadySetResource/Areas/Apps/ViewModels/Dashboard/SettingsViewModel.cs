@@ -18,6 +18,8 @@ namespace ReadySetResource.Areas.Apps.ViewModels.Dashboard
         public ApplicationUser User { get; set;  }
         public List<SelectListItem> TitleOptions { get; set; }
 
+        public bool CalendarEditorsEnabledGoogle { get; set; }
+
         public string ErrorMessage { get; set; }
     }
 }

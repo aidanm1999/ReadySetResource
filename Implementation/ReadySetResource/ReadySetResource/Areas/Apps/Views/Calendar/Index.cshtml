@@ -15,15 +15,23 @@
     @Html.ActionLink("Add Shift", "Add", "Calendar", null, new { @class = "btn btn-default" })
     @Html.ActionLink("Print", "PDF", "Calendar", new { week = Model.ActiveWeekCommenceDate }, new { @class = "btn btn-default" })
     @Html.ActionLink("Copy To Next Week", "CopyToNextWeek", "Calendar", new { week = Model.ActiveWeekCommenceDate.AddDays(7) }, new { @class = "btn btn-default", title = "This button copies all shifts from this week to the next week and deletes all shifts on that week!" })
-    
+    @if (Model.CurrentUser.GoogleCalendarFilePath != null)
+    {
+        @Html.ActionLink("Export", "ExportToCalendar", "Calendar", new { week = Model.ActiveWeekCommenceDate } , new { @class = "btn btn-default" })
+    }
 </h2>
 }
 else if (Model.CurrentUser.BusinessUserType.Calendar == "V")
 {
-    <h2>
-        Calendar - For Week @Model.ActiveWeekCommenceDate.Day/@Model.ActiveWeekCommenceDate.Month to @Model.ActiveWeekCommenceDate.AddDays(6).Day/@Model.ActiveWeekCommenceDate.AddDays(6).Month
-        @Html.ActionLink("Print", "PDF", "Calendar", null, new { @class = "btn btn-default" })
-    </h2>
+<h2>
+    Calendar - For Week @Model.ActiveWeekCommenceDate.Day/@Model.ActiveWeekCommenceDate.Month to @Model.ActiveWeekCommenceDate.AddDays(6).Day/@Model.ActiveWeekCommenceDate.AddDays(6).Month
+    @Html.ActionLink("Print", "PDF", "Calendar", null, new { @class = "btn btn-default" })
+    @if (Model.CurrentUser.GoogleCalendarFilePath != null)
+    {
+        @Html.ActionLink("Export", "ExportToCalendar", "Calendar", null, new { @class = "btn btn-default" })
+    }
+
+</h2>
 
 }
 else
@@ -89,28 +97,13 @@ else
             @foreach (var employee in Model.Employees)
             {
                 <tr>
-                    @if (Model.CurrentUser.BusinessUserType.Calendar == "V")
-                    {
-                        if(employee.Id == Model.CurrentUser.Id)
-                        {
-                            
-                            <td align="left" style=" white-space: nowrap;table-layout:fixed;">
-                                <a href="@Url.Action("MyCharts", "Calendar", new { week = Model.ActiveWeekCommenceDate })">
-                                    @employee.FirstName @employee.LastName
-                                </a>
-                            </td>
-
-                        }
-
-                    }
-                    else
-                    {
-                        <td align="left" style=" white-space: nowrap;table-layout:fixed;">
-                                <a href="@Url.Action("MyCharts", "Calendar", new { user = employee.Id, week = Model.ActiveWeekCommenceDate })">
-                                    @employee.FirstName @employee.LastName
-                                </a>
-                            </td>
-                    }
+                    
+                    <td align="left" style=" white-space: nowrap;table-layout:fixed;">
+                        <a href="@Url.Action("MyCharts", "Calendar", new { user = employee.Id, week = Model.ActiveWeekCommenceDate })">
+                            @employee.FirstName @employee.LastName
+                        </a>
+                    </td>
+                    
 
                     @{
                         var empShifts = Model.Shifts;
