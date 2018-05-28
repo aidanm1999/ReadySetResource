@@ -1309,14 +1309,16 @@ namespace ReadySetResource.Areas.Apps.Controllers
             {
                 string credPath = System.Environment.GetFolderPath(
                     System.Environment.SpecialFolder.Personal);
-                credPath = Path.Combine(credPath, ".credentials/calendar-dotnet-quickstart.json");
+                credPath = Path.Combine(credPath, "Projects/ReadySetResource/Implementation/ReadySetResource/ReadySetResource/.credentials");
 
+                
                 credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
                     GoogleClientSecrets.Load(stream).Secrets,
                     Scopes,
                     currUserId,
                     CancellationToken.None,
                     new FileDataStore(credPath, true)).Result;
+                
                 Console.WriteLine("Credential file saved to: " + credPath);
                 var userInDb = _context.Users.SingleOrDefault(u => u.Id == currUserId);
 
