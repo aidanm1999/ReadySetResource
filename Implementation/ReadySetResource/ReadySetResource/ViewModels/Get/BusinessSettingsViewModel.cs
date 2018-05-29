@@ -16,6 +16,7 @@ namespace ReadySetResource.ViewModels
         public List<SelectListItem> ExpiryYearOptions { get; set; }
         public string TempCountry { get; set;}
         public string TempCardType { get; set; }
+        public string ErrorMessage { get; set; }
         public Business Business { get; set; }
         
     }

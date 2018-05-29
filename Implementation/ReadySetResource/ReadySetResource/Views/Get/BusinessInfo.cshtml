@@ -8,6 +8,7 @@
 @using (Html.BeginForm("AddBusiness", "Get"))
 {
     @Html.ValidationSummary(true, "Please fix the following errors.")
+    @Model.ErrorMessage
     <div class="form-group">
         @Html.LabelFor(m => m.Business.Name)
         @Html.TextBoxFor(m => m.Business.Name, new { @class = "form-control" })

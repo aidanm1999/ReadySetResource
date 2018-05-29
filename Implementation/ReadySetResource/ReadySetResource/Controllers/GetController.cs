@@ -91,7 +91,7 @@ namespace ReadySetResource.Controllers
         #region Business Info
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult BusinessInfo(int plan)
+        public ActionResult BusinessInfo(int plan, string errorMsg)
         {
             //Checks to see if the user is already logged In, 
             //If they are, it redirects them to their home screen in dashboard
@@ -107,6 +107,7 @@ namespace ReadySetResource.Controllers
                 TempCountry = "",
                 TempCardType = "",
                 Business = new Business(),
+                ErrorMessage = errorMsg,
             };
             
             //Sets the size of the business plan
@@ -209,14 +210,25 @@ namespace ReadySetResource.Controllers
         {
             //Checks to see if the user is already logged In, 
             //If they are, it redirects them to their home screen in dashboard
+            int tempPlan = 0;
             try
             {
                 var userId = User.Identity.GetUserId();
                 if (userId != null) { return RedirectToAction("Index", "Dashboard", new { area = "Apps" }); }
+                var tryConvertCard = Convert.ToInt64( businessVM.Business.CardNumber);
+                var tryConvertSecurityNo = Convert.ToInt16(businessVM.Business.SecuriyNumber);
             }
-            catch { }
+            catch (Exception ex)
+            {
+                
+                if (businessVM.Business.Plan == "Small") { tempPlan = 1; }
+                else if (businessVM.Business.Plan == "Medium") { tempPlan = 2; }
+                else if (businessVM.Business.Plan == "Large") { tempPlan = 3; }
 
-            int tempPlan = 0;
+                businessVM.ErrorMessage = "Card number or Security number can only contain numbers";
+                return RedirectToAction("BusinessInfo", new { plan = tempPlan, errorMsg = businessVM.ErrorMessage });
+            }
+
             if(businessVM.Business.Plan == "1" | businessVM.Business.Plan == "2" | businessVM.Business.Plan == "3")
             {
                 tempPlan = Int32.Parse(businessVM.Business.Plan);
@@ -233,8 +245,8 @@ namespace ReadySetResource.Controllers
 
             if (!ModelState.IsValid)
             {
-                
-                BusinessInfo(tempPlan);
+                string errorMsg = "";
+                BusinessInfo(tempPlan, errorMsg);
             }
 
             if (businessVM.Business.Id == 0)
