@@ -745,7 +745,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
                 msg.To.Add(currUser.Email);
                 msg.Subject = userVM.Sender + " has invited you to join RSR!";
                 msg.IsBodyHtml = true;
-                if(userVM.AdditionalText == null | userVM.AdditionalText == "")
+                if(userVM.AdditionalText != null | userVM.AdditionalText != "")
                 {
                     msg.Body = "<html>" +
                     "<p>Dear " + currUser.Title + " " + currUser.FirstName + " " + currUser.LastName + ",</p>" +
