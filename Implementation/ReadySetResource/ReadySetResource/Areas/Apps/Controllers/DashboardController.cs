@@ -35,6 +35,9 @@ namespace ReadySetResource.Areas.Apps.Controllers
         private ApplicationUserManager _userManager;
 
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DashboardController"/> class.
+        /// </summary>
         public DashboardController()
         {
             _context = new ApplicationDbContext();
@@ -43,6 +46,12 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
 
 
+        /// <summary>
+        /// Gets the sign in manager.
+        /// </summary>
+        /// <value>
+        /// The sign in manager.
+        /// </value>
         public ApplicationSignInManager SignInManager
         {
             get
@@ -55,6 +64,12 @@ namespace ReadySetResource.Areas.Apps.Controllers
             }
         }
 
+        /// <summary>
+        /// Gets the user manager.
+        /// </summary>
+        /// <value>
+        /// The user manager.
+        /// </value>
         public ApplicationUserManager UserManager
         {
             get
@@ -68,6 +83,10 @@ namespace ReadySetResource.Areas.Apps.Controllers
         }
 
 
+        /// <summary>
+        /// Releases unmanaged resources and optionally releases managed resources.
+        /// </summary>
+        /// <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
         protected override void Dispose(bool disposing)
         {
             _context.Dispose();
