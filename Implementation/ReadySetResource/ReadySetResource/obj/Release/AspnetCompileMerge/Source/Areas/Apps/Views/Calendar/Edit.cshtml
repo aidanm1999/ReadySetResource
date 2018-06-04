@@ -1,0 +1,60 @@
+﻿@model ReadySetResource.ViewModels.ShiftViewModel
+@{
+    ViewBag.Title = "Edit Shift";
+    Layout = "~/Areas/Apps/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit Shift</h2>
+
+
+<div class="col-md-3">
+
+    @Model.ErrorMessage
+
+    @using (Html.BeginForm("EditShift", "Calendar"))
+    {
+        @Html.ValidationSummary(true, "Please fix the following errors.")
+        <div class="form-group">
+            @Html.LabelFor(m => m.TempDate)
+            @Html.EditorFor(m => m.TempDate, new{ date = Model.TempDate })
+            @Html.ValidationMessageFor(m => m.TempDate)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.StartHour)
+        </div>
+        <div class="form-inline">
+            @Html.TextBoxFor(m => m.StartHour, new { @class = "form-control", style = "width: 50px" }) :
+            @Html.TextBoxFor(m => m.StartMinute, new { @class = "form-control", style = "width: 50px" })
+        </div>
+        <div class="form-group" style="padding-top:20px">
+            @Html.LabelFor(m => m.EndHour)
+        </div>
+        <div class="form-inline">
+            @Html.TextBoxFor(m => m.EndHour, new { @class = "form-control", style = "width: 50px" }) :
+            @Html.TextBoxFor(m => m.EndMinute, new { @class = "form-control", style = "width: 50px" })
+        </div>
+
+        <div class="form-group" style="padding-top:20px">
+            @Html.LabelFor(m => m.Employees)
+            @Html.DropDownListFor(m => m.UserId, Model.Employees)
+            @Html.ValidationMessageFor(m => m.Employees)
+        </div>
+
+        @Html.AntiForgeryToken()
+        <p>
+            @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default", style = "float:left" })
+            @Html.ActionLink("Delete", "DeleteShift", new { shift = Model.ShiftId }, new { @class = "btn btn-danger", style = "margin-left: 20px;" })
+            <button type="submit" class="btn btn-primary" style="float:right;">Save</button>
+        </p>
+        @Html.HiddenFor(m => m.EmployeesHolidays)
+        @Html.HiddenFor(m => m.ShiftId)
+
+    }
+</div>
+
+
+@*Generating client side validation*@
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}

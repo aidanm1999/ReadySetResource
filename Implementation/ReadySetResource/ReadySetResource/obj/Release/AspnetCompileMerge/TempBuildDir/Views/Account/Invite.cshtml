@@ -1,0 +1,39 @@
+﻿@model ReadySetResource.ViewModels.Account.InviteViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Verify Email</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="~/Content/animate.css">
+</head>
+<body style="text-align:center; align-content:center;">
+    <div style="border-color:black; border-width:thin;">
+        <h1 class="animated flash">One last thing!</h1>
+
+        <h2>We want to keep your account as secure as possible, </h2>
+        <h2>therefore please enter the temporary password below:</h2>
+
+        @using (Html.BeginForm("InvitePost", "Account"))
+        {
+            @Html.ValidationSummary(true, "The password is incorrect, sorry.")
+
+            @Html.TextBoxFor(m => m.TempPass)
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.NewUser.Id)
+            @Html.HiddenFor(m => m.NewUser.Email)
+            <button type="submit" class="btn btn-primary">Continue</button>
+        }
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,242 @@
+﻿@model ReadySetResource.ViewModels.CalendarViewModel
+@{
+    ViewBag.Title = "Calendar";
+    Layout = "~/Areas/Apps/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" type="text/css" href="~/Content/Site.css">
+
+
+
+@if (Model.CurrentUser.BusinessUserType.Calendar == "E")
+{
+<h2>
+    Calendar - For Week @Model.ActiveWeekCommenceDate.Day/@Model.ActiveWeekCommenceDate.Month to @Model.ActiveWeekCommenceDate.AddDays(6).Day/@Model.ActiveWeekCommenceDate.AddDays(6).Month
+    @Html.ActionLink("Add Shift", "Add", "Calendar", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Print", "PDF", "Calendar", new { week = Model.ActiveWeekCommenceDate }, new { @class = "btn btn-default" })
+    @Html.ActionLink("Copy To Next Week", "CopyToNextWeek", "Calendar", new { week = Model.ActiveWeekCommenceDate.AddDays(7) }, new { @class = "btn btn-default", title = "This button copies all shifts from this week to the next week and deletes all shifts on that week!" })
+    @if (Model.CurrentUser.GoogleCalendarFilePath != null)
+    {
+        @Html.ActionLink("Export", "ExportToCalendar", "Calendar", new { week = Model.ActiveWeekCommenceDate } , new { @class = "btn btn-default" })
+    }
+</h2>
+}
+else if (Model.CurrentUser.BusinessUserType.Calendar == "V")
+{
+<h2>
+    Calendar - For Week @Model.ActiveWeekCommenceDate.Day/@Model.ActiveWeekCommenceDate.Month to @Model.ActiveWeekCommenceDate.AddDays(6).Day/@Model.ActiveWeekCommenceDate.AddDays(6).Month
+    @Html.ActionLink("Print", "PDF", "Calendar", null, new { @class = "btn btn-default" })
+    @if (Model.CurrentUser.GoogleCalendarFilePath != null)
+    {
+        @Html.ActionLink("Export", "ExportToCalendar", "Calendar", null, new { @class = "btn btn-default" })
+    }
+
+</h2>
+
+}
+else
+{
+    Response.Redirect(Url.Action("NotAuthorised", "Dashboard", new { Uri = HttpContext.Current.Request.Url.AbsolutePath }));
+}
+
+
+@if (Model.Employees.Count() == 0)
+{
+    <text>You have no employees!</text>
+}
+else if (Model.Shifts.Count() == 0 | Model.Shifts == null)
+{
+    <text>You have no shifts for this week!</text>
+}
+else
+{
+
+    <table id="rota">
+        <thead>
+            <tr>
+                <th rowspan="2">Employee</th>
+                <th colspan="2">Monday</th>
+                <th colspan="2">Tuesday</th>
+                <th colspan="2">Wednesday</th>
+                <th colspan="2">Thursday</th>
+                <th colspan="2">Friday</th>
+                <th colspan="2">Saturday</th>
+                <th colspan="2">Sunday</th>
+                <th rowspan="2">Totals</th>
+            </tr>
+            <tr>
+                <th>Start</th>
+                <th>End</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Start</th>
+                <th>End</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{ 
+                double totalHours = 0;
+
+                List<double> dailyHours = new List<double>();
+                for(int i = 0; i < 7; i++)
+                {
+                    dailyHours.Add(0);
+                }
+                int day = 0;
+
+            }
+
+            @foreach (var employee in Model.Employees)
+            {
+                <tr>
+                    
+                    <td align="left" style=" white-space: nowrap;table-layout:fixed;">
+                        <a href="@Url.Action("MyCharts", "Calendar", new { user = employee.Id, week = Model.ActiveWeekCommenceDate })">
+                            @employee.FirstName @employee.LastName
+                        </a>
+                    </td>
+                    
+
+                    @{
+                        var empShifts = Model.Shifts;
+                        int currEmpIndex = Model.Employees.IndexOf(employee);
+                        int prevEmpIndex = Model.Employees.IndexOf(employee) - 1;
+                        int currMinElement = (prevEmpIndex * 7) + 7;
+                        empShifts = Model.Shifts.ToList().GetRange(currMinElement, 7);
+                        double totalEmployeeHours = 0;
+                        
+                    }
+
+                    @foreach (var empShift in empShifts)
+                    {
+                        if (Model.CurrentUser.BusinessUserType.Calendar == "V")
+                        {
+                            if (empShift == null)
+                            {
+                                <td></td>
+                                <td></td>
+                            }
+                            else if (empShift.UserId == employee.Id)
+                            {
+
+                                totalHours += (empShift.EndDateTime - empShift.StartDateTime).TotalHours;
+                                totalEmployeeHours += (empShift.EndDateTime - empShift.StartDateTime).TotalHours;
+                                if(empShift.EndDateTime.DayOfWeek.ToString() == "Monday") { day = 0; }
+                                else if (empShift.EndDateTime.DayOfWeek.ToString() == "Tuesday") { day = 1; }
+                                else if (empShift.EndDateTime.DayOfWeek.ToString() == "Wednesday") { day = 2; }
+                                else if (empShift.EndDateTime.DayOfWeek.ToString() == "Thursday") { day = 3; }
+                                else if (empShift.EndDateTime.DayOfWeek.ToString() == "Friday") { day = 4; }
+                                else if (empShift.EndDateTime.DayOfWeek.ToString() == "Saturday") { day = 5; }
+                                else if (empShift.EndDateTime.DayOfWeek.ToString() == "Sunday") { day = 6; }
+
+                                dailyHours[day] = dailyHours[day] + (empShift.EndDateTime - empShift.StartDateTime).TotalHours;
+
+                                <td style="white-space: nowrap;">
+                                    @empShift.StartDateTime.Hour :
+                                    @if (empShift.StartDateTime.Minute < 10)
+                                    {<text>0</text>@empShift.StartDateTime.Minute }
+                                else
+                                { @empShift.StartDateTime.Minute}
+                                </td>
+                                <td style="white-space: nowrap;">
+                                    @empShift.EndDateTime.Hour :
+                                    @if (empShift.EndDateTime.Minute < 10)
+                                    {<text>0</text>@empShift.EndDateTime.Minute }
+                                else
+                                { @empShift.EndDateTime.Minute}
+                                </td>
+                            }
+                        }
+                        else if (Model.CurrentUser.BusinessUserType.Calendar == "E")
+                        {
+                            if (empShift == null)
+                            {
+                                <td colspan="2"><a href="@Url.Action("Add","Calendar")">+</a></td>
+                            }
+                            else if (empShift.UserId == employee.Id)
+                            {
+
+                                totalHours += (empShift.EndDateTime - empShift.StartDateTime).TotalHours;
+                                totalEmployeeHours += (empShift.EndDateTime - empShift.StartDateTime).TotalHours;
+                                if (empShift.EndDateTime.DayOfWeek.ToString() == "Monday") { day = 0; }
+                                else if (empShift.EndDateTime.DayOfWeek.ToString() == "Tuesday") { day = 1; }
+                                else if (empShift.EndDateTime.DayOfWeek.ToString() == "Wednesday") { day = 2; }
+                                else if (empShift.EndDateTime.DayOfWeek.ToString() == "Thursday") { day = 3; }
+                                else if (empShift.EndDateTime.DayOfWeek.ToString() == "Friday") { day = 4; }
+                                else if (empShift.EndDateTime.DayOfWeek.ToString() == "Saturday") { day = 5; }
+                                else if (empShift.EndDateTime.DayOfWeek.ToString() == "Sunday") { day = 6; }
+
+                                dailyHours[day] = dailyHours[day] + (empShift.EndDateTime - empShift.StartDateTime).TotalHours;
+
+                                <td style="white-space: nowrap;">
+                                    <a href="@Url.Action("Edit","Calendar", new { shift = empShift.Id } )">
+                                        <div style="height:100%;width:100%">
+                                            @empShift.StartDateTime.Hour :
+                                            @if (empShift.StartDateTime.Minute < 10)
+                                            {<text>0</text>@empShift.StartDateTime.Minute }
+                                        else
+                                        { @empShift.StartDateTime.Minute}
+                                        </div>
+                                    </a>
+                                </td>
+                                <td style="white-space: nowrap;">
+                                    <a href="@Url.Action("Edit","Calendar", new { shift = empShift.Id } )">
+                                        <div style="height:100%;width:100%">
+                                            @empShift.EndDateTime.Hour :
+                                            @if (empShift.EndDateTime.Minute < 10)
+                                            {<text>0</text>@empShift.EndDateTime.Minute }
+                                        else
+                                        { @empShift.EndDateTime.Minute}
+                                        </div>
+                                    </a>
+                                </td>
+                            }
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                    <td>
+                        @Math.Round(totalEmployeeHours, 1)
+                    </td>
+                </tr>
+
+            }
+            
+
+
+
+
+        </tbody>
+        <tfoot>
+            <tr style="color:black">
+                <td>Totals</td>
+                @foreach(var dailyTotal in dailyHours)
+                {
+                    <td colspan="2">@Math.Round(@dailyTotal, 1)</td>
+                }
+                
+
+                <td>@Math.Round(totalHours, 1)</td>
+
+            </tr>
+        </tfoot>
+
+    </table>
+}
+
+
+<footer style="text-align:center; align-content:center; padding-top:20px">
+    @Html.ActionLink("< Last Week", "Index", "Calendar", new { week = (Model.ActiveWeekCommenceDate.AddDays(-7).Date) }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Today", "Index", "Calendar", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Next Week >", "Index", "Calendar", new { week = (Model.ActiveWeekCommenceDate.AddDays(7).Date) }, new { @class = "btn btn-primary" })
+</footer>

@@ -1,0 +1,38 @@
+﻿@model ReadySetResource.ViewModels.EmailVerificationViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Verify Email</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="~/Content/animate.css">
+</head>
+<body  style="text-align:center; align-content:center;">
+    <div style="border-color:black; border-width:thin;">
+        <h1 class="animated flash">One last thing!</h1>
+
+        <h2>We want to keep your account as secure as possible, </h2>
+        <h2>therefore please verify your email.</h2>
+
+        @using (Html.BeginForm("EmailAuthorisation", "Get"))
+        {
+            @Html.ValidationSummary(true, "The code is incorrect, sorry.")
+
+            @Html.TextBoxFor(m => m.AttemptedCode)
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.ActualCode)
+            <button type="submit" class="btn btn-primary">Continue</button>
+        }
+
+    </div>
+</body>
+</html>

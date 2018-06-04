@@ -218,7 +218,7 @@ namespace ReadySetResource.Controllers
                 var tryConvertCard = Convert.ToInt64( businessVM.Business.CardNumber);
                 var tryConvertSecurityNo = Convert.ToInt16(businessVM.Business.SecuriyNumber);
             }
-            catch (Exception ex)
+            catch
             {
                 
                 if (businessVM.Business.Plan == "Small") { tempPlan = 1; }

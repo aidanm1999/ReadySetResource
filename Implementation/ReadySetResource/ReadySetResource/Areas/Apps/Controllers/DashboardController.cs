@@ -1,5 +1,6 @@
-﻿using System;
+﻿
 #region Usages
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -21,6 +22,10 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace ReadySetResource.Areas.Apps.Controllers
 {
+    /// <summary>
+    /// This is the controller for the dashboard application
+    /// </summary>
+    /// <seealso cref="System.Web.Mvc.Controller" />
     public class DashboardController : Controller
     {
 
@@ -74,6 +79,10 @@ namespace ReadySetResource.Areas.Apps.Controllers
         //HTTPGET
         #region Home
         // GET: Dashboard/Index
+        /// <summary>
+        /// Indexes this instance.
+        /// </summary>
+        /// <returns>The view with the user</returns>
         [HttpGet]
         [Authorize]
         public ActionResult Index()
@@ -86,10 +95,14 @@ namespace ReadySetResource.Areas.Apps.Controllers
         #endregion
 
 
-        
+
 
         #region Settings
         // GET: Dashboard/Calendar
+        /// <summary>
+        /// Settingses this instance.
+        /// </summary>
+        /// <returns>The view with the settingsVM</returns>
         [HttpGet]
         [Authorize]
         public ActionResult Settings()
@@ -122,6 +135,11 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
         #region BusinessSettings
         // GET: Dashboard/Calendar
+        /// <summary>
+        /// Businesses the settings.
+        /// </summary>
+        /// <param name="errorMsg">The error MSG.</param>
+        /// <returns>The view with the settingsVM</returns>
         [HttpGet]
         [Authorize]
         public ActionResult BusinessSettings(string errorMsg)
@@ -158,6 +176,10 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
         #region UnderConstruction
         // GET: Dashboard/UnderConstruction
+        /// <summary>
+        /// Unders the construction.
+        /// </summary>
+        /// <returns>The view</returns>
         [HttpGet]
         public ActionResult UnderConstruction()
         {
@@ -170,6 +192,11 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
         #region NotAuthorised
         // GET: Dashboard/Index
+        /// <summary>
+        /// Not authorised.
+        /// </summary>
+        /// <param name="Uri">The URI.</param>
+        /// <returns>The view 'not authorised'</returns>
         [HttpGet]
         [Authorize]
         public ActionResult NotAuthorised(string Uri)
@@ -198,6 +225,10 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
         #region AddType
         // GET: Dashboard/Calendar
+        /// <summary>
+        /// Adds the type.
+        /// </summary>
+        /// <returns>The view with the typeVM</returns>
         [HttpGet]
         [Authorize]
         public ActionResult AddType()
@@ -242,6 +273,12 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
         #region EditType
         // GET: Dashboard/Calendar
+        /// <summary>
+        /// Edits the type.
+        /// </summary>
+        /// <param name="type">The typeId.</param>
+        /// <param name="errorMessage">The error message.</param>
+        /// <returns>The view with the typeVM</returns>
         [HttpGet]
         [Authorize]
         public ActionResult EditType(int type, string errorMessage)
@@ -288,6 +325,11 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
         #region AddUser
         // GET: Dashboard/AddUser
+        /// <summary>
+        /// Adds the user.
+        /// </summary>
+        /// <param name="errorMsg">The error MSG.</param>
+        /// <returns>Returns the view with the userVM</returns>
         [HttpGet]
         [Authorize]
         public ActionResult AddUser(string errorMsg)
@@ -415,6 +457,11 @@ namespace ReadySetResource.Areas.Apps.Controllers
         //HTTPPOST
         #region UpdateSettings
         // GET: Dashboard/Calendar
+        /// <summary>
+        /// Updates the settings.
+        /// </summary>
+        /// <param name="settingsVM">The settings vm.</param>
+        /// <returns>The settings view with the settingsViewModel</returns>
         [HttpPost]
         [Authorize]
         public ActionResult UpdateSettings(SettingsViewModel settingsVM)
@@ -506,6 +553,11 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
         #region AddTypePost
         // POST: Calendar/AddTypePost
+        /// <summary>
+        /// Adds the type post.
+        /// </summary>
+        /// <param name="typeVM">The type vm.</param>
+        /// <returns>Add type view with the typeVM</returns>
         [HttpPost]
         [Authorize]
         public ActionResult AddTypePost(BusinessUserTypeViewModel typeVM)
@@ -545,6 +597,11 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
         #region EditTypePost
         // POST: Calendar/EditTypePost
+        /// <summary>
+        /// Edits the type post.
+        /// </summary>
+        /// <param name="typeVM">The type vm.</param>
+        /// <returns>Business settings view or edit type view</returns>
         [HttpPost]
         [Authorize]
         public ActionResult EditTypePost(BusinessUserTypeViewModel typeVM)
@@ -624,6 +681,11 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
         #region DeleteType
         // POST: Calendar/DeleteType
+        /// <summary>
+        /// Deletes the type.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns>Edit Type view with the error message or redirects to business settings action</returns>
         [Authorize]
         public ActionResult DeleteType(int type)
         {
@@ -649,6 +711,11 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
         #region AddUserPost
         // POST: Calendar/AddUserPost
+        /// <summary>
+        /// Adds the user post.
+        /// </summary>
+        /// <param name="userVM">The user vm.</param>
+        /// <returns>Error message to the view or redirects to BusinessSettings View</returns>
         [HttpPost]
         [Authorize]
         public async Task<ActionResult> AddUserPost(BusinessUserViewModel userVM)
