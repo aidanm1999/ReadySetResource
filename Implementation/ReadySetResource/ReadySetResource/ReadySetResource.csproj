@@ -175,6 +175,8 @@
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.4\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.DurableInstancing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Security.Cryptography.Algorithms, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net461\System.Security.Cryptography.Algorithms.dll</HintPath>
     </Reference>
@@ -455,8 +457,7 @@
     <Content Include="Api\client_secret.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
-    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\ReadySetResource1 - Web Deploy.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -587,6 +588,7 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />

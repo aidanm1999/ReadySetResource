@@ -1,4 +1,12 @@
-﻿using System;
+﻿//Document Author:      Aidan Marshall
+//Date Created:         20/3/2018
+//Date Last Modified:   8/6/2018
+//Description:          This controller deals with user signing in and out
+
+
+
+#region Usages
+using System;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
@@ -12,6 +20,7 @@ using ReadySetResource.Models;
 using ReadySetResource.ViewModels.Account;
 using System.Net;
 using System.Net.Mail;
+#endregion
 
 namespace ReadySetResource.Controllers
 {

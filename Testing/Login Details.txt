@@ -1,0 +1,17 @@
+Business:	Buchanan Galleries
+	Login Details for full edit functionality with Google Calendar: 
+		Username:	aidanmarshall1999@gmail.com
+		Password:	HelloWorld1
+
+Business:	City of Glasgow College
+	Login Details for full edit functionality: 
+		Username:	30207717@cityofglacol.ac.uk
+		Password:	Dana1Carson
+
+	Login Details for view functionality only:
+		Username:	tgaamarshall21@gmail.com
+		Password:	Graham2Cadger
+
+	Login Details for no functionality:
+		Username:	aidanm_1999@hotmail.com
+		Password:	James3Hood

@@ -1,4 +1,13 @@
-﻿using System.Collections.Generic;
+﻿//Document Author:      Aidan Marshall
+//Date Created:         20/3/2018
+//Date Last Modified:   8/6/2018
+//Description:          This model deals with holding all details for the data transfer rate
+
+
+
+
+
+using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel.DataAnnotations;
 using System.Web;

@@ -1,4 +1,12 @@
-﻿#region Usages
+﻿//Document Author:      Aidan Marshall
+//Date Created:         20/3/2018
+//Date Last Modified:   8/6/2018
+//Description:          This controller deals with signing a business up to the service
+
+
+
+
+#region Usages
 using System;
 using System.Collections.Generic;
 using System.Linq;

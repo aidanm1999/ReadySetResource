@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)http://localhost:57785/Apps/Dashboard/Settings -->
+<html style="" class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Settings - RSR</title>
+    <link rel="stylesheet" href="./Settings - RSR_files/animate.css">
+    <link href="./Settings - RSR_files/bootstrap.css" rel="stylesheet">
+<link href="./Settings - RSR_files/site.css" rel="stylesheet">
+
+    <script src="./Settings - RSR_files/modernizr-2.8.3.js.download"></script>
+
+
+
+<script src="chrome-extension://odamfmfcmgcaghpmeppfiaaafahcnfbc/js/synofficeExt.js"></script></head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top navbar" style="background-color:#428bca; border-color:#428bca">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                    <a href="http://localhost:57785/Apps/Dashboard">
+                        <img src="./Settings - RSR_files/logoWhite.png" width="50" style="margin-right:15px; margin-left:15px;">
+                    </a>
+
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        
+
+
+<h2>Account Settings</h2>
+
+
+
+<form action="http://localhost:57785/Apps/Dashboard/UpdateSettings" method="post" novalidate="novalidate">    <div class="col-md-6 animated fadeInUp" style="animation-duration:1s">
+        <h3>Basic Details</h3>
+        <div class="form-group">
+            <label for="User_Title">Name</label>
+            <select id="User_Title" name="User.Title"><option selected="selected" value="Mr">Mr</option>
+<option value="Mrs">Mrs</option>
+<option value="Miss">Miss</option>
+</select>
+            <input class="form-control" id="User_FirstName" name="User.FirstName" type="text" value="Aidan">
+            <input class="form-control" id="User_LastName" name="User.LastName" type="text" value="Marshall">
+            <span class="field-validation-valid" data-valmsg-for="User.Title" data-valmsg-replace="true"></span>
+            <span class="field-validation-valid" data-valmsg-for="User.FirstName" data-valmsg-replace="true"></span>
+            <span class="field-validation-valid" data-valmsg-for="User.LastName" data-valmsg-replace="true"></span>
+        </div>
+        <div class="form-group">
+            <label for="TempBirthDate">Birthday</label>
+            <input class="text-box single-line" data-val="true" data-val-date="The field Birthday must be a date." data-val-required="The Birthday field is required." id="TempBirthDate" name="TempBirthDate" type="date" value="1999-10-21">
+            <span class="field-validation-valid" data-valmsg-for="User.DateOfBirth" data-valmsg-replace="true"></span>
+        </div>
+        <div>
+            <a href="http://localhost:57785/Apps/Dashboard/Settings#" id="dnperm" class="btn btn-default">Enable Desktop Notifications</a>
+            <a href="http://localhost:57785/Apps/Dashboard/Settings#" id="dntrigger" class="btn btn-warning">Test</a>
+            <script>
+                var dnperm = document.getElementById('dnperm');
+                var dntrigger = document.getElementById('dntrigger');
+
+                dnperm.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    if (!window.Notification) {
+                        alert('Notifications are not supported');
+                    }
+                    else {
+                        Notification.requestPermission(function (p) {
+                            if (p === 'denied') {
+                                alert('You have denied notifications');
+                            }
+                            else if (p === 'granted') {
+                                alert('You have accepted notifications');
+                            }
+                                
+                        });
+                    }
+                });
+
+
+                dntrigger.addEventListener('click', function (e) {
+                    var notify;
+
+                    e.preventDefault();
+
+                    if (Notification.permission === 'default') {
+                        alert('Please allow notifications');
+                    } else {
+                        notify = new Notification('Test from ReadySetResource', {
+                            body: 'Let\'s go back home!',
+                            icon: '../../../../Content/Images/home/logo.png'
+                        });
+
+                        notify.onclick = function () {
+                            window.location = '/Apps/Dashboard';
+                            notify.close();
+                        }
+                    }
+
+                });
+
+            </script>
+        </div>
+        <div>
+            To change your password, please log out, and click 'Forgot password?' when logging in.
+        </div>
+        
+
+        <input data-val="true" data-val-number="The field AccessFailedCount must be a number." data-val-required="The AccessFailedCount field is required." id="User_AccessFailedCount" name="User.AccessFailedCount" type="hidden" value="0">
+        <input data-val="true" data-val-maxlength="The field Address Line 1 must be a string or array type with a maximum length of &#39;255&#39;." data-val-maxlength-max="255" data-val-minlength="The field Address Line 1 must be a string or array type with a minimum length of &#39;6&#39;." data-val-minlength-min="6" id="User_AddressLine1" name="User.AddressLine1" type="hidden" value="">
+        <input data-val="true" data-val-maxlength="The field Address Line 2 must be a string or array type with a maximum length of &#39;255&#39;." data-val-maxlength-max="255" data-val-minlength="The field Address Line 2 must be a string or array type with a minimum length of &#39;6&#39;." data-val-minlength-min="6" id="User_AddressLine2" name="User.AddressLine2" type="hidden" value="">
+        <input data-val="true" data-val-email="The Back-up Email field is not a valid e-mail address." id="User_BackupEmail" name="User.BackupEmail" type="hidden" value="">
+        <input data-val="true" data-val-required="The Blocked field is required." id="User_Blocked" name="User.Blocked" type="hidden" value="False">
+        <input id="User_Email" name="User.Email" type="hidden" value="aidanmarshall1999@gmail.com">
+        <input id="User_BusinessUserType" name="User.BusinessUserType" type="hidden" value="ReadySetResource.Models.BusinessUserType">
+        <input data-val="true" data-val-number="The field BusinessUserTypeId must be a number." data-val-required="The BusinessUserTypeId field is required." id="User_BusinessUserTypeId" name="User.BusinessUserTypeId" type="hidden" value="1026">
+        <input id="User_Claims" name="User.Claims" type="hidden" value="System.Collections.Generic.List`1[Microsoft.AspNet.Identity.EntityFramework.IdentityUserClaim]">
+        <input data-val="true" data-val-required="The EmailConfirmed field is required." id="User_EmailConfirmed" name="User.EmailConfirmed" type="hidden" value="True">
+        <input data-val="true" data-val-phone="The Emergency Number field is not a valid phone number." id="User_EmergencyContact" name="User.EmergencyContact" type="hidden" value="">
+        <input id="User_EmployeeType" name="User.EmployeeType" type="hidden" value="">
+        <input data-val="true" data-val-number="The field EmployeeTypeId must be a number." data-val-required="The EmployeeTypeId field is required." id="User_EmployeeTypeId" name="User.EmployeeTypeId" type="hidden" value="1">
+        <input id="User_Id" name="User.Id" type="hidden" value="5320dc64-5e4e-4b3b-aefb-ea04fdf48c9l">
+        <input data-val="true" data-val-required="The LockoutEnabled field is required." id="User_LockoutEnabled" name="User.LockoutEnabled" type="hidden" value="True">
+        <input data-val="true" data-val-date="The field LockoutEndDateUtc must be a date." id="User_LockoutEndDateUtc" name="User.LockoutEndDateUtc" type="hidden" value="">
+        <input id="User_Logins" name="User.Logins" type="hidden" value="System.Collections.Generic.List`1[Microsoft.AspNet.Identity.EntityFramework.IdentityUserLogin]">
+        <input data-val="true" data-val-number="The field TimesLoggedIn must be a number." data-val-required="The TimesLoggedIn field is required." id="User_TimesLoggedIn" name="User.TimesLoggedIn" type="hidden" value="0">
+        <input data-val="true" data-val-required="The TwoFactorEnabled field is required." id="User_TwoFactorEnabled" name="User.TwoFactorEnabled" type="hidden" value="False">
+        <input id="User_UserName" name="User.UserName" type="hidden" value="aidanmarshall1999@gmail.com">
+
+
+        <input name="__RequestVerificationToken" type="hidden" value="7mJPLUHffIvIVn7jxKJ13_AhEdRShe0Ab7aQtN3GcGveGWDsvRwVzP-eBc-GndttEINKZIfZiHKjCqDe6btRnPZx20lN3lbGM1dQeARjtxlRgD_1P29evKcX7RkYgMhjg3GjvgNQqPdb1pFS3S0ZrA2">
+        <button type="submit" class="btn btn-primary">Update Details</button>
+    </div>
+</form>
+<div class="col-md-6 animated fadeInUp" style="animation-duration:1s">
+    <h2>Sync to Google Calendar</h2>
+        You have enabled Google Calendar sync. Click 'Export' in the calendar app to export your shifts!
+    
+</div>
+
+
+
+
+
+        
+        <footer>
+        </footer>
+    </div>
+
+    <script src="./Settings - RSR_files/jquery-3.3.1.js.download"></script>
+
+    <script src="./Settings - RSR_files/bootstrap.js.download"></script>
+<script src="./Settings - RSR_files/respond.js.download"></script>
+
+    
+    <script src="./Settings - RSR_files/jquery.validate.js.download"></script>
+<script src="./Settings - RSR_files/jquery.validate.unobtrusive.js.download"></script>
+
+
+
+
+
+</body></html>

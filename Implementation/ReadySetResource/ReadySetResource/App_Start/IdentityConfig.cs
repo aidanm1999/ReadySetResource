@@ -1,4 +1,9 @@
-﻿using System;
+﻿//Document Author:      Aidan Marshall
+//Date Created:         20/3/2018
+//Date Last Modified:   8/6/2018
+
+#region Usages
+using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -9,6 +14,7 @@ using Microsoft.Owin.Security;
 using ReadySetResource.Models;
 using Twilio;
 using System.Diagnostics;
+#endregion
 
 
 namespace ReadySetResource

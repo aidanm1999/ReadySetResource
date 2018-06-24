@@ -192,3 +192,4 @@ C:\Users\Aidan Marshall\Documents\Projects\ReadySetResource\Implementation\Ready
 C:\Users\Aidan Marshall\Documents\Projects\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\obj\Debug\ReadySetResource.csproj.CopyComplete
 C:\Users\Aidan Marshall\Documents\Projects\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\obj\Debug\ReadySetResource.dll
 C:\Users\Aidan Marshall\Documents\Projects\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\obj\Debug\ReadySetResource.pdb
+C:\Users\Aidan Marshall\Documents\Projects\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\roslyn\desktop.ini

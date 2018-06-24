@@ -1,4 +1,9 @@
-﻿using System;
+﻿//Document Author:      Aidan Marshall
+//Date Created:         27/4/2018
+//Date Last Modified:   8/6/2018
+
+#region Usages
+using System;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
@@ -6,6 +11,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using ReadySetResource.Models;
+#endregion
 
 namespace ReadySetResource
 {

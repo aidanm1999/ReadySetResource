@@ -1,4 +1,13 @@
-﻿using System;
+﻿//Document Author:      Aidan Marshall
+//Date Created:         20/3/2018
+//Date Last Modified:   8/6/2018
+//Description:          This controller deals with managing the sign in and user manager
+
+
+
+
+#region Usages
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -7,6 +16,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ReadySetResource.Models;
+#endregion
 
 namespace ReadySetResource.Controllers
 {

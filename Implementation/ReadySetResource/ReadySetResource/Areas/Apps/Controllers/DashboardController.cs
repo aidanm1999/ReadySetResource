@@ -1,4 +1,8 @@
-﻿
+﻿//Document Author:      Aidan Marshall
+//Date Created:         27/4/2018
+//Date Last Modified:   8/6/2018
+//Description:          This controller deals with CRUD for users and user types
+
 #region Usages
 using System;
 using System.Collections.Generic;

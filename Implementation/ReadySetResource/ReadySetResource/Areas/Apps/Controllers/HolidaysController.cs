@@ -1,4 +1,10 @@
-﻿using System;
+﻿//Document Author:      Aidan Marshall
+//Date Created:         16/4/2018
+//Date Last Modified:   8/6/2018
+//Description:          This controller deals with CRUD for holidays
+
+#region Usages
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,6 +13,7 @@ using ReadySetResource.Models;
 using ReadySetResource.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+#endregion
 
 namespace ReadySetResource.Areas.Apps.Controllers
 {

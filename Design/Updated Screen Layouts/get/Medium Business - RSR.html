@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)http://localhost:57785/Get/BusinessInfo?plan=2 -->
+<html style="" class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medium Business - RSR</title>
+    <link rel="stylesheet" href="./Medium Business - RSR_files/animate.css">
+    <link href="./Medium Business - RSR_files/bootstrap.css" rel="stylesheet">
+<link href="./Medium Business - RSR_files/site.css" rel="stylesheet">
+
+    <script src="./Medium Business - RSR_files/modernizr-2.8.3.js.download"></script>
+
+
+
+<script src="chrome-extension://odamfmfcmgcaghpmeppfiaaafahcnfbc/js/synofficeExt.js"></script></head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top navbar" style="background-color:#428bca; border-color:#428bca">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="http://localhost:57785/">
+                    <img src="./Medium Business - RSR_files/logoWhite.png" width="50" style="margin-right:15px; margin-left:15px;">
+                </a>
+                
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="http://localhost:57785/" style="color: #ffffff">Home</a></li>
+                    <li><a href="http://localhost:57785/Home/OurStory" style="color: #ffffff">Our Story</a></li>
+                    <li><a href="http://localhost:57785/Home/Solutions" style="color: #ffffff">Solutions</a></li>
+                </ul>
+                    <ul class="nav navbar-nav navbar-right">
+        <li><a href="http://localhost:57785/Get/Solutions" id="registerLink" style="color:#ffffff">Sign Up</a></li>
+        <li><a href="http://localhost:57785/Home/Login" id="loginLink" style="color:#ffffff">Log in</a></li>
+    </ul>
+
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        
+﻿
+<h2>Business Info</h2>
+
+<form action="http://localhost:57785/Get/AddBusiness" method="post" novalidate="novalidate">    <div class="form-group">
+        <label for="Business_Name">Name</label>
+        <input class="form-control" data-val="true" data-val-maxlength="The field Name must be a string or array type with a maximum length of &#39;255&#39;." data-val-maxlength-max="255" data-val-minlength="The field Name must be a string or array type with a minimum length of &#39;10&#39;." data-val-minlength-min="10" data-val-required="The Name field is required." id="Business_Name" name="Business.Name" type="text" value="">
+        <span class="field-validation-valid" data-valmsg-for="Business.Name" data-valmsg-replace="true"></span>
+    </div>
+    <div class="form-group">
+        <label for="Business_Type">Type</label>
+        <select data-val="true" data-val-maxlength="The field Type must be a string or array type with a maximum length of &#39;255&#39;." data-val-maxlength-max="255" data-val-required="The Type field is required." id="Business_Type" name="Business.Type"><option value="Service">Service Business</option>
+<option value="Merchendising">Merchendising Business</option>
+<option value="Manufacturing">Manufacturing Business</option>
+<option value="Other">Other</option>
+</select>
+        <span class="field-validation-valid" data-valmsg-for="Business.Type" data-valmsg-replace="true"></span>
+    </div>
+    <div class="form-group">
+        <label for="Business_AddressLine1">AddressLine1</label>
+        <input class="form-control" data-val="true" data-val-maxlength="The field AddressLine1 must be a string or array type with a maximum length of &#39;255&#39;." data-val-maxlength-max="255" data-val-minlength="The field AddressLine1 must be a string or array type with a minimum length of &#39;10&#39;." data-val-minlength-min="10" id="Business_AddressLine1" name="Business.AddressLine1" type="text" value="">
+        <span class="field-validation-valid" data-valmsg-for="Business.AddressLine1" data-valmsg-replace="true"></span>
+    </div>
+    <div class="form-group">
+        <label for="Business_AddressLine2">AddressLine2</label>
+        <input class="form-control" data-val="true" data-val-maxlength="The field AddressLine2 must be a string or array type with a maximum length of &#39;255&#39;." data-val-maxlength-max="255" data-val-minlength="The field AddressLine2 must be a string or array type with a minimum length of &#39;10&#39;." data-val-minlength-min="10" id="Business_AddressLine2" name="Business.AddressLine2" type="text" value="">
+        <span class="field-validation-valid" data-valmsg-for="Business.AddressLine2" data-valmsg-replace="true"></span>
+    </div>
+    <div class="form-group">
+        <label for="Business_Postcode">Postcode</label>
+        <input class="form-control" data-val="true" data-val-maxlength="The field Postcode must be a string or array type with a maximum length of &#39;10&#39;." data-val-maxlength-max="10" data-val-minlength="The field Postcode must be a string or array type with a minimum length of &#39;4&#39;." data-val-minlength-min="4" id="Business_Postcode" name="Business.Postcode" type="text" value="">
+        <span class="field-validation-valid" data-valmsg-for="Business.Postcode" data-valmsg-replace="true"></span>
+    </div>
+    <div class="form-group">
+        <label for="Business_Town">Town</label>
+        <input class="form-control" data-val="true" data-val-maxlength="The field Town must be a string or array type with a maximum length of &#39;40&#39;." data-val-maxlength-max="40" data-val-minlength="The field Town must be a string or array type with a minimum length of &#39;3&#39;." data-val-minlength-min="3" id="Business_Town" name="Business.Town" type="text" value="">
+        <span class="field-validation-valid" data-valmsg-for="Business.Town" data-valmsg-replace="true"></span>
+    </div>
+    <div class="form-group">
+        <label for="Business_Region">Region</label>
+        <input class="form-control" data-val="true" data-val-maxlength="The field Region must be a string or array type with a maximum length of &#39;40&#39;." data-val-maxlength-max="40" data-val-minlength="The field Region must be a string or array type with a minimum length of &#39;4&#39;." data-val-minlength-min="4" id="Business_Region" name="Business.Region" type="text" value="">
+        <span class="field-validation-valid" data-valmsg-for="Business.Region" data-valmsg-replace="true"></span>
+    </div>
+    <div class="form-group">
+        <label for="Business_Country">Country</label>
+        <select id="TempCountry" name="TempCountry"><option value="England">England</option>
+<option value="Scotland">Scotland</option>
+<option value="Wales">Wales</option>
+<option value="Northern Ireland">Northern Ireland</option>
+</select>
+    </div>
+    <div class="form-group">
+        <label for="Business_CardType">CardType</label>
+        <select id="TempCardType" name="TempCardType"><option value="Visa">Visa</option>
+<option value="MasterCard">MasterCard</option>
+</select>
+    </div>
+    <div class="form-group">
+        <label for="Business_CardNumber">CardNumber</label>
+        <input class="form-control" data-val="true" data-val-maxlength="The field CardNumber must be a string or array type with a maximum length of &#39;16&#39;." data-val-maxlength-max="16" id="Business_CardNumber" name="Business.CardNumber" type="text" value="">
+        <span class="field-validation-valid" data-valmsg-for="Business.CardNumber" data-valmsg-replace="true"></span>
+    </div>
+    <div class="form-group">
+        <label for="Business_ExpiryMonth">ExpiryMonth</label>
+        <select data-val="true" data-val-length="The field ExpiryMonth must be a string with a maximum length of 2." data-val-length-max="2" id="Business_ExpiryMonth" name="Business.ExpiryMonth"><option value="01">Jan</option>
+<option value="02">Feb</option>
+<option value="03">Mar</option>
+<option value="04">Apr</option>
+<option value="05">May</option>
+<option value="06">Jun</option>
+<option value="07">Jul</option>
+<option value="08">Aug</option>
+<option value="09">Sep</option>
+<option value="10">Oct</option>
+<option value="11">Nov</option>
+<option value="12">Dec</option>
+</select>
+        <span class="field-validation-valid" data-valmsg-for="Business.ExpiryMonth" data-valmsg-replace="true"></span>
+    </div>
+    <div class="form-group">
+        <label for="Business_ExpiryYear">ExpiryYear</label>
+        <select data-val="true" data-val-length="The field ExpiryYear must be a string with a maximum length of 2." data-val-length-max="2" id="Business_ExpiryYear" name="Business.ExpiryYear"><option value="18">18</option>
+<option value="19">19</option>
+<option value="20">20</option>
+<option value="21">21</option>
+<option value="22">22</option>
+<option value="23">23</option>
+<option value="24">24</option>
+<option value="25">25</option>
+<option value="26">26</option>
+<option value="27">27</option>
+<option value="28">28</option>
+<option value="29">29</option>
+</select>
+        <span class="field-validation-valid" data-valmsg-for="Business.ExpiryYear" data-valmsg-replace="true"></span>
+    </div>
+    <div class="form-group">
+        <label for="Business_SecuriyNumber">SecuriyNumber</label>
+        <input class="form-control" data-val="true" data-val-length="The field SecuriyNumber must be a string with a maximum length of 3." data-val-length-max="3" id="Business_SecuriyNumber" name="Business.SecuriyNumber" type="text" value="">
+        <span class="field-validation-valid" data-valmsg-for="Business.SecuriyNumber" data-valmsg-replace="true"></span>
+    </div>
+<input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="Business_Id" name="Business.Id" type="hidden" value="0"><input data-val="true" data-val-date="The field StartDate must be a date." data-val-required="The StartDate field is required." id="Business_StartDate" name="Business.StartDate" type="hidden" value="01/01/0001 00:00:00"><input data-val="true" data-val-date="The field EndDate must be a date." data-val-required="The EndDate field is required." id="Business_EndDate" name="Business.EndDate" type="hidden" value="01/01/0001 00:00:00"><input id="Business_Plan" name="Business.Plan" type="hidden" value="Medium"><input name="__RequestVerificationToken" type="hidden" value="MvaG9HpeUx9IkBF9F8vNBhaEkyvVG5HLmwAblUCL_CG3OA6c4IfojFJkdRyVaH4VjEdPcbA7Paxl7_6TxcgZPQWDSVxkjREeVkmYv_A575A1">    <small>
+        <p>
+            By continuing you agree to our <a href="http://localhost:57785/Legal">Terms and Conditions</a>,
+        </p>
+        <p>
+            you also agree that by selecting the
+ Chain             Plan,
+        </p>
+        <p> 
+            you will be charged monthly at a rate of
+ £20         </p>
+    </small>
+    <button type="submit" class="btn btn-primary">Continue</button>
+</form>
+
+        <hr>
+        <footer class="navbar" style="background-color:#428bca">
+            <div style="text-align:center; padding-top:15px; color:#ffffff">
+                <a href="http://localhost:57785/Home/JobOpportunities" style="color: #ffffff">Job Opportunities</a> |
+                <a href="http://localhost:57785/Legal/Index" style="color:#ffffff">© 2018</a> |
+                <a href="http://localhost:57785/" style="color: #ffffff"> ReadySetResource</a> |
+                <a href="http://localhost:57785/Home/Credits" style="color: #ffffff">Credits</a> |
+                <a href="http://localhost:57785/Home/SiteMap" style="color: #ffffff">Site Map</a> |
+                <a href="http://localhost:57785/Home/Donate" style="color: #ffffff">Donate!</a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="./Medium Business - RSR_files/jquery-3.3.1.js.download"></script>
+
+    <script src="./Medium Business - RSR_files/bootstrap.js.download"></script>
+<script src="./Medium Business - RSR_files/respond.js.download"></script>
+
+    
+    <script src="./Medium Business - RSR_files/jquery.validate.js.download"></script>
+<script src="./Medium Business - RSR_files/jquery.validate.unobtrusive.js.download"></script>
+
+
+
+
+</body></html>

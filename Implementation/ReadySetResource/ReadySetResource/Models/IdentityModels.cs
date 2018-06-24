@@ -1,4 +1,12 @@
-﻿ using System.Data.Entity;
+﻿//Document Author:      Aidan Marshall
+//Date Created:         20/3/2018
+//Date Last Modified:   8/6/2018
+//Description:          This model deals with holding all details for the user
+
+
+
+
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;

@@ -1,4 +1,9 @@
-﻿#region Usages
+﻿//Document Author:      Aidan Marshall
+//Date Created:         27/3/2018
+//Date Last Modified:   8/6/2018
+//Description:          This controller deals with CRUD for shifts
+
+#region Usages
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -151,7 +156,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
             var currBusinessUserType = _context.BusinessUserTypes.SingleOrDefault(c => c.Id == currBusinessUserTypeId);
             var currBusinessId = currBusinessUserType.BusinessId;
 
-            Shift ActualShift = _context.Shifts.SingleOrDefault(s => s.Id == shift);
+            Models.Shift ActualShift = _context.Shifts.SingleOrDefault(s => s.Id == shift);
 
 
             ShiftViewModel shiftVM = new ShiftViewModel()
