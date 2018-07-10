@@ -1,4 +1,4 @@
-//Document Author:      Aidan Marshall
+﻿//Document Author:      Aidan Marshall
 //Date Created:         27/4/2018
 //Date Last Modified:   8/6/2018
 //Description:          This view model deals with holding all details for the shift 
@@ -8,8 +8,8 @@ namespace ReadySetResource.Models
 
     using System;
     using System.Collections.Generic;
-    
-    public partial class Answer
+
+    public class Answer
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -17,7 +17,7 @@ namespace ReadySetResource.Models
         public int Points { get; set; }
         public Nullable<int> Question_Id { get; set; }
         public string User_Id { get; set; }
-    
+
         public virtual ApplicationUser ApplicationUser { get; set; }
         public virtual Question Question { get; set; }
 

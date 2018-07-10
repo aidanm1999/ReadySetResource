@@ -29,25 +29,9 @@ namespace ReadySetResource.ViewModels
         /// </value>
         public Business NewBusiness { get; set; }
 
-<<<<<<< HEAD
-
         public ApplicationUser NewManager { get; set; }
 
-=======
-        /// <summary>
-        /// Gets or sets the new manager.
-        /// </summary>
-        /// <value>
-        /// The new manager.
-        /// </value>
-        public ApplicationUser NewManager { get; set; }
-        /// <summary>
-        /// Gets or sets the password.
-        /// </summary>
-        /// <value>
-        /// The password.
-        /// </value>
->>>>>>> parent of ae2ad3a... Took out XML Comments
+
         [Display(Name ="Password")]
         public string Password { get; set; }
         /// <summary>

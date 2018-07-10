@@ -14,46 +14,17 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ReadySetResource.ViewModels
 {
-    /// <summary>
-    /// Initialises the calendarVM
-    /// </summary>
+
     public class CalendarViewModel
     {
-<<<<<<< HEAD
 
         public ApplicationUser CurrentUser  { get; set; }
 
         public List<ApplicationUser> Employees { get; set; }
 
-=======
-        /// <summary>
-        /// Gets or sets the current user.
-        /// </summary>
-        /// <value>
-        /// The current user.
-        /// </value>
-        public ApplicationUser CurrentUser  { get; set; }
-        /// <summary>
-        /// Gets or sets the employees.
-        /// </summary>
-        /// <value>
-        /// The employees.
-        /// </value>
-        public List<ApplicationUser> Employees { get; set; }
-        /// <summary>
-        /// Gets or sets the shifts.
-        /// </summary>
-        /// <value>
-        /// The shifts.
-        /// </value>
->>>>>>> parent of ae2ad3a... Took out XML Comments
+
         public List<Shift> Shifts { get; set; }
-        /// <summary>
-        /// Gets or sets the active week commence date.
-        /// </summary>
-        /// <value>
-        /// The active week commence date.
-        /// </value>
+
         public DateTime ActiveWeekCommenceDate { get; set; }
     }
 }

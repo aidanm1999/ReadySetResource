@@ -55,25 +55,11 @@ namespace ReadySetResource.Areas.Apps.ViewModels.Dashboard
         /// The sender.
         /// </value>
         public string Sender { get; set; }
-<<<<<<< HEAD
+
 
         public ApplicationUser BusinessUser { get; set; }
 
-=======
-        /// <summary>
-        /// Gets or sets the business user.
-        /// </summary>
-        /// <value>
-        /// The business user.
-        /// </value>
-        public ApplicationUser BusinessUser { get; set; }
-        /// <summary>
-        /// Gets or sets the temporary password.
-        /// </summary>
-        /// <value>
-        /// The temporary password.
-        /// </value>
->>>>>>> parent of ae2ad3a... Took out XML Comments
+
         public string TempPassword { get; set; }
         /// <summary>
         /// Gets or sets the link.

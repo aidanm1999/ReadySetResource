@@ -91,25 +91,10 @@ namespace ReadySetResource.ViewModels
         /// The user identifier.
         /// </value>
         public string UserId { get; set; }
-<<<<<<< HEAD
+
 
         public ApplicationUser User { get; set; }
 
-=======
-        /// <summary>
-        /// Gets or sets the user.
-        /// </summary>
-        /// <value>
-        /// The user.
-        /// </value>
-        public ApplicationUser User { get; set; }
-        /// <summary>
-        /// Gets or sets the holiday identifier.
-        /// </summary>
-        /// <value>
-        /// The holiday identifier.
-        /// </value>
->>>>>>> parent of ae2ad3a... Took out XML Comments
         public int HolidayId { get; set; }
 
         /// <summary>

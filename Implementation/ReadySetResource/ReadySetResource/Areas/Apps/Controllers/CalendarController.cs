@@ -29,10 +29,7 @@ using System.Threading;
 
 namespace ReadySetResource.Areas.Apps.Controllers
 {
-    /// <summary>
-    /// This is the controller for the calendar application so that users can see their shift schedule.
-    /// </summary>
-    /// <seealso cref="System.Web.Mvc.Controller" />
+
     public class CalendarController : Controller
     {
         #region Context and Global Variables
@@ -41,9 +38,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
         private TextFrame addressFrame;
         private Table table;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CalendarController"/> class.
-        /// </summary>
+
         public CalendarController()
         {
             _context = new ApplicationDbContext();
@@ -55,12 +50,6 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
         //Views for Calendar
         #region Index (View)
-        // GET: Dashboard/Calendar
-        /// <summary>
-        /// Indexes the specified week.
-        /// </summary>
-        /// <param name="week">The week.</param>
-        /// <returns>The view with the canlendarVM</returns>
         [HttpGet]
         [Authorize]
         public ActionResult Index(DateTime? week)
@@ -78,12 +67,6 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
 
         #region Add (View)
-        // GET: Dashboard/AddShift
-        /// <summary>
-        /// Adds the specified date.
-        /// </summary>
-        /// <param name="date">The date.</param>
-        /// <returns>The view with the shiftVM</returns>
         [HttpGet]
         [Authorize]
         public ActionResult Add(DateTime? date)
@@ -569,17 +552,9 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
 
         #region Populate MyCharts
-<<<<<<< HEAD
+
         private MyChartsViewModel PopulateUserCharts(ApplicationUser user, DateTime weekBeginDate)
-=======
-        /// <summary>
-        /// Populates the user charts.
-        /// </summary>
-        /// <param name="user">The user.</param>
-        /// <param name="weekBeginDate">The week begin date.</param>
-        /// <returns>The carts view model</returns>
-        private MyChartsViewModel PopulateUserCharts(ApplicationUser user, DateTime weekBeginDate)
->>>>>>> parent of ae2ad3a... Took out XML Comments
+
         {
             MyChartsViewModel chartsVM = new MyChartsViewModel();
 
@@ -894,12 +869,6 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
 
         #region EditShift
-        // POST: Calendar/AddShift
-        /// <summary>
-        /// Edits the shift.
-        /// </summary>
-        /// <param name="shiftVM">The shift vm.</param>
-        /// <returns>The index with this year</returns>
         [HttpPost]
         [Authorize]
         public ActionResult EditShift(ShiftViewModel shiftVM)
@@ -1028,11 +997,6 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
         #region DeleteShift
         // POST: Calendar/DeleteShift
-        /// <summary>
-        /// Deletes the shift.
-        /// </summary>
-        /// <param name="shift">The shift.</param>
-        /// <returns>Redirects to index of calendar with the shift date</returns>
         [Authorize]
         public ActionResult DeleteShift(int shift)
         {
@@ -1049,11 +1013,6 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
 
         #region CreatePDF
-        // POST: Calendar/PDF
-        /// <summary>
-        /// PDFs the specified week.
-        /// </summary>
-        /// <param name="week">The week.</param>
         [Authorize]
         public void PDF(DateTime? week)
         {
@@ -1372,10 +1331,6 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
 
         #region Log In To Google Calendar
-        /// <summary>
-        /// Logs the into google calendar.
-        /// </summary>
-        /// <returns>The settings view with the settingsVM</returns>
         [Authorize]
         public ActionResult LogIntoGoogleCalendar()
         {
@@ -1415,10 +1370,6 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
 
         #region Log Out Of Google Calendar (MUST COMPLETE)
-        /// <summary>
-        /// Logs the out of google calendar.
-        /// </summary>
-        /// <returns>redirects to the settings view in the dashboard</returns>
         [Authorize]
         public ActionResult LogOutOfGoogleCalendar()
         {
@@ -1429,11 +1380,6 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
 
         #region Export To Calendar (MUST COMPLETE)
-        /// <summary>
-        /// Exports the calendar.
-        /// </summary>
-        /// <param name="week">The week.</param>
-        /// <returns></returns>
         [Authorize]
         public ActionResult ExportToCalendar(DateTime week)
         {
