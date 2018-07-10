@@ -16,100 +16,100 @@ using System;
 
 namespace ReadySetResource.Models
 {
-    // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
-    public class ApplicationUser : IdentityUser
-    {
+    //// You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
+    //public class AspNetUser : IdentityUser
+    //{
 
-        //[Required]
+    //    //[Required]
 
-        [Display(Name = "Name")]
-        public string Title { get; set; }
+    //    [Display(Name = "Name")]
+    //    public string Title { get; set; }
 
-        //[Required]
-        [Display(Name = "First Name")]
-        public string FirstName { get; set; }
+    //    //[Required]
+    //    [Display(Name = "First Name")]
+    //    public string FirstName { get; set; }
 
-        //[Required]
-        [Display(Name = "Last Name")]
-        public string LastName { get; set; }
+    //    //[Required]
+    //    [Display(Name = "Last Name")]
+    //    public string LastName { get; set; }
 
-        //[Required]
-        
-        [Display(Name = "Date of Birth")]
-        public DateTime DateOfBirth { get; set; }
+    //    //[Required]
 
-
-        
-        [EmailAddress]
-        [Display(Name = "Back-up Email")]
-        public string BackupEmail { get; set; }
-
-        
-        [MaxLength(255)]
-        [MinLength(6)]
-        [Display(Name = "Address Line 1")]
-        public string AddressLine1 { get; set; }
+    //    [Display(Name = "Date of Birth")]
+    //    public DateTime DateOfBirth { get; set; }
 
 
-        [MaxLength(255)]
-        [MinLength(6)]
-        [Display(Name = "Address Line 2")]
-        public string AddressLine2 { get; set; }
+
+    //    [EmailAddress]
+    //    [Display(Name = "Back-up Email")]
+    //    public string BackupEmail { get; set; }
 
 
-        [MaxLength(8)]
-        [MinLength(5)]
-        public string Postcode { get; set; }
-
-        //[Required]
-        public bool Blocked { get; set; }
-
-        //[Required]
-        public int TimesLoggedIn { get; set; }
-
-        
-        public char Sex { get; set; }
+    //    [MaxLength(255)]
+    //    [MinLength(6)]
+    //    [Display(Name = "Address Line 1")]
+    //    public string AddressLine1 { get; set; }
 
 
-        [Display(Name = "National Insurance Number")]
-        public string NIN { get; set; }
+    //    [MaxLength(255)]
+    //    [MinLength(6)]
+    //    [Display(Name = "Address Line 2")]
+    //    public string AddressLine2 { get; set; }
 
 
-        [Phone]
-        [Display(Name = "Emergency Number")]
-        public string EmergencyContact { get; set; }
+    //    [MaxLength(8)]
+    //    [MinLength(5)]
+    //    public string Postcode { get; set; }
+
+    //    //[Required]
+    //    public bool Blocked { get; set; }
+
+    //    //[Required]
+    //    public int TimesLoggedIn { get; set; }
 
 
-        public float Raise { get; set; }
+    //    public char Sex { get; set; }
 
 
-        public int Strikes { get; set; }
+    //    [Display(Name = "National Insurance Number")]
+    //    public string NIN { get; set; }
 
 
-        public string GoogleCalendarFilePath { get; set; }
+    //    [Phone]
+    //    [Display(Name = "Emergency Number")]
+    //    public string EmergencyContact { get; set; }
 
 
-        public int EmployeeTypeId { get; set; }
-
-        public EmployeeType EmployeeType { get; set; }
+    //    public float Raise { get; set; }
 
 
-        public int BusinessUserTypeId { get; set; }
-
-        public BusinessUserType BusinessUserType { get; set; }
+    //    public int Strikes { get; set; }
 
 
-        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
-        {
-            // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
-            var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
-                // Add custom user claims here
-                return userIdentity;
-            }
-    }
+    //    public string GoogleCalendarFilePath { get; set; }
 
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    //    public int EmployeeTypeId { get; set; }
+
+    //    public EmployeeType EmployeeType { get; set; }
+
+
+    //    public int BusinessUserTypeId { get; set; }
+
+    //    public BusinessUserType BusinessUserType { get; set; }
+
+
+    //    public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<AspNetUser> manager)
+    //    {
+    //        // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
+    //        var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
+    //        // Add custom user claims here
+    //        return userIdentity;
+    //    }
+    //}
+
+
+    public class ApplicationDbContext : IdentityDbContext<AspNetUser>
     {
 
 
@@ -142,7 +142,7 @@ namespace ReadySetResource.Models
 
 
 
-        
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

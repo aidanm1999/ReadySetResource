@@ -18,9 +18,9 @@ namespace ReadySetResource.ViewModels
     public class CalendarViewModel
     {
 
-        public ApplicationUser CurrentUser  { get; set; }
+        public AspNetUser CurrentUser  { get; set; }
 
-        public List<ApplicationUser> Employees { get; set; }
+        public List<AspNetUser> Employees { get; set; }
 
         public List<Shift> Shifts { get; set; }
 

@@ -25,7 +25,7 @@ namespace ReadySetResource.Areas.Apps.ViewModels.Dashboard
         public DateTime TempBirthDate { get; set; }
 
 
-        public ApplicationUser User { get; set;  }
+        public AspNetUser User { get; set;  }
         
         public List<SelectListItem> TitleOptions { get; set; }
         

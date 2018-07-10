@@ -23,7 +23,7 @@ namespace ReadySetResource.ViewModels
         public Business NewBusiness { get; set; }
 
 
-        public ApplicationUser NewManager { get; set; }
+        public AspNetUser NewManager { get; set; }
 
         [Display(Name ="Password")]
         public string Password { get; set; }

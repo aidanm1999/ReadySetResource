@@ -234,14 +234,14 @@ namespace ReadySetResource.Areas.Apps.Controllers
         [Authorize]
         public ActionResult AddHoliday(HolidayViewModel holidayVM)
         {
-            ApplicationUser user = new ApplicationUser();
+            AspNetUser user = new AspNetUser();
             if(holidayVM.UserId == null)
             {
                 holidayVM.UserId = User.Identity.GetUserId();
             }
             user = _context.Users.SingleOrDefault(u => u.Id == holidayVM.UserId);
             Holiday holiday = new Holiday();
-            holiday.User = user;
+            holiday.AspNetUser = user;
             holiday.UserId = user.Id;
 
             var holidayAlready = false;
@@ -351,10 +351,10 @@ namespace ReadySetResource.Areas.Apps.Controllers
         {
 
             //Finds the user and sets the holiday user and its id
-            ApplicationUser user = new ApplicationUser();
+            AspNetUser user = new AspNetUser();
             user = _context.Users.SingleOrDefault(u => u.Id == holidayVM.UserId);
             Shift holiday = new Shift();
-            holiday.User = user;
+            holiday.AspNetUser = user;
             holiday.UserId = user.Id;
 
             holiday.Id = holidayVM.HolidayId;
@@ -388,13 +388,13 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
             Holiday holidayInDb = _context.Holidays.SingleOrDefault(s => s.Id == holiday.Id);
 
-            if (holidayInDb.Id != holiday.Id | holidayInDb.StartDateTime != holiday.StartDateTime | holidayInDb.EndDateTime != holiday.EndDateTime | holidayInDb.User.Id != holiday.User.Id | holidayInDb.UserId != holiday.UserId)
+            if (holidayInDb.Id != holiday.Id | holidayInDb.StartDateTime != holiday.StartDateTime | holidayInDb.EndDateTime != holiday.EndDateTime | holidayInDb.AspNetUser.Id != holiday.AspNetUser.Id | holidayInDb.UserId != holiday.UserId)
             {
                 changesMade = true;
 
                 holidayInDb.StartDateTime = holiday.StartDateTime;
                 holidayInDb.EndDateTime = holiday.EndDateTime;
-                holidayInDb.User = holiday.User;
+                holidayInDb.AspNetUser = holiday.AspNetUser;
                 holidayInDb.UserId = holiday.UserId;
             }
 

@@ -1,0 +1,603 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RSRDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Answer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="Int32" Nullable="false" />
+    <Property Name="Points" Type="Int32" Nullable="false" />
+    <Property Name="Question_Id" Type="Int32" />
+    <Property Name="User_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_Answers_dbo_AspNetUsers_User_Id" FromRole="Answers" ToRole="AspNetUsers" />
+    <NavigationProperty Name="Question" Relationship="Self.FK_dbo_Answers_dbo_Questions_Question_Id" FromRole="Answers" ToRole="Questions" />
+  </EntityType>
+  <EntityType Name="AspNetUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="BackupEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AddressLine1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="AddressLine2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Postcode" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+    <Property Name="Blocked" Type="Boolean" Nullable="false" />
+    <Property Name="TimesLoggedIn" Type="Int32" Nullable="false" />
+    <Property Name="NIN" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EmergencyContact" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Raise" Type="Single" Nullable="false" />
+    <Property Name="Strikes" Type="Int32" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BusinessUserTypeid" Type="Int32" Nullable="false" />
+    <Property Name="EmployeeTypeId" Type="Int32" Nullable="false" />
+    <Property Name="GoogleCalendarFilePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Answers" Relationship="Self.FK_dbo_Answers_dbo_AspNetUsers_User_Id" FromRole="AspNetUsers" ToRole="Answers" />
+    <NavigationProperty Name="BusinessUserType" Relationship="Self.FK_dbo_AspNetUsers_dbo_BusinessUserTypes_BusinessUserTypeid" FromRole="AspNetUsers" ToRole="BusinessUserTypes" />
+    <NavigationProperty Name="EmployeeType" Relationship="Self.FK_dbo_AspNetUsers_dbo_EmployeeTypes_EmployeeTypeId" FromRole="AspNetUsers" ToRole="EmployeeTypes" />
+    <NavigationProperty Name="Cases" Relationship="Self.FK_dbo_Cases_dbo_AspNetUsers_User_Id" FromRole="AspNetUsers" ToRole="Cases" />
+    <NavigationProperty Name="Holidays" Relationship="Self.FK_dbo_Holidays_dbo_AspNetUsers_User_Id" FromRole="AspNetUsers" ToRole="Holidays" />
+    <NavigationProperty Name="Ideas" Relationship="Self.FK_dbo_Ideas_dbo_AspNetUsers_User_Id" FromRole="AspNetUsers" ToRole="Ideas" />
+    <NavigationProperty Name="Items" Relationship="Self.FK_dbo_Items_dbo_AspNetUsers_User_Id" FromRole="AspNetUsers" ToRole="Items" />
+    <NavigationProperty Name="Messages" Relationship="Self.FK_dbo_Messages_dbo_AspNetUsers_Recipient_Id" FromRole="AspNetUsers" ToRole="Messages" />
+    <NavigationProperty Name="Messages1" Relationship="Self.FK_dbo_Messages_dbo_AspNetUsers_Sender_Id" FromRole="AspNetUsers" ToRole="Messages" />
+    <NavigationProperty Name="Passwords" Relationship="Self.FK_dbo_Passwords_dbo_AspNetUsers_User_Id" FromRole="AspNetUsers" ToRole="Passwords" />
+    <NavigationProperty Name="Questions" Relationship="Self.FK_dbo_Questions_dbo_AspNetUsers_User_Id" FromRole="AspNetUsers" ToRole="Questions" />
+    <NavigationProperty Name="Shifts" Relationship="Self.FK_dbo_Shifts_dbo_AspNetUsers_User_Id" FromRole="AspNetUsers" ToRole="Shifts" />
+    <NavigationProperty Name="UserInterests" Relationship="Self.FK_dbo_UserInterests_dbo_AspNetUsers_User_Id" FromRole="AspNetUsers" ToRole="UserInterests" />
+  </EntityType>
+  <EntityType Name="Business">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Type" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="AddressLine1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="AddressLine2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Postcode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Town" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="Region" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="Country" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="CardType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="CardNumber" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+    <Property Name="ExpiryMonth" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="ExpiryYear" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="SecuriyNumber" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Name="Plan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="BusinessUserTypes" Relationship="Self.FK_dbo_BusinessUserTypes_dbo_Businesses_BusinessId" FromRole="Businesses" ToRole="BusinessUserTypes" />
+    <NavigationProperty Name="DataOverTimes" Relationship="Self.FK_dbo_DataOverTimes_dbo_Businesses_Business_Id" FromRole="Businesses" ToRole="DataOverTimes" />
+    <NavigationProperty Name="Transactions" Relationship="Self.FK_dbo_Transactions_dbo_Businesses_Recipient_Id" FromRole="Businesses" ToRole="Transactions" />
+    <NavigationProperty Name="Transactions1" Relationship="Self.FK_dbo_Transactions_dbo_Businesses_Sender_Id" FromRole="Businesses" ToRole="Transactions" />
+    <NavigationProperty Name="Updates" Relationship="Self.FK_dbo_Updates_dbo_Businesses_Business_Id" FromRole="Businesses" ToRole="Updates" />
+  </EntityType>
+  <EntityType Name="BusinessUserType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BusinessId" Type="Int32" Nullable="false" />
+    <Property Name="Administrator" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Updates" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Store" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Messenger" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Meetings" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Calendar" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Holidays" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUsers_dbo_BusinessUserTypes_BusinessUserTypeid" FromRole="BusinessUserTypes" ToRole="AspNetUsers" />
+    <NavigationProperty Name="Business" Relationship="Self.FK_dbo_BusinessUserTypes_dbo_Businesses_BusinessId" FromRole="BusinessUserTypes" ToRole="Businesses" />
+  </EntityType>
+  <EntityType Name="Case">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Solved" Type="Boolean" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="User_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_Cases_dbo_AspNetUsers_User_Id" FromRole="Cases" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="DataOverTime">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="MemoryMB" Type="Single" Nullable="false" />
+    <Property Name="Business_Id" Type="Int32" />
+    <NavigationProperty Name="Business" Relationship="Self.FK_dbo_DataOverTimes_dbo_Businesses_Business_Id" FromRole="DataOverTimes" ToRole="Businesses" />
+  </EntityType>
+  <EntityType Name="DataTransferRate">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StartTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StartPage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="EndPage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="EmployeeType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="70" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="BaseSalary" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUsers_dbo_EmployeeTypes_EmployeeTypeId" FromRole="EmployeeTypes" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="Error">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="Holiday">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StartDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Accepted" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_Holidays_dbo_AspNetUsers_User_Id" FromRole="Holidays" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="Idea">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="User_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_Ideas_dbo_AspNetUsers_User_Id" FromRole="Ideas" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="Item">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhotoPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="User_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_Items_dbo_AspNetUsers_User_Id" FromRole="Items" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="Message">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DateTimeSend" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DateTimeViewed" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ContentString" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ContentImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Recipient_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Sender_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_Messages_dbo_AspNetUsers_Recipient_Id" FromRole="Messages" ToRole="AspNetUsers" />
+    <NavigationProperty Name="AspNetUser1" Relationship="Self.FK_dbo_Messages_dbo_AspNetUsers_Sender_Id" FromRole="Messages" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="Password">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PassString" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Valid" Type="Boolean" Nullable="false" />
+    <Property Name="User_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_Passwords_dbo_AspNetUsers_User_Id" FromRole="Passwords" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="Question">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Solved" Type="Boolean" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="Int32" Nullable="false" />
+    <Property Name="Views" Type="Int32" Nullable="false" />
+    <Property Name="User_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Answers" Relationship="Self.FK_dbo_Answers_dbo_Questions_Question_Id" FromRole="Questions" ToRole="Answers" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_Questions_dbo_AspNetUsers_User_Id" FromRole="Questions" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="Shift">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StartDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_Shifts_dbo_AspNetUsers_User_Id" FromRole="Shifts" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="Transaction">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Amount" Type="Single" Nullable="false" />
+    <Property Name="VAT" Type="Single" Nullable="false" />
+    <Property Name="Total" Type="Single" Nullable="false" />
+    <Property Name="DateSent" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DateRefunded" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Recipient_Id" Type="Int32" />
+    <Property Name="Sender_Id" Type="Int32" />
+    <NavigationProperty Name="Business" Relationship="Self.FK_dbo_Transactions_dbo_Businesses_Recipient_Id" FromRole="Transactions" ToRole="Businesses" />
+    <NavigationProperty Name="Business1" Relationship="Self.FK_dbo_Transactions_dbo_Businesses_Sender_Id" FromRole="Transactions" ToRole="Businesses" />
+  </EntityType>
+  <EntityType Name="Update">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Business_Id" Type="Int32" />
+    <NavigationProperty Name="Business" Relationship="Self.FK_dbo_Updates_dbo_Businesses_Business_Id" FromRole="Updates" ToRole="Businesses" />
+  </EntityType>
+  <EntityType Name="UserInterest">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="User_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_UserInterests_dbo_AspNetUsers_User_Id" FromRole="UserInterests" ToRole="AspNetUsers" />
+  </EntityType>
+  <Association Name="FK_dbo_Answers_dbo_AspNetUsers_User_Id">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+    <End Role="Answers" Type="Self.Answer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Answers">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Answers_dbo_Questions_Question_Id">
+    <End Role="Questions" Type="Self.Question" Multiplicity="0..1" />
+    <End Role="Answers" Type="Self.Answer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Questions">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Answers">
+        <PropertyRef Name="Question_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUsers_dbo_BusinessUserTypes_BusinessUserTypeid">
+    <End Role="BusinessUserTypes" Type="Self.BusinessUserType" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BusinessUserTypes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUsers">
+        <PropertyRef Name="BusinessUserTypeid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUsers_dbo_EmployeeTypes_EmployeeTypeId">
+    <End Role="EmployeeTypes" Type="Self.EmployeeType" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmployeeTypes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUsers">
+        <PropertyRef Name="EmployeeTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Cases_dbo_AspNetUsers_User_Id">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+    <End Role="Cases" Type="Self.Case" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cases">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Holidays_dbo_AspNetUsers_User_Id">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+    <End Role="Holidays" Type="Self.Holiday" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Holidays">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Ideas_dbo_AspNetUsers_User_Id">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+    <End Role="Ideas" Type="Self.Idea" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ideas">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Items_dbo_AspNetUsers_User_Id">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+    <End Role="Items" Type="Self.Item" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Items">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Messages_dbo_AspNetUsers_Recipient_Id">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+    <End Role="Messages" Type="Self.Message" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Messages">
+        <PropertyRef Name="Recipient_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Messages_dbo_AspNetUsers_Sender_Id">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+    <End Role="Messages" Type="Self.Message" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Messages">
+        <PropertyRef Name="Sender_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Passwords_dbo_AspNetUsers_User_Id">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+    <End Role="Passwords" Type="Self.Password" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Passwords">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Questions_dbo_AspNetUsers_User_Id">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+    <End Role="Questions" Type="Self.Question" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Questions">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Shifts_dbo_AspNetUsers_User_Id">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+    <End Role="Shifts" Type="Self.Shift" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Shifts">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_UserInterests_dbo_AspNetUsers_User_Id">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+    <End Role="UserInterests" Type="Self.UserInterest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserInterests">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_BusinessUserTypes_dbo_Businesses_BusinessId">
+    <End Role="Businesses" Type="Self.Business" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="BusinessUserTypes" Type="Self.BusinessUserType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Businesses">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BusinessUserTypes">
+        <PropertyRef Name="BusinessId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_DataOverTimes_dbo_Businesses_Business_Id">
+    <End Role="Businesses" Type="Self.Business" Multiplicity="0..1" />
+    <End Role="DataOverTimes" Type="Self.DataOverTime" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Businesses">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DataOverTimes">
+        <PropertyRef Name="Business_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Transactions_dbo_Businesses_Recipient_Id">
+    <End Role="Businesses" Type="Self.Business" Multiplicity="0..1" />
+    <End Role="Transactions" Type="Self.Transaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Businesses">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Transactions">
+        <PropertyRef Name="Recipient_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Transactions_dbo_Businesses_Sender_Id">
+    <End Role="Businesses" Type="Self.Business" Multiplicity="0..1" />
+    <End Role="Transactions" Type="Self.Transaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Businesses">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Transactions">
+        <PropertyRef Name="Sender_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Updates_dbo_Businesses_Business_Id">
+    <End Role="Businesses" Type="Self.Business" Multiplicity="0..1" />
+    <End Role="Updates" Type="Self.Update" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Businesses">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Updates">
+        <PropertyRef Name="Business_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="RSRDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Answers" EntityType="Self.Answer" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+    <EntitySet Name="Businesses" EntityType="Self.Business" />
+    <EntitySet Name="BusinessUserTypes" EntityType="Self.BusinessUserType" />
+    <EntitySet Name="Cases" EntityType="Self.Case" />
+    <EntitySet Name="DataOverTimes" EntityType="Self.DataOverTime" />
+    <EntitySet Name="DataTransferRates" EntityType="Self.DataTransferRate" />
+    <EntitySet Name="EmployeeTypes" EntityType="Self.EmployeeType" />
+    <EntitySet Name="Errors" EntityType="Self.Error" />
+    <EntitySet Name="Holidays" EntityType="Self.Holiday" />
+    <EntitySet Name="Ideas" EntityType="Self.Idea" />
+    <EntitySet Name="Items" EntityType="Self.Item" />
+    <EntitySet Name="Messages" EntityType="Self.Message" />
+    <EntitySet Name="Passwords" EntityType="Self.Password" />
+    <EntitySet Name="Questions" EntityType="Self.Question" />
+    <EntitySet Name="Shifts" EntityType="Self.Shift" />
+    <EntitySet Name="Transactions" EntityType="Self.Transaction" />
+    <EntitySet Name="Updates" EntityType="Self.Update" />
+    <EntitySet Name="UserInterests" EntityType="Self.UserInterest" />
+    <AssociationSet Name="FK_dbo_Answers_dbo_AspNetUsers_User_Id" Association="Self.FK_dbo_Answers_dbo_AspNetUsers_User_Id">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Answers" EntitySet="Answers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Answers_dbo_Questions_Question_Id" Association="Self.FK_dbo_Answers_dbo_Questions_Question_Id">
+      <End Role="Questions" EntitySet="Questions" />
+      <End Role="Answers" EntitySet="Answers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUsers_dbo_BusinessUserTypes_BusinessUserTypeid" Association="Self.FK_dbo_AspNetUsers_dbo_BusinessUserTypes_BusinessUserTypeid">
+      <End Role="BusinessUserTypes" EntitySet="BusinessUserTypes" />
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUsers_dbo_EmployeeTypes_EmployeeTypeId" Association="Self.FK_dbo_AspNetUsers_dbo_EmployeeTypes_EmployeeTypeId">
+      <End Role="EmployeeTypes" EntitySet="EmployeeTypes" />
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Cases_dbo_AspNetUsers_User_Id" Association="Self.FK_dbo_Cases_dbo_AspNetUsers_User_Id">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Cases" EntitySet="Cases" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Holidays_dbo_AspNetUsers_User_Id" Association="Self.FK_dbo_Holidays_dbo_AspNetUsers_User_Id">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Holidays" EntitySet="Holidays" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Ideas_dbo_AspNetUsers_User_Id" Association="Self.FK_dbo_Ideas_dbo_AspNetUsers_User_Id">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Ideas" EntitySet="Ideas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Items_dbo_AspNetUsers_User_Id" Association="Self.FK_dbo_Items_dbo_AspNetUsers_User_Id">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Items" EntitySet="Items" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Messages_dbo_AspNetUsers_Recipient_Id" Association="Self.FK_dbo_Messages_dbo_AspNetUsers_Recipient_Id">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Messages" EntitySet="Messages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Messages_dbo_AspNetUsers_Sender_Id" Association="Self.FK_dbo_Messages_dbo_AspNetUsers_Sender_Id">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Messages" EntitySet="Messages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Passwords_dbo_AspNetUsers_User_Id" Association="Self.FK_dbo_Passwords_dbo_AspNetUsers_User_Id">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Passwords" EntitySet="Passwords" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Questions_dbo_AspNetUsers_User_Id" Association="Self.FK_dbo_Questions_dbo_AspNetUsers_User_Id">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Questions" EntitySet="Questions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Shifts_dbo_AspNetUsers_User_Id" Association="Self.FK_dbo_Shifts_dbo_AspNetUsers_User_Id">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Shifts" EntitySet="Shifts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_UserInterests_dbo_AspNetUsers_User_Id" Association="Self.FK_dbo_UserInterests_dbo_AspNetUsers_User_Id">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="UserInterests" EntitySet="UserInterests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_BusinessUserTypes_dbo_Businesses_BusinessId" Association="Self.FK_dbo_BusinessUserTypes_dbo_Businesses_BusinessId">
+      <End Role="Businesses" EntitySet="Businesses" />
+      <End Role="BusinessUserTypes" EntitySet="BusinessUserTypes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_DataOverTimes_dbo_Businesses_Business_Id" Association="Self.FK_dbo_DataOverTimes_dbo_Businesses_Business_Id">
+      <End Role="Businesses" EntitySet="Businesses" />
+      <End Role="DataOverTimes" EntitySet="DataOverTimes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Transactions_dbo_Businesses_Recipient_Id" Association="Self.FK_dbo_Transactions_dbo_Businesses_Recipient_Id">
+      <End Role="Businesses" EntitySet="Businesses" />
+      <End Role="Transactions" EntitySet="Transactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Transactions_dbo_Businesses_Sender_Id" Association="Self.FK_dbo_Transactions_dbo_Businesses_Sender_Id">
+      <End Role="Businesses" EntitySet="Businesses" />
+      <End Role="Transactions" EntitySet="Transactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Updates_dbo_Businesses_Business_Id" Association="Self.FK_dbo_Updates_dbo_Businesses_Business_Id">
+      <End Role="Businesses" EntitySet="Businesses" />
+      <End Role="Updates" EntitySet="Updates" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

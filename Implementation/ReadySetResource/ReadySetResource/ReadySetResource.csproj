@@ -359,19 +359,48 @@
     <Compile Include="Migrations\201805242355322_AddedUserGoogleCalendar.Designer.cs">
       <DependentUpon>201805242355322_AddedUserGoogleCalendar.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\Answer.cs" />
-    <Compile Include="Models\DataOverTime.cs" />
-    <Compile Include="Models\DataTransferRate.cs" />
-    <Compile Include="Models\Holiday.cs" />
-    <Compile Include="Models\Business.cs" />
-    <Compile Include="Models\BusinessUserType.cs" />
-    <Compile Include="Models\Case.cs" />
-    <Compile Include="Models\EmployeeType.cs" />
-    <Compile Include="Models\Error.cs" />
-    <Compile Include="Models\Idea.cs" />
-    <Compile Include="Models\Item.cs" />
-    <Compile Include="Models\Message.cs" />
-    <Compile Include="Models\Password.cs" />
+    <Compile Include="Models\Answer.cs">
+      <DependentUpon>ReadySetResourceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUser.cs">
+      <DependentUpon>ReadySetResourceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataOverTime.cs">
+      <DependentUpon>ReadySetResourceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataTransferRate.cs">
+      <DependentUpon>ReadySetResourceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Holiday.cs">
+      <DependentUpon>ReadySetResourceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Business.cs">
+      <DependentUpon>ReadySetResourceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BusinessUserType.cs">
+      <DependentUpon>ReadySetResourceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Case.cs">
+      <DependentUpon>ReadySetResourceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EmployeeType.cs">
+      <DependentUpon>ReadySetResourceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Error.cs">
+      <DependentUpon>ReadySetResourceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Idea.cs">
+      <DependentUpon>ReadySetResourceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Item.cs">
+      <DependentUpon>ReadySetResourceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Message.cs">
+      <DependentUpon>ReadySetResourceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Password.cs">
+      <DependentUpon>ReadySetResourceModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -379,11 +408,36 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Question.cs" />
-    <Compile Include="Models\Shift.cs" />
-    <Compile Include="Models\Transaction.cs" />
-    <Compile Include="Models\Update.cs" />
-    <Compile Include="Models\UserInterest.cs" />
+    <Compile Include="Models\Question.cs">
+      <DependentUpon>ReadySetResourceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ReadySetResourceModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReadySetResourceModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ReadySetResourceModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReadySetResourceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ReadySetResourceModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReadySetResourceModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Shift.cs">
+      <DependentUpon>ReadySetResourceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Transaction.cs">
+      <DependentUpon>ReadySetResourceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Update.cs">
+      <DependentUpon>ReadySetResourceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserInterest.cs">
+      <DependentUpon>ReadySetResourceModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -458,11 +512,32 @@
     <Content Include="Api\client_secret.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <EntityDeploy Include="Models\ReadySetResourceModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ReadySetResourceModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ReadySetResourceModel.edmx.diagram">
+      <DependentUpon>ReadySetResourceModel.edmx</DependentUpon>
+    </Content>
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\ReadySetResource1 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\ReadySetResource3 - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\ReadySetResource3 - Web Deploy.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Content Include="Models\ReadySetResourceModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ReadySetResourceModel.edmx</DependentUpon>
+      <LastGenOutput>ReadySetResourceModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ReadySetResourceModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ReadySetResourceModel.edmx</DependentUpon>
+      <LastGenOutput>ReadySetResourceModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Chart.js" />

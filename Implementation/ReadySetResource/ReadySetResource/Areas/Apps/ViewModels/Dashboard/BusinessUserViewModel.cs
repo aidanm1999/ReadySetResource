@@ -29,7 +29,7 @@ namespace ReadySetResource.Areas.Apps.ViewModels.Dashboard
 
         public string Sender { get; set; }
 
-        public ApplicationUser BusinessUser { get; set; }
+        public AspNetUser BusinessUser { get; set; }
 
         public string TempPassword { get; set; }
 

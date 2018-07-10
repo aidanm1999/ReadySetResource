@@ -60,7 +60,7 @@ namespace ReadySetResource.ViewModels
 
         public List<Holiday> Holidays { get; set; }
 
-        public ApplicationUser User { get; set; }
+        public AspNetUser User { get; set; }
         
     }
 }

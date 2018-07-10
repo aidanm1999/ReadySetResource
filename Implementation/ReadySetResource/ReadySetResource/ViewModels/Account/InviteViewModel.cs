@@ -18,7 +18,7 @@ namespace ReadySetResource.ViewModels.Account
     public class InviteViewModel
     {
 
-        public ApplicationUser NewUser { get; set; }
+        public AspNetUser NewUser { get; set; }
         public string TempPass { get; set; }
         public string InviteCode { get; set; }
     }

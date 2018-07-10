@@ -53,7 +53,7 @@ namespace ReadySetResource.ViewModels
 
         public string UserId { get; set; }
 
-        public ApplicationUser User { get; set; }
+        public AspNetUser User { get; set; }
 
         public int HolidayId { get; set; }
 
