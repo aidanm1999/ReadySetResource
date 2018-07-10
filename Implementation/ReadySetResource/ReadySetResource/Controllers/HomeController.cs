@@ -18,10 +18,7 @@ using ReadySetResource.Models;
 
 namespace ReadySetResource.Controllers
 {
-    /// <summary>
-    /// The home controller introductes the user to the program with welcome pages
-    /// </summary>
-    /// <seealso cref="System.Web.Mvc.Controller" />
+    
     public class HomeController : Controller
     {
         #region Context
@@ -29,9 +26,7 @@ namespace ReadySetResource.Controllers
         private ApplicationDbContext _context;
 
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="HomeController"/> class.
-        /// </summary>
+
         public HomeController()
         {
             _context = new ApplicationDbContext();
@@ -41,10 +36,6 @@ namespace ReadySetResource.Controllers
 
 
         #region Index
-        /// <summary>
-        /// Indexes this instance.
-        /// </summary>
-        /// <returns></returns>
         [HttpGet]
         [AllowAnonymous]
         public ViewResult Index()
@@ -55,10 +46,6 @@ namespace ReadySetResource.Controllers
 
 
         #region OurStory
-        /// <summary>
-        /// Distplays our story.
-        /// </summary>
-        /// <returns></returns>
         [HttpGet]
         [AllowAnonymous]
         public ViewResult OurStory()
@@ -69,10 +56,6 @@ namespace ReadySetResource.Controllers
 
 
         #region Solutions
-        /// <summary>
-        /// Solutions this instance.
-        /// </summary>
-        /// <returns></returns>
         [HttpGet]
         [AllowAnonymous]
         public ViewResult Solutions()
@@ -83,10 +66,6 @@ namespace ReadySetResource.Controllers
 
 
         #region LogIn
-        /// <summary>
-        /// Logs in.
-        /// </summary>
-        /// <returns>The view</returns>
         [HttpGet]
         [AllowAnonymous]
         public ViewResult LogIn()
@@ -96,11 +75,7 @@ namespace ReadySetResource.Controllers
         #endregion
 
 
-        #region LogInStage2
-        /// <summary>
-        /// Logs in stage2.
-        /// </summary>
-        /// <returns></returns>
+        #region LogInStage2        
         [HttpGet]
         [AllowAnonymous]
         public ViewResult LogInStage2()
@@ -111,10 +86,6 @@ namespace ReadySetResource.Controllers
 
 
         #region ForgotPassword
-        /// <summary>
-        /// Forgots the password.
-        /// </summary>
-        /// <returns>The view</returns>
         [HttpGet]
         [AllowAnonymous]
         public ViewResult ForgotPassword()
@@ -125,10 +96,6 @@ namespace ReadySetResource.Controllers
 
 
         #region CreateNewPassword
-        /// <summary>
-        /// Creates the new password.
-        /// </summary>
-        /// <returns></returns>
         [HttpGet]
         [AllowAnonymous]
         public ViewResult CreateNewPassword()
@@ -139,10 +106,6 @@ namespace ReadySetResource.Controllers
 
 
         #region SecurityQuestions
-        /// <summary>
-        /// Securities the questions.
-        /// </summary>
-        /// <returns>The view</returns>
         [HttpGet]
         [AllowAnonymous]
         public ViewResult SecurityQuestions()
@@ -153,10 +116,6 @@ namespace ReadySetResource.Controllers
 
 
         #region JobOpportunities
-        /// <summary>
-        /// Jobs the opportunities.
-        /// </summary>
-        /// <returns>The view</returns>
         [HttpGet]
         [AllowAnonymous]
         public ViewResult JobOpportunities()
@@ -167,10 +126,6 @@ namespace ReadySetResource.Controllers
 
 
         #region Credits
-        /// <summary>
-        /// Creditses this instance.
-        /// </summary>
-        /// <returns>The view</returns>
         [HttpGet]
         [AllowAnonymous]
         public ViewResult Credits()
@@ -181,10 +136,6 @@ namespace ReadySetResource.Controllers
 
 
         #region SiteMap
-        /// <summary>
-        /// Sites the map.
-        /// </summary>
-        /// <returns>the view</returns>
         [HttpGet]
         [AllowAnonymous]
         public ViewResult SiteMap()
@@ -195,10 +146,6 @@ namespace ReadySetResource.Controllers
 
 
         #region ConfirmEmail
-        /// <summary>
-        /// Confirms the email.
-        /// </summary>
-        /// <returns>The view</returns>
         [HttpGet]
         [AllowAnonymous]
         public ViewResult ConfirmEmail()
@@ -209,10 +156,6 @@ namespace ReadySetResource.Controllers
 
 
         #region Donate
-        /// <summary>
-        /// Donates this instance.
-        /// </summary>
-        /// <returns>The view</returns>
         [HttpGet]
         [AllowAnonymous]
         public ViewResult Donate()

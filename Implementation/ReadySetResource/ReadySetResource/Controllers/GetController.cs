@@ -27,10 +27,7 @@ using System.Net.Mail;
 
 namespace ReadySetResource.Controllers
 {
-    /// <summary>
-    /// This is the get controller to sign a business and user to the service
-    /// </summary>
-    /// <seealso cref="System.Web.Mvc.Controller" />
+
     public class GetController : Controller
     {
         #region Initialization and StartUp
@@ -39,9 +36,6 @@ namespace ReadySetResource.Controllers
         private ApplicationUserManager _userManager;
 
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GetController"/> class.
-        /// </summary>
         public GetController()
         {
             _context = new ApplicationDbContext();
@@ -49,12 +43,7 @@ namespace ReadySetResource.Controllers
 
 
 
-        /// <summary>
-        /// Gets the sign in manager.
-        /// </summary>
-        /// <value>
-        /// The sign in manager.
-        /// </value>
+
         public ApplicationSignInManager SignInManager
         {
             get
@@ -67,12 +56,7 @@ namespace ReadySetResource.Controllers
             }
         }
 
-        /// <summary>
-        /// Gets the user manager.
-        /// </summary>
-        /// <value>
-        /// The user manager.
-        /// </value>
+
         public ApplicationUserManager UserManager
         {
             get
@@ -86,10 +70,7 @@ namespace ReadySetResource.Controllers
         }
 
 
-        /// <summary>
-        /// Releases unmanaged resources and optionally releases managed resources.
-        /// </summary>
-        /// <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        
         protected override void Dispose(bool disposing)
         {
             _context.Dispose();
@@ -99,10 +80,7 @@ namespace ReadySetResource.Controllers
 
         //Step 1 - Solutions (HttpGet) - Manager One will pick a solution
         #region Solutions
-        /// <summary>
-        /// Solutionses this instance.
-        /// </summary>
-        /// <returns>The view</returns>
+
         [HttpGet]
         [AllowAnonymous]
         public ActionResult Solutions()
@@ -124,12 +102,6 @@ namespace ReadySetResource.Controllers
 
         //Step 2 - BusinessInfo (HttpGet) - Manager One adds company details
         #region Business Info
-        /// <summary>
-        /// Businesses the information.
-        /// </summary>
-        /// <param name="plan">The plan.</param>
-        /// <param name="errorMsg">The error MSG.</param>
-        /// <returns>The view with the model</returns>
         [HttpGet]
         [AllowAnonymous]
         public ActionResult BusinessInfo(int plan, string errorMsg)
@@ -244,11 +216,6 @@ namespace ReadySetResource.Controllers
 
         //Step 3 - AddBusiness (HttpPost) - Company details are added to DB
         #region Add Business
-        /// <summary>
-        /// Adds the business.
-        /// </summary>
-        /// <param name="businessVM">The business vm.</param>
-        /// <returns>Redirects to the manager details</returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -310,11 +277,6 @@ namespace ReadySetResource.Controllers
 
         //Step 4 - ManagerDetails (HttpGet) - Manager One adds their details
         #region Manager Details
-        /// <summary>
-        /// Managers the details.
-        /// </summary>
-        /// <param name="businessId">The business identifier.</param>
-        /// <returns>The view with the sign up view model</returns>
         [HttpGet]
         [AllowAnonymous]
         public ActionResult ManagerDetails(int businessId)
@@ -371,11 +333,6 @@ namespace ReadySetResource.Controllers
 
         //Step 5 - AddManagerOne (HttpPost) - Manager details are added to DB 
         #region Add ManagerOne And Admin User Type
-        /// <summary>
-        /// Adds the manager one.
-        /// </summary>
-        /// <param name="signUpVM">The sign up vm.</param>
-        /// <returns>Redirects the manager to the verification page</returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -496,10 +453,6 @@ namespace ReadySetResource.Controllers
 
         //Step 6 - EmailVerification (HttpGet) - Manager One adds the verification code
         #region EmailVerification
-        /// <summary>
-        /// Emails the verification.
-        /// </summary>
-        /// <returns>The view with the email verifiaction</returns>
         [HttpGet]
         [Authorize]
         public ActionResult EmailVerification()
@@ -579,11 +532,6 @@ namespace ReadySetResource.Controllers
 
         //Step 7 - EmailAuthorisation (HttpPost) - Manager details are updated to DB 
         #region Email Authorisation
-        /// <summary>
-        /// Emails the authorisation.
-        /// </summary>
-        /// <param name="verificationVM">The verification vm.</param>
-        /// <returns>The email verification view</returns>
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
@@ -626,10 +574,6 @@ namespace ReadySetResource.Controllers
 
         //Step 8 - Welcome
         #region Welcome
-        /// <summary>
-        /// Welcomes this instance.
-        /// </summary>
-        /// <returns></returns>
         [HttpGet]
         [Authorize]
         public ActionResult Welcome()

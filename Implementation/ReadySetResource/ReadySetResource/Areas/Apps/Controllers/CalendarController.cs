@@ -29,10 +29,7 @@ using System.Threading;
 
 namespace ReadySetResource.Areas.Apps.Controllers
 {
-    /// <summary>
-    /// This is the controller for the calendar application so that users can see their shift schedule.
-    /// </summary>
-    /// <seealso cref="System.Web.Mvc.Controller" />
+
     public class CalendarController : Controller
     {
         #region Context and Global Variables
@@ -41,9 +38,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
         private TextFrame addressFrame;
         private Table table;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CalendarController"/> class.
-        /// </summary>
+
         public CalendarController()
         {
             _context = new ApplicationDbContext();
@@ -56,11 +51,6 @@ namespace ReadySetResource.Areas.Apps.Controllers
         //Views for Calendar
         #region Index (View)
         // GET: Dashboard/Calendar
-        /// <summary>
-        /// Indexes the specified week.
-        /// </summary>
-        /// <param name="week">The week.</param>
-        /// <returns>The view with the canlendarVM</returns>
         [HttpGet]
         [Authorize]
         public ActionResult Index(DateTime? week)
@@ -79,11 +69,6 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
         #region Add (View)
         // GET: Dashboard/AddShift
-        /// <summary>
-        /// Adds the specified date.
-        /// </summary>
-        /// <param name="date">The date.</param>
-        /// <returns>The view with the shiftVM</returns>
         [HttpGet]
         [Authorize]
         public ActionResult Add(DateTime? date)
@@ -138,11 +123,6 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
         #region Edit (View)
         // GET: Dashboard/Edit
-        /// <summary>
-        /// Edits the specified shift.
-        /// </summary>
-        /// <param name="shift">The shift.</param>
-        /// <returns>The view with the shiftVM</returns>
         [HttpGet]
         [Authorize]
         public ActionResult Edit(int shift)
@@ -204,12 +184,6 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
         #region MyCharts (View)
         // GET: Apps/Calendar/MyCharts
-        /// <summary>
-        /// Creates an instance of the MyCharts View.
-        /// </summary>
-        /// <param name="user">The user.</param>
-        /// <param name="week">The week.</param>
-        /// <returns></returns>
         [HttpGet]
         [Authorize]
         public ActionResult MyCharts(string user, DateTime? week)
@@ -291,12 +265,6 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
         #region Charts (View)
         // GET: Apps/Calendar/Charts
-        /// <summary>
-        /// Creates an instance of the charts view
-        /// </summary>
-        /// <param name="user">The user.</param>
-        /// <param name="week">The week.</param>
-        /// <returns>The view</returns>
         [HttpGet]
         [Authorize]
         public ActionResult Charts(string user, DateTime? week)
@@ -310,11 +278,6 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
         //Methods for Calendar
         #region Populate Calendar Method
-        /// <summary>
-        /// Populates the calendar.
-        /// </summary>
-        /// <param name="weekBeginDate">The week begin date.</param>
-        /// <returns>The calendar view model</returns>
         private CalendarViewModel PopulateCalendar(DateTime weekBeginDate)
         {
             //1 - Get BusinessUserType from current user and sets current user as Calendar.cshtml needs to check for business user type
@@ -569,12 +532,6 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
 
         #region Populate MyCharts
-        /// <summary>
-        /// Populates the user charts.
-        /// </summary>
-        /// <param name="user">The user.</param>
-        /// <param name="weekBeginDate">The week begin date.</param>
-        /// <returns>The carts view model</returns>
         private MyChartsViewModel PopulateUserCharts(ApplicationUser user, DateTime weekBeginDate)
         {
             MyChartsViewModel chartsVM = new MyChartsViewModel();
@@ -710,11 +667,6 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
 
         #region Copy To Next Week
-        /// <summary>
-        /// Copies to next week.
-        /// </summary>
-        /// <param name="week">The week.</param>
-        /// <returns>Redirects to Index action with next week passed in</returns>
         public ActionResult CopyToNextWeek (DateTime week)
         {
             //Get all of next week's data
@@ -733,11 +685,6 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
         #region AddShift
         // POST: Calendar/AddShift
-        /// <summary>
-        /// Adds the shift.
-        /// </summary>
-        /// <param name="shiftVM">The shift vm.</param>
-        /// <returns>The index view</returns>
         [HttpPost]
         [Authorize]
         public ActionResult AddShift(ShiftViewModel shiftVM)
@@ -823,7 +770,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
             //Checks to see if any of that employee's holidays overlaps with that week
             //shiftVM. 
 
-            ////6 - Load all holidays from those employees in that business in that week (activeWeekCommenceDate)
+            //6 - Load all holidays from those employees in that business in that week (activeWeekCommenceDate)
 
             var tempHolidays = _context.Holidays.Where(s => s.StartDateTime >= activeWeekCommenceDate || s.EndDateTime <= activeWeekEndDate).ToList();
 
@@ -891,11 +838,6 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
         #region EditShift
         // POST: Calendar/AddShift
-        /// <summary>
-        /// Edits the shift.
-        /// </summary>
-        /// <param name="shiftVM">The shift vm.</param>
-        /// <returns>The index with this year</returns>
         [HttpPost]
         [Authorize]
         public ActionResult EditShift(ShiftViewModel shiftVM)
@@ -1024,11 +966,6 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
         #region DeleteShift
         // POST: Calendar/DeleteShift
-        /// <summary>
-        /// Deletes the shift.
-        /// </summary>
-        /// <param name="shift">The shift.</param>
-        /// <returns>Redirects to index of calendar with the shift date</returns>
         [Authorize]
         public ActionResult DeleteShift(int shift)
         {
@@ -1046,10 +983,6 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
         #region CreatePDF
         // POST: Calendar/PDF
-        /// <summary>
-        /// PDFs the specified week.
-        /// </summary>
-        /// <param name="week">The week.</param>
         [Authorize]
         public void PDF(DateTime? week)
         {
@@ -1368,10 +1301,6 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
 
         #region Log In To Google Calendar
-        /// <summary>
-        /// Logs the into google calendar.
-        /// </summary>
-        /// <returns>The settings view with the settingsVM</returns>
         [Authorize]
         public ActionResult LogIntoGoogleCalendar()
         {
@@ -1411,10 +1340,6 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
 
         #region Log Out Of Google Calendar (MUST COMPLETE)
-        /// <summary>
-        /// Logs the out of google calendar.
-        /// </summary>
-        /// <returns>redirects to the settings view in the dashboard</returns>
         [Authorize]
         public ActionResult LogOutOfGoogleCalendar()
         {
@@ -1425,11 +1350,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
 
         #region Export To Calendar (MUST COMPLETE)
-        /// <summary>
-        /// Exports the calendar.
-        /// </summary>
-        /// <param name="week">The week.</param>
-        /// <returns></returns>
+
         [Authorize]
         public ActionResult ExportToCalendar(DateTime week)
         {
