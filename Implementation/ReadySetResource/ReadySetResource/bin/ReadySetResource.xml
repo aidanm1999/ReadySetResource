@@ -1,0 +1,3544 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ReadySetResource</name>
+    </assembly>
+    <members>
+        <member name="T:ReadySetResource.BundleConfig">
+            <summary>
+            This is the bundle configuration to send to the client
+            </summary>
+        </member>
+        <member name="M:ReadySetResource.BundleConfig.RegisterBundles(System.Web.Optimization.BundleCollection)">
+            <summary>
+            Registers the bundles.
+            </summary>
+            <param name="bundles">The bundles.</param>
+        </member>
+        <member name="T:ReadySetResource.FilterConfig">
+            <summary>
+            This is the filter configuration which adds the filters
+            </summary>
+        </member>
+        <member name="M:ReadySetResource.FilterConfig.RegisterGlobalFilters(System.Web.Mvc.GlobalFilterCollection)">
+            <summary>
+            Registers the global filters.
+            </summary>
+            <param name="filters">The filters.</param>
+        </member>
+        <member name="T:ReadySetResource.EmailService">
+            <summary>
+            This is the email service to send emails
+            </summary>
+            <seealso cref="T:Microsoft.AspNet.Identity.IIdentityMessageService" />
+        </member>
+        <member name="M:ReadySetResource.EmailService.SendAsync(Microsoft.AspNet.Identity.IdentityMessage)">
+            <summary>
+            This method should send the message
+            </summary>
+            <param name="message"></param>
+            <returns>The task from result 0</returns>
+        </member>
+        <member name="T:ReadySetResource.SmsService">
+            <summary>
+            This is the email service to send emails
+            </summary>
+            <seealso cref="T:Microsoft.AspNet.Identity.IIdentityMessageService" />
+        </member>
+        <member name="M:ReadySetResource.SmsService.SendAsync(Microsoft.AspNet.Identity.IdentityMessage)">
+            <summary>
+            This method should send the message
+            </summary>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ReadySetResource.ApplicationUserManager">
+            <summary>
+            Thus creates a application user manager
+            </summary>
+        </member>
+        <member name="M:ReadySetResource.ApplicationUserManager.#ctor(Microsoft.AspNet.Identity.IUserStore{ReadySetResource.Models.ApplicationUser})">
+            <summary>
+            Initializes a new instance of the <see cref="T:ReadySetResource.ApplicationUserManager"/> class.
+            </summary>
+            <param name="store"></param>
+        </member>
+        <member name="M:ReadySetResource.ApplicationUserManager.Create(Microsoft.AspNet.Identity.Owin.IdentityFactoryOptions{ReadySetResource.ApplicationUserManager},Microsoft.Owin.IOwinContext)">
+            <summary>
+            Creates the specified options.
+            </summary>
+            <param name="options">The options.</param>
+            <param name="context">The context.</param>
+            <returns>the manager</returns>
+        </member>
+        <member name="T:ReadySetResource.ApplicationSignInManager">
+            <summary>
+            Initialises the sign in manager
+            </summary>
+        </member>
+        <member name="M:ReadySetResource.ApplicationSignInManager.#ctor(ReadySetResource.ApplicationUserManager,Microsoft.Owin.Security.IAuthenticationManager)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ReadySetResource.ApplicationSignInManager"/> class.
+            </summary>
+            <param name="userManager">The user manager.</param>
+            <param name="authenticationManager">The authentication manager.</param>
+        </member>
+        <member name="M:ReadySetResource.ApplicationSignInManager.CreateUserIdentityAsync(ReadySetResource.Models.ApplicationUser)">
+            <summary>
+            Called to generate the ClaimsIdentity for the user, override to add additional claims before SignIn
+            </summary>
+            <param name="user"></param>
+            <returns>The user generated identity</returns>
+        </member>
+        <member name="M:ReadySetResource.ApplicationSignInManager.Create(Microsoft.AspNet.Identity.Owin.IdentityFactoryOptions{ReadySetResource.ApplicationSignInManager},Microsoft.Owin.IOwinContext)">
+            <summary>
+            Creates the specified options.
+            </summary>
+            <param name="options">The options.</param>
+            <param name="context">The context.</param>
+            <returns>The sign in manager</returns>
+        </member>
+        <member name="T:ReadySetResource.RouteConfig">
+            <summary>
+            A configuration of the routes
+            </summary>
+        </member>
+        <member name="M:ReadySetResource.RouteConfig.RegisterRoutes(System.Web.Routing.RouteCollection)">
+            <summary>
+            Registers the routes.
+            </summary>
+            <param name="routes">The routes.</param>
+        </member>
+        <member name="T:ReadySetResource.Startup">
+            <summary>
+            Creates an instance of the startup when called upon
+            </summary>
+        </member>
+        <member name="M:ReadySetResource.Startup.ConfigureAuth(Owin.IAppBuilder)">
+            <summary>
+            Configures the authentication.
+            </summary>
+            <param name="app">The application.</param>
+        </member>
+        <member name="M:ReadySetResource.Startup.Configuration(Owin.IAppBuilder)">
+            <summary>
+            Configues the specified application.
+            </summary>
+            <param name="app">The application.</param>
+        </member>
+        <member name="T:ReadySetResource.WebApiConfig">
+            <summary>
+            This creates the web api configuration
+            </summary>
+        </member>
+        <member name="M:ReadySetResource.WebApiConfig.Register(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Registers the specified configuration.
+            </summary>
+            <param name="config">The configuration.</param>
+        </member>
+        <member name="T:ReadySetResource.Areas.Apps.Controllers.HolidaysController">
+            <summary>
+            This is the holiday for the calendar application so that users can see their shift schedule.
+            </summary>
+            <seealso cref="T:System.Web.Mvc.Controller" />
+        </member>
+        <member name="M:ReadySetResource.Areas.Apps.Controllers.HolidaysController.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ReadySetResource.Areas.Apps.Controllers.HolidaysController"/> class.
+            </summary>
+        </member>
+        <member name="M:ReadySetResource.Areas.Apps.Controllers.HolidaysController.Index(System.Nullable{System.DateTime})">
+            <summary>
+            Indexes the specified week.
+            </summary>
+            <param name="week">The week.</param>
+            <returns>The view with the holidaysVM</returns>
+        </member>
+        <member name="M:ReadySetResource.Areas.Apps.Controllers.HolidaysController.Add(System.Nullable{System.DateTime})">
+            <summary>
+            Adds the specified date.
+            </summary>
+            <param name="date">The date.</param>
+            <returns>The view with the holiaysVM</returns>
+        </member>
+        <member name="M:ReadySetResource.Areas.Apps.Controllers.HolidaysController.Edit(System.Int32)">
+            <summary>
+            Edits the specified holiday.
+            </summary>
+            <param name="holiday">The holiday.</param>
+            <returns>The view with the holidayVM</returns>
+        </member>
+        <member name="M:ReadySetResource.Areas.Apps.Controllers.HolidaysController.PopulateHolidays(System.DateTime)">
+            <summary>
+            Populates the holidays.
+            </summary>
+            <param name="weekBeginDate">The week begin date.</param>
+            <returns>The holidays view model</returns>
+        </member>
+        <member name="M:ReadySetResource.Areas.Apps.Controllers.HolidaysController.AddHoliday(ReadySetResource.ViewModels.HolidayViewModel)">
+            <summary>
+            Adds the holiday.
+            </summary>
+            <param name="holidayVM">The holiday vm.</param>
+            <returns>The index view with the updated holiday list</returns>
+        </member>
+        <member name="M:ReadySetResource.Areas.Apps.Controllers.HolidaysController.EditHoliday(ReadySetResource.ViewModels.HolidayViewModel)">
+            <summary>
+            Edits the holiday.
+            </summary>
+            <param name="holidayVM">The holiday vm.</param>
+            <returns>The index view with the updated holiday list</returns>
+        </member>
+        <member name="M:ReadySetResource.Areas.Apps.Controllers.HolidaysController.AcceptHoliday(System.Int32)">
+            <summary>
+            Accepts the holiday.
+            </summary>
+            <param name="holiday">The holiday.</param>
+            <returns>The index action with the updated holidays list</returns>
+        </member>
+        <member name="M:ReadySetResource.Areas.Apps.Controllers.HolidaysController.DeclineHoliday(System.Int32)">
+            <summary>
+            Declines the holiday.
+            </summary>
+            <param name="holiday">The holiday.</param>
+            <returns>The index action with the updated holidays list</returns>
+        </member>
+        <member name="M:ReadySetResource.Areas.Apps.Controllers.HolidaysController.DeleteHoliday(System.Int32)">
+            <summary>
+            Deletes the holiday.
+            </summary>
+            <param name="holiday">The holiday.</param>
+            <returns>The index action with the updated holidays list</returns>
+        </member>
+        <member name="T:ReadySetResource.Areas.Apps.Controllers.CalendarController">
+            <summary>
+            This is the controller for the calendar application so that users can see their shift schedule.
+            </summary>
+            <seealso cref="T:System.Web.Mvc.Controller" />
+        </member>
+        <member name="M:ReadySetResource.Areas.Apps.Controllers.CalendarController.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ReadySetResource.Areas.Apps.Controllers.CalendarController"/> class.
+            </summary>
+        </member>
+        <member name="M:ReadySetResource.Areas.Apps.Controllers.CalendarController.Index(System.Nullable{System.DateTime})">
+            <summary>
+            Indexes the specified week.
+            </summary>
+            <param name="week">The week.</param>
+            <returns>The view with the canlendarVM</returns>
+        </member>
+        <member name="M:ReadySetResource.Areas.Apps.Controllers.CalendarController.Add(System.Nullable{System.DateTime})">
+            <summary>
+            Adds the specified date.
+            </summary>
+            <param name="date">The date.</param>
+            <returns>The view with the shiftVM</returns>
+        </member>
+        <member name="M:ReadySetResource.Areas.Apps.Controllers.CalendarController.Edit(System.Int32)">
+            <summary>
+            Edits the specified shift.
+            </summary>
+            <param name="shift">The shift.</param>
+            <returns>The view with the shiftVM</returns>
+        </member>
+        <member name="M:ReadySetResource.Areas.Apps.Controllers.CalendarController.MyCharts(System.String,System.Nullable{System.DateTime})">
+            <summary>
+            Creates an instance of the MyCharts View.
+            </summary>
+            <param name="user">The user.</param>
+            <param name="week">The week.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ReadySetResource.Areas.Apps.Controllers.CalendarController.Charts(System.String,System.Nullable{System.DateTime})">
+            <summary>
+            Creates an instance of the charts view
+            </summary>
+            <param name="user">The user.</param>
+            <param name="week">The week.</param>
+            <returns>The view</returns>
+        </member>
+        <member name="M:ReadySetResource.Areas.Apps.Controllers.CalendarController.PopulateCalendar(System.DateTime)">
+            <summary>
+            Populates the calendar.
+            </summary>
+            <param name="weekBeginDate">The week begin date.</param>
+            <returns>The calendar view model</returns>
+        </member>
+        <member name="M:ReadySetResource.Areas.Apps.Controllers.CalendarController.PopulateUserCharts(ReadySetResource.Models.ApplicationUser,System.DateTime)">
+            <summary>
+            Populates the user charts.
+            </summary>
+            <param name="user">The user.</param>
+            <param name="weekBeginDate">The week begin date.</param>
+            <returns>The carts view model</returns>
+        </member>
+        <member name="M:ReadySetResource.Areas.Apps.Controllers.CalendarController.CopyToNextWeek(System.DateTime)">
+            <summary>
+            Copies to next week.
+            </summary>
+            <param name="week">The week.</param>
+            <returns>Redirects to Index action with next week passed in</returns>
+        </member>
+        <member name="M:ReadySetResource.Areas.Apps.Controllers.CalendarController.AddShift(ReadySetResource.ViewModels.ShiftViewModel)">
+            <summary>
+            Adds the shift.
+            </summary>
+            <param name="shiftVM">The shift vm.</param>
+            <returns>The index view</returns>
+        </member>
+        <member name="M:ReadySetResource.Areas.Apps.Controllers.CalendarController.EditShift(ReadySetResource.ViewModels.ShiftViewModel)">
+            <summary>
+            Edits the shift.
+            </summary>
+            <param name="shiftVM">The shift vm.</param>
+            <returns>The index with this year</returns>
+        </member>
+        <member name="M:ReadySetResource.Areas.Apps.Controllers.CalendarController.DeleteShift(System.Int32)">
+            <summary>
+            Deletes the shift.
+            </summary>
+            <param name="shift">The shift.</param>
+            <returns>Redirects to index of calendar with the shift date</returns>
+        </member>
+        <member name="M:ReadySetResource.Areas.Apps.Controllers.CalendarController.PDF(System.Nullable{System.DateTime})">
+            <summary>
+            PDFs the specified week.
+            </summary>
+            <param name="week">The week.</param>
+        </member>
+        <member name="M:ReadySetResource.Areas.Apps.Controllers.CalendarController.LogIntoGoogleCalendar">
+            <summary>
+            Logs the into google calendar.
+            </summary>
+            <returns>The settings view with the settingsVM</returns>
+        </member>
+        <member name="M:ReadySetResource.Areas.Apps.Controllers.CalendarController.LogOutOfGoogleCalendar">
+            <summary>
+            Logs the out of google calendar.
+            </summary>
+            <returns>redirects to the settings view in the dashboard</returns>
+        </member>
+        <member name="M:ReadySetResource.Areas.Apps.Controllers.CalendarController.ExportToCalendar(System.DateTime)">
+            <summary>
+            Exports the calendar.
+            </summary>
+            <param name="week">The week.</param>
+            <returns></returns>
+        </member>
+        <member name="T:ReadySetResource.Areas.Apps.Controllers.DashboardController">
+            <summary>
+            This is the controller for the dashboard application
+            </summary>
+            <seealso cref="T:System.Web.Mvc.Controller" />
+        </member>
+        <member name="M:ReadySetResource.Areas.Apps.Controllers.DashboardController.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ReadySetResource.Areas.Apps.Controllers.DashboardController"/> class.
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.Areas.Apps.Controllers.DashboardController.SignInManager">
+            <summary>
+            Gets the sign in manager.
+            </summary>
+            <value>
+            The sign in manager.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Areas.Apps.Controllers.DashboardController.UserManager">
+            <summary>
+            Gets the user manager.
+            </summary>
+            <value>
+            The user manager.
+            </value>
+        </member>
+        <member name="M:ReadySetResource.Areas.Apps.Controllers.DashboardController.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged resources and optionally releases managed resources.
+            </summary>
+            <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="M:ReadySetResource.Areas.Apps.Controllers.DashboardController.Index">
+            <summary>
+            Indexes this instance.
+            </summary>
+            <returns>The view with the user</returns>
+        </member>
+        <member name="M:ReadySetResource.Areas.Apps.Controllers.DashboardController.Settings">
+            <summary>
+            Settingses this instance.
+            </summary>
+            <returns>The view with the settingsVM</returns>
+        </member>
+        <member name="M:ReadySetResource.Areas.Apps.Controllers.DashboardController.BusinessSettings(System.String)">
+            <summary>
+            Businesses the settings.
+            </summary>
+            <param name="errorMsg">The error MSG.</param>
+            <returns>The view with the settingsVM</returns>
+        </member>
+        <member name="M:ReadySetResource.Areas.Apps.Controllers.DashboardController.UnderConstruction">
+            <summary>
+            Unders the construction.
+            </summary>
+            <returns>The view</returns>
+        </member>
+        <member name="M:ReadySetResource.Areas.Apps.Controllers.DashboardController.NotAuthorised(System.String)">
+            <summary>
+            Not authorised.
+            </summary>
+            <param name="Uri">The URI.</param>
+            <returns>The view 'not authorised'</returns>
+        </member>
+        <member name="M:ReadySetResource.Areas.Apps.Controllers.DashboardController.AddType">
+            <summary>
+            Adds the type.
+            </summary>
+            <returns>The view with the typeVM</returns>
+        </member>
+        <member name="M:ReadySetResource.Areas.Apps.Controllers.DashboardController.EditType(System.Int32,System.String)">
+            <summary>
+            Edits the type.
+            </summary>
+            <param name="type">The typeId.</param>
+            <param name="errorMessage">The error message.</param>
+            <returns>The view with the typeVM</returns>
+        </member>
+        <member name="M:ReadySetResource.Areas.Apps.Controllers.DashboardController.AddUser(System.String)">
+            <summary>
+            Adds the user.
+            </summary>
+            <param name="errorMsg">The error MSG.</param>
+            <returns>Returns the view with the userVM</returns>
+        </member>
+        <member name="M:ReadySetResource.Areas.Apps.Controllers.DashboardController.UpdateSettings(ReadySetResource.Areas.Apps.ViewModels.Dashboard.SettingsViewModel)">
+            <summary>
+            Updates the settings.
+            </summary>
+            <param name="settingsVM">The settings vm.</param>
+            <returns>The settings view with the settingsViewModel</returns>
+        </member>
+        <member name="M:ReadySetResource.Areas.Apps.Controllers.DashboardController.AddTypePost(ReadySetResource.Areas.Apps.ViewModels.Dashboard.BusinessUserTypeViewModel)">
+            <summary>
+            Adds the type post.
+            </summary>
+            <param name="typeVM">The type vm.</param>
+            <returns>Add type view with the typeVM</returns>
+        </member>
+        <member name="M:ReadySetResource.Areas.Apps.Controllers.DashboardController.EditTypePost(ReadySetResource.Areas.Apps.ViewModels.Dashboard.BusinessUserTypeViewModel)">
+            <summary>
+            Edits the type post.
+            </summary>
+            <param name="typeVM">The type vm.</param>
+            <returns>Business settings view or edit type view</returns>
+        </member>
+        <member name="M:ReadySetResource.Areas.Apps.Controllers.DashboardController.DeleteType(System.Int32)">
+            <summary>
+            Deletes the type.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>Edit Type view with the error message or redirects to business settings action</returns>
+        </member>
+        <member name="M:ReadySetResource.Areas.Apps.Controllers.DashboardController.AddUserPost(ReadySetResource.Areas.Apps.ViewModels.Dashboard.BusinessUserViewModel)">
+            <summary>
+            Adds the user post.
+            </summary>
+            <param name="userVM">The user vm.</param>
+            <returns>Error message to the view or redirects to BusinessSettings View</returns>
+        </member>
+        <member name="T:ReadySetResource.Areas.Apps.DashboardAreaRegistration">
+            <summary>
+            This is the area registration to register the apps area for the program
+            </summary>
+            <seealso cref="T:System.Web.Mvc.AreaRegistration" />
+        </member>
+        <member name="P:ReadySetResource.Areas.Apps.DashboardAreaRegistration.AreaName">
+            <summary>
+            Gets the name of the area to register.
+            </summary>
+        </member>
+        <member name="M:ReadySetResource.Areas.Apps.DashboardAreaRegistration.RegisterArea(System.Web.Mvc.AreaRegistrationContext)">
+            <summary>
+            Registers an area in an ASP.NET MVC application using the specified area's context information.
+            </summary>
+            <param name="context">Encapsulates the information that is required in order to register the area.</param>
+        </member>
+        <member name="T:ReadySetResource.Areas.Apps.ViewModels.Calendar.MyChartsViewModel">
+            <summary>
+            Initialises a mychartsVM
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.Areas.Apps.ViewModels.Calendar.MyChartsViewModel.DoughnutUserNames">
+            <summary>
+            Gets or sets the doughnut user names.
+            </summary>
+            <value>
+            The doughnut user names.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Areas.Apps.ViewModels.Calendar.MyChartsViewModel.DoughnutHoursWorked">
+            <summary>
+            Gets or sets the doughnut hours worked.
+            </summary>
+            <value>
+            The doughnut hours worked.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Areas.Apps.ViewModels.Calendar.MyChartsViewModel.DoughnutUserNamesJson">
+            <summary>
+            Gets or sets the doughnut user names json.
+            </summary>
+            <value>
+            The doughnut user names json.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Areas.Apps.ViewModels.Calendar.MyChartsViewModel.DoughnutHoursWorkedJson">
+            <summary>
+            Gets or sets the doughnut hours worked json.
+            </summary>
+            <value>
+            The doughnut hours worked json.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Areas.Apps.ViewModels.Calendar.MyChartsViewModel.UpOrDownBoolean">
+            <summary>
+            Gets or sets a value indicating whether [up or down boolean].
+            </summary>
+            <value>
+              <c>true</c> if [up or down boolean]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Areas.Apps.ViewModels.Calendar.MyChartsViewModel.UpOrDownHours">
+            <summary>
+            Gets or sets up or down hours.
+            </summary>
+            <value>
+            Up or down hours.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Areas.Apps.ViewModels.Calendar.MyChartsViewModel.UpOrDownLastHours">
+            <summary>
+            Gets or sets up or down last hours.
+            </summary>
+            <value>
+            Up or down last hours.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Areas.Apps.ViewModels.Calendar.MyChartsViewModel.UpOrDownThisHours">
+            <summary>
+            Gets or sets up or down this hours.
+            </summary>
+            <value>
+            Up or down this hours.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Areas.Apps.ViewModels.Calendar.MyChartsViewModel.LineAverageHours">
+            <summary>
+            Gets or sets the line average hours.
+            </summary>
+            <value>
+            The line average hours.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Areas.Apps.ViewModels.Calendar.MyChartsViewModel.LineUserHours">
+            <summary>
+            Gets or sets the line user hours.
+            </summary>
+            <value>
+            The line user hours.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Areas.Apps.ViewModels.Calendar.MyChartsViewModel.LineAverageHoursJson">
+            <summary>
+            Gets or sets the line average hours json.
+            </summary>
+            <value>
+            The line average hours json.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Areas.Apps.ViewModels.Calendar.MyChartsViewModel.LineUserHoursJson">
+            <summary>
+            Gets or sets the line user hours json.
+            </summary>
+            <value>
+            The line user hours json.
+            </value>
+        </member>
+        <member name="M:ReadySetResource.Areas.Apps.ViewModels.Calendar.MyChartsViewModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ReadySetResource.Areas.Apps.ViewModels.Calendar.MyChartsViewModel"/> class.
+            </summary>
+        </member>
+        <member name="T:ReadySetResource.Areas.Apps.ViewModels.Calendar.ChartsViewModel">
+            <summary>
+            Not used
+            </summary>
+        </member>
+        <member name="T:ReadySetResource.Areas.Apps.ViewModels.Dashboard.BusinessSettingsViewModel">
+            <summary>
+            Initialises the business settings view model
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.Areas.Apps.ViewModels.Dashboard.BusinessSettingsViewModel.ErrorMessage">
+            <summary>
+            Gets or sets the error message.
+            </summary>
+            <value>
+            The error message.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Areas.Apps.ViewModels.Dashboard.BusinessSettingsViewModel.CurrUserType">
+            <summary>
+            Gets or sets the type of the curr user.
+            </summary>
+            <value>
+            The type of the curr user.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Areas.Apps.ViewModels.Dashboard.BusinessSettingsViewModel.Employees">
+            <summary>
+            Gets or sets the employees.
+            </summary>
+            <value>
+            The employees.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Areas.Apps.ViewModels.Dashboard.BusinessSettingsViewModel.BusinessUserTypes">
+            <summary>
+            Gets or sets the business user types.
+            </summary>
+            <value>
+            The business user types.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.Areas.Apps.ViewModels.Dashboard.BusinessUserTypeViewModel">
+            <summary>
+            Initialise the business user type
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.Areas.Apps.ViewModels.Dashboard.BusinessUserTypeViewModel.ErrorMessage">
+            <summary>
+            Gets or sets the error message.
+            </summary>
+            <value>
+            The error message.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Areas.Apps.ViewModels.Dashboard.BusinessUserTypeViewModel.Options">
+            <summary>
+            Gets or sets the options.
+            </summary>
+            <value>
+            The options.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Areas.Apps.ViewModels.Dashboard.BusinessUserTypeViewModel.BusinessUserType">
+            <summary>
+            Gets or sets the type of the business user.
+            </summary>
+            <value>
+            The type of the business user.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Areas.Apps.ViewModels.Dashboard.BusinessUserTypeViewModel.PreviousName">
+            <summary>
+            Gets or sets the name of the previous.
+            </summary>
+            <value>
+            The name of the previous.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.Areas.Apps.ViewModels.Dashboard.BusinessUserViewModel">
+            <summary>
+            Initialises the business view model
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.Areas.Apps.ViewModels.Dashboard.BusinessUserViewModel.ErrorMessage">
+            <summary>
+            Gets or sets the error message.
+            </summary>
+            <value>
+            The error message.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Areas.Apps.ViewModels.Dashboard.BusinessUserViewModel.Honorifics">
+            <summary>
+            Gets or sets the honorifics.
+            </summary>
+            <value>
+            The honorifics.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Areas.Apps.ViewModels.Dashboard.BusinessUserViewModel.SenderOptions">
+            <summary>
+            Gets or sets the sender options.
+            </summary>
+            <value>
+            The sender options.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Areas.Apps.ViewModels.Dashboard.BusinessUserViewModel.TypeOptions">
+            <summary>
+            Gets or sets the type options.
+            </summary>
+            <value>
+            The type options.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Areas.Apps.ViewModels.Dashboard.BusinessUserViewModel.Sender">
+            <summary>
+            Gets or sets the sender.
+            </summary>
+            <value>
+            The sender.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Areas.Apps.ViewModels.Dashboard.BusinessUserViewModel.BusinessUser">
+            <summary>
+            Gets or sets the business user.
+            </summary>
+            <value>
+            The business user.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Areas.Apps.ViewModels.Dashboard.BusinessUserViewModel.TempPassword">
+            <summary>
+            Gets or sets the temporary password.
+            </summary>
+            <value>
+            The temporary password.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Areas.Apps.ViewModels.Dashboard.BusinessUserViewModel.Link">
+            <summary>
+            Gets or sets the link.
+            </summary>
+            <value>
+            The link.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Areas.Apps.ViewModels.Dashboard.BusinessUserViewModel.AdditionalText">
+            <summary>
+            Gets or sets the additional text.
+            </summary>
+            <value>
+            The additional text.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.Areas.Apps.ViewModels.Dashboard.SettingsViewModel">
+            <summary>
+            Initialises the settings view model
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.Areas.Apps.ViewModels.Dashboard.SettingsViewModel.TempBirthDate">
+            <summary>
+            Gets or sets the temporary birth date.
+            </summary>
+            <value>
+            The temporary birth date.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Areas.Apps.ViewModels.Dashboard.SettingsViewModel.User">
+            <summary>
+            Gets or sets the user.
+            </summary>
+            <value>
+            The user.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Areas.Apps.ViewModels.Dashboard.SettingsViewModel.TitleOptions">
+            <summary>
+            Gets or sets the title options.
+            </summary>
+            <value>
+            The title options.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Areas.Apps.ViewModels.Dashboard.SettingsViewModel.CalendarEditorsEnabledGoogle">
+            <summary>
+            Gets or sets a value indicating whether [calendar editors enabled google].
+            </summary>
+            <value>
+              <c>true</c> if [calendar editors enabled google]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Areas.Apps.ViewModels.Dashboard.SettingsViewModel.ErrorMessage">
+            <summary>
+            Gets or sets the error message.
+            </summary>
+            <value>
+            The error message.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.ViewModels.HolidaysViewModel">
+            <summary>
+            Initialises the holidayVM
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.HolidaysViewModel.CurrentUserType">
+            <summary>
+            Gets or sets the type of the current user.
+            </summary>
+            <value>
+            The type of the current user.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.HolidaysViewModel.CurrentUser">
+            <summary>
+            Gets or sets the current user.
+            </summary>
+            <value>
+            The current user.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.HolidaysViewModel.Employees">
+            <summary>
+            Gets or sets the employees.
+            </summary>
+            <value>
+            The employees.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.HolidaysViewModel.Holidays">
+            <summary>
+            Gets or sets the holidays.
+            </summary>
+            <value>
+            The holidays.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.HolidaysViewModel.ActiveWeekCommenceDate">
+            <summary>
+            Gets or sets the active week commence date.
+            </summary>
+            <value>
+            The active week commence date.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.ViewModels.HolidayViewModel">
+            <summary>
+            Initialises the Holiday View Model
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.HolidayViewModel.StartDate">
+            <summary>
+            Gets or sets the start date.
+            </summary>
+            <value>
+            The start date.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.HolidayViewModel.StartHour">
+            <summary>
+            Gets or sets the start hour.
+            </summary>
+            <value>
+            The start hour.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.HolidayViewModel.StartMinute">
+            <summary>
+            Gets or sets the start minute.
+            </summary>
+            <value>
+            The start minute.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.HolidayViewModel.EndDate">
+            <summary>
+            Gets or sets the end date.
+            </summary>
+            <value>
+            The end date.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.HolidayViewModel.EndHour">
+            <summary>
+            Gets or sets the end hour.
+            </summary>
+            <value>
+            The end hour.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.HolidayViewModel.EndMinute">
+            <summary>
+            Gets or sets the end minute.
+            </summary>
+            <value>
+            The end minute.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.HolidayViewModel.UserId">
+            <summary>
+            Gets or sets the user identifier.
+            </summary>
+            <value>
+            The user identifier.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.HolidayViewModel.User">
+            <summary>
+            Gets or sets the user.
+            </summary>
+            <value>
+            The user.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.HolidayViewModel.HolidayId">
+            <summary>
+            Gets or sets the holiday identifier.
+            </summary>
+            <value>
+            The holiday identifier.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.HolidayViewModel.Employees">
+            <summary>
+            Gets or sets the employees.
+            </summary>
+            <value>
+            The employees.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.HolidayViewModel.ErrorMessage">
+            <summary>
+            Gets or sets the error message.
+            </summary>
+            <value>
+            The error message.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.HolidayViewModel.Holidays">
+            <summary>
+            Gets or sets the holidays.
+            </summary>
+            <value>
+            The holidays.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.ViewModels.ShiftViewModel">
+            <summary>
+            Initialises the shift view model
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.ShiftViewModel.TempDate">
+            <summary>
+            Gets or sets the temporary date.
+            </summary>
+            <value>
+            The temporary date.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.ShiftViewModel.StartHour">
+            <summary>
+            Gets or sets the start hour.
+            </summary>
+            <value>
+            The start hour.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.ShiftViewModel.StartMinute">
+            <summary>
+            Gets or sets the start minute.
+            </summary>
+            <value>
+            The start minute.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.ShiftViewModel.EndHour">
+            <summary>
+            Gets or sets the end hour.
+            </summary>
+            <value>
+            The end hour.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.ShiftViewModel.EndMinute">
+            <summary>
+            Gets or sets the end minute.
+            </summary>
+            <value>
+            The end minute.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.ShiftViewModel.UserId">
+            <summary>
+            Gets or sets the user identifier.
+            </summary>
+            <value>
+            The user identifier.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.ShiftViewModel.ShiftId">
+            <summary>
+            Gets or sets the shift identifier.
+            </summary>
+            <value>
+            The shift identifier.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.ShiftViewModel.Employees">
+            <summary>
+            Gets or sets the employees.
+            </summary>
+            <value>
+            The employees.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.ShiftViewModel.EmployeesHolidays">
+            <summary>
+            Gets or sets the employees holidays.
+            </summary>
+            <value>
+            The employees holidays.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.ShiftViewModel.ErrorMessage">
+            <summary>
+            Gets or sets the error message.
+            </summary>
+            <value>
+            The error message.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.ShiftViewModel.Shifts">
+            <summary>
+            Gets or sets the shifts.
+            </summary>
+            <value>
+            The shifts.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.ShiftViewModel.Holidays">
+            <summary>
+            Gets or sets the holidays.
+            </summary>
+            <value>
+            The holidays.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.ShiftViewModel.User">
+            <summary>
+            Gets or sets the user.
+            </summary>
+            <value>
+            The user.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.ViewModels.Account.InviteViewModel">
+            <summary>
+            Creates an instance of the inviteviewmodel when called upon
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.Account.InviteViewModel.NewUser">
+            <summary>
+            Gets or sets the new user.
+            </summary>
+            <value>
+            The new user.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.Account.InviteViewModel.TempPass">
+            <summary>
+            Gets or sets the temporary pass.
+            </summary>
+            <value>
+            The temporary pass.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.Account.InviteViewModel.InviteCode">
+            <summary>
+            Gets or sets the invite code.
+            </summary>
+            <value>
+            The invite code.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.ViewModels.BusinessSettingsViewModel">
+            <summary>
+            Creates an instance of the businesssettingsviewmodel when called upon
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.BusinessSettingsViewModel.BusinessTypeOptions">
+            <summary>
+            Gets or sets the business type options.
+            </summary>
+            <value>
+            The business type options.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.BusinessSettingsViewModel.CountryOptions">
+            <summary>
+            Gets or sets the country options.
+            </summary>
+            <value>
+            The country options.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.BusinessSettingsViewModel.CardTypeOptions">
+            <summary>
+            Gets or sets the card type options.
+            </summary>
+            <value>
+            The card type options.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.BusinessSettingsViewModel.ExpiryMonthOptions">
+            <summary>
+            Gets or sets the expiry month options.
+            </summary>
+            <value>
+            The expiry month options.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.BusinessSettingsViewModel.ExpiryYearOptions">
+            <summary>
+            Gets or sets the expiry year options.
+            </summary>
+            <value>
+            The expiry year options.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.BusinessSettingsViewModel.TempCountry">
+            <summary>
+            Gets or sets the temporary country.
+            </summary>
+            <value>
+            The temporary country.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.BusinessSettingsViewModel.TempCardType">
+            <summary>
+            Gets or sets the type of the temporary card.
+            </summary>
+            <value>
+            The type of the temporary card.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.BusinessSettingsViewModel.ErrorMessage">
+            <summary>
+            Gets or sets the error message.
+            </summary>
+            <value>
+            The error message.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.BusinessSettingsViewModel.Business">
+            <summary>
+            Gets or sets the business.
+            </summary>
+            <value>
+            The business.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.ViewModels.EmailVerificationViewModel">
+            <summary>
+            Creates an instance of the emailVerificationViewModel when called upon
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.EmailVerificationViewModel.ActualCode">
+            <summary>
+            Gets or sets the actual code.
+            </summary>
+            <value>
+            The actual code.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.EmailVerificationViewModel.AttemptedCode">
+            <summary>
+            Gets or sets the attempted code.
+            </summary>
+            <value>
+            The attempted code.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.ViewModels.CalendarViewModel">
+            <summary>
+            Initialises the calendarVM
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.CalendarViewModel.CurrentUser">
+            <summary>
+            Gets or sets the current user.
+            </summary>
+            <value>
+            The current user.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.CalendarViewModel.Employees">
+            <summary>
+            Gets or sets the employees.
+            </summary>
+            <value>
+            The employees.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.CalendarViewModel.Shifts">
+            <summary>
+            Gets or sets the shifts.
+            </summary>
+            <value>
+            The shifts.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.CalendarViewModel.ActiveWeekCommenceDate">
+            <summary>
+            Gets or sets the active week commence date.
+            </summary>
+            <value>
+            The active week commence date.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.ViewModels.SignUpViewModel">
+            <summary>
+            Creates an instance of the signupviewmodel when called upon
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.SignUpViewModel.NewBusiness">
+            <summary>
+            Gets or sets the new business.
+            </summary>
+            <value>
+            The new business.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.SignUpViewModel.NewManager">
+            <summary>
+            Gets or sets the new manager.
+            </summary>
+            <value>
+            The new manager.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.SignUpViewModel.Password">
+            <summary>
+            Gets or sets the password.
+            </summary>
+            <value>
+            The password.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.SignUpViewModel.ConfirmPassword">
+            <summary>
+            Gets or sets the confirm password.
+            </summary>
+            <value>
+            The confirm password.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.SignUpViewModel.TempDate">
+            <summary>
+            Gets or sets the temporary date.
+            </summary>
+            <value>
+            The temporary date.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.ViewModels.SignUpViewModel.Titles">
+            <summary>
+            Gets or sets the titles.
+            </summary>
+            <value>
+            The titles.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.Controllers.AccountController">
+            <summary>
+            Account controller manages all the account details
+            </summary>
+            <seealso cref="T:System.Web.Mvc.Controller" />
+        </member>
+        <member name="M:ReadySetResource.Controllers.AccountController.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ReadySetResource.Controllers.AccountController"/> class.
+            </summary>
+        </member>
+        <member name="M:ReadySetResource.Controllers.AccountController.#ctor(ReadySetResource.ApplicationUserManager,ReadySetResource.ApplicationSignInManager)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ReadySetResource.Controllers.AccountController"/> class.
+            </summary>
+            <param name="userManager">The user manager.</param>
+            <param name="signInManager">The sign in manager.</param>
+        </member>
+        <member name="P:ReadySetResource.Controllers.AccountController.SignInManager">
+            <summary>
+            Gets the sign in manager.
+            </summary>
+            <value>
+            The sign in manager.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Controllers.AccountController.UserManager">
+            <summary>
+            Gets the user manager.
+            </summary>
+            <value>
+            The user manager.
+            </value>
+        </member>
+        <member name="M:ReadySetResource.Controllers.AccountController.Login(System.String)">
+            <summary>
+            Logins the specified return URL.
+            </summary>
+            <param name="returnUrl">The return URL.</param>
+            <returns>The view</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.AccountController.Login(ReadySetResource.Models.LoginViewModel,System.String)">
+            <summary>
+            Logins the specified model.
+            </summary>
+            <param name="model">The model.</param>
+            <param name="returnUrl">The return URL.</param>
+            <returns>The view with the loginViewModel</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.AccountController.VerifyCode(System.String,System.String,System.Boolean)">
+            <summary>
+            Verifies the code.
+            </summary>
+            <param name="provider">The provider.</param>
+            <param name="returnUrl">The return URL.</param>
+            <param name="rememberMe">if set to <c>true</c> [remember me].</param>
+            <returns>The view with the error message</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.AccountController.VerifyCode(ReadySetResource.Models.VerifyCodeViewModel)">
+            <summary>
+            Verifies the code.
+            </summary>
+            <param name="model">The model.</param>
+            <returns>The view with the verifyCodeViewModel</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.AccountController.Register">
+            <summary>
+            Registers this instance.
+            </summary>
+            <returns>The view</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.AccountController.Register(ReadySetResource.Models.RegisterViewModel)">
+            <summary>
+            Registers the specified model.
+            </summary>
+            <param name="model">The model.</param>
+            <returns>The view with the register view model</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.AccountController.ConfirmEmail(System.String,System.String)">
+            <summary>
+            Confirms the email.
+            </summary>
+            <param name="userId">The user identifier.</param>
+            <param name="code">The code.</param>
+            <returns>The view with error or with confirmedemail</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.AccountController.ForgotPassword">
+            <summary>
+            Forgots the password.
+            </summary>
+            <returns>The view</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.AccountController.ForgotPassword(ReadySetResource.Models.ForgotPasswordViewModel)">
+            <summary>
+            Forgots the password.
+            </summary>
+            <param name="model">The model.</param>
+            <returns>The view with the forgot password view model</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.AccountController.ForgotPasswordConfirmation">
+            <summary>
+            Forgots the password confirmation.
+            </summary>
+            <returns>The view</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.AccountController.ResetPassword(System.String)">
+            <summary>
+            Resets the password.
+            </summary>
+            <param name="code">The code.</param>
+            <returns>The view  with or without an error</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.AccountController.ResetPassword(ReadySetResource.Models.ResetPasswordViewModel)">
+            <summary>
+            Resets the password.
+            </summary>
+            <param name="model">The model.</param>
+            <returns>The view with the resetPasswordViewModel</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.AccountController.ResetPasswordConfirmation">
+            <summary>
+            Resets the password confirmation.
+            </summary>
+            <returns>The view</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.AccountController.ExternalLogin(System.String,System.String)">
+            <summary>
+            Externals the login.
+            </summary>
+            <param name="provider">The provider.</param>
+            <param name="returnUrl">The return URL.</param>
+            <returns>The view</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.AccountController.SendCode(System.String,System.Boolean)">
+            <summary>
+            Sends the code.
+            </summary>
+            <param name="returnUrl">The return URL.</param>
+            <param name="rememberMe">if set to <c>true</c> [remember me].</param>
+            <returns>The view with a sendCodeViewModel</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.AccountController.SendCode(ReadySetResource.Models.SendCodeViewModel)">
+            <summary>
+            Sends the code.
+            </summary>
+            <param name="model">The model.</param>
+            <returns>The view</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.AccountController.ExternalLoginCallback(System.String)">
+            <summary>
+            Externals the login callback.
+            </summary>
+            <param name="returnUrl">The return URL.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.AccountController.ExternalLoginConfirmation(ReadySetResource.Models.ExternalLoginConfirmationViewModel,System.String)">
+            <summary>
+            Externals the login confirmation.
+            </summary>
+            <param name="model">The model.</param>
+            <param name="returnUrl">The return URL.</param>
+            <returns>The view with the externalLogInConfirmationViweModel</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.AccountController.LogOff">
+            <summary>
+            Logs the off.
+            </summary>
+            <returns>The index</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.AccountController.ExternalLoginFailure">
+            <summary>
+            Externals the login failure.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.AccountController.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged resources and optionally releases managed resources.
+            </summary>
+            <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="M:ReadySetResource.Controllers.AccountController.Invite(System.String)">
+            <summary>
+            Invites the specified invite code.
+            </summary>
+            <param name="inviteCode">The invite code.</param>
+            <returns>The view iwth the invite view model</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.AccountController.InvitePost(ReadySetResource.ViewModels.Account.InviteViewModel)">
+            <summary>
+            Invites the post.
+            </summary>
+            <param name="inviteVM">The invite vm.</param>
+            <returns>The view with the invite view model</returns>
+        </member>
+        <member name="T:ReadySetResource.Controllers.GetController">
+            <summary>
+            This is the get controller to sign a business and user to the service
+            </summary>
+            <seealso cref="T:System.Web.Mvc.Controller" />
+        </member>
+        <member name="M:ReadySetResource.Controllers.GetController.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ReadySetResource.Controllers.GetController"/> class.
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.Controllers.GetController.SignInManager">
+            <summary>
+            Gets the sign in manager.
+            </summary>
+            <value>
+            The sign in manager.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Controllers.GetController.UserManager">
+            <summary>
+            Gets the user manager.
+            </summary>
+            <value>
+            The user manager.
+            </value>
+        </member>
+        <member name="M:ReadySetResource.Controllers.GetController.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged resources and optionally releases managed resources.
+            </summary>
+            <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="M:ReadySetResource.Controllers.GetController.Solutions">
+            <summary>
+            Solutionses this instance.
+            </summary>
+            <returns>The view</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.GetController.BusinessInfo(System.Int32,System.String)">
+            <summary>
+            Businesses the information.
+            </summary>
+            <param name="plan">The plan.</param>
+            <param name="errorMsg">The error MSG.</param>
+            <returns>The view with the model</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.GetController.AddBusiness(ReadySetResource.ViewModels.BusinessSettingsViewModel)">
+            <summary>
+            Adds the business.
+            </summary>
+            <param name="businessVM">The business vm.</param>
+            <returns>Redirects to the manager details</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.GetController.ManagerDetails(System.Int32)">
+            <summary>
+            Managers the details.
+            </summary>
+            <param name="businessId">The business identifier.</param>
+            <returns>The view with the sign up view model</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.GetController.AddManagerOne(ReadySetResource.ViewModels.SignUpViewModel)">
+            <summary>
+            Adds the manager one.
+            </summary>
+            <param name="signUpVM">The sign up vm.</param>
+            <returns>Redirects the manager to the verification page</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.GetController.EmailVerification">
+            <summary>
+            Emails the verification.
+            </summary>
+            <returns>The view with the email verifiaction</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.GetController.EmailAuthorisation(ReadySetResource.ViewModels.EmailVerificationViewModel)">
+            <summary>
+            Emails the authorisation.
+            </summary>
+            <param name="verificationVM">The verification vm.</param>
+            <returns>The email verification view</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.GetController.Welcome">
+            <summary>
+            Welcomes this instance.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ReadySetResource.Controllers.HomeController">
+            <summary>
+            The home controller introductes the user to the program with welcome pages
+            </summary>
+            <seealso cref="T:System.Web.Mvc.Controller" />
+        </member>
+        <member name="M:ReadySetResource.Controllers.HomeController.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ReadySetResource.Controllers.HomeController"/> class.
+            </summary>
+        </member>
+        <member name="M:ReadySetResource.Controllers.HomeController.Index">
+            <summary>
+            Indexes this instance.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.HomeController.OurStory">
+            <summary>
+            Distplays our story.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.HomeController.Solutions">
+            <summary>
+            Solutions this instance.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.HomeController.LogIn">
+            <summary>
+            Logs in.
+            </summary>
+            <returns>The view</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.HomeController.LogInStage2">
+            <summary>
+            Logs in stage2.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.HomeController.ForgotPassword">
+            <summary>
+            Forgots the password.
+            </summary>
+            <returns>The view</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.HomeController.CreateNewPassword">
+            <summary>
+            Creates the new password.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.HomeController.SecurityQuestions">
+            <summary>
+            Securities the questions.
+            </summary>
+            <returns>The view</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.HomeController.JobOpportunities">
+            <summary>
+            Jobs the opportunities.
+            </summary>
+            <returns>The view</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.HomeController.Credits">
+            <summary>
+            Creditses this instance.
+            </summary>
+            <returns>The view</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.HomeController.SiteMap">
+            <summary>
+            Sites the map.
+            </summary>
+            <returns>the view</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.HomeController.ConfirmEmail">
+            <summary>
+            Confirms the email.
+            </summary>
+            <returns>The view</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.HomeController.Donate">
+            <summary>
+            Donates this instance.
+            </summary>
+            <returns>The view</returns>
+        </member>
+        <member name="T:ReadySetResource.Controllers.LegalController">
+            <summary>
+            The legal controller displays all legal information for the system
+            </summary>
+            <seealso cref="T:System.Web.Mvc.Controller" />
+        </member>
+        <member name="M:ReadySetResource.Controllers.LegalController.Index">
+            <summary>
+            Indexes this instance.
+            </summary>
+            <returns>The view</returns>
+        </member>
+        <member name="T:ReadySetResource.Controllers.ManageController">
+            <summary>
+            The manage controller manages the sign in and user manager
+            </summary>
+            <seealso cref="T:System.Web.Mvc.Controller" />
+        </member>
+        <member name="M:ReadySetResource.Controllers.ManageController.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ReadySetResource.Controllers.ManageController"/> class.
+            </summary>
+        </member>
+        <member name="M:ReadySetResource.Controllers.ManageController.#ctor(ReadySetResource.ApplicationUserManager,ReadySetResource.ApplicationSignInManager)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ReadySetResource.Controllers.ManageController"/> class.
+            </summary>
+            <param name="userManager">The user manager.</param>
+            <param name="signInManager">The sign in manager.</param>
+        </member>
+        <member name="P:ReadySetResource.Controllers.ManageController.SignInManager">
+            <summary>
+            Gets the sign in manager.
+            </summary>
+            <value>
+            The sign in manager.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Controllers.ManageController.UserManager">
+            <summary>
+            Gets the user manager.
+            </summary>
+            <value>
+            The user manager.
+            </value>
+        </member>
+        <member name="M:ReadySetResource.Controllers.ManageController.Index(System.Nullable{ReadySetResource.Controllers.ManageController.ManageMessageId})">
+            <summary>
+            Indexes the specified message.
+            </summary>
+            <param name="message">The message.</param>
+            <returns>The view with the model</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.ManageController.RemoveLogin(System.String,System.String)">
+            <summary>
+            Removes the login.
+            </summary>
+            <param name="loginProvider">The login provider.</param>
+            <param name="providerKey">The provider key.</param>
+            <returns>The actoion manageLogins</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.ManageController.AddPhoneNumber">
+            <summary>
+            Adds the phone number.
+            </summary>
+            <returns>The view</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.ManageController.AddPhoneNumber(ReadySetResource.Models.AddPhoneNumberViewModel)">
+            <summary>
+            Adds the phone number.
+            </summary>
+            <param name="model">The model.</param>
+            <returns>The view with the model</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.ManageController.EnableTwoFactorAuthentication">
+            <summary>
+            Enables the two factor authentication.
+            </summary>
+            <returns>The Index action in the manage</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.ManageController.DisableTwoFactorAuthentication">
+            <summary>
+            Disables the two factor authentication.
+            </summary>
+            <returns>The index view in the manage controller</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.ManageController.VerifyPhoneNumber(System.String)">
+            <summary>
+            Verifies the phone number.
+            </summary>
+            <param name="phoneNumber">The phone number.</param>
+            <returns>The view</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.ManageController.VerifyPhoneNumber(ReadySetResource.Models.VerifyPhoneNumberViewModel)">
+            <summary>
+            Verifies the phone number.
+            </summary>
+            <param name="model">The model.</param>
+            <returns>The view with the model</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.ManageController.RemovePhoneNumber">
+            <summary>
+            Removes the phone number.
+            </summary>
+            <returns>The index view</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.ManageController.ChangePassword">
+            <summary>
+            Changes the password.
+            </summary>
+            <returns>The view</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.ManageController.ChangePassword(ReadySetResource.Models.ChangePasswordViewModel)">
+            <summary>
+            Changes the password.
+            </summary>
+            <param name="model">The model.</param>
+            <returns>The View with the model</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.ManageController.SetPassword">
+            <summary>
+            Sets the password.
+            </summary>
+            <returns>The view</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.ManageController.SetPassword(ReadySetResource.Models.SetPasswordViewModel)">
+            <summary>
+            Sets the password.
+            </summary>
+            <param name="model">The model.</param>
+            <returns>The view with the model</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.ManageController.ManageLogins(System.Nullable{ReadySetResource.Controllers.ManageController.ManageMessageId})">
+            <summary>
+            Manages the logins.
+            </summary>
+            <param name="message">The message.</param>
+            <returns>The view with the model</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.ManageController.LinkLogin(System.String)">
+            <summary>
+            Links the login.
+            </summary>
+            <param name="provider">The provider.</param>
+            <returns>The view</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.ManageController.LinkLoginCallback">
+            <summary>
+            Links the login callback.
+            </summary>
+            <returns>The action 'manage logins'</returns>
+        </member>
+        <member name="M:ReadySetResource.Controllers.ManageController.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged resources and optionally releases managed resources.
+            </summary>
+            <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="T:ReadySetResource.Controllers.ManageController.ManageMessageId">
+            <summary>
+            Initialises Manage MessageId when called upon
+            </summary>
+        </member>
+        <member name="F:ReadySetResource.Controllers.ManageController.ManageMessageId.AddPhoneSuccess">
+            <summary>
+            The add phone success
+            </summary>
+        </member>
+        <member name="F:ReadySetResource.Controllers.ManageController.ManageMessageId.ChangePasswordSuccess">
+            <summary>
+            The change password success
+            </summary>
+        </member>
+        <member name="F:ReadySetResource.Controllers.ManageController.ManageMessageId.SetTwoFactorSuccess">
+            <summary>
+            The set two factor success
+            </summary>
+        </member>
+        <member name="F:ReadySetResource.Controllers.ManageController.ManageMessageId.SetPasswordSuccess">
+            <summary>
+            The set password success
+            </summary>
+        </member>
+        <member name="F:ReadySetResource.Controllers.ManageController.ManageMessageId.RemoveLoginSuccess">
+            <summary>
+            The remove login success
+            </summary>
+        </member>
+        <member name="F:ReadySetResource.Controllers.ManageController.ManageMessageId.RemovePhoneSuccess">
+            <summary>
+            The remove phone success
+            </summary>
+        </member>
+        <member name="F:ReadySetResource.Controllers.ManageController.ManageMessageId.Error">
+            <summary>
+            The error
+            </summary>
+        </member>
+        <member name="T:ReadySetResource.Models.Answer">
+            <summary>
+            Creates an instance of the answer when called upon
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.Models.Answer.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Answer.Title">
+            <summary>
+            Gets or sets the title.
+            </summary>
+            <value>
+            The title.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Answer.Description">
+            <summary>
+            Gets or sets the description.
+            </summary>
+            <value>
+            The description.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Answer.Points">
+            <summary>
+            Gets or sets the points.
+            </summary>
+            <value>
+            The points.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Answer.User">
+            <summary>
+            Gets or sets the user.
+            </summary>
+            <value>
+            The user.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Answer.Question">
+            <summary>
+            Gets or sets the question.
+            </summary>
+            <value>
+            The question.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.Models.DataOverTime">
+            <summary>
+            Creates an instance of the data over time when called upon
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.Models.DataOverTime.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.DataOverTime.DateTime">
+            <summary>
+            Gets or sets the date time.
+            </summary>
+            <value>
+            The date time.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.DataOverTime.MemoryMB">
+            <summary>
+            Gets or sets the memory mb.
+            </summary>
+            <value>
+            The memory mb.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.DataOverTime.Business">
+            <summary>
+            Gets or sets the business.
+            </summary>
+            <value>
+            The business.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.Models.DataTransferRate">
+            <summary>
+            Creates an instance of the data transfer rate when called upon
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.Models.DataTransferRate.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.DataTransferRate.StartTime">
+            <summary>
+            Gets or sets the start time.
+            </summary>
+            <value>
+            The start time.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.DataTransferRate.EndTime">
+            <summary>
+            Gets or sets the end time.
+            </summary>
+            <value>
+            The end time.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.DataTransferRate.StartPage">
+            <summary>
+            Gets or sets the start page.
+            </summary>
+            <value>
+            The start page.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.DataTransferRate.EndPage">
+            <summary>
+            Gets or sets the end page.
+            </summary>
+            <value>
+            The end page.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.Models.Holiday">
+            <summary>
+            Creates an instance of the holiday when called upon
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.Models.Holiday.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Holiday.StartDateTime">
+            <summary>
+            Gets or sets the start date time.
+            </summary>
+            <value>
+            The start date time.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Holiday.EndDateTime">
+            <summary>
+            Gets or sets the end date time.
+            </summary>
+            <value>
+            The end date time.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Holiday.Accepted">
+            <summary>
+            Gets or sets the accepted.
+            </summary>
+            <value>
+            The accepted.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Holiday.UserId">
+            <summary>
+            Gets or sets the user identifier.
+            </summary>
+            <value>
+            The user identifier.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Holiday.User">
+            <summary>
+            Gets or sets the user.
+            </summary>
+            <value>
+            The user.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.Models.Business">
+            <summary>
+            Creates an instance of the business when called upon
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.Models.Business.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Business.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>
+            The name.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Business.Type">
+            <summary>
+            Gets or sets the type.
+            </summary>
+            <value>
+            The type.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Business.StartDate">
+            <summary>
+            Gets or sets the start date.
+            </summary>
+            <value>
+            The start date.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Business.EndDate">
+            <summary>
+            Gets or sets the end date.
+            </summary>
+            <value>
+            The end date.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Business.AddressLine1">
+            <summary>
+            Gets or sets the address line1.
+            </summary>
+            <value>
+            The address line1.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Business.AddressLine2">
+            <summary>
+            Gets or sets the address line2.
+            </summary>
+            <value>
+            The address line2.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Business.Postcode">
+            <summary>
+            Gets or sets the postcode.
+            </summary>
+            <value>
+            The postcode.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Business.Town">
+            <summary>
+            Gets or sets the town.
+            </summary>
+            <value>
+            The town.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Business.Region">
+            <summary>
+            Gets or sets the region.
+            </summary>
+            <value>
+            The region.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Business.Country">
+            <summary>
+            Gets or sets the country.
+            </summary>
+            <value>
+            The country.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Business.CardType">
+            <summary>
+            Gets or sets the type of the card.
+            </summary>
+            <value>
+            The type of the card.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Business.CardNumber">
+            <summary>
+            Gets or sets the card number.
+            </summary>
+            <value>
+            The card number.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Business.ExpiryMonth">
+            <summary>
+            Gets or sets the expiry month.
+            </summary>
+            <value>
+            The expiry month.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Business.ExpiryYear">
+            <summary>
+            Gets or sets the expiry year.
+            </summary>
+            <value>
+            The expiry year.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Business.SecuriyNumber">
+            <summary>
+            Gets or sets the securiy number.
+            </summary>
+            <value>
+            The securiy number.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Business.Plan">
+            <summary>
+            Gets or sets the plan.
+            </summary>
+            <value>
+            The plan.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.Models.BusinessUserType">
+            <summary>
+            Creates an instance of the businessusertype when called upon
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.Models.BusinessUserType.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.BusinessUserType.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>
+            The name.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.BusinessUserType.Administrator">
+            <summary>
+            Gets or sets the administrator.
+            </summary>
+            <value>
+            The administrator.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.BusinessUserType.Calendar">
+            <summary>
+            Gets or sets the calendar.
+            </summary>
+            <value>
+            The calendar.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.BusinessUserType.Updates">
+            <summary>
+            Gets or sets the updates.
+            </summary>
+            <value>
+            The updates.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.BusinessUserType.Store">
+            <summary>
+            Gets or sets the store.
+            </summary>
+            <value>
+            The store.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.BusinessUserType.Messenger">
+            <summary>
+            Gets or sets the messenger.
+            </summary>
+            <value>
+            The messenger.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.BusinessUserType.Meetings">
+            <summary>
+            Gets or sets the meetings.
+            </summary>
+            <value>
+            The meetings.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.BusinessUserType.Holidays">
+            <summary>
+            Gets or sets the holidays.
+            </summary>
+            <value>
+            The holidays.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.BusinessUserType.BusinessId">
+            <summary>
+            Gets or sets the business identifier.
+            </summary>
+            <value>
+            The business identifier.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.BusinessUserType.Business">
+            <summary>
+            Gets or sets the business.
+            </summary>
+            <value>
+            The business.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.Models.Case">
+            <summary>
+            Creates an instance of the case when called upon
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.Models.Case.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Case.Solved">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:ReadySetResource.Models.Case"/> is solved.
+            </summary>
+            <value>
+              <c>true</c> if solved; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Case.Email">
+            <summary>
+            Gets or sets the email.
+            </summary>
+            <value>
+            The email.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Case.Title">
+            <summary>
+            Gets or sets the title.
+            </summary>
+            <value>
+            The title.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Case.Description">
+            <summary>
+            Gets or sets the description.
+            </summary>
+            <value>
+            The description.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Case.User">
+            <summary>
+            Gets or sets the user.
+            </summary>
+            <value>
+            The user.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.Models.EmployeeType">
+            <summary>
+            Creates an instance of the employee type when called upon
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.Models.EmployeeType.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.EmployeeType.Title">
+            <summary>
+            Gets or sets the title.
+            </summary>
+            <value>
+            The title.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.EmployeeType.Description">
+            <summary>
+            Gets or sets the description.
+            </summary>
+            <value>
+            The description.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.EmployeeType.BaseSalary">
+            <summary>
+            Gets or sets the base salary.
+            </summary>
+            <value>
+            The base salary.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.Models.Error">
+            <summary>
+            Creates an instance of the error when called upon
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.Models.Error.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Error.Type">
+            <summary>
+            Gets or sets the type.
+            </summary>
+            <value>
+            The type.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Error.DateTime">
+            <summary>
+            Gets or sets the date time.
+            </summary>
+            <value>
+            The date time.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.Models.Idea">
+            <summary>
+            Creates an instance of the idea when called upon
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.Models.Idea.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Idea.Title">
+            <summary>
+            Gets or sets the title.
+            </summary>
+            <value>
+            The title.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Idea.Description">
+            <summary>
+            Gets or sets the description.
+            </summary>
+            <value>
+            The description.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Idea.User">
+            <summary>
+            Gets or sets the user.
+            </summary>
+            <value>
+            The user.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.Models.Item">
+            <summary>
+            Creates an instance of the item when called upon
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.Models.Item.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Item.Title">
+            <summary>
+            Gets or sets the title.
+            </summary>
+            <value>
+            The title.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Item.Description">
+            <summary>
+            Gets or sets the description.
+            </summary>
+            <value>
+            The description.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Item.PhotoPath">
+            <summary>
+            Gets or sets the photo path.
+            </summary>
+            <value>
+            The photo path.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Item.User">
+            <summary>
+            Gets or sets the user.
+            </summary>
+            <value>
+            The user.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.Models.Message">
+            <summary>
+            Creates an instance of the message when called upon
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.Models.Message.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Message.DateTimeSend">
+            <summary>
+            Gets or sets the date time send.
+            </summary>
+            <value>
+            The date time send.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Message.DateTimeViewed">
+            <summary>
+            Gets or sets the date time viewed.
+            </summary>
+            <value>
+            The date time viewed.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Message.ContentString">
+            <summary>
+            Gets or sets the content string.
+            </summary>
+            <value>
+            The content string.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Message.ContentImagePath">
+            <summary>
+            Gets or sets the content image path.
+            </summary>
+            <value>
+            The content image path.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Message.Sender">
+            <summary>
+            Gets or sets the sender.
+            </summary>
+            <value>
+            The sender.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Message.Recipient">
+            <summary>
+            Gets or sets the recipient.
+            </summary>
+            <value>
+            The recipient.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.Models.Password">
+            <summary>
+            Creates an instance of the password when called upon
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.Models.Password.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Password.PassString">
+            <summary>
+            Gets or sets the pass string.
+            </summary>
+            <value>
+            The pass string.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Password.Valid">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:ReadySetResource.Models.Password"/> is valid.
+            </summary>
+            <value>
+              <c>true</c> if valid; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Password.User">
+            <summary>
+            Gets or sets the user.
+            </summary>
+            <value>
+            The user.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.Models.ExternalLoginConfirmationViewModel">
+            <summary>
+            This instanciates the ExternalLoginConfirmationViewModel when called
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.Models.ExternalLoginConfirmationViewModel.Email">
+            <summary>
+            Gets or sets the email.
+            </summary>
+            <value>
+            The email.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.Models.ExternalLoginListViewModel">
+            <summary>
+            This instanciates the ExternalLoginListViewModel when called
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.Models.ExternalLoginListViewModel.ReturnUrl">
+            <summary>
+            Gets or sets the return URL.
+            </summary>
+            <value>
+            The return URL.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.Models.SendCodeViewModel">
+            <summary>
+            This instanciates the SendCodeViewModel when called
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.Models.SendCodeViewModel.SelectedProvider">
+            <summary>
+            Gets or sets the selected provider.
+            </summary>
+            <value>
+            The selected provider.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.SendCodeViewModel.Providers">
+            <summary>
+            Gets or sets the providers.
+            </summary>
+            <value>
+            The providers.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.SendCodeViewModel.ReturnUrl">
+            <summary>
+            Gets or sets the return URL.
+            </summary>
+            <value>
+            The return URL.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.SendCodeViewModel.RememberMe">
+            <summary>
+            Gets or sets a value indicating whether [remember me].
+            </summary>
+            <value>
+              <c>true</c> if [remember me]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.Models.VerifyCodeViewModel">
+            <summary>
+            This instanciates the VerifyCodeViewModel when called
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.Models.VerifyCodeViewModel.Provider">
+            <summary>
+            Gets or sets the provider.
+            </summary>
+            <value>
+            The provider.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.VerifyCodeViewModel.Code">
+            <summary>
+            Gets or sets the code.
+            </summary>
+            <value>
+            The code.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.VerifyCodeViewModel.ReturnUrl">
+            <summary>
+            Gets or sets the return URL.
+            </summary>
+            <value>
+            The return URL.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.VerifyCodeViewModel.RememberBrowser">
+            <summary>
+            Gets or sets a value indicating whether [remember browser].
+            </summary>
+            <value>
+              <c>true</c> if [remember browser]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.VerifyCodeViewModel.RememberMe">
+            <summary>
+            Gets or sets a value indicating whether [remember me].
+            </summary>
+            <value>
+              <c>true</c> if [remember me]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.Models.ForgotViewModel">
+            <summary>
+            This instanciates the ForgotViewModel when called
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.Models.ForgotViewModel.Email">
+            <summary>
+            Gets or sets the email.
+            </summary>
+            <value>
+            The email.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.Models.LoginViewModel">
+            <summary>
+            This instanciates the LoginViewModel when called
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.Models.LoginViewModel.Email">
+            <summary>
+            Gets or sets the email.
+            </summary>
+            <value>
+            The email.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.LoginViewModel.Password">
+            <summary>
+            Gets or sets the password.
+            </summary>
+            <value>
+            The password.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.LoginViewModel.RememberMe">
+            <summary>
+            Gets or sets a value indicating whether [remember me].
+            </summary>
+            <value>
+              <c>true</c> if [remember me]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.Models.RegisterViewModel">
+            <summary>
+            This instanciates the RegisterViewModel when called
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.Models.RegisterViewModel.Email">
+            <summary>
+            Gets or sets the email.
+            </summary>
+            <value>
+            The email.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.RegisterViewModel.Password">
+            <summary>
+            Gets or sets the password.
+            </summary>
+            <value>
+            The password.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.RegisterViewModel.ConfirmPassword">
+            <summary>
+            Gets or sets the confirm password.
+            </summary>
+            <value>
+            The confirm password.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.Models.ResetPasswordViewModel">
+            <summary>
+            This instanciates the ResetPasswordViewModel when called
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.Models.ResetPasswordViewModel.Email">
+            <summary>
+            Gets or sets the email.
+            </summary>
+            <value>
+            The email.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.ResetPasswordViewModel.Password">
+            <summary>
+            Gets or sets the password.
+            </summary>
+            <value>
+            The password.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.ResetPasswordViewModel.ConfirmPassword">
+            <summary>
+            Gets or sets the confirm password.
+            </summary>
+            <value>
+            The confirm password.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.ResetPasswordViewModel.Code">
+            <summary>
+            Gets or sets the code.
+            </summary>
+            <value>
+            The code.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.Models.ForgotPasswordViewModel">
+            <summary>
+            This instanciates the ForgotPasswordViewModel when called
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.Models.ForgotPasswordViewModel.Email">
+            <summary>
+            Gets or sets the email.
+            </summary>
+            <value>
+            The email.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.Models.ApplicationUser">
+            <summary>
+            Creates an instance of the applicationUser when called upon
+            </summary>
+            <seealso cref="T:Microsoft.AspNet.Identity.EntityFramework.IdentityUser" />
+        </member>
+        <member name="P:ReadySetResource.Models.ApplicationUser.Title">
+            <summary>
+            Gets or sets the title.
+            </summary>
+            <value>
+            The title.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.ApplicationUser.FirstName">
+            <summary>
+            Gets or sets the first name.
+            </summary>
+            <value>
+            The first name.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.ApplicationUser.LastName">
+            <summary>
+            Gets or sets the last name.
+            </summary>
+            <value>
+            The last name.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.ApplicationUser.DateOfBirth">
+            <summary>
+            Gets or sets the date of birth.
+            </summary>
+            <value>
+            The date of birth.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.ApplicationUser.BackupEmail">
+            <summary>
+            Gets or sets the backup email.
+            </summary>
+            <value>
+            The backup email.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.ApplicationUser.AddressLine1">
+            <summary>
+            Gets or sets the address line1.
+            </summary>
+            <value>
+            The address line1.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.ApplicationUser.AddressLine2">
+            <summary>
+            Gets or sets the address line2.
+            </summary>
+            <value>
+            The address line2.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.ApplicationUser.Postcode">
+            <summary>
+            Gets or sets the postcode.
+            </summary>
+            <value>
+            The postcode.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.ApplicationUser.Blocked">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:ReadySetResource.Models.ApplicationUser"/> is blocked.
+            </summary>
+            <value>
+              <c>true</c> if blocked; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.ApplicationUser.TimesLoggedIn">
+            <summary>
+            Gets or sets the times logged in.
+            </summary>
+            <value>
+            The times logged in.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.ApplicationUser.Sex">
+            <summary>
+            Gets or sets the sex.
+            </summary>
+            <value>
+            The sex.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.ApplicationUser.NIN">
+            <summary>
+            Gets or sets the nin.
+            </summary>
+            <value>
+            The nin.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.ApplicationUser.EmergencyContact">
+            <summary>
+            Gets or sets the emergency contact.
+            </summary>
+            <value>
+            The emergency contact.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.ApplicationUser.Raise">
+            <summary>
+            Gets or sets the raise.
+            </summary>
+            <value>
+            The raise.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.ApplicationUser.Strikes">
+            <summary>
+            Gets or sets the strikes.
+            </summary>
+            <value>
+            The strikes.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.ApplicationUser.GoogleCalendarFilePath">
+            <summary>
+            Gets or sets the google calendar file path.
+            </summary>
+            <value>
+            The google calendar file path.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.ApplicationUser.EmployeeTypeId">
+            <summary>
+            Gets or sets the employee type identifier.
+            </summary>
+            <value>
+            The employee type identifier.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.ApplicationUser.EmployeeType">
+            <summary>
+            Gets or sets the type of the employee.
+            </summary>
+            <value>
+            The type of the employee.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.ApplicationUser.BusinessUserTypeId">
+            <summary>
+            Gets or sets the business user type identifier.
+            </summary>
+            <value>
+            The business user type identifier.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.ApplicationUser.BusinessUserType">
+            <summary>
+            Gets or sets the type of the business user.
+            </summary>
+            <value>
+            The type of the business user.
+            </value>
+        </member>
+        <member name="M:ReadySetResource.Models.ApplicationUser.GenerateUserIdentityAsync(Microsoft.AspNet.Identity.UserManager{ReadySetResource.Models.ApplicationUser})">
+            <summary>
+            Generates the user identity asynchronous.
+            </summary>
+            <param name="manager">The manager.</param>
+            <returns></returns>
+        </member>
+        <member name="T:ReadySetResource.Models.ApplicationDbContext">
+            <summary>
+            Creates new application db context
+            </summary>
+        </member>
+        <member name="M:ReadySetResource.Models.ApplicationDbContext.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ReadySetResource.Models.ApplicationDbContext"/> class.
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.Models.ApplicationDbContext.Passwords">
+            <summary>
+            Gets or sets the passwords.
+            </summary>
+            <value>
+            The passwords.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.ApplicationDbContext.EmployeeTypes">
+            <summary>
+            Gets or sets the employee types.
+            </summary>
+            <value>
+            The employee types.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.ApplicationDbContext.BusinessUserTypes">
+            <summary>
+            Gets or sets the business user types.
+            </summary>
+            <value>
+            The business user types.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.ApplicationDbContext.Businesses">
+            <summary>
+            Gets or sets the businesses.
+            </summary>
+            <value>
+            The businesses.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.ApplicationDbContext.Errors">
+            <summary>
+            Gets or sets the errors.
+            </summary>
+            <value>
+            The errors.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.ApplicationDbContext.Ideas">
+            <summary>
+            Gets or sets the ideas.
+            </summary>
+            <value>
+            The ideas.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.ApplicationDbContext.Shifts">
+            <summary>
+            Gets or sets the shifts.
+            </summary>
+            <value>
+            The shifts.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.ApplicationDbContext.UserInterests">
+            <summary>
+            Gets or sets the user interests.
+            </summary>
+            <value>
+            The user interests.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.ApplicationDbContext.Cases">
+            <summary>
+            Gets or sets the cases.
+            </summary>
+            <value>
+            The cases.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.ApplicationDbContext.Holidays">
+            <summary>
+            Gets or sets the holidays.
+            </summary>
+            <value>
+            The holidays.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.ApplicationDbContext.DataTransferRates">
+            <summary>
+            Gets or sets the data transfer rates.
+            </summary>
+            <value>
+            The data transfer rates.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.ApplicationDbContext.Items">
+            <summary>
+            Gets or sets the items.
+            </summary>
+            <value>
+            The items.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.ApplicationDbContext.Updates">
+            <summary>
+            Gets or sets the updates.
+            </summary>
+            <value>
+            The updates.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.ApplicationDbContext.DataOverTimes">
+            <summary>
+            Gets or sets the data over times.
+            </summary>
+            <value>
+            The data over times.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.ApplicationDbContext.Questions">
+            <summary>
+            Gets or sets the questions.
+            </summary>
+            <value>
+            The questions.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.ApplicationDbContext.Answers">
+            <summary>
+            Gets or sets the answers.
+            </summary>
+            <value>
+            The answers.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.ApplicationDbContext.Messages">
+            <summary>
+            Gets or sets the messages.
+            </summary>
+            <value>
+            The messages.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.ApplicationDbContext.Transactions">
+            <summary>
+            Gets or sets the transactions.
+            </summary>
+            <value>
+            The transactions.
+            </value>
+        </member>
+        <member name="M:ReadySetResource.Models.ApplicationDbContext.Create">
+            <summary>
+            Creates this instance.
+            </summary>
+            <returns>A new applicationDBContext</returns>
+        </member>
+        <member name="T:ReadySetResource.Models.IndexViewModel">
+            <summary>
+            Creates an instance of the indexviewmodel when called upon
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.Models.IndexViewModel.HasPassword">
+            <summary>
+            Gets or sets a value indicating whether this instance has password.
+            </summary>
+            <value>
+              <c>true</c> if this instance has password; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.IndexViewModel.Logins">
+            <summary>
+            Gets or sets the logins.
+            </summary>
+            <value>
+            The logins.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.IndexViewModel.PhoneNumber">
+            <summary>
+            Gets or sets the phone number.
+            </summary>
+            <value>
+            The phone number.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.IndexViewModel.TwoFactor">
+            <summary>
+            Gets or sets a value indicating whether [two factor].
+            </summary>
+            <value>
+              <c>true</c> if [two factor]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.IndexViewModel.BrowserRemembered">
+            <summary>
+            Gets or sets a value indicating whether [browser remembered].
+            </summary>
+            <value>
+              <c>true</c> if [browser remembered]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.Models.ManageLoginsViewModel">
+            <summary>
+            Creates an instance of the ManageLoginsViewModel when called upon
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.Models.ManageLoginsViewModel.CurrentLogins">
+            <summary>
+            Gets or sets the current logins.
+            </summary>
+            <value>
+            The current logins.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.ManageLoginsViewModel.OtherLogins">
+            <summary>
+            Gets or sets the other logins.
+            </summary>
+            <value>
+            The other logins.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.Models.FactorViewModel">
+            <summary>
+            Creates an instance of the factorViewModel when called upon
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.Models.FactorViewModel.Purpose">
+            <summary>
+            Gets or sets the purpose.
+            </summary>
+            <value>
+            The purpose.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.Models.SetPasswordViewModel">
+            <summary>
+            Creates an instance of the SendPasswordViewModel when called upon
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.Models.SetPasswordViewModel.NewPassword">
+            <summary>
+            Gets or sets the new password.
+            </summary>
+            <value>
+            The new password.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.SetPasswordViewModel.ConfirmPassword">
+            <summary>
+            Gets or sets the confirm password.
+            </summary>
+            <value>
+            The confirm password.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.Models.ChangePasswordViewModel">
+            <summary>
+            Creates an instance of the changePasswordViewModel when called upon
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.Models.ChangePasswordViewModel.OldPassword">
+            <summary>
+            Gets or sets the old password.
+            </summary>
+            <value>
+            The old password.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.ChangePasswordViewModel.NewPassword">
+            <summary>
+            Gets or sets the new password.
+            </summary>
+            <value>
+            The new password.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.ChangePasswordViewModel.ConfirmPassword">
+            <summary>
+            Gets or sets the confirm password.
+            </summary>
+            <value>
+            The confirm password.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.Models.AddPhoneNumberViewModel">
+            <summary>
+            Creates an instance of the addPhoneNumberViewModel when called upon
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.Models.AddPhoneNumberViewModel.Number">
+            <summary>
+            Gets or sets the number.
+            </summary>
+            <value>
+            The number.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.Models.VerifyPhoneNumberViewModel">
+            <summary>
+            Creates an instance of the VerifyPhoneNumberViewModel when called upon
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.Models.VerifyPhoneNumberViewModel.Code">
+            <summary>
+            Gets or sets the code.
+            </summary>
+            <value>
+            The code.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.VerifyPhoneNumberViewModel.PhoneNumber">
+            <summary>
+            Gets or sets the phone number.
+            </summary>
+            <value>
+            The phone number.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.Models.ConfigureTwoFactorViewModel">
+            <summary>
+            Creates an instance of the twofactorviewmodel when called upon
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.Models.ConfigureTwoFactorViewModel.SelectedProvider">
+            <summary>
+            Gets or sets the selected provider.
+            </summary>
+            <value>
+            The selected provider.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.ConfigureTwoFactorViewModel.Providers">
+            <summary>
+            Gets or sets the providers.
+            </summary>
+            <value>
+            The providers.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.Models.Question">
+            <summary>
+            Creates an instance of the question when called upon
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.Models.Question.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Question.Solved">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:ReadySetResource.Models.Question" /> is solved.
+            </summary>
+            <value>
+              <c>true</c> if solved; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Question.Title">
+            <summary>
+            Gets or sets the title.
+            </summary>
+            <value>
+            The title.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Question.Description">
+            <summary>
+            Gets or sets the description.
+            </summary>
+            <value>
+            The description.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Question.Views">
+            <summary>
+            Gets or sets the views.
+            </summary>
+            <value>
+            The views.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Question.User">
+            <summary>
+            Gets or sets the user.
+            </summary>
+            <value>
+            The user.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.Models.Shift">
+            <summary>
+            Creates an instance of the shift when called upon
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.Models.Shift.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Shift.StartDateTime">
+            <summary>
+            Gets or sets the start date time.
+            </summary>
+            <value>
+            The start date time.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Shift.EndDateTime">
+            <summary>
+            Gets or sets the end date time.
+            </summary>
+            <value>
+            The end date time.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Shift.UserId">
+            <summary>
+            Gets or sets the user identifier.
+            </summary>
+            <value>
+            The user identifier.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Shift.User">
+            <summary>
+            Gets or sets the user.
+            </summary>
+            <value>
+            The user.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.Models.Transaction">
+            <summary>
+            When called upon, instanciates the transaction class
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.Models.Transaction.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Transaction.Type">
+            <summary>
+            Gets or sets the type.
+            </summary>
+            <value>
+            The type.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Transaction.Amount">
+            <summary>
+            Gets or sets the amount.
+            </summary>
+            <value>
+            The amount.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Transaction.VAT">
+            <summary>
+            Gets or sets the vat.
+            </summary>
+            <value>
+            The vat.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Transaction.Total">
+            <summary>
+            Gets or sets the total.
+            </summary>
+            <value>
+            The total.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Transaction.DateSent">
+            <summary>
+            Gets or sets the date sent.
+            </summary>
+            <value>
+            The date sent.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Transaction.DateRefunded">
+            <summary>
+            Gets or sets the date refunded.
+            </summary>
+            <value>
+            The date refunded.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Transaction.Sender">
+            <summary>
+            Gets or sets the sender.
+            </summary>
+            <value>
+            The sender.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Transaction.Recipient">
+            <summary>
+            Gets or sets the recipient.
+            </summary>
+            <value>
+            The recipient.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.Models.Update">
+            <summary>
+            Creates an instance of the update when called upon
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.Models.Update.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Update.Title">
+            <summary>
+            Gets or sets the title.
+            </summary>
+            <value>
+            The title.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Update.Description">
+            <summary>
+            Gets or sets the description.
+            </summary>
+            <value>
+            The description.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.Update.Business">
+            <summary>
+            Gets or sets the business.
+            </summary>
+            <value>
+            The business.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.Models.UserInterest">
+            <summary>
+            Creates an instance of the userInterest when called upon
+            </summary>
+        </member>
+        <member name="P:ReadySetResource.Models.UserInterest.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.UserInterest.Code">
+            <summary>
+            Gets or sets the code.
+            </summary>
+            <value>
+            The code.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.UserInterest.DateTime">
+            <summary>
+            Gets or sets the date time.
+            </summary>
+            <value>
+            The date time.
+            </value>
+        </member>
+        <member name="P:ReadySetResource.Models.UserInterest.User">
+            <summary>
+            Gets or sets the user.
+            </summary>
+            <value>
+            The user.
+            </value>
+        </member>
+        <member name="T:ReadySetResource.MvcApplication">
+            <summary>
+            Creates an instance of the MvcApplication when called upon
+            </summary>
+            <seealso cref="T:System.Web.HttpApplication" />
+        </member>
+        <member name="M:ReadySetResource.MvcApplication.Application_Start">
+            <summary>
+            Starts the application
+            </summary>
+        </member>
+    </members>
+</doc>

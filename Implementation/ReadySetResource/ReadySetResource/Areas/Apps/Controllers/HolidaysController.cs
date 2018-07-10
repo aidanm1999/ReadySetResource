@@ -17,13 +17,18 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace ReadySetResource.Areas.Apps.Controllers
 {
-
+    /// <summary>
+    /// This is the holiday for the calendar application so that users can see their shift schedule.
+    /// </summary>
+    /// <seealso cref="System.Web.Mvc.Controller" />
     public class HolidaysController : Controller
     {
         #region Context
         private ApplicationDbContext _context;
 
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HolidaysController"/> class.
+        /// </summary>
         public HolidaysController()
         {
             _context = new ApplicationDbContext();
@@ -35,7 +40,11 @@ namespace ReadySetResource.Areas.Apps.Controllers
         //Views for Holidays
         #region Index (View)
         // GET: Dashboard/Holidays
-
+        /// <summary>
+        /// Indexes the specified week.
+        /// </summary>
+        /// <param name="week">The week.</param>
+        /// <returns>The view with the holidaysVM</returns>
         [HttpGet]
         [Authorize]
         public ActionResult Index(DateTime? week)
@@ -55,6 +64,11 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
         #region Add (View)
         // GET: Holidays/AddHoliday
+        /// <summary>
+        /// Adds the specified date.
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <returns>The view with the holiaysVM</returns>
         [HttpGet]
         [Authorize]
         public ActionResult Add(DateTime? date)
@@ -108,6 +122,11 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
         #region Edit (View)
         // GET: Dashboard/Edit
+        /// <summary>
+        /// Edits the specified holiday.
+        /// </summary>
+        /// <param name="holiday">The holiday.</param>
+        /// <returns>The view with the holidayVM</returns>
         [HttpGet]
         [Authorize]
         public ActionResult Edit(int holiday)
@@ -168,6 +187,11 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
         //Methods for Holidays
         #region Populate Holidays Method
+        /// <summary>
+        /// Populates the holidays.
+        /// </summary>
+        /// <param name="weekBeginDate">The week begin date.</param>
+        /// <returns>The holidays view model</returns>
         private HolidaysViewModel PopulateHolidays(DateTime weekBeginDate)
         {
             //1 - Get BusinessUserType from current user and sets current user as holidays.cshtml needs to check for business user type
@@ -230,6 +254,11 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
         #region AddHoliday
         // POST: Holidays/AddHoliday
+        /// <summary>
+        /// Adds the holiday.
+        /// </summary>
+        /// <param name="holidayVM">The holiday vm.</param>
+        /// <returns>The index view with the updated holiday list</returns>
         [HttpPost]
         [Authorize]
         public ActionResult AddHoliday(HolidayViewModel holidayVM)
@@ -345,6 +374,11 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
         #region EditHoliday
         // POST: Calendar/AddShift
+        /// <summary>
+        /// Edits the holiday.
+        /// </summary>
+        /// <param name="holidayVM">The holiday vm.</param>
+        /// <returns>The index view with the updated holiday list</returns>
         [HttpPost]
         [Authorize]
         public ActionResult EditHoliday(HolidayViewModel holidayVM)
@@ -461,6 +495,11 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
         #region AcceptHoliday
         // POST: Calendar/DeleteHoliday
+        /// <summary>
+        /// Accepts the holiday.
+        /// </summary>
+        /// <param name="holiday">The holiday.</param>
+        /// <returns>The index action with the updated holidays list</returns>
         [Authorize]
         public ActionResult AcceptHoliday(int holiday)
         {
@@ -476,6 +515,11 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
         #region DeclineHoliday
         // POST: Calendar/DeleteHoliday
+        /// <summary>
+        /// Declines the holiday.
+        /// </summary>
+        /// <param name="holiday">The holiday.</param>
+        /// <returns>The index action with the updated holidays list</returns>
         [Authorize]
         public ActionResult DeclineHoliday(int holiday)
         {
@@ -491,6 +535,11 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
         #region DeleteHoliday
         // POST: Calendar/DeleteHoliday
+        /// <summary>
+        /// Deletes the holiday.
+        /// </summary>
+        /// <param name="holiday">The holiday.</param>
+        /// <returns>The index action with the updated holidays list</returns>
         [Authorize]
         public ActionResult DeleteHoliday(int holiday)
         {

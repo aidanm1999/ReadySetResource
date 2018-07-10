@@ -9,6 +9,7 @@
 
 namespace ReadySetResource.Models
 {
+<<<<<<< HEAD
     using System;
     using System.Collections.Generic;
     
@@ -20,5 +21,46 @@ namespace ReadySetResource.Models
         public Nullable<int> Business_Id { get; set; }
     
         public virtual Business Business { get; set; }
+=======
+    /// <summary>
+    /// Creates an instance of the data over time when called upon
+    /// </summary>
+    public class DataOverTime
+    {
+        /// <summary>
+        /// Gets or sets the identifier.
+        /// </summary>
+        /// <value>
+        /// The identifier.
+        /// </value>
+        [Key]
+        public int Id { get; set; }
+
+        /// <summary>
+        /// Gets or sets the date time.
+        /// </summary>
+        /// <value>
+        /// The date time.
+        /// </value>
+        [Required]
+        public DateTime DateTime { get; set; }
+
+        /// <summary>
+        /// Gets or sets the memory mb.
+        /// </summary>
+        /// <value>
+        /// The memory mb.
+        /// </value>
+        [Required]
+        public float MemoryMB { get; set; }
+
+        /// <summary>
+        /// Gets or sets the business.
+        /// </summary>
+        /// <value>
+        /// The business.
+        /// </value>
+        public Business Business { get; set; }
+>>>>>>> parent of ae2ad3a... Took out XML Comments
     }
 }

@@ -9,6 +9,7 @@
 
 namespace ReadySetResource.Models
 {
+<<<<<<< HEAD
     using System;
     using System.Collections.Generic;
     
@@ -23,6 +24,48 @@ namespace ReadySetResource.Models
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+=======
+    /// <summary>
+    /// Creates an instance of the employee type when called upon
+    /// </summary>
+    public class EmployeeType
+    {
+        /// <summary>
+        /// Gets or sets the identifier.
+        /// </summary>
+        /// <value>
+        /// The identifier.
+        /// </value>
+        [Key]
+        public int Id { get; set; }
+
+        /// <summary>
+        /// Gets or sets the title.
+        /// </summary>
+        /// <value>
+        /// The title.
+        /// </value>
+        [Required]
+        [MaxLength(70)]
+        [MinLength(3)]
+        public string Title { get; set; }
+
+        /// <summary>
+        /// Gets or sets the description.
+        /// </summary>
+        /// <value>
+        /// The description.
+        /// </value>
+        [MaxLength(255)]
+        public string Description { get; set; }
+
+        /// <summary>
+        /// Gets or sets the base salary.
+        /// </summary>
+        /// <value>
+        /// The base salary.
+        /// </value>
+>>>>>>> parent of ae2ad3a... Took out XML Comments
         public int BaseSalary { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

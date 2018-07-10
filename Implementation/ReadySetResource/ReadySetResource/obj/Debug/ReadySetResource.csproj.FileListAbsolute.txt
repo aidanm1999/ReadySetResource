@@ -204,6 +204,7 @@ C:\Users\Aidan Marshall\Google Drive\ReadySetResource\Implementation\ReadySetRes
 C:\Users\Aidan Marshall\Google Drive\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\roslyn\csi.exe
 C:\Users\Aidan Marshall\Google Drive\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\roslyn\csi.exe.config
 C:\Users\Aidan Marshall\Google Drive\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\roslyn\csi.rsp
+C:\Users\Aidan Marshall\Google Drive\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\roslyn\desktop.ini
 C:\Users\Aidan Marshall\Google Drive\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 C:\Users\Aidan Marshall\Google Drive\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
 C:\Users\Aidan Marshall\Google Drive\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll

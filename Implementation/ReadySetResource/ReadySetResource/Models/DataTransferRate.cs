@@ -9,6 +9,7 @@
 
 namespace ReadySetResource.Models
 {
+<<<<<<< HEAD
     using System;
     using System.Collections.Generic;
     
@@ -18,6 +19,55 @@ namespace ReadySetResource.Models
         public System.DateTime StartTime { get; set; }
         public System.DateTime EndTime { get; set; }
         public string StartPage { get; set; }
+=======
+    /// <summary>
+    /// Creates an instance of the data transfer rate when called upon
+    /// </summary>
+    public class DataTransferRate
+    {
+        /// <summary>
+        /// Gets or sets the identifier.
+        /// </summary>
+        /// <value>
+        /// The identifier.
+        /// </value>
+        [Key]
+        public int Id { get; set; }
+
+        /// <summary>
+        /// Gets or sets the start time.
+        /// </summary>
+        /// <value>
+        /// The start time.
+        /// </value>
+        [Required]
+        public DateTime StartTime { get; set; }
+
+        /// <summary>
+        /// Gets or sets the end time.
+        /// </summary>
+        /// <value>
+        /// The end time.
+        /// </value>
+        [Required]
+        public DateTime EndTime { get; set; }
+
+        /// <summary>
+        /// Gets or sets the start page.
+        /// </summary>
+        /// <value>
+        /// The start page.
+        /// </value>
+        [Required]
+        public string StartPage { get; set; }
+
+        /// <summary>
+        /// Gets or sets the end page.
+        /// </summary>
+        /// <value>
+        /// The end page.
+        /// </value>
+>>>>>>> parent of ae2ad3a... Took out XML Comments
         public string EndPage { get; set; }
     }
 }

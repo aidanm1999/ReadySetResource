@@ -9,6 +9,7 @@
 
 namespace ReadySetResource.Models
 {
+<<<<<<< HEAD
     using System;
     using System.Collections.Generic;
     
@@ -20,5 +21,47 @@ namespace ReadySetResource.Models
         public string User_Id { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
+=======
+    /// <summary>
+    /// Creates an instance of the userInterest when called upon
+    /// </summary>
+    public class UserInterest
+    {
+        /// <summary>
+        /// Gets or sets the identifier.
+        /// </summary>
+        /// <value>
+        /// The identifier.
+        /// </value>
+        [Key]
+        public int Id { get; set; }
+
+        /// <summary>
+        /// Gets or sets the code.
+        /// </summary>
+        /// <value>
+        /// The code.
+        /// </value>
+        [Required]
+        public string Code { get; set; }//Changed from int to string
+
+        /// <summary>
+        /// Gets or sets the date time.
+        /// </summary>
+        /// <value>
+        /// The date time.
+        /// </value>
+        [Required]
+        public DateTime DateTime { get; set; } //Changed from int to DateTime
+
+
+        /// <summary>
+        /// Gets or sets the user.
+        /// </summary>
+        /// <value>
+        /// The user.
+        /// </value>
+        public ApplicationUser User { get; set; }
+>>>>>>> parent of ae2ad3a... Took out XML Comments
     }
 }

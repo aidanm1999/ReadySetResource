@@ -14,12 +14,36 @@ using ReadySetResource.Models;
 
 namespace ReadySetResource.ViewModels.Account
 {
-
+    /// <summary>
+    /// Creates an instance of the inviteviewmodel when called upon
+    /// </summary>
     public class InviteViewModel
     {
+<<<<<<< HEAD
 
         public AspNetUser NewUser { get; set; }
+=======
+        /// <summary>
+        /// Gets or sets the new user.
+        /// </summary>
+        /// <value>
+        /// The new user.
+        /// </value>
+        public ApplicationUser NewUser { get; set; }
+        /// <summary>
+        /// Gets or sets the temporary pass.
+        /// </summary>
+        /// <value>
+        /// The temporary pass.
+        /// </value>
+>>>>>>> parent of ae2ad3a... Took out XML Comments
         public string TempPass { get; set; }
+        /// <summary>
+        /// Gets or sets the invite code.
+        /// </summary>
+        /// <value>
+        /// The invite code.
+        /// </value>
         public string InviteCode { get; set; }
     }
 }

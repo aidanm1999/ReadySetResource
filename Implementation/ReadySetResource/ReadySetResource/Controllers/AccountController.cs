@@ -24,7 +24,10 @@ using System.Net.Mail;
 
 namespace ReadySetResource.Controllers
 {
-
+    /// <summary>
+    /// Account controller manages all the account details
+    /// </summary>
+    /// <seealso cref="System.Web.Mvc.Controller" />
     [Authorize]
     public class AccountController : Controller
     {
@@ -32,20 +35,31 @@ namespace ReadySetResource.Controllers
         private ApplicationUserManager _userManager;
         private ApplicationDbContext _context;
 
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AccountController"/> class.
+        /// </summary>
         public AccountController()
         {
             _context = new ApplicationDbContext();
         }
 
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AccountController"/> class.
+        /// </summary>
+        /// <param name="userManager">The user manager.</param>
+        /// <param name="signInManager">The sign in manager.</param>
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
         {
             UserManager = userManager;
             SignInManager = signInManager;
         }
 
-
+        /// <summary>
+        /// Gets the sign in manager.
+        /// </summary>
+        /// <value>
+        /// The sign in manager.
+        /// </value>
         public ApplicationSignInManager SignInManager
         {
             get
@@ -58,7 +72,12 @@ namespace ReadySetResource.Controllers
             }
         }
 
-
+        /// <summary>
+        /// Gets the user manager.
+        /// </summary>
+        /// <value>
+        /// The user manager.
+        /// </value>
         public ApplicationUserManager UserManager
         {
             get
@@ -71,8 +90,13 @@ namespace ReadySetResource.Controllers
             }
         }
 
-        
+        //
         // GET: /Account/Login
+        /// <summary>
+        /// Logins the specified return URL.
+        /// </summary>
+        /// <param name="returnUrl">The return URL.</param>
+        /// <returns>The view</returns>
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
@@ -80,8 +104,14 @@ namespace ReadySetResource.Controllers
             return View();
         }
 
-        
+        //
         // POST: /Account/Login
+        /// <summary>
+        /// Logins the specified model.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <param name="returnUrl">The return URL.</param>
+        /// <returns>The view with the loginViewModel</returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -111,8 +141,15 @@ namespace ReadySetResource.Controllers
             }
         }
 
-        
+        //
         // GET: /Account/VerifyCode
+        /// <summary>
+        /// Verifies the code.
+        /// </summary>
+        /// <param name="provider">The provider.</param>
+        /// <param name="returnUrl">The return URL.</param>
+        /// <param name="rememberMe">if set to <c>true</c> [remember me].</param>
+        /// <returns>The view with the error message</returns>
         [AllowAnonymous]
         public async Task<ActionResult> VerifyCode(string provider, string returnUrl, bool rememberMe)
         {
@@ -124,8 +161,13 @@ namespace ReadySetResource.Controllers
             return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
 
-        
+        //
         // POST: /Account/VerifyCode
+        /// <summary>
+        /// Verifies the code.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns>The view with the verifyCodeViewModel</returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -154,16 +196,25 @@ namespace ReadySetResource.Controllers
             }
         }
 
-        
+        //
         // GET: /Account/Register
+        /// <summary>
+        /// Registers this instance.
+        /// </summary>
+        /// <returns>The view</returns>
         [AllowAnonymous]
         public ActionResult Register()
         {
             return View();
         }
 
-        
+        //
         // POST: /Account/Register
+        /// <summary>
+        /// Registers the specified model.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns>The view with the register view model</returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -194,8 +245,14 @@ namespace ReadySetResource.Controllers
             return View(model);
         }
 
-        
+        //
         // GET: /Account/ConfirmEmail
+        /// <summary>
+        /// Confirms the email.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <param name="code">The code.</param>
+        /// <returns>The view with error or with confirmedemail</returns>
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {
@@ -207,16 +264,25 @@ namespace ReadySetResource.Controllers
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 
-        
+        //
         // GET: /Account/ForgotPassword
+        /// <summary>
+        /// Forgots the password.
+        /// </summary>
+        /// <returns>The view</returns>
         [AllowAnonymous]
         public ActionResult ForgotPassword()
         {
             return View();
         }
 
-        
+        //
         // POST: /Account/ForgotPassword
+        /// <summary>
+        /// Forgots the password.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns>The view with the forgot password view model</returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -279,24 +345,38 @@ namespace ReadySetResource.Controllers
             return View(model);
         }
 
-        
+        //
         // GET: /Account/ForgotPasswordConfirmation
+        /// <summary>
+        /// Forgots the password confirmation.
+        /// </summary>
+        /// <returns>The view</returns>
         [AllowAnonymous]
         public ActionResult ForgotPasswordConfirmation()
         {
             return View();
         }
 
-        
+        //
         // GET: /Account/ResetPassword
+        /// <summary>
+        /// Resets the password.
+        /// </summary>
+        /// <param name="code">The code.</param>
+        /// <returns>The view  with or without an error</returns>
         [AllowAnonymous]
         public ActionResult ResetPassword(string code)
         {
             return code == null ? View("Error") : View();
         }
 
-        
+        //
         // POST: /Account/ResetPassword
+        /// <summary>
+        /// Resets the password.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns>The view with the resetPasswordViewModel</returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -330,16 +410,26 @@ namespace ReadySetResource.Controllers
             return View();
         }
 
-        
+        //
         // GET: /Account/ResetPasswordConfirmation
+        /// <summary>
+        /// Resets the password confirmation.
+        /// </summary>
+        /// <returns>The view</returns>
         [AllowAnonymous]
         public ActionResult ResetPasswordConfirmation()
         {
             return View();
         }
 
-        
+        //
         // POST: /Account/ExternalLogin
+        /// <summary>
+        /// Externals the login.
+        /// </summary>
+        /// <param name="provider">The provider.</param>
+        /// <param name="returnUrl">The return URL.</param>
+        /// <returns>The view</returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -349,8 +439,14 @@ namespace ReadySetResource.Controllers
             return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
         }
 
-        
+        //
         // GET: /Account/SendCode
+        /// <summary>
+        /// Sends the code.
+        /// </summary>
+        /// <param name="returnUrl">The return URL.</param>
+        /// <param name="rememberMe">if set to <c>true</c> [remember me].</param>
+        /// <returns>The view with a sendCodeViewModel</returns>
         [AllowAnonymous]
         public async Task<ActionResult> SendCode(string returnUrl, bool rememberMe)
         {
@@ -364,8 +460,13 @@ namespace ReadySetResource.Controllers
             return View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
 
-        
+        //
         // POST: /Account/SendCode
+        /// <summary>
+        /// Sends the code.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns>The view</returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -384,8 +485,13 @@ namespace ReadySetResource.Controllers
             return RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });
         }
 
-        
+        //
         // GET: /Account/ExternalLoginCallback
+        /// <summary>
+        /// Externals the login callback.
+        /// </summary>
+        /// <param name="returnUrl">The return URL.</param>
+        /// <returns></returns>
         [AllowAnonymous]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
@@ -414,8 +520,14 @@ namespace ReadySetResource.Controllers
             }
         }
 
-        
+        //
         // POST: /Account/ExternalLoginConfirmation
+        /// <summary>
+        /// Externals the login confirmation.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <param name="returnUrl">The return URL.</param>
+        /// <returns>The view with the externalLogInConfirmationViweModel</returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -452,8 +564,12 @@ namespace ReadySetResource.Controllers
             return View(model);
         }
 
-        
+        //
         // POST: /Account/LogOff
+        /// <summary>
+        /// Logs the off.
+        /// </summary>
+        /// <returns>The index</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
@@ -462,14 +578,22 @@ namespace ReadySetResource.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        
+        //
         // GET: /Account/ExternalLoginFailure
+        /// <summary>
+        /// Externals the login failure.
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         public ActionResult ExternalLoginFailure()
         {
             return View();
         }
 
+        /// <summary>
+        /// Releases unmanaged resources and optionally releases managed resources.
+        /// </summary>
+        /// <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -498,6 +622,11 @@ namespace ReadySetResource.Controllers
 
 
         // GET: /Account/Login
+        /// <summary>
+        /// Invites the specified invite code.
+        /// </summary>
+        /// <param name="inviteCode">The invite code.</param>
+        /// <returns>The view iwth the invite view model</returns>
         [AllowAnonymous]
         [HttpGet]
         public ActionResult Invite(string inviteCode)
@@ -519,6 +648,11 @@ namespace ReadySetResource.Controllers
         }
 
         // GET: /Account/Login
+        /// <summary>
+        /// Invites the post.
+        /// </summary>
+        /// <param name="inviteVM">The invite vm.</param>
+        /// <returns>The view with the invite view model</returns>
         [AllowAnonymous]
         [HttpPost]
         public async Task<ActionResult> InvitePost(InviteViewModel inviteVM)

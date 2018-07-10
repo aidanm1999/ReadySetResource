@@ -19,10 +19,17 @@ using System.Diagnostics;
 
 namespace ReadySetResource
 {
-
+    /// <summary>
+    /// This is the email service to send emails
+    /// </summary>
+    /// <seealso cref="Microsoft.AspNet.Identity.IIdentityMessageService" />
     public class EmailService : IIdentityMessageService
     {
-
+        /// <summary>
+        /// This method should send the message
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns>The task from result 0</returns>
         public Task SendAsync(IdentityMessage message)
         {
             // Plug in your email service here to send an email.
@@ -30,9 +37,17 @@ namespace ReadySetResource
         }
     }
 
+    /// <summary>
+    /// This is the email service to send emails
+    /// </summary>
+    /// <seealso cref="Microsoft.AspNet.Identity.IIdentityMessageService" />
     public class SmsService : IIdentityMessageService
     {
-
+        /// <summary>
+        /// This method should send the message
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
         public Task SendAsync(IdentityMessage message)
         {
             var Twilio = new TwilioRestClient(
@@ -50,15 +65,34 @@ namespace ReadySetResource
         }
     }
 
+<<<<<<< HEAD
     public class ApplicationUserManager : UserManager<AspNetUser>
     {
 
         public ApplicationUserManager(IUserStore<AspNetUser> store)
+=======
+    // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
+    /// <summary>
+    /// Thus creates a application user manager
+    /// </summary>
+    public class ApplicationUserManager : UserManager<ApplicationUser>
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ApplicationUserManager"/> class.
+        /// </summary>
+        /// <param name="store"></param>
+        public ApplicationUserManager(IUserStore<ApplicationUser> store)
+>>>>>>> parent of ae2ad3a... Took out XML Comments
             : base(store)
         {
         }
 
-
+        /// <summary>
+        /// Creates the specified options.
+        /// </summary>
+        /// <param name="options">The options.</param>
+        /// <param name="context">The context.</param>
+        /// <returns>the manager</returns>
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) 
         {
             var manager = new ApplicationUserManager(new UserStore<AspNetUser>(context.Get<ApplicationDbContext>()));
@@ -108,22 +142,47 @@ namespace ReadySetResource
     }
 
     // Configure the application sign-in manager which is used in this application.
+<<<<<<< HEAD
 
     public class ApplicationSignInManager : SignInManager<AspNetUser, string>
+=======
+    /// <summary>
+    /// Initialises the sign in manager
+    /// </summary>
+    public class ApplicationSignInManager : SignInManager<ApplicationUser, string>
+>>>>>>> parent of ae2ad3a... Took out XML Comments
     {
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ApplicationSignInManager"/> class.
+        /// </summary>
+        /// <param name="userManager">The user manager.</param>
+        /// <param name="authenticationManager">The authentication manager.</param>
         public ApplicationSignInManager(ApplicationUserManager userManager, IAuthenticationManager authenticationManager)
             : base(userManager, authenticationManager)
         {
         }
 
+<<<<<<< HEAD
 
         public override Task<ClaimsIdentity> CreateUserIdentityAsync(AspNetUser user)
+=======
+        /// <summary>
+        /// Called to generate the ClaimsIdentity for the user, override to add additional claims before SignIn
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns>The user generated identity</returns>
+        public override Task<ClaimsIdentity> CreateUserIdentityAsync(ApplicationUser user)
+>>>>>>> parent of ae2ad3a... Took out XML Comments
         {
             return user.GenerateUserIdentityAsync((ApplicationUserManager)UserManager);
         }
 
-
+        /// <summary>
+        /// Creates the specified options.
+        /// </summary>
+        /// <param name="options">The options.</param>
+        /// <param name="context">The context.</param>
+        /// <returns>The sign in manager</returns>
         public static ApplicationSignInManager Create(IdentityFactoryOptions<ApplicationSignInManager> options, IOwinContext context)
         {
             return new ApplicationSignInManager(context.GetUserManager<ApplicationUserManager>(), context.Authentication);
