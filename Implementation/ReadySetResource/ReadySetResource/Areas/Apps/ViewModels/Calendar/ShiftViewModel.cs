@@ -124,7 +124,7 @@ namespace ReadySetResource.ViewModels
         public List<Holiday> Holidays { get; set; }
 <<<<<<< HEAD
 
-        public AspNetUser User { get; set; }
+        public ApplicationUser User { get; set; }
 =======
         /// <summary>
         /// Gets or sets the user.

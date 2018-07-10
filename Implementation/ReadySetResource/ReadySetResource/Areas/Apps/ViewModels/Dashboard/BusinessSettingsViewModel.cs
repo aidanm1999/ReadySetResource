@@ -35,7 +35,7 @@ namespace ReadySetResource.Areas.Apps.ViewModels.Dashboard
         public BusinessUserType CurrUserType { get; set; }
 <<<<<<< HEAD
 
-        public List<AspNetUser> Employees { get; set; }
+        public List<ApplicationUser> Employees { get; set; }
 
 =======
         /// <summary>

@@ -18,7 +18,7 @@ namespace ReadySetResource.Models
         public Nullable<int> Question_Id { get; set; }
         public string User_Id { get; set; }
     
-        public virtual AspNetUser AspNetUser { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
         public virtual Question Question { get; set; }
 
     }

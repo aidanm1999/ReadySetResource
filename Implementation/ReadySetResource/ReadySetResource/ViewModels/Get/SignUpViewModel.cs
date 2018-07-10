@@ -31,7 +31,7 @@ namespace ReadySetResource.ViewModels
 
 <<<<<<< HEAD
 
-        public AspNetUser NewManager { get; set; }
+        public ApplicationUser NewManager { get; set; }
 
 =======
         /// <summary>

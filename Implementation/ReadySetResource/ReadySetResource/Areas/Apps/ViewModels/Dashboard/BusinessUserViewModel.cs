@@ -57,7 +57,7 @@ namespace ReadySetResource.Areas.Apps.ViewModels.Dashboard
         public string Sender { get; set; }
 <<<<<<< HEAD
 
-        public AspNetUser BusinessUser { get; set; }
+        public ApplicationUser BusinessUser { get; set; }
 
 =======
         /// <summary>

@@ -27,8 +27,8 @@ namespace ReadySetResource.ViewModels
         /// </value>
         public BusinessUserType CurrentUserType  { get; set; }
 <<<<<<< HEAD
-        public AspNetUser CurrentUser { get; set; }
-        public List<AspNetUser> Employees { get; set; }
+        public ApplicationUser CurrentUser { get; set; }
+        public List<ApplicationUser> Employees { get; set; }
 =======
         /// <summary>
         /// Gets or sets the current user.

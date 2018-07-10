@@ -21,7 +21,7 @@ namespace ReadySetResource.ViewModels.Account
     {
 <<<<<<< HEAD
 
-        public AspNetUser NewUser { get; set; }
+        public ApplicationUser NewUser { get; set; }
 =======
         /// <summary>
         /// Gets or sets the new user.

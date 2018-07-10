@@ -570,7 +570,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
         #region Populate MyCharts
 <<<<<<< HEAD
-        private MyChartsViewModel PopulateUserCharts(AspNetUser user, DateTime weekBeginDate)
+        private MyChartsViewModel PopulateUserCharts(ApplicationUser user, DateTime weekBeginDate)
 =======
         /// <summary>
         /// Populates the user charts.
@@ -618,7 +618,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
         }
 
         #region Populates Doughnut Chart
-        private MyChartsViewModel PopulateDoughnutChart(AspNetUser user, DateTime weekBeginDate, MyChartsViewModel chartsVM)
+        private MyChartsViewModel PopulateDoughnutChart(ApplicationUser user, DateTime weekBeginDate, MyChartsViewModel chartsVM)
         {
             List<string> daysOfWeek = new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
 
@@ -626,9 +626,9 @@ namespace ReadySetResource.Areas.Apps.Controllers
             //Gets the user types of that business
             var userTypesInBusiness = _context.BusinessUserTypes.Where(t => t.BusinessId == user.BusinessUserType.BusinessId).ToList();
             // this var will be a temporary one to store the users in that type
-            var usersInDb = new List<AspNetUser>();
+            var usersInDb = new List<ApplicationUser>();
             // this var will sort all the users when gotten
-            var usersInBusiness = new List<AspNetUser>();
+            var usersInBusiness = new List<ApplicationUser>();
 
             foreach (var type in userTypesInBusiness)
             {
@@ -746,10 +746,10 @@ namespace ReadySetResource.Areas.Apps.Controllers
         [Authorize]
         public ActionResult AddShift(ShiftViewModel shiftVM)
         {
-            AspNetUser user = new AspNetUser();
+            ApplicationUser user = new ApplicationUser();
             user = _context.Users.SingleOrDefault(u => u.Id == shiftVM.UserId);
             Shift shift = new Shift();
-            shift.AspNetUser = user;
+            shift.ApplicationUser = user;
             shift.UserId = user.Id;
 
             var shiftAlready = false;
@@ -909,7 +909,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
             ApplicationUser user = new ApplicationUser();
             user = _context.Users.SingleOrDefault(u => u.Id == shiftVM.UserId);
             Shift shift = new Shift();
-            shift.AspNetUser = user;
+            shift.ApplicationUser = user;
             shift.UserId = user.Id;
 
             shift.Id = shiftVM.ShiftId;
@@ -946,13 +946,13 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
             Shift shiftInDb = _context.Shifts.SingleOrDefault(s => s.Id == shift.Id);
 
-            if (shiftInDb.Id != shift.Id | shiftInDb.StartDateTime != shift.StartDateTime | shiftInDb.EndDateTime != shift.EndDateTime | shiftInDb.AspNetUser.Id != shift.AspNetUser.Id | shiftInDb.UserId != shift.UserId)
+            if (shiftInDb.Id != shift.Id | shiftInDb.StartDateTime != shift.StartDateTime | shiftInDb.EndDateTime != shift.EndDateTime | shiftInDb.ApplicationUser.Id != shift.ApplicationUser.Id | shiftInDb.UserId != shift.UserId)
             {
                 changesMade = true;
 
                 shiftInDb.StartDateTime = shift.StartDateTime;
                 shiftInDb.EndDateTime = shift.EndDateTime;
-                shiftInDb.AspNetUser = shift.AspNetUser;
+                shiftInDb.ApplicationUser = shift.ApplicationUser;
                 shiftInDb.UserId = shift.UserId;
             }
 

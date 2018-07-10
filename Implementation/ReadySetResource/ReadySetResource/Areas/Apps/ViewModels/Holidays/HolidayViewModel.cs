@@ -93,7 +93,7 @@ namespace ReadySetResource.ViewModels
         public string UserId { get; set; }
 <<<<<<< HEAD
 
-        public AspNetUser User { get; set; }
+        public ApplicationUser User { get; set; }
 
 =======
         /// <summary>

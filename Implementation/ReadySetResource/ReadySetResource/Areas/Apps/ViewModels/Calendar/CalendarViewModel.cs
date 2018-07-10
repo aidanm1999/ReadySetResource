@@ -21,9 +21,9 @@ namespace ReadySetResource.ViewModels
     {
 <<<<<<< HEAD
 
-        public AspNetUser CurrentUser  { get; set; }
+        public ApplicationUser CurrentUser  { get; set; }
 
-        public List<AspNetUser> Employees { get; set; }
+        public List<ApplicationUser> Employees { get; set; }
 
 =======
         /// <summary>

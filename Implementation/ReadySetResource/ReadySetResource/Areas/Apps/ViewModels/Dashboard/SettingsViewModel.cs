@@ -33,7 +33,7 @@ namespace ReadySetResource.Areas.Apps.ViewModels.Dashboard
 
 <<<<<<< HEAD
 
-        public AspNetUser User { get; set;  }
+        public ApplicationUser User { get; set;  }
         
 =======
         /// <summary>
