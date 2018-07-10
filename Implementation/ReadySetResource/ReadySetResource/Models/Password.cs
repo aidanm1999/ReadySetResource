@@ -1,4 +1,4 @@
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace ReadySetResource.Models
 {
@@ -24,7 +24,8 @@ namespace ReadySetResource.Models
         /// The pass string.
         /// </value>
         [Required]
-        [MaxLength(20)] [MinLength(8)]
+        [MaxLength(20)]
+        [MinLength(8)]
         [RegularExpression("(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9])$", ErrorMessage = "Password must have a letter, a number and no special characters.")]
         public string PassString { get; set; }
 
@@ -46,6 +47,6 @@ namespace ReadySetResource.Models
         /// </value>
         public ApplicationUser User { get; set; }
 
-        
+
     }
 }

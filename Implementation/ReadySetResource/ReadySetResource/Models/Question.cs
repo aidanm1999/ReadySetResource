@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -61,6 +61,6 @@ namespace ReadySetResource.Models
         /// The user.
         /// </value>
         public ApplicationUser User { get; set; }
-        
+
     }
 }

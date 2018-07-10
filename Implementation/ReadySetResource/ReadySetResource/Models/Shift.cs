@@ -1,4 +1,4 @@
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System;
 
 
@@ -19,7 +19,7 @@ namespace ReadySetResource.Models
         public DateTime EndDateTime { get; set; } //Changed from integer to datetime
 
         public string UserId { get; set; }
-        
+
         public ApplicationUser User { get; set; }
     }
 }

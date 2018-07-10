@@ -724,7 +724,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
             ApplicationUser user = new ApplicationUser();
             user = _context.Users.SingleOrDefault(u => u.Id == shiftVM.UserId);
             Shift shift = new Shift();
-            shift.ApplicationUser = user;
+            shift.User = user;
             shift.UserId = user.Id;
 
             var shiftAlready = false;
@@ -878,7 +878,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
             ApplicationUser user = new ApplicationUser();
             user = _context.Users.SingleOrDefault(u => u.Id == shiftVM.UserId);
             Shift shift = new Shift();
-            shift.ApplicationUser = user;
+            shift.User = user;
             shift.UserId = user.Id;
 
             shift.Id = shiftVM.ShiftId;
@@ -915,13 +915,13 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
             Shift shiftInDb = _context.Shifts.SingleOrDefault(s => s.Id == shift.Id);
 
-            if (shiftInDb.Id != shift.Id | shiftInDb.StartDateTime != shift.StartDateTime | shiftInDb.EndDateTime != shift.EndDateTime | shiftInDb.ApplicationUser.Id != shift.ApplicationUser.Id | shiftInDb.UserId != shift.UserId)
+            if (shiftInDb.Id != shift.Id | shiftInDb.StartDateTime != shift.StartDateTime | shiftInDb.EndDateTime != shift.EndDateTime | shiftInDb.User.Id != shift.User.Id | shiftInDb.UserId != shift.UserId)
             {
                 changesMade = true;
 
                 shiftInDb.StartDateTime = shift.StartDateTime;
                 shiftInDb.EndDateTime = shift.EndDateTime;
-                shiftInDb.ApplicationUser = shift.ApplicationUser;
+                shiftInDb.User = shift.User;
                 shiftInDb.UserId = shift.UserId;
             }
 

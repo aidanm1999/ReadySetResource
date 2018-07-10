@@ -270,7 +270,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
             }
             user = _context.Users.SingleOrDefault(u => u.Id == holidayVM.UserId);
             Holiday holiday = new Holiday();
-            holiday.ApplicationUser = user;
+            holiday.User = user;
             holiday.UserId = user.Id;
 
             var holidayAlready = false;
@@ -388,7 +388,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
             ApplicationUser user = new ApplicationUser();
             user = _context.Users.SingleOrDefault(u => u.Id == holidayVM.UserId);
             Shift holiday = new Shift();
-            holiday.ApplicationUser = user;
+            holiday.User = user;
             holiday.UserId = user.Id;
 
             holiday.Id = holidayVM.HolidayId;
@@ -422,13 +422,13 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
             Holiday holidayInDb = _context.Holidays.SingleOrDefault(s => s.Id == holiday.Id);
 
-            if (holidayInDb.Id != holiday.Id | holidayInDb.StartDateTime != holiday.StartDateTime | holidayInDb.EndDateTime != holiday.EndDateTime | holidayInDb.ApplicationUser.Id != holiday.ApplicationUser.Id | holidayInDb.UserId != holiday.UserId)
+            if (holidayInDb.Id != holiday.Id | holidayInDb.StartDateTime != holiday.StartDateTime | holidayInDb.EndDateTime != holiday.EndDateTime | holidayInDb.User.Id != holiday.User.Id | holidayInDb.UserId != holiday.UserId)
             {
                 changesMade = true;
 
                 holidayInDb.StartDateTime = holiday.StartDateTime;
                 holidayInDb.EndDateTime = holiday.EndDateTime;
-                holidayInDb.ApplicationUser = holiday.ApplicationUser;
+                holidayInDb.User = holiday.User;
                 holidayInDb.UserId = holiday.UserId;
             }
 

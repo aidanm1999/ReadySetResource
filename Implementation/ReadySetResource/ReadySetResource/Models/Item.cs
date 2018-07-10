@@ -1,4 +1,4 @@
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace ReadySetResource.Models
 {
@@ -17,7 +17,7 @@ namespace ReadySetResource.Models
 
 
         public string Description { get; set; }
-        
+
         public string PhotoPath { get; set; }
         public ApplicationUser User { get; set; }
     }
