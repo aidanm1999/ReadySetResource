@@ -521,12 +521,6 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
 
         #region AddTypePost
-        // POST: Calendar/AddTypePost
-        /// <summary>
-        /// Adds the type post.
-        /// </summary>
-        /// <param name="typeVM">The type vm.</param>
-        /// <returns>Add type view with the typeVM</returns>
         [HttpPost]
         [Authorize]
         public ActionResult AddTypePost(BusinessUserTypeViewModel typeVM)
@@ -680,11 +674,6 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
         #region AddUserPost
         // POST: Calendar/AddUserPost
-        /// <summary>
-        /// Adds the user post.
-        /// </summary>
-        /// <param name="userVM">The user vm.</param>
-        /// <returns>Error message to the view or redirects to BusinessSettings View</returns>
         [HttpPost]
         [Authorize]
         public async Task<ActionResult> AddUserPost(BusinessUserViewModel userVM)
@@ -772,7 +761,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
                 //Send email to get confirmation that that user exists
 
                 //Creates a personalised link based on their user id
-                userVM.Link = "http://localhost:57785/Account/Invite?inviteCode=" + currUser.Id;
+                userVM.Link = "http://readysetresource3.azurewebsites.net/Account/Invite?inviteCode=" + currUser.Id;
 
 
                 //Email user the code
