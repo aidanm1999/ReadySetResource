@@ -112,7 +112,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
 
 
-        #region Settings
+        #region Account Settings
         [HttpGet]
         [Authorize]
         public ActionResult Settings()
@@ -139,6 +139,53 @@ namespace ReadySetResource.Areas.Apps.Controllers
             return View(settingsVM);
         }
         #endregion
+
+
+
+        #region BusinessUserTypes
+        [HttpGet]
+        [Authorize]
+        public ActionResult BusinessUserTypes(string errorMsg)
+        {
+            //1 - Get BusinessUserType from current user and sets current user as Calendar.cshtml needs to check for business user type
+            var currUserId = User.Identity.GetUserId();
+            var currBusinessUser = _context.Users.SingleOrDefault(c => c.Id == currUserId);
+            var currBusinessUserTypeId = currBusinessUser.BusinessUserTypeId;
+            var currBusinessUserType = _context.BusinessUserTypes.SingleOrDefault(c => c.Id == currBusinessUserTypeId);
+            var currBusinessId = currBusinessUserType.BusinessId;
+
+
+            //2 - Get Business from BusinessUserType
+            var currBusiness = _context.Businesses.SingleOrDefault(c => c.Id == currBusinessId);
+            var userTypes = _context.BusinessUserTypes.Where(t => t.BusinessId == currBusinessId).ToList();
+
+            var employeeCounts = new List<int>();
+
+            foreach (var type in userTypes)
+            {
+                var employees = _context.Users.Where(u => u.BusinessUserTypeId == type.Id).ToList();
+
+                int employeeCount = employees.Count();
+
+                employeeCounts.Add(employeeCount);
+            }
+
+
+            //3 - Load all employees in that business and initialize settingsVM
+            BusinessUserTypesViewModel businessUserTypesVM = new BusinessUserTypesViewModel
+            {
+                ErrorMessage = errorMsg,
+                BusinessUserTypes = _context.BusinessUserTypes.Where(e => e.BusinessId == currBusiness.Id).ToList(),
+                CurrUserType = currBusinessUserType,
+                EmployeeCounts = employeeCounts,
+            };
+
+
+
+            return View(businessUserTypesVM);
+        }
+        #endregion
+
 
 
 
@@ -559,12 +606,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
 
         #region EditTypePost
-        // POST: Calendar/EditTypePost
-        /// <summary>
-        /// Edits the type post.
-        /// </summary>
-        /// <param name="typeVM">The type vm.</param>
-        /// <returns>Business settings view or edit type view</returns>
+
         [HttpPost]
         [Authorize]
         public ActionResult EditTypePost(BusinessUserTypeViewModel typeVM)
@@ -644,11 +686,6 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
         #region DeleteType
         // POST: Calendar/DeleteType
-        /// <summary>
-        /// Deletes the type.
-        /// </summary>
-        /// <param name="type">The type.</param>
-        /// <returns>Edit Type view with the error message or redirects to business settings action</returns>
         [Authorize]
         public ActionResult DeleteType(int type)
         {

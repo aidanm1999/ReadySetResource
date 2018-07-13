@@ -274,6 +274,7 @@
     <Compile Include="Areas\Apps\ViewModels\Dashboard\BusinessSettingsViewModel.cs" />
     <Compile Include="Areas\Apps\ViewModels\Dashboard\BusinessUserTypeViewModel.cs" />
     <Compile Include="Areas\Apps\ViewModels\Dashboard\BusinessUserViewModel.cs" />
+    <Compile Include="Areas\Apps\ViewModels\Dashboard\BusinessUserTypesViewModel.cs" />
     <Compile Include="Areas\Apps\ViewModels\Dashboard\SettingsViewModel.cs" />
     <Compile Include="Areas\Apps\ViewModels\Holidays\HolidaysViewModel.cs" />
     <Compile Include="Areas\Apps\ViewModels\Holidays\HolidayViewModel.cs" />
@@ -462,6 +463,7 @@
     <Content Include="Api\client_secret.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Areas\Apps\Views\Dashboard\BusinessUserTypes.cshtml" />
     <None Include="Properties\PublishProfiles\ReadySetResource3 - Web Deploy.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
