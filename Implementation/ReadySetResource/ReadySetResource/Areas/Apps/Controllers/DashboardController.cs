@@ -142,10 +142,10 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
 
 
-        #region BusinessUserTypes
+        #region UserTypes
         [HttpGet]
         [Authorize]
-        public ActionResult BusinessUserTypes(string errorMsg)
+        public ActionResult UserTypes(string errorMsg)
         {
             //1 - Get BusinessUserType from current user and sets current user as Calendar.cshtml needs to check for business user type
             var currUserId = User.Identity.GetUserId();
