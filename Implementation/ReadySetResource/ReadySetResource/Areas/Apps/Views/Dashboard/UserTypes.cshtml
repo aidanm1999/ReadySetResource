@@ -48,8 +48,9 @@
                         <img src="~/Content/Images/dashboard/user.png" alt="@type.Name" style="width:100%">
                         <div class="container">
                             <h4><b>@type.Name</b></h4>
-                            <p> @Model.EmployeeCounts[count] 
-                            
+                            <p>
+                                @Model.EmployeeCounts[count]
+
                                 @if (@Model.EmployeeCounts[count] == 1)
                                 {
                                     <text>Employee</text>
@@ -68,6 +69,20 @@
             count = count + 1;
         }
     }
+
+    <a href="@Url.Action("AddType")">
+
+        <div class="col-md-3">
+            <div class="center">
+                <div class="card">
+                    <img src="~/Content/Images/dashboard/addUser.png" alt="Add Employee Type" style="width:100%">
+                    <div class="container">
+                        <h4><b>Add Employee Type</b></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
 </body>
 
 
