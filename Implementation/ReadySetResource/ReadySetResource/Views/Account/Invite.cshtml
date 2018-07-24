@@ -25,12 +25,20 @@
 
         @using (Html.BeginForm("InvitePost", "Account"))
         {
-            @Html.ValidationSummary(true, "The password is incorrect, sorry.")
+            @Html.ValidationSummary(true, "The temporary password is incorrect, sorry.")
+            @Model.ErrorMsg
 
             @Html.TextBoxFor(m => m.TempPass)
             @Html.AntiForgeryToken()
             @Html.HiddenFor(m => m.NewUser.Id)
             @Html.HiddenFor(m => m.NewUser.Email)
+
+            @Html.LabelFor(m => m.NewPassword)
+            @Html.TextBoxFor(m => m.NewPassword)
+            @Html.LabelFor(m => m.ConfirmNewPassword)
+            @Html.TextBoxFor(m => m.ConfirmNewPassword)
+
+
             <button type="submit" class="btn btn-primary">Continue</button>
         }
 

@@ -54,14 +54,10 @@ namespace ReadySetResource.Controllers
         #endregion
 
 
-        #region OurStory
-        /// <summary>
-        /// Distplays our story.
-        /// </summary>
-        /// <returns></returns>
+        #region Updates
         [HttpGet]
         [AllowAnonymous]
-        public ViewResult OurStory()
+        public ViewResult Updates()
         {
             return View();
         }

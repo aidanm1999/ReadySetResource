@@ -1346,7 +1346,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
             {
                 string credPath = System.Environment.GetFolderPath(
                     System.Environment.SpecialFolder.Personal);
-                credPath = Path.Combine(credPath, "Projects/ReadySetResource/Implementation/ReadySetResource/ReadySetResource/.credentials");
+                credPath = Path.Combine(credPath, "Projects/ReadySetResource/Implementation/ReadySetResource/ReadySetResource/credentials");
 
                 
                 credential = GoogleWebAuthorizationBroker.AuthorizeAsync(

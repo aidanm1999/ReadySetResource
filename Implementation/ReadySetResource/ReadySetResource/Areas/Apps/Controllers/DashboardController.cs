@@ -798,7 +798,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
                 //Send email to get confirmation that that user exists
 
                 //Creates a personalised link based on their user id
-                userVM.Link = "http://readysetresource3.azurewebsites.net/Account/Invite?inviteCode=" + currUser.Id;
+                userVM.Link = "http://readysetresource.com/Account/Invite?inviteCode=" + currUser.Id;
 
 
                 //Email user the code

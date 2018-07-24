@@ -1,0 +1,114 @@
+﻿@model ReadySetResource.Areas.Apps.ViewModels.Dashboard.BusinessUserTypesViewModel
+@{
+    ViewBag.Title = "Employee Types";
+    Layout = "~/Areas/Apps/Views/Shared/_Layout.cshtml";
+    int count = 0;
+}
+
+<style>
+    .card {
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+        width: 100%;
+        border-radius: 5px;
+        word-wrap: break-word;
+    }
+
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        }
+
+    img {
+        border-radius: 5px 5px 0 0;
+    }
+
+    .container {
+        padding: 2px 16px;
+    }
+
+    .center {
+        margin: auto;
+        width: 80%;
+        padding: 10px;
+    }
+</style>
+
+<h2>Employee Types</h2>
+@Model.ErrorMessage
+
+
+<body>
+    @foreach (var type in Model.BusinessUserTypes)
+    {
+        <a href="@Url.Action("BusinessSettings", new { type = type.Id })">
+
+            <div class="col-md-3">
+                <div class="center">
+                    <div class="card">
+                        <img src="~/Content/Images/dashboard/user.png" alt="@type.Name" style="width:100%">
+                        <div class="container">
+                            <h4><b>@type.Name</b></h4>
+                            <p>
+                                @Model.EmployeeCounts[count]
+
+                                @if (@Model.EmployeeCounts[count] == 1)
+                                {
+                                    <text>Employee</text>
+                                }
+                                else
+                                {
+                                    <text>Employees</text>
+                                }
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+        {
+            count = count + 1;
+        }
+    }
+
+    <a href="@Url.Action("AddType")">
+
+        <div class="col-md-3">
+            <div class="center">
+                <div class="card">
+                    <img src="~/Content/Images/dashboard/addUser.png" alt="Add Employee Type" style="width:100%">
+                    <div class="container">
+                        <h4><b>Add Employee Type</b></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+</body>
+
+
+
+<!--
+<div class="col-md-3 animated fadeInUp" style="animation-duration:1s">
+
+    @if (Model.CurrUserType.Administrator == "E")
+    {
+        @Html.ActionLink("Add Type", "AddType", "Dashboard", null, new { @class = "btn btn-default" })
+    }
+
+    <table id="rota">
+        <tbody>
+            @foreach (var type in Model.BusinessUserTypes)
+            {
+                <tr>
+                    <td>@type.Name</td>
+                    @if (Model.CurrUserType.Administrator == "E")
+                    {
+                        <td>@Html.ActionLink("Edit", "EditType", new { type = type.Id })</td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+    -->

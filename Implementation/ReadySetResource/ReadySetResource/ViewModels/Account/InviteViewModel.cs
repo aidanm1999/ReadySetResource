@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using ReadySetResource.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace ReadySetResource.ViewModels.Account
 {
@@ -20,7 +21,16 @@ namespace ReadySetResource.ViewModels.Account
 
         public ApplicationUser NewUser { get; set; }
 
+
         public string TempPass { get; set; }
         public string InviteCode { get; set; }
+
+        [Display(Name = "Password")]
+        public string NewPassword { get; set; }
+        [Display(Name = "Confirm")]
+        public string ConfirmNewPassword { get; set; }
+
+        public string ErrorMsg { get; set; }
+        public string Token { get; set; }
     }
 }
