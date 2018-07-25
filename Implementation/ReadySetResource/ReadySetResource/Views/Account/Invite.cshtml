@@ -6,7 +6,33 @@
 
 <!DOCTYPE html>
 
+
+<style>
+    body, html {
+        height: 100%;
+        margin: 0;
+    }
+
+    .bg {
+        /* The image used */
+        background-image: url("../../Content/Images/home/ExtendedChairBG.png");
+        /* Full height */
+        height: 100%;
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    form {
+        margin: 0 auto;
+        width: 280px;
+    }
+</style>
+
+
 <html>
+
 <head>
     <title>Verify Email</title>
     <meta charset="utf-8" />
@@ -16,31 +42,38 @@
     @Scripts.Render("~/bundles/modernizr")
     <link rel="stylesheet" href="~/Content/animate.css">
 </head>
-<body style="text-align:center; align-content:center;">
+
+<body class="bg" style="text-align:center; align-content:center;">
     <div style="border-color:black; border-width:thin;">
-        <h1 class="animated flash">One last thing!</h1>
 
-        <h2>We want to keep your account as secure as possible, </h2>
-        <h2>therefore please enter the temporary password below:</h2>
+        <img style="width:200px" src="~/Content/Images/home/shortLogo.png" />
 
-        @using (Html.BeginForm("InvitePost", "Account"))
-        {
-            @Html.ValidationSummary(true, "The temporary password is incorrect, sorry.")
-            @Model.ErrorMsg
+        <h1>Please enter temporary password</h1>
 
-            @Html.TextBoxFor(m => m.TempPass)
-            @Html.AntiForgeryToken()
-            @Html.HiddenFor(m => m.NewUser.Id)
-            @Html.HiddenFor(m => m.NewUser.Email)
+        <div class="row">
+            <div class="text-center" style=" text-align:center;">
+                @using (Html.BeginForm("InvitePost", "Account"))
+                {
+                    @Html.ValidationSummary(true, "The temporary password is incorrect, sorry.")
+                    <h3 class="animated flash">
+                        @Model.ErrorMsg
+                    </h3>
 
-            @Html.LabelFor(m => m.NewPassword)
-            @Html.TextBoxFor(m => m.NewPassword)
-            @Html.LabelFor(m => m.ConfirmNewPassword)
-            @Html.TextBoxFor(m => m.ConfirmNewPassword)
+                    <br />
 
+                    @Html.PasswordFor(m => m.TempPass, new { @class = "form-control", placeholder = "Password is found on your email"})
 
-            <button type="submit" class="btn btn-primary">Continue</button>
-        }
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(m => m.NewUser.Id)
+                    @Html.HiddenFor(m => m.NewUser.Email)
+
+                    <br />
+
+                    <button type="submit" class="btn btn-primary">Continue</button>
+                }
+            </div>
+
+        </div>
 
     </div>
 </body>

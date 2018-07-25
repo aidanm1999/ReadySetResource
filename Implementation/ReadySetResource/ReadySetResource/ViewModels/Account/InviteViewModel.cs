@@ -17,18 +17,27 @@ namespace ReadySetResource.ViewModels.Account
 {
 
     public class InviteViewModel
-    { 
+    {
 
         public ApplicationUser NewUser { get; set; }
 
-
+        
+        [DataType(DataType.Password)]
+        [Display(Name = "Temporary Password")]
         public string TempPass { get; set; }
+
+
         public string InviteCode { get; set; }
 
         [Display(Name = "Password")]
-        public string NewPassword { get; set; }
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+
         [Display(Name = "Confirm")]
-        public string ConfirmNewPassword { get; set; }
+        [DataType(DataType.Password)]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; }
 
         public string ErrorMsg { get; set; }
         public string Token { get; set; }

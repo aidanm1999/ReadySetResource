@@ -483,12 +483,12 @@ namespace ReadySetResource.Controllers
 
 
 
-
+        #region User Invite
 
         // GET: /Account/Invite
         [AllowAnonymous]
         [HttpGet]
-        public ActionResult Invite(string inviteCode)
+        public ActionResult Invite(string inviteCode, string errorMsg)
         {
             var user = _context.Users.SingleOrDefault(u => u.Id == inviteCode);
             if(user == null)
@@ -500,7 +500,18 @@ namespace ReadySetResource.Controllers
                 InviteViewModel inviteVM = new InviteViewModel
                 {
                     NewUser = user,
+                    Password = "",
+                    ConfirmPassword = "",
                 };
+
+                if(errorMsg != "" || errorMsg != null)
+                {
+                    inviteVM.ErrorMsg = errorMsg;
+                }
+                else
+                {
+                    inviteVM.ErrorMsg = "";
+                }
                 return View(inviteVM);
             }
             
@@ -511,52 +522,30 @@ namespace ReadySetResource.Controllers
         [HttpPost]
         public async Task<ActionResult> InvitePost(InviteViewModel inviteVM)
         {
-            //Checks to see if passwords are the same
-            if(inviteVM.NewPassword != inviteVM.ConfirmNewPassword)
-            {
-                inviteVM.ErrorMsg = "Passwords do not match";
-                return View(inviteVM);
-            }
-
             if (!ModelState.IsValid)
             {
                 return View(inviteVM);
             }
-            
+
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
+
+
             var result = await SignInManager.PasswordSignInAsync(inviteVM.NewUser.Email, inviteVM.TempPass, false, shouldLockout: false);
 
 
 
-            var result2 = await SignInManager.SignInAsync(inviteVM.NewUser, true, false);
-
             switch (result)
             {
                 case SignInStatus.Success:
-                    var userId = User.Identity.GetUserId();
-                    var userInDb = _context.Users.SingleOrDefault(c => c.Id == userId);
-                    userInDb.EmailConfirmed = true;
-
-                    inviteVM.Token = await UserManager.GeneratePasswordResetTokenAsync(inviteVM.NewUser.Id);
-
-                    //Change password
-                    var resetResult = await UserManager.ResetPasswordAsync(userInDb.Id, inviteVM.Token, inviteVM.NewPassword);
-                    if (resetResult.Succeeded)
-                    {
-                        _context.SaveChanges();
-                        return RedirectToAction("Index", "Dashboard", new { area = "Apps" });
-                    }
-                    else
-                    {
-                        //Something went wrong
-                        return RedirectToAction("Error");
-                    }
+                    return View("InviteSetPassword");
+                    
                     
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.Failure:
+                    return RedirectToAction("Invite", new { inviteCode = inviteVM.NewUser.Id , errorMsg = "Wrong temporary password." });
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return RedirectToAction("Invite", new { inviteCode = inviteVM.InviteCode });
@@ -566,6 +555,61 @@ namespace ReadySetResource.Controllers
 
 
 
+
+
+
+
+
+
+
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult InviteSetPassword()
+        {
+            return View();
+        }
+
+        
+
+        [Authorize]
+        [HttpPost]
+        public async Task<ActionResult> InviteSetPasswordPost(InviteViewModel inviteVM)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View("InviteSetPassword", inviteVM);
+            }
+
+            if (inviteVM.Password != inviteVM.ConfirmPassword)
+            {
+                inviteVM.ErrorMsg = "Passwords do not match";
+                return View("InviteSetPassword", inviteVM);
+            }
+
+            var userId = User.Identity.GetUserId();
+            var userInDb = _context.Users.SingleOrDefault(c => c.Id == userId);
+            userInDb.EmailConfirmed = true;
+
+            inviteVM.Token = await UserManager.GeneratePasswordResetTokenAsync(inviteVM.NewUser.Id);
+
+            //Change password
+            var resetResult = await UserManager.ResetPasswordAsync(userInDb.Id, inviteVM.Token, inviteVM.Password);
+            if (resetResult.Succeeded)
+            {
+                _context.SaveChanges();
+                return RedirectToAction("Index", "Dashboard", new { area = "Apps" });
+            }
+            else
+            {
+                //Something went wrong
+                return RedirectToAction("Error", "Shared");
+            }
+            
+        }
+
+        #endregion
 
 
 

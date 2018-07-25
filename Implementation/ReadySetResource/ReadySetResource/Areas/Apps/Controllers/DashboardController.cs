@@ -815,7 +815,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
                     "where you can see your shifts, book holidays and more!</p>" +
 
                     "<p>Your email:" + currUser.Email + "</p>" +
-                    "<p>Your temporary password:" + userVM.TempPassword + "</p>" +
+                    "<p>Your temporary password:  " + userVM.TempPassword + "</p>" +
 
                     "<p>Please click the following link to get started:</p>" +
                     "<p><b><a href='" + userVM.Link + "'>Click me!</a></b></p>" +

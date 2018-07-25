@@ -463,14 +463,17 @@
     <Content Include="Content\Images\dashboard\avitars\girl-27.png" />
     <Content Include="Content\Images\dashboard\user.png" />
     <Content Include="Content\Images\home\backgroud.jpg" />
+    <Content Include="Content\Images\home\BackgroundChair.jpg" />
     <Content Include="Content\Images\home\calendar.png" />
     <Content Include="Content\Images\home\cogwheels.png" />
+    <Content Include="Content\Images\home\ExtendedChairBG.png" />
     <Content Include="Content\Images\home\holidays.png" />
     <Content Include="Content\Images\home\ideas.png" />
     <Content Include="Content\Images\home\logo.png" />
     <Content Include="Content\Images\home\LogoWhite.png" />
     <Content Include="Content\Images\home\meetings.png" />
     <Content Include="Content\Images\home\messages.png" />
+    <Content Include="Content\Images\home\shortLogo.png" />
     <Content Include="Content\Images\home\store.png" />
     <Content Include="Content\Images\home\update.png" />
     <Content Include="Content\Images\legal\terms.png" />
@@ -626,6 +629,7 @@
     <Content Include="Areas\Apps\Views\Calendar\Add.cshtml" />
     <Content Include="Views\Home\Donate.cshtml" />
     <Content Include="Views\Account\Invite.cshtml" />
+    <Content Include="Views\Account\InviteSetPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
