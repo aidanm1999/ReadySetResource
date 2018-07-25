@@ -361,7 +361,6 @@ C:\Users\Aidan Marshall\Google Drive\ReadySetResource\Implementation\ReadySetRes
 C:\Users\Aidan Marshall\Google Drive\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\de\MigraDoc.RtfRendering-gdi.resources.dll
 C:\Users\Aidan Marshall\Google Drive\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\de\PdfSharp-gdi.resources.dll
 C:\Users\Aidan Marshall\Google Drive\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\de\PdfSharp.Charting-gdi.resources.dll
-C:\Users\Aidan Marshall\Google Drive\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\obj\Debug\ReadySetResource.csprojAssemblyReference.cache
 C:\Users\Aidan Marshall\Google Drive\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\obj\Debug\ReadySetResource.Migrations.InitialMigration.resources
 C:\Users\Aidan Marshall\Google Drive\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\obj\Debug\ReadySetResource.Migrations.UserTest.resources
 C:\Users\Aidan Marshall\Google Drive\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\obj\Debug\ReadySetResource.Migrations.ChangedSalesToUpdates.resources
