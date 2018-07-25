@@ -284,87 +284,24 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LegalController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Migrations\201804231020469_InitialMigration.cs" />
-    <Compile Include="Migrations\201804231020469_InitialMigration.Designer.cs">
-      <DependentUpon>201804231020469_InitialMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201807252148378_AddApps.cs" />
+    <Compile Include="Migrations\201807252148378_AddApps.Designer.cs">
+      <DependentUpon>201807252148378_AddApps.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804231126316_UserTest.cs" />
-    <Compile Include="Migrations\201804231126316_UserTest.Designer.cs">
-      <DependentUpon>201804231126316_UserTest.cs</DependentUpon>
+    <Compile Include="Migrations\201807252204571_AddApps2.cs" />
+    <Compile Include="Migrations\201807252204571_AddApps2.Designer.cs">
+      <DependentUpon>201807252204571_AddApps2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804232132532_ChangedSalesToUpdates.cs" />
-    <Compile Include="Migrations\201804232132532_ChangedSalesToUpdates.Designer.cs">
-      <DependentUpon>201804232132532_ChangedSalesToUpdates.cs</DependentUpon>
+    <Compile Include="Migrations\201807252216098_AddApps3.cs" />
+    <Compile Include="Migrations\201807252216098_AddApps3.Designer.cs">
+      <DependentUpon>201807252216098_AddApps3.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804232134026_ChangedSalesToUpdates2.cs" />
-    <Compile Include="Migrations\201804232134026_ChangedSalesToUpdates2.Designer.cs">
-      <DependentUpon>201804232134026_ChangedSalesToUpdates2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804232141108_ChangedSalesToUpdates3.cs" />
-    <Compile Include="Migrations\201804232141108_ChangedSalesToUpdates3.Designer.cs">
-      <DependentUpon>201804232141108_ChangedSalesToUpdates3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804251700524_AddUserForeignIdKeys.cs" />
-    <Compile Include="Migrations\201804251700524_AddUserForeignIdKeys.Designer.cs">
-      <DependentUpon>201804251700524_AddUserForeignIdKeys.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804251741408_AddUserForeignIdKeys2.cs" />
-    <Compile Include="Migrations\201804251741408_AddUserForeignIdKeys2.Designer.cs">
-      <DependentUpon>201804251741408_AddUserForeignIdKeys2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804251745099_AddUserForeignIdKeys3.cs" />
-    <Compile Include="Migrations\201804251745099_AddUserForeignIdKeys3.Designer.cs">
-      <DependentUpon>201804251745099_AddUserForeignIdKeys3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804251751107_AddUserForeignIdKeys4.cs" />
-    <Compile Include="Migrations\201804251751107_AddUserForeignIdKeys4.Designer.cs">
-      <DependentUpon>201804251751107_AddUserForeignIdKeys4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804251809464_AddUserForeignIdKeys5.cs" />
-    <Compile Include="Migrations\201804251809464_AddUserForeignIdKeys5.Designer.cs">
-      <DependentUpon>201804251809464_AddUserForeignIdKeys5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804251845246_AddBusinessUserTypesForeignIdKey.cs" />
-    <Compile Include="Migrations\201804251845246_AddBusinessUserTypesForeignIdKey.Designer.cs">
-      <DependentUpon>201804251845246_AddBusinessUserTypesForeignIdKey.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804261010177_AddedForeignKeyIdToShift.cs" />
-    <Compile Include="Migrations\201804261010177_AddedForeignKeyIdToShift.Designer.cs">
-      <DependentUpon>201804261010177_AddedForeignKeyIdToShift.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804261045543_AddedForeignKeyIdToShift2.cs" />
-    <Compile Include="Migrations\201804261045543_AddedForeignKeyIdToShift2.Designer.cs">
-      <DependentUpon>201804261045543_AddedForeignKeyIdToShift2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805061416464_AddFKToHolidays.cs" />
-    <Compile Include="Migrations\201805061416464_AddFKToHolidays.Designer.cs">
-      <DependentUpon>201805061416464_AddFKToHolidays.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805081031291_ChangedRotaToCalendar.cs" />
-    <Compile Include="Migrations\201805081031291_ChangedRotaToCalendar.Designer.cs">
-      <DependentUpon>201805081031291_ChangedRotaToCalendar.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805101751046_RemovedRequiredFromAcceptedAttributeInHoliday.cs" />
-    <Compile Include="Migrations\201805101751046_RemovedRequiredFromAcceptedAttributeInHoliday.Designer.cs">
-      <DependentUpon>201805101751046_RemovedRequiredFromAcceptedAttributeInHoliday.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805101801329_ChangedAcceptedHoliday.cs" />
-    <Compile Include="Migrations\201805101801329_ChangedAcceptedHoliday.Designer.cs">
-      <DependentUpon>201805101801329_ChangedAcceptedHoliday.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805151443038_ChangedIdeaToHolidayInBusinessUserType.cs" />
-    <Compile Include="Migrations\201805151443038_ChangedIdeaToHolidayInBusinessUserType.Designer.cs">
-      <DependentUpon>201805151443038_ChangedIdeaToHolidayInBusinessUserType.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805242355322_AddedUserGoogleCalendar.cs" />
-    <Compile Include="Migrations\201805242355322_AddedUserGoogleCalendar.Designer.cs">
-      <DependentUpon>201805242355322_AddedUserGoogleCalendar.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807102000224_FixedDatabase.cs" />
-    <Compile Include="Migrations\201807102000224_FixedDatabase.Designer.cs">
-      <DependentUpon>201807102000224_FixedDatabase.cs</DependentUpon>
+    <Compile Include="Migrations\201807252232129_DeletedUserInterests.cs" />
+    <Compile Include="Migrations\201807252232129_DeletedUserInterests.Designer.cs">
+      <DependentUpon>201807252232129_DeletedUserInterests.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Answer.cs" />
+    <Compile Include="Models\App.cs" />
     <Compile Include="Models\Business.cs" />
     <Compile Include="Models\BusinessUserType.cs" />
     <Compile Include="Models\Case.cs" />
@@ -387,8 +324,8 @@
     <Compile Include="Models\Question.cs" />
     <Compile Include="Models\Shift.cs" />
     <Compile Include="Models\Transaction.cs" />
+    <Compile Include="Models\TypeAppAccess.cs" />
     <Compile Include="Models\Update.cs" />
-    <Compile Include="Models\UserInterest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -657,65 +594,17 @@
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201804231020469_InitialMigration.resx">
-      <DependentUpon>201804231020469_InitialMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201807252148378_AddApps.resx">
+      <DependentUpon>201807252148378_AddApps.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804231126316_UserTest.resx">
-      <DependentUpon>201804231126316_UserTest.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201807252204571_AddApps2.resx">
+      <DependentUpon>201807252204571_AddApps2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804232132532_ChangedSalesToUpdates.resx">
-      <DependentUpon>201804232132532_ChangedSalesToUpdates.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201807252216098_AddApps3.resx">
+      <DependentUpon>201807252216098_AddApps3.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804232134026_ChangedSalesToUpdates2.resx">
-      <DependentUpon>201804232134026_ChangedSalesToUpdates2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804232141108_ChangedSalesToUpdates3.resx">
-      <DependentUpon>201804232141108_ChangedSalesToUpdates3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804251700524_AddUserForeignIdKeys.resx">
-      <DependentUpon>201804251700524_AddUserForeignIdKeys.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804251741408_AddUserForeignIdKeys2.resx">
-      <DependentUpon>201804251741408_AddUserForeignIdKeys2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804251745099_AddUserForeignIdKeys3.resx">
-      <DependentUpon>201804251745099_AddUserForeignIdKeys3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804251751107_AddUserForeignIdKeys4.resx">
-      <DependentUpon>201804251751107_AddUserForeignIdKeys4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804251809464_AddUserForeignIdKeys5.resx">
-      <DependentUpon>201804251809464_AddUserForeignIdKeys5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804251845246_AddBusinessUserTypesForeignIdKey.resx">
-      <DependentUpon>201804251845246_AddBusinessUserTypesForeignIdKey.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804261010177_AddedForeignKeyIdToShift.resx">
-      <DependentUpon>201804261010177_AddedForeignKeyIdToShift.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804261045543_AddedForeignKeyIdToShift2.resx">
-      <DependentUpon>201804261045543_AddedForeignKeyIdToShift2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805061416464_AddFKToHolidays.resx">
-      <DependentUpon>201805061416464_AddFKToHolidays.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805081031291_ChangedRotaToCalendar.resx">
-      <DependentUpon>201805081031291_ChangedRotaToCalendar.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805101751046_RemovedRequiredFromAcceptedAttributeInHoliday.resx">
-      <DependentUpon>201805101751046_RemovedRequiredFromAcceptedAttributeInHoliday.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805101801329_ChangedAcceptedHoliday.resx">
-      <DependentUpon>201805101801329_ChangedAcceptedHoliday.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805151443038_ChangedIdeaToHolidayInBusinessUserType.resx">
-      <DependentUpon>201805151443038_ChangedIdeaToHolidayInBusinessUserType.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805242355322_AddedUserGoogleCalendar.resx">
-      <DependentUpon>201805242355322_AddedUserGoogleCalendar.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807102000224_FixedDatabase.resx">
-      <DependentUpon>201807102000224_FixedDatabase.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201807252232129_DeletedUserInterests.resx">
+      <DependentUpon>201807252232129_DeletedUserInterests.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -120,7 +120,6 @@ namespace ReadySetResource.Models
         public DbSet<Error> Errors { get; set; }
         public DbSet<Idea> Ideas { get; set; }
         public DbSet<Shift> Shifts { get; set; }
-        public DbSet<UserInterest> UserInterests { get; set; }
         public DbSet<Case> Cases { get; set; }
         public DbSet<Holiday> Holidays { get; set; }
         public DbSet<DataTransferRate> DataTransferRates { get; set; }
@@ -131,6 +130,9 @@ namespace ReadySetResource.Models
         public DbSet<Answer> Answers { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<App> Apps { get; set; }
+        public DbSet<TypeAppAccess> TypeAppAccesses { get; set; }
+
 
 
 
