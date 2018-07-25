@@ -39,12 +39,6 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
         //Views for Holidays
         #region Index (View)
-        // GET: Dashboard/Holidays
-        /// <summary>
-        /// Indexes the specified week.
-        /// </summary>
-        /// <param name="week">The week.</param>
-        /// <returns>The view with the holidaysVM</returns>
         [HttpGet]
         [Authorize]
         public ActionResult Index(DateTime? week)
@@ -63,12 +57,6 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
 
         #region Add (View)
-        // GET: Holidays/AddHoliday
-        /// <summary>
-        /// Adds the specified date.
-        /// </summary>
-        /// <param name="date">The date.</param>
-        /// <returns>The view with the holiaysVM</returns>
         [HttpGet]
         [Authorize]
         public ActionResult Add(DateTime? date)
@@ -185,6 +173,21 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
 
 
+
+
+        #region Test
+        [HttpGet]
+        [Authorize]
+        public ActionResult Test()
+        { 
+            return View();
+        }
+        #endregion
+
+
+
+
+
         //Methods for Holidays
         #region Populate Holidays Method
         /// <summary>
@@ -253,12 +256,6 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
 
         #region AddHoliday
-        // POST: Holidays/AddHoliday
-        /// <summary>
-        /// Adds the holiday.
-        /// </summary>
-        /// <param name="holidayVM">The holiday vm.</param>
-        /// <returns>The index view with the updated holiday list</returns>
         [HttpPost]
         [Authorize]
         public ActionResult AddHoliday(HolidayViewModel holidayVM)
@@ -372,13 +369,10 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
 
 
+
+
+
         #region EditHoliday
-        // POST: Calendar/AddShift
-        /// <summary>
-        /// Edits the holiday.
-        /// </summary>
-        /// <param name="holidayVM">The holiday vm.</param>
-        /// <returns>The index view with the updated holiday list</returns>
         [HttpPost]
         [Authorize]
         public ActionResult EditHoliday(HolidayViewModel holidayVM)

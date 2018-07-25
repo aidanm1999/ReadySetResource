@@ -778,7 +778,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
                     var result = await UserManager.CreateAsync(userVM.BusinessUser, userVM.TempPassword);
                     if (result.Succeeded)
                     {
-                        await SignInManager.SignInAsync(userVM.BusinessUser, isPersistent: false, rememberBrowser: false);
+                        //await SignInManager.SignInAsync(userVM.BusinessUser, isPersistent: false, rememberBrowser: false);
 
                     }
                     else
