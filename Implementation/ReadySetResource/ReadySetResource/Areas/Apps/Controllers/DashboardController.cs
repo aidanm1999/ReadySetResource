@@ -104,8 +104,25 @@ namespace ReadySetResource.Areas.Apps.Controllers
         {
             var userId = User.Identity.GetUserId();
             var user = _context.Users.SingleOrDefault(c => c.Id == userId);
-            user.BusinessUserType = _context.BusinessUserTypes.SingleOrDefault(c => c.Id == user.BusinessUserTypeId);
-            return View(user);
+
+            var dashboardVM = new DashboardViewModel
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Apps = new List<string>(),
+            };
+
+
+
+            var typeAppAccesses = _context.TypeAppAccesses.Where(a => a.BusinessUserTypeId == user.BusinessUserTypeId).ToList();
+
+            foreach (var typeAppAccess in typeAppAccesses)
+            {
+                var app = _context.Apps.FirstOrDefault(a => a.Id == typeAppAccess.AppId);
+                dashboardVM.Apps.Add(app.Name);
+            }
+
+            return View(dashboardVM);
         }
         #endregion
 

@@ -275,6 +275,7 @@
     <Compile Include="Areas\Apps\ViewModels\Dashboard\BusinessUserTypeViewModel.cs" />
     <Compile Include="Areas\Apps\ViewModels\Dashboard\BusinessUserViewModel.cs" />
     <Compile Include="Areas\Apps\ViewModels\Dashboard\BusinessUserTypesViewModel.cs" />
+    <Compile Include="Areas\Apps\ViewModels\Dashboard\DashboardViewModel.cs" />
     <Compile Include="Areas\Apps\ViewModels\Dashboard\SettingsViewModel.cs" />
     <Compile Include="Areas\Apps\ViewModels\Holidays\HolidaysViewModel.cs" />
     <Compile Include="Areas\Apps\ViewModels\Holidays\HolidayViewModel.cs" />
@@ -303,6 +304,10 @@
     <Compile Include="Migrations\201807252345479_CleanedModels.cs" />
     <Compile Include="Migrations\201807252345479_CleanedModels.Designer.cs">
       <DependentUpon>201807252345479_CleanedModels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807261121345_ChangedFKsInTypeAppAccess.cs" />
+    <Compile Include="Migrations\201807261121345_ChangedFKsInTypeAppAccess.Designer.cs">
+      <DependentUpon>201807261121345_ChangedFKsInTypeAppAccess.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\App.cs" />
     <Compile Include="Models\Business.cs" />
@@ -333,11 +338,6 @@
     <Compile Include="ViewModels\Get\SignUpViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\animate.css" />
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\dashboard\addUser.png" />
     <Content Include="Content\Images\dashboard\avitars\boy-1.png" />
     <Content Include="Content\Images\dashboard\avitars\boy-10.png" />
@@ -354,6 +354,7 @@
     <Content Include="Content\Images\dashboard\avitars\boy-20.png" />
     <Content Include="Content\Images\dashboard\avitars\boy-21.png" />
     <Content Include="Content\Images\dashboard\avitars\boy-22.png" />
+    <Content Include="Content\Images\dashboard\avitars\boy-23.png" />
     <Content Include="Content\Images\dashboard\avitars\boy-3.png" />
     <Content Include="Content\Images\dashboard\avitars\boy-4.png" />
     <Content Include="Content\Images\dashboard\avitars\boy-5.png" />
@@ -361,8 +362,6 @@
     <Content Include="Content\Images\dashboard\avitars\boy-7.png" />
     <Content Include="Content\Images\dashboard\avitars\boy-8.png" />
     <Content Include="Content\Images\dashboard\avitars\boy-9.png" />
-    <Content Include="Content\Images\dashboard\avitars\boy-23.png" />
-    <Content Include="Content\Images\dashboard\cog.png" />
     <Content Include="Content\Images\dashboard\avitars\girl-1.png" />
     <Content Include="Content\Images\dashboard\avitars\girl-10.png" />
     <Content Include="Content\Images\dashboard\avitars\girl-11.png" />
@@ -382,6 +381,7 @@
     <Content Include="Content\Images\dashboard\avitars\girl-24.png" />
     <Content Include="Content\Images\dashboard\avitars\girl-25.png" />
     <Content Include="Content\Images\dashboard\avitars\girl-26.png" />
+    <Content Include="Content\Images\dashboard\avitars\girl-27.png" />
     <Content Include="Content\Images\dashboard\avitars\girl-3.png" />
     <Content Include="Content\Images\dashboard\avitars\girl-4.png" />
     <Content Include="Content\Images\dashboard\avitars\girl-5.png" />
@@ -389,7 +389,7 @@
     <Content Include="Content\Images\dashboard\avitars\girl-7.png" />
     <Content Include="Content\Images\dashboard\avitars\girl-8.png" />
     <Content Include="Content\Images\dashboard\avitars\girl-9.png" />
-    <Content Include="Content\Images\dashboard\avitars\girl-27.png" />
+    <Content Include="Content\Images\dashboard\cog.png" />
     <Content Include="Content\Images\dashboard\user.png" />
     <Content Include="Content\Images\home\backgroud.jpg" />
     <Content Include="Content\Images\home\BackgroundChair.jpg" />
@@ -405,9 +405,14 @@
     <Content Include="Content\Images\home\shortLogo.png" />
     <Content Include="Content\Images\home\store.png" />
     <Content Include="Content\Images\home\update.png" />
-    <Content Include="Content\Images\legal\terms.png" />
     <Content Include="Content\Images\legal\copyright.png" />
     <Content Include="Content\Images\legal\privacy.png" />
+    <Content Include="Content\Images\legal\terms.png" />
+    <Content Include="Content\animate.css" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -429,7 +434,6 @@
     <Content Include="Content\SystemFiles\legal\TermsAndConditions.pdf" />
     <Content Include="Areas\Apps\Views\web.config" />
     <Content Include="Areas\Apps\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Apps\Views\Shared\_Partial.cshtml" />
     <Content Include="Areas\Apps\Views\Shared\Lockout.cshtml" />
     <Content Include="Areas\Apps\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Apps\Views\Shared\Error.cshtml" />
@@ -448,6 +452,7 @@
     </Content>
     <Content Include="Areas\Apps\Views\Dashboard\UserTypes.cshtml" />
     <Content Include="Areas\Apps\Views\Holidays\Test.cshtml" />
+    <Content Include="Content\Images\home\Thumbs.db" />
     <None Include="Properties\PublishProfiles\ReadySetResource3 - Web Deploy.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -564,6 +569,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Apps\Models\" />
+    <Folder Include="Content\Images\apps\" />
     <Folder Include="Content\PDF\" />
   </ItemGroup>
   <ItemGroup>
@@ -600,6 +606,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807252345479_CleanedModels.resx">
       <DependentUpon>201807252345479_CleanedModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807261121345_ChangedFKsInTypeAppAccess.resx">
+      <DependentUpon>201807261121345_ChangedFKsInTypeAppAccess.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

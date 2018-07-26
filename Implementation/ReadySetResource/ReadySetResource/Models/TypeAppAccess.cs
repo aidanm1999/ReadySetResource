@@ -13,10 +13,10 @@ namespace ReadySetResource.Models
 
         public string AccessType { get; set; }
 
-        public string AppId { get; set; }
+        public int AppId { get; set; }
         public App App { get; set; }
 
-        public string BusinessUserTypeId { get; set; }
+        public int BusinessUserTypeId { get; set; }
         public BusinessUserType BusinessUserType { get; set; }
     }
 }

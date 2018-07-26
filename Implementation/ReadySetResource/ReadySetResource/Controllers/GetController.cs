@@ -310,11 +310,6 @@ namespace ReadySetResource.Controllers
 
         //Step 4 - ManagerDetails (HttpGet) - Manager One adds their details
         #region Manager Details
-        /// <summary>
-        /// Managers the details.
-        /// </summary>
-        /// <param name="businessId">The business identifier.</param>
-        /// <returns>The view with the sign up view model</returns>
         [HttpGet]
         [AllowAnonymous]
         public ActionResult ManagerDetails(int businessId)
@@ -371,11 +366,6 @@ namespace ReadySetResource.Controllers
 
         //Step 5 - AddManagerOne (HttpPost) - Manager details are added to DB 
         #region Add ManagerOne And Admin User Type
-        /// <summary>
-        /// Adds the manager one.
-        /// </summary>
-        /// <param name="signUpVM">The sign up vm.</param>
-        /// <returns>Redirects the manager to the verification page</returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -438,19 +428,92 @@ namespace ReadySetResource.Controllers
                         adminUserType = new BusinessUserType
                         {
                             Name = "Admin",
-                            //Administrator = "E",
-                            //Calendar = "E",
-                            //Messenger = "E",
-                            //Meetings = "E",
-                            //Holidays = "E",
-                            //Store = "E",
-                            //Updates = "E",
                             Business = signUpVM.NewBusiness,
                             BusinessId = signUpVM.NewBusiness.Id,
 
                         };
+
                         adminUserType.Business = null;
                         _context.BusinessUserTypes.Add(adminUserType);
+                        _context.SaveChanges();
+
+                        //Adding app accesses to Admin User
+                            //Business Settings
+                            //Employees
+                            //Dashboard
+                            //Account
+                            //Store
+
+                        App businessSettingsApp = _context.Apps.FirstOrDefault(a => a.Name == "Business Settings");
+                        App employeesApp = _context.Apps.FirstOrDefault(a => a.Name == "Employees");
+                        App dashboardApp = _context.Apps.FirstOrDefault(a => a.Name == "Business Settings");
+                        App accountApp = _context.Apps.FirstOrDefault(a => a.Name == "Employees");
+                        App storeApp = _context.Apps.FirstOrDefault(a => a.Name == "RSR Store");
+
+                        
+
+                        adminUserType = _context.BusinessUserTypes.FirstOrDefault(t => t.BusinessId == signUpVM.NewBusiness.Id);
+
+
+                        
+                        var businessSettingsAppAccess = new TypeAppAccess
+                        {
+                            App = businessSettingsApp,
+                            AppId = businessSettingsApp.Id,
+                            AccessType = "E",
+                            BusinessUserType = adminUserType,
+                            BusinessUserTypeId = adminUserType.Id,
+                        };
+
+                        var employeesAppAccess = new TypeAppAccess
+                        {
+                            App = employeesApp,
+                            AppId = employeesApp.Id,
+                            AccessType = "E",
+                            BusinessUserType = adminUserType,
+                            BusinessUserTypeId = adminUserType.Id,
+                        };
+
+                        var dashboardAppAccess = new TypeAppAccess
+                        {
+                            App = dashboardApp,
+                            AppId = dashboardApp.Id,
+                            AccessType = "E",
+                            BusinessUserType = adminUserType,
+                            BusinessUserTypeId = adminUserType.Id,
+                        };
+
+                        var accountAppAccess = new TypeAppAccess
+                        {
+                            App = accountApp,
+                            AppId = accountApp.Id,
+                            AccessType = "E",
+                            BusinessUserType = adminUserType,
+                            BusinessUserTypeId = adminUserType.Id,
+                        };
+
+
+
+                        var storeAppAccess = new TypeAppAccess
+                        {
+                            App = storeApp,
+                            AppId = storeApp.Id,
+                            AccessType = "E",
+                            BusinessUserType = adminUserType,
+                            BusinessUserTypeId = adminUserType.Id,
+                        };
+
+
+
+                        
+
+                        
+                        _context.TypeAppAccesses.Add(businessSettingsAppAccess);
+                        _context.TypeAppAccesses.Add(employeesAppAccess);
+                        _context.TypeAppAccesses.Add(dashboardAppAccess);
+                        _context.TypeAppAccesses.Add(accountAppAccess);
+                        _context.TypeAppAccesses.Add(storeAppAccess); 
+
 
                         _context.SaveChanges();
 
@@ -478,7 +541,7 @@ namespace ReadySetResource.Controllers
                     }
                     
                 }
-                catch
+                catch (Exception ex)
                 {
                     return View("Solutions");
                 }
@@ -496,10 +559,6 @@ namespace ReadySetResource.Controllers
 
         //Step 6 - EmailVerification (HttpGet) - Manager One adds the verification code
         #region EmailVerification
-        /// <summary>
-        /// Emails the verification.
-        /// </summary>
-        /// <returns>The view with the email verifiaction</returns>
         [HttpGet]
         [Authorize]
         public ActionResult EmailVerification()
@@ -579,11 +638,6 @@ namespace ReadySetResource.Controllers
 
         //Step 7 - EmailAuthorisation (HttpPost) - Manager details are updated to DB 
         #region Email Authorisation
-        /// <summary>
-        /// Emails the authorisation.
-        /// </summary>
-        /// <param name="verificationVM">The verification vm.</param>
-        /// <returns>The email verification view</returns>
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
