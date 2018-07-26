@@ -14,12 +14,7 @@ namespace ReadySetResource.Models
 
         [Required]
         public string Name { get; set; }
-
-        [Required]
-        public string IconLocation { get; set; }
-
-        [Required]
-        public string HomeLocation { get; set; }
+        
         
     }
 }

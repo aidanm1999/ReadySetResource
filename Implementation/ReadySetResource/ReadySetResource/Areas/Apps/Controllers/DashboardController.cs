@@ -635,13 +635,13 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
                 var businessUserTypeInDb = _context.BusinessUserTypes.FirstOrDefault(b => b.Id == typeVM.BusinessUserType.Id);
 
-                businessUserTypeInDb.Administrator = typeVM.BusinessUserType.Administrator;
-                businessUserTypeInDb.Calendar = typeVM.BusinessUserType.Calendar;
-                businessUserTypeInDb.Holidays = typeVM.BusinessUserType.Holidays;
-                businessUserTypeInDb.Meetings = typeVM.BusinessUserType.Meetings;
-                businessUserTypeInDb.Messenger = typeVM.BusinessUserType.Messenger;
-                businessUserTypeInDb.Store = typeVM.BusinessUserType.Store;
-                businessUserTypeInDb.Updates = typeVM.BusinessUserType.Updates;
+                //businessUserTypeInDb.Administrator = typeVM.BusinessUserType.Administrator;
+                //businessUserTypeInDb.Calendar = typeVM.BusinessUserType.Calendar;
+                //businessUserTypeInDb.Holidays = typeVM.BusinessUserType.Holidays;
+                //businessUserTypeInDb.Meetings = typeVM.BusinessUserType.Meetings;
+                //businessUserTypeInDb.Messenger = typeVM.BusinessUserType.Messenger;
+                //businessUserTypeInDb.Store = typeVM.BusinessUserType.Store;
+                //businessUserTypeInDb.Updates = typeVM.BusinessUserType.Updates;
 
                 _context.SaveChanges();
 

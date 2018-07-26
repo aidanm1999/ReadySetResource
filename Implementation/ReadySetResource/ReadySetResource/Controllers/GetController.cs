@@ -438,13 +438,13 @@ namespace ReadySetResource.Controllers
                         adminUserType = new BusinessUserType
                         {
                             Name = "Admin",
-                            Administrator = "E",
-                            Calendar = "E",
-                            Messenger = "E",
-                            Meetings = "E",
-                            Holidays = "E",
-                            Store = "E",
-                            Updates = "E",
+                            //Administrator = "E",
+                            //Calendar = "E",
+                            //Messenger = "E",
+                            //Meetings = "E",
+                            //Holidays = "E",
+                            //Store = "E",
+                            //Updates = "E",
                             Business = signUpVM.NewBusiness,
                             BusinessId = signUpVM.NewBusiness.Id,
 

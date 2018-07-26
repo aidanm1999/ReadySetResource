@@ -9,7 +9,7 @@ namespace ReadySetResource.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(ReadySetResource.Models.ApplicationDbContext context)
@@ -26,6 +26,11 @@ namespace ReadySetResource.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+
+            //context.Apps.AddOrUpdate(
+            //    a => a.IconLocation,
+            //    new Models.App { IconLocation = "Location", HomeLocation = "Locayion", Name = "App" }
+            //    );
         }
     }
 }

@@ -113,23 +113,12 @@ namespace ReadySetResource.Models
         {
         }
 
-        public DbSet<Password> Passwords { get; set; }
+
         public DbSet<EmployeeType> EmployeeTypes { get; set; }
         public DbSet<BusinessUserType> BusinessUserTypes { get; set; }
         public DbSet<Business> Businesses { get; set; }
-        public DbSet<Error> Errors { get; set; }
-        public DbSet<Idea> Ideas { get; set; }
         public DbSet<Shift> Shifts { get; set; }
-        public DbSet<Case> Cases { get; set; }
         public DbSet<Holiday> Holidays { get; set; }
-        public DbSet<DataTransferRate> DataTransferRates { get; set; }
-        public DbSet<Item> Items { get; set; }
-        public DbSet<Update> Updates { get; set; }
-        public DbSet<DataOverTime> DataOverTimes { get; set; }
-        public DbSet<Question> Questions { get; set; }
-        public DbSet<Answer> Answers { get; set; }
-        public DbSet<Message> Messages { get; set; }
-        public DbSet<Transaction> Transactions { get; set; }
         public DbSet<App> Apps { get; set; }
         public DbSet<TypeAppAccess> TypeAppAccesses { get; set; }
 

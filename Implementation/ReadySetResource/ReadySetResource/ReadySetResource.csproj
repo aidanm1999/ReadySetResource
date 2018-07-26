@@ -284,35 +284,31 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LegalController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Migrations\201807252148378_AddApps.cs" />
-    <Compile Include="Migrations\201807252148378_AddApps.Designer.cs">
-      <DependentUpon>201807252148378_AddApps.cs</DependentUpon>
+    <Compile Include="Migrations\201807252259106_InitialMigration.cs" />
+    <Compile Include="Migrations\201807252259106_InitialMigration.Designer.cs">
+      <DependentUpon>201807252259106_InitialMigration.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201807252204571_AddApps2.cs" />
-    <Compile Include="Migrations\201807252204571_AddApps2.Designer.cs">
-      <DependentUpon>201807252204571_AddApps2.cs</DependentUpon>
+    <Compile Include="Migrations\201807252320474_RemovedAppLocation.cs" />
+    <Compile Include="Migrations\201807252320474_RemovedAppLocation.Designer.cs">
+      <DependentUpon>201807252320474_RemovedAppLocation.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201807252216098_AddApps3.cs" />
-    <Compile Include="Migrations\201807252216098_AddApps3.Designer.cs">
-      <DependentUpon>201807252216098_AddApps3.cs</DependentUpon>
+    <Compile Include="Migrations\201807252337063_RemovedAppsFromBUT.cs" />
+    <Compile Include="Migrations\201807252337063_RemovedAppsFromBUT.Designer.cs">
+      <DependentUpon>201807252337063_RemovedAppsFromBUT.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201807252232129_DeletedUserInterests.cs" />
-    <Compile Include="Migrations\201807252232129_DeletedUserInterests.Designer.cs">
-      <DependentUpon>201807252232129_DeletedUserInterests.cs</DependentUpon>
+    <Compile Include="Migrations\201807252343121_AddedAccessTypeForUsers.cs" />
+    <Compile Include="Migrations\201807252343121_AddedAccessTypeForUsers.Designer.cs">
+      <DependentUpon>201807252343121_AddedAccessTypeForUsers.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\Answer.cs" />
+    <Compile Include="Migrations\201807252345479_CleanedModels.cs" />
+    <Compile Include="Migrations\201807252345479_CleanedModels.Designer.cs">
+      <DependentUpon>201807252345479_CleanedModels.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\App.cs" />
     <Compile Include="Models\Business.cs" />
     <Compile Include="Models\BusinessUserType.cs" />
-    <Compile Include="Models\Case.cs" />
-    <Compile Include="Models\DataOverTime.cs" />
-    <Compile Include="Models\DataTransferRate.cs" />
     <Compile Include="Models\EmployeeType.cs" />
     <Compile Include="Models\Holiday.cs" />
-    <Compile Include="Models\Idea.cs" />
-    <Compile Include="Models\Error.cs" />
-    <Compile Include="Models\Item.cs" />
-    <Compile Include="Models\Message.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -320,12 +316,8 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Password.cs" />
-    <Compile Include="Models\Question.cs" />
     <Compile Include="Models\Shift.cs" />
-    <Compile Include="Models\Transaction.cs" />
     <Compile Include="Models\TypeAppAccess.cs" />
-    <Compile Include="Models\Update.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -594,17 +586,20 @@
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201807252148378_AddApps.resx">
-      <DependentUpon>201807252148378_AddApps.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201807252259106_InitialMigration.resx">
+      <DependentUpon>201807252259106_InitialMigration.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807252204571_AddApps2.resx">
-      <DependentUpon>201807252204571_AddApps2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201807252320474_RemovedAppLocation.resx">
+      <DependentUpon>201807252320474_RemovedAppLocation.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807252216098_AddApps3.resx">
-      <DependentUpon>201807252216098_AddApps3.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201807252337063_RemovedAppsFromBUT.resx">
+      <DependentUpon>201807252337063_RemovedAppsFromBUT.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807252232129_DeletedUserInterests.resx">
-      <DependentUpon>201807252232129_DeletedUserInterests.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201807252343121_AddedAccessTypeForUsers.resx">
+      <DependentUpon>201807252343121_AddedAccessTypeForUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807252345479_CleanedModels.resx">
+      <DependentUpon>201807252345479_CleanedModels.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

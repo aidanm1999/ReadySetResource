@@ -93,10 +93,10 @@ namespace ReadySetResource.Areas.Apps.Controllers
                 User = currBusinessUser,
             };
 
-            if(currBusinessUserType.Calendar != "E")
-            {
+            //if(currBusinessUserType.Calendar != "E")
+            //{
                 return RedirectToAction("NotAuthorised", "Dashboard", new { Uri = "/Modify Calendar" });
-            }
+            //}
 
 
 
@@ -161,10 +161,10 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
             };
 
-            if (currBusinessUserType.Calendar != "E")
-            {
+            //if (currBusinessUserType.Calendar != "E")
+            //{
                 return RedirectToAction("NotAuthorised", "Dashboard", new { Uri = "/Modify Calendar" });
-            }
+            //}
 
 
             //2 -Gets the list of all employees and changes them to a SelectedListItem
@@ -246,15 +246,15 @@ namespace ReadySetResource.Areas.Apps.Controllers
                 //Both people are in the same business. Authorises the user to see if they are able to view others details.
                 else
                 {
-                    if (currBusinessUser.BusinessUserType.Calendar == "E")
-                    {
+                    //if (currBusinessUser.BusinessUserType.Calendar == "E")
+                    //{
                         chartsVM = PopulateUserCharts(userCharted, weekBeginDate);
-                    }
-                    else
-                    {
+                    //}
+                    //else
+                    //{
                         return RedirectToAction("Index", new { week = weekBeginDate });
 
-                    }
+                    //}
                 }
             }
 
