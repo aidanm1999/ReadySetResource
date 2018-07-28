@@ -446,8 +446,8 @@ namespace ReadySetResource.Controllers
 
                         App businessSettingsApp = _context.Apps.FirstOrDefault(a => a.Name == "Business Settings");
                         App employeesApp = _context.Apps.FirstOrDefault(a => a.Name == "Employees");
-                        App dashboardApp = _context.Apps.FirstOrDefault(a => a.Name == "Business Settings");
-                        App accountApp = _context.Apps.FirstOrDefault(a => a.Name == "Employees");
+                        App dashboardApp = _context.Apps.FirstOrDefault(a => a.Name == "Dashboard");
+                        App accountApp = _context.Apps.FirstOrDefault(a => a.Name == "Account");
                         App storeApp = _context.Apps.FirstOrDefault(a => a.Name == "RSR Store");
 
                         

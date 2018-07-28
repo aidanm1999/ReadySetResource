@@ -85,6 +85,8 @@ namespace ReadySetResource.Models
 
         public string GoogleCalendarFilePath { get; set; }
 
+        public string Avitar { get; set; }
+
 
         public int EmployeeTypeId { get; set; }
 
