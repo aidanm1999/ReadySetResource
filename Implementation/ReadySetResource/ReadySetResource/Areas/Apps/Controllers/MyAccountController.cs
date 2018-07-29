@@ -13,6 +13,7 @@ using System.Net.Mail;
 using ReadySetResource.ViewModels;
 using System.Globalization;
 using System.Security.Claims;
+using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Owin.Security;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -191,7 +192,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
         #endregion
 
-        #region Index
+        #region SelectAvitar
 
         #region Get
         [HttpGet]
@@ -201,7 +202,11 @@ namespace ReadySetResource.Areas.Apps.Controllers
             var userId = User.Identity.GetUserId();
             ApplicationUser user = _context.Users.SingleOrDefault(c => c.Id == userId);
 
-            return View(user);
+            String path = Server.MapPath(@"~\Content\Images\avitars\");
+            String[] avitarPaths = new DirectoryInfo(path).GetFiles().Select(o => o.Name).ToArray();
+
+
+            return View(avitarPaths);
         }
         #endregion
 
