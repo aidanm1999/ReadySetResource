@@ -218,7 +218,10 @@ namespace ReadySetResource.Areas.Apps.Controllers
                 CurrentUser = currBusinessUser,
             };
 
+            var holidayApp = _context.Apps.FirstOrDefault(a => a.Name == "Calendar");
+            var holidayVMAccessType = _context.TypeAppAccesses.Where(t => t.AppId == holidayApp.Id).Where(t => t.BusinessUserTypeId == currBusinessUserTypeId).ToList();
 
+            holidaysVM.AccessType = holidayVMAccessType[0];
 
             //4 - Get current day and set to CalendarVM.ActiveWeekCommenceDate
             holidaysVM.ActiveWeekCommenceDate = weekBeginDate;

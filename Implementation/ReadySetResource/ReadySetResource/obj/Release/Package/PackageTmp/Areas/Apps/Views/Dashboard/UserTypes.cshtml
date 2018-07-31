@@ -87,28 +87,3 @@
 
 
 
-<!--
-<div class="col-md-3 animated fadeInUp" style="animation-duration:1s">
-
-    @if (Model.CurrUserType.Administrator == "E")
-    {
-        @Html.ActionLink("Add Type", "AddType", "Dashboard", null, new { @class = "btn btn-default" })
-    }
-
-    <table id="rota">
-        <tbody>
-            @foreach (var type in Model.BusinessUserTypes)
-            {
-                <tr>
-                    <td>@type.Name</td>
-                    @if (Model.CurrUserType.Administrator == "E")
-                    {
-                        <td>@Html.ActionLink("Edit", "EditType", new { type = type.Id })</td>
-                    }
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
-
-    -->

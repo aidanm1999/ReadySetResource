@@ -95,7 +95,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
             //if(currBusinessUserType.Calendar != "E")
             //{
-                return RedirectToAction("NotAuthorised", "Dashboard", new { Uri = "/Modify Calendar" });
+                //return RedirectToAction("NotAuthorised", "Dashboard", new { Uri = "/Modify Calendar" });
             //}
 
 
@@ -121,11 +121,6 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
         #region Edit (View)
         // GET: Dashboard/Edit
-        /// <summary>
-        /// Edits the specified shift.
-        /// </summary>
-        /// <param name="shift">The shift.</param>
-        /// <returns>The view with the shiftVM</returns>
         [HttpGet]
         [Authorize]
         public ActionResult Edit(int shift)
@@ -163,7 +158,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
             //if (currBusinessUserType.Calendar != "E")
             //{
-                return RedirectToAction("NotAuthorised", "Dashboard", new { Uri = "/Modify Calendar" });
+                //return RedirectToAction("NotAuthorised", "Dashboard", new { Uri = "/Modify Calendar" });
             //}
 
 
@@ -186,13 +181,6 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
 
         #region MyCharts (View)
-        // GET: Apps/Calendar/MyCharts
-        /// <summary>
-        /// Creates an instance of the MyCharts View.
-        /// </summary>
-        /// <param name="user">The user.</param>
-        /// <param name="week">The week.</param>
-        /// <returns></returns>
         [HttpGet]
         [Authorize]
         public ActionResult MyCharts(string user, DateTime? week)
@@ -293,11 +281,6 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
         //Methods for Calendar
         #region Populate Calendar Method
-        /// <summary>
-        /// Populates the calendar.
-        /// </summary>
-        /// <param name="weekBeginDate">The week begin date.</param>
-        /// <returns>The calendar view model</returns>
         private CalendarViewModel PopulateCalendar(DateTime weekBeginDate)
         {
             //1 - Get BusinessUserType from current user and sets current user as Calendar.cshtml needs to check for business user type
@@ -306,6 +289,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
             var currBusinessUserTypeId = currBusinessUser.BusinessUserTypeId;
             var currBusinessUserType = _context.BusinessUserTypes.SingleOrDefault(c => c.Id == currBusinessUserTypeId);
             var currBusinessId = currBusinessUserType.BusinessId;
+
 
 
             //2 - Get Business from BusinessUserType
@@ -319,18 +303,21 @@ namespace ReadySetResource.Areas.Apps.Controllers
                 CurrentUser = currBusinessUser,
             };
 
-
-
-            //4 - Get current day and set to CalendarVM.ActiveWeekCommenceDate
             CalendarVM.ActiveWeekCommenceDate = weekBeginDate;
 
 
+            var calendarApp = _context.Apps.FirstOrDefault(a => a.Name == "Calendar");
+            var CalendarVMAccessType = _context.TypeAppAccesses.Where(t => t.AppId == calendarApp.Id).Where(t => t.BusinessUserTypeId == currBusinessUserTypeId).ToList();
+
+            CalendarVM.AccessType = CalendarVMAccessType[0];
+
+            //4 - Get current day and set to CalendarVM.ActiveWeekCommenceDate
 
             //5 - Get start date of the week and set to CalendarVM.ActiveWeekCommenceDate
             while (CalendarVM.ActiveWeekCommenceDate.DayOfWeek.ToString() != "Monday")
             {
                 CalendarVM.ActiveWeekCommenceDate = CalendarVM.ActiveWeekCommenceDate.AddDays(-1);
-            }
+                }
 
 
 

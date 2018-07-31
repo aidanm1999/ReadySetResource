@@ -1,0 +1,99 @@
+﻿@model System.String[]
+
+@{
+    ViewBag.Title = "Select Avitar";
+    Layout = "~/Areas/Apps/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    #more-button {
+        border-style: none;
+        background: none;
+        font: 16px Serif;
+        color: blue;
+        margin: 0 0 10px 0;
+    }
+
+    #grow input:checked {
+        color: red;
+    }
+
+    #more-button:hover {
+        color: black;
+    }
+
+    #grow {
+        -moz-transition: height .5s;
+        -ms-transition: height .5s;
+        -o-transition: height .5s;
+        -webkit-transition: height .5s;
+        transition: height .5s;
+        height: 0;
+        overflow: auto;
+    }
+</style>
+
+<script>
+    function growBoyDiv() {
+        var growDiv = document.getElementById('grow');
+        if (growDiv.clientHeight) {
+            growDiv.style.height = 0;
+        } else {
+            var wrapper = document.querySelector('.measuringWrapperBoy');
+            growDiv.style.height = wrapper.clientHeight + "px";
+        }
+        document.getElementById("more-boy-button").value = document.getElementById("more-boy-button").value == 'Read more' ? 'Read less' : 'Read more';
+    }
+
+    function growGirlDiv() {
+        var growDiv = document.getElementById('grow');
+        if (growDiv.clientHeight) {
+            growDiv.style.height = 0;
+        } else {
+            var wrapper = document.querySelector('.measuringWrapperGirl');
+            growDiv.style.height = wrapper.clientHeight + "px";
+        }
+        document.getElementById("more-gril-button").value = document.getElementById("more-girl-button").value == 'Read more' ? 'Read less' : 'Read more';
+    }
+</script> 
+
+<h2>Select Avitar</h2>
+<div class="row">
+    <div class="col-md-6">
+        <input type="button" onclick="growBoyDiv()" value="Read more" id="more-boy-button">
+        <div class="row" id="grow">
+            <div class='measuringWrapperBoy' style="height:260px;">
+                <div class="text">
+                    @foreach (var avitarPath in Model)
+                    {
+                        if (avitarPath[0] == 'b')
+                        {
+                            <div class="col-md-6">
+                                <img src='@string.Format("/Content/Images/avitars/{0}", avitarPath)' style=" padding-top:20px; padding-bottom:10px; height: 235px; display:block; margin-left:auto; margin-right:auto;" />
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <input type="button" onclick="growGirlDiv()" value="Read more" id="more-girl-button">
+        <div class="row" id="grow">
+            <div class='measuringWrapperGirl' style="height:260px;">
+                <div class="text">
+                    @foreach (var avitarPath in Model)
+                    {
+                        if (avitarPath[0] == 'g')
+                        {
+                            <div class="col-md-3">
+                                <img src='@string.Format("/Content/Images/avitars/{0}", avitarPath)' style=" padding-top:20px; padding-bottom:10px; height: 235px; display:block; margin-left:auto; margin-right:auto;" />
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

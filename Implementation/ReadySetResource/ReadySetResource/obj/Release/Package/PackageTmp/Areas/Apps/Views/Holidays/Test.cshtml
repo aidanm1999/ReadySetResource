@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "Test";
+    Layout = "~/Areas/Apps/Views/Shared/_Layout.cshtml";
+}
+
+
+<head>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v0.47.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v0.47.0/mapbox-gl.css' rel='stylesheet' />
+</head>
+
+<body>
+    <h2>Test</h2>
+
+    <div id='map' style='width: 400px; height: 300px;'></div>
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoiYWlkYW5tMTk5OSIsImEiOiJjamsxZ2p6eTIwNzExM3BwNjB3NzBvajFkIn0.7zgeBkg6_M5lT6b7MhHo4w';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v10'
+        });
+    </script>
+
+
+</body>

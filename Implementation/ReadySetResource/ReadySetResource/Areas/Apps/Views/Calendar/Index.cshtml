@@ -8,7 +8,7 @@
 
 
 
-@if (Model.CurrentUser.BusinessUserType.Calendar == "E")
+@if (Model.AccessType.AccessType == "E")
 {
 <h2>
     Calendar - For Week @Model.ActiveWeekCommenceDate.Day/@Model.ActiveWeekCommenceDate.Month to @Model.ActiveWeekCommenceDate.AddDays(6).Day/@Model.ActiveWeekCommenceDate.AddDays(6).Month
@@ -21,7 +21,7 @@
     }
 </h2>
 }
-else if (Model.CurrentUser.BusinessUserType.Calendar == "V")
+else if (Model.AccessType.AccessType == "V")
 {
 <h2>
     Calendar - For Week @Model.ActiveWeekCommenceDate.Day/@Model.ActiveWeekCommenceDate.Month to @Model.ActiveWeekCommenceDate.AddDays(6).Day/@Model.ActiveWeekCommenceDate.AddDays(6).Month
@@ -117,7 +117,7 @@ else
 
                     @foreach (var empShift in empShifts)
                     {
-                        if (Model.CurrentUser.BusinessUserType.Calendar == "V")
+                        if (Model.AccessType.AccessType == "V")
                         {
                             if (empShift == null)
                             {
@@ -155,7 +155,7 @@ else
                                 </td>
                             }
                         }
-                        else if (Model.CurrentUser.BusinessUserType.Calendar == "E")
+                        else if (Model.AccessType.AccessType == "E")
                         {
                             if (empShift == null)
                             {

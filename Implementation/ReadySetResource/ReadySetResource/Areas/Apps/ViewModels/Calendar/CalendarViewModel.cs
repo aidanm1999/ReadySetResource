@@ -22,6 +22,7 @@ namespace ReadySetResource.ViewModels
 
         public List<ApplicationUser> Employees { get; set; }
 
+        public TypeAppAccess AccessType { get; set; }
 
         public List<Shift> Shifts { get; set; }
 
