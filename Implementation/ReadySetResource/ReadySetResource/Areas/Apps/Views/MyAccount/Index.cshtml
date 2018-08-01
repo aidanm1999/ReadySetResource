@@ -4,14 +4,67 @@
     Layout = "~/Areas/Apps/Views/Shared/_Layout.cshtml";
 }
 
+<script>
+    function growDiv() {
+        var growDiv = document.getElementById('grow');
+        if (growDiv.clientHeight) {
+            growDiv.style.height = 0;
+        } else {
+            var wrapper = document.querySelector('.measuringWrapper');
+            growDiv.style.height = wrapper.clientHeight + "px";
+        }
+        document.getElementById("more-button").value = document.getElementById("more-button").value == 'Read more' ? 'Read less' : 'Read more';
+    }
+</script>
+
+
+<style>
+    #more-button {
+        border-style: none;
+        background: none;
+        font: 16px Serif;
+        color: blue;
+        margin: 0 0 10px 0;
+    }
+
+    #grow input:checked {
+        color: red;
+    }
+
+    #more-button:hover {
+        color: black;
+    }
+
+    #grow {
+        -moz-transition: height .5s;
+        -ms-transition: height .5s;
+        -o-transition: height .5s;
+        -webkit-transition: height .5s;
+        transition: height .5s;
+        height: 0;
+        overflow: hidden;
+    }
+</style>
 
 @Model.ErrorMessage
+
+
 
 <br>
 
 <div class="col-md-3 animated fadeInUp" style="animation-duration:1s; text-align:center;">
     <img src='@string.Format("/Content/Images/avitars/{0}.png", Model.User.Avitar)' alt="@Model.User.FirstName" style=" padding-top:20px; padding-bottom:10px; height: 235px; display:block; margin-left:auto; margin-right:auto;">
-    @Html.ActionLink("Change Avitar", "SelectAvitar", "Account", new { @class = "btn btn-default", style = "width:200px;" })
+    <input type="button" onclick="growDiv()" value="Change Avitar" class="btn btn-default" style="width:200px;">
+    <div id="grow">
+        <div class='measuringWrapper'>
+            <div class="text">
+                <p style="padding-top:4px;">
+                    @Html.ActionLink("Male", "SelectAvitar", "Account", new { @class = "btn btn-primary", style = "width:98px;" })
+                    @Html.ActionLink("Female", "SelectAvitar", "Account", new { @class = "btn btn-primary", style = "width:98px;" })
+                </p>
+            </div>
+        </div>
+    </div>
 </div>
 
 
@@ -71,78 +124,77 @@
 }
 
 
-    <div>
-        @* SECTION COMMENTED BECAUSE IT HAS ERRORS
-            <div>
-            <a href="#" id="dnperm" class="btn btn-default">Enable Desktop Notifications</a>
-            <a href="#" id="dntrigger" class="btn btn-warning">Test</a>
-            <script>
-                var dnperm = document.getElementById('dnperm');
-                var dntrigger = document.getElementById('dntrigger');
+            
+@* SECTION COMMENTED BECAUSE IT HAS ERRORS
+<div>
+<a href="#" id="dnperm" class="btn btn-default">Enable Desktop Notifications</a>
+<a href="#" id="dntrigger" class="btn btn-warning">Test</a>
+<script>
+    var dnperm = document.getElementById('dnperm');
+    var dntrigger = document.getElementById('dntrigger');
 
-                dnperm.addEventListener('click', function (e) {
-                    e.preventDefault();
+    dnperm.addEventListener('click', function (e) {
+        e.preventDefault();
 
-                    if (!window.Notification) {
-                        alert('Notifications are not supported');
-                    }
-                    else {
-                        Notification.requestPermission(function (p) {
-                            if (p === 'denied') {
-                                alert('You have denied notifications');
-                            }
-                            else if (p === 'granted') {
-                                alert('You have accepted notifications');
-                            }
+        if (!window.Notification) {
+            alert('Notifications are not supported');
+        }
+        else {
+            Notification.requestPermission(function (p) {
+                if (p === 'denied') {
+                    alert('You have denied notifications');
+                }
+                else if (p === 'granted') {
+                    alert('You have accepted notifications');
+                }
 
-                        });
-                    }
-                });
+            });
+        }
+    });
 
 
-                dntrigger.addEventListener('click', function (e) {
-                    var notify;
+    dntrigger.addEventListener('click', function (e) {
+        var notify;
 
-                    e.preventDefault();
+        e.preventDefault();
 
-                    if (Notification.permission === 'default') {
-                        alert('Please allow notifications');
-                    } else {
-                        notify = new Notification('Test from ReadySetResource', {
-                            body: 'Let\'s go back home!',
-                            icon: '../../../../Content/Images/home/logo.png'
-                        });
+        if (Notification.permission === 'default') {
+            alert('Please allow notifications');
+        } else {
+            notify = new Notification('Test from ReadySetResource', {
+                body: 'Let\'s go back home!',
+                icon: '../../../../Content/Images/home/logo.png'
+            });
 
-                        notify.onclick = function () {
-                            window.location = '/Apps/Dashboard';
-                            notify.close();
-                        }
-                    }
-
-                });
-
-            </script>
-        </div>
-        *@
-
-        @* SECTION COMMENTED OUT AS IT HAS ERRORS
-
-        <div class="col-md-6 animated fadeInUp" style="animation-duration:1s">
-            <h2>Sync to Google Calendar</h2>
-            @if (Model.User.GoogleCalendarFilePath == null)
-            {
-                <text>Log In to Google Calendar to sync your shifts</text>
-                @Html.ActionLink("Log In", "LogIntoGoogleCalendar", "Calendar", null, new { @class = "btn btn-default" });
+            notify.onclick = function () {
+                window.location = '/Apps/Dashboard';
+                notify.close();
             }
-            else
-            {
-                <text>You have enabled Google Calendar sync. Click 'Export' in the calendar app to export your shifts!</text>
-            }
+        }
 
-        </div>
+    });
 
-        *@
-    </div>
+</script>
+</div>
+*@
+
+@* SECTION COMMENTED OUT AS IT HAS ERRORS
+
+<div class="col-md-6 animated fadeInUp" style="animation-duration:1s">
+<h2>Sync to Google Calendar</h2>
+@if (Model.User.GoogleCalendarFilePath == null)
+{
+    <text>Log In to Google Calendar to sync your shifts</text>
+    @Html.ActionLink("Log In", "LogIntoGoogleCalendar", "Calendar", null, new { @class = "btn btn-default" });
+}
+else
+{
+    <text>You have enabled Google Calendar sync. Click 'Export' in the calendar app to export your shifts!</text>
+}
+
+</div>
+
+*@
 
 
 
