@@ -27,10 +27,6 @@ using System.Net.Mail;
 
 namespace ReadySetResource.Controllers
 {
-    /// <summary>
-    /// This is the get controller to sign a business and user to the service
-    /// </summary>
-    /// <seealso cref="System.Web.Mvc.Controller" />
     public class GetController : Controller
     {
         #region Initialization and StartUp
@@ -543,6 +539,7 @@ namespace ReadySetResource.Controllers
                 }
                 catch (Exception ex)
                 {
+                    var error = ex.Message;
                     return View("Solutions");
                 }
             }

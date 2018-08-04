@@ -192,7 +192,6 @@ C:\Users\Aidan Marshall\Documents\Projects\ReadySetResource\Implementation\Ready
 C:\Users\Aidan Marshall\Documents\Projects\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\obj\Release\ReadySetResource.dll
 C:\Users\Aidan Marshall\Documents\Projects\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\obj\Release\ReadySetResource.pdb
 C:\Users\Aidan Marshall\Google Drive\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\ApplicationInsights.config
-C:\Users\Aidan Marshall\Google Drive\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\Api\client_secret.json
 C:\Users\Aidan Marshall\Google Drive\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\ReadySetResource.dll.config
 C:\Users\Aidan Marshall\Google Drive\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\ReadySetResource.dll
 C:\Users\Aidan Marshall\Google Drive\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\ReadySetResource.pdb
@@ -373,3 +372,6 @@ C:\Users\Aidan Marshall\Google Drive\ReadySetResource\Implementation\ReadySetRes
 C:\Users\Aidan Marshall\Google Drive\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\obj\Release\ReadySetResource.Migrations.ChangedFKsInTypeAppAccess.resources
 C:\Users\Aidan Marshall\Google Drive\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\obj\Release\ReadySetResource.Migrations.AddedLinkToAppsTable.resources
 C:\Users\Aidan Marshall\Google Drive\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\obj\Release\ReadySetResource.Migrations.AddAvitarToUser.resources
+C:\Users\Aidan Marshall\Google Drive\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\Google.Apis.Auth.Mvc.dll
+C:\Users\Aidan Marshall\Google Drive\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\Google.Apis.Auth.Mvc.pdb
+C:\Users\Aidan Marshall\Google Drive\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\Google.Apis.Auth.Mvc.xml

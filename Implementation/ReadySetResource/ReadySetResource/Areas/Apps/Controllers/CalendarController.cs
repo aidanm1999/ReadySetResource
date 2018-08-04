@@ -19,11 +19,14 @@ using MigraDoc.Rendering;
 using ReadySetResource.Areas.Apps.ViewModels.Calendar;
 using Newtonsoft.Json;
 using Google.Apis.Auth.OAuth2;
+using System.Threading.Tasks;
 using Google.Apis.Calendar.v3;
 using Google.Apis.Calendar.v3.Data;
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
 using System.Threading;
+using Google.Apis.Auth.OAuth2.Mvc;
+using ReadySetResource.Apis.GoogleAPI;
 #endregion
 
 
@@ -1313,7 +1316,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
         // If modifying these scopes, delete your previously saved credentials
         // at ~/.credentials/calendar-dotnet-quickstart.json
         static string[] Scopes = { CalendarService.Scope.Calendar };
-        string ApplicationName = "Google Calendar API .NET Quickstart";
+        string ApplicationName = "ReadySetResource";
         #endregion
 
 
@@ -1331,10 +1334,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
             using (var stream =
                 new FileStream(path, FileMode.Open, FileAccess.Read))
             {
-                string credPath = System.Environment.GetFolderPath(
-                    System.Environment.SpecialFolder.Personal);
-                credPath = Path.Combine(credPath, "Projects/ReadySetResource/Implementation/ReadySetResource/ReadySetResource/credentials");
-
+                string credPath = Server.MapPath(@"~/.credentials/token.json");
                 
                 credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
                     GoogleClientSecrets.Load(stream).Secrets,
@@ -1399,9 +1399,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
             using (var stream =
                 new FileStream(path, FileMode.Open, FileAccess.Read))
             {
-                string credPath = System.Environment.GetFolderPath(
-                    System.Environment.SpecialFolder.Personal);
-                credPath = Path.Combine(credPath, ".credentials/calendar-dotnet-quickstart.json");
+                string credPath = Server.MapPath(@"~/Content/.credentials/token.json");
 
                 credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
                     GoogleClientSecrets.Load(stream).Secrets,
@@ -1518,10 +1516,59 @@ namespace ReadySetResource.Areas.Apps.Controllers
             return RedirectToAction("Index", "Calendar", new { week });
         }
         #endregion
-        
-        
-        #endregion
 
+        #region IndexAsync
+
+        public async Task<ActionResult> IndexAsync2(CancellationToken cancellationToken)
+        {
+            var result = await new AuthorizationCodeMvcApp(this, new AppFlowMetadata()).
+                AuthorizeAsync(cancellationToken);
+
+            if (result.Credential != null)
+            {
+                var service = new CalendarService(new BaseClientService.Initializer
+                {
+                    HttpClientInitializer = result.Credential,
+                    ApplicationName = "ReadySetResource"
+                });
+
+                // YOUR CODE SHOULD BE HERE..
+                // SAMPLE CODE:
+                // Define parameters of request.
+                EventsResource.ListRequest request = service.Events.List("primary");
+                request.TimeMin = DateTime.Now;
+                request.TimeMax = DateTime.Now.AddDays(7);
+                request.ShowDeleted = false;
+                request.SingleEvents = true;
+                request.MaxResults = 100;
+                request.OrderBy = EventsResource.ListRequest.OrderByEnum.StartTime;
+
+                // List events.
+                Events events = request.Execute();
+                Console.WriteLine("Upcoming events:");
+                if (events.Items != null && events.Items.Count > 0)
+                {
+                    foreach (var eventItem in events.Items)
+                    {
+                        string when = eventItem.Start.DateTime.ToString();
+                        if (String.IsNullOrEmpty(when))
+                        {
+                            when = eventItem.Start.Date;
+                        }
+
+                    }
+                }
+                return View();
+            }
+            else
+            {
+                return new RedirectResult(result.RedirectUri);
+            }
+        }
+
+
+        #endregion
+        #endregion
 
 
 
