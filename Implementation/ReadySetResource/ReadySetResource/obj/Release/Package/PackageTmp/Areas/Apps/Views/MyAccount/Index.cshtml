@@ -49,8 +49,6 @@
 @Model.ErrorMessage
 
 
-<h2>Select Avitar</h2>
-
 
 <br>
 
@@ -61,8 +59,8 @@
         <div class='measuringWrapper'>
             <div class="text">
                 <p style="padding-top:4px;">
-                    @Html.ActionLink("Male", "SelectAvitar", "Account", new { @class = "btn btn-primary", style = "width:98px;" })
-                    @Html.ActionLink("Female", "SelectAvitar", "Account", new { @class = "btn btn-primary", style = "width:98px;" })
+                    @Html.ActionLink("Male", "SelectAvitar", "MyAccount", new { gender = "M" }, new { @class = "btn btn-primary", style = "width:98px;" })
+                    @Html.ActionLink("Female", "SelectAvitar", "MyAccount", new { gender = "F" }, new { @class = "btn btn-primary", style = "width:98px;" })
                 </p>
             </div>
         </div>
@@ -70,7 +68,7 @@
 </div>
 
 
-@using (Html.BeginForm("UpdateSettings", "Dashboard"))
+@using (Html.BeginForm("UpdateSettings", "MyAccount"))
 {
     @Html.ValidationSummary(true, "Please fix the following errors.")
 

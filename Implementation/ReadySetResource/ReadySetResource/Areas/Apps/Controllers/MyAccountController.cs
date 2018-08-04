@@ -197,16 +197,39 @@ namespace ReadySetResource.Areas.Apps.Controllers
         #region Get
         [HttpGet]
         [Authorize]
-        public ActionResult SelectAvitar()
+        public ActionResult SelectAvitar(string gender)
         {
+            
             var userId = User.Identity.GetUserId();
             ApplicationUser user = _context.Users.SingleOrDefault(c => c.Id == userId);
 
             String path = Server.MapPath(@"~\Content\Images\avitars\");
-            String[] avitarPaths = new DirectoryInfo(path).GetFiles().Select(o => o.Name).ToArray();
+            String[] avitarNames = new DirectoryInfo(path).GetFiles().Select(o => o.Name).ToArray();
 
+            var avitarFilteredNames = new List<String>();
 
-            return View(avitarPaths);
+            if (gender == "M")
+            {
+                foreach(var name in avitarNames)
+                {
+                    if(name[0] == 'b')
+                    {
+                        avitarFilteredNames.Add(name);
+                    }
+                }
+            }
+            else if (gender == "F")
+            {
+                foreach (var name in avitarNames)
+                {
+                    if (name[0] == 'g')
+                    {
+                        avitarFilteredNames.Add(name);
+                    }
+                }
+            }
+
+            return View(avitarFilteredNames);
         }
         #endregion
 
@@ -299,8 +322,25 @@ namespace ReadySetResource.Areas.Apps.Controllers
         }
         #endregion
 
+        #region AvitarAssign
+        [Authorize]
+        public ActionResult AvitarAssign(string avitar)
+        {
+            avitar = avitar.Substring(0, avitar.Length - 4);
+
+            var userId = User.Identity.GetUserId();
+            ApplicationUser user = _context.Users.SingleOrDefault(c => c.Id == userId);
+
+            user.Avitar = avitar;
+
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+        #endregion
+
         #endregion
 
 
-    }
+        }
 }
