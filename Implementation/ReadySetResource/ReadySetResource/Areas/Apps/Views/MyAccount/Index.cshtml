@@ -1,6 +1,6 @@
 ﻿@model ReadySetResource.Areas.Apps.ViewModels.Dashboard.SettingsViewModel
 @{
-    ViewBag.Title = "Account Details";
+    ViewBag.Title = "Account";
     Layout = "~/Areas/Apps/Views/Shared/_Layout.cshtml";
 }
 
@@ -118,83 +118,89 @@
 
         @Html.AntiForgeryToken()
 
+        <b style="font-size:large">Sync Your Shifts</b>
+        <br>
+        @if (Model.User.GoogleCalendarFilePath == null)
+        {
+            <a href="@Url.Action()" style="white-space:nowrap; text-decoration:none;" >
+                <img src="~/Content/Images/myAccount/googleSignInButtonPressed.png"/>
+            </a>
+            @*Html.ActionLink("Log In", "LogIntoGoogleCalendar", "Calendar", null, new { @class = "btn btn-default" });*@
+        }
+        else
+        {
+            <text>Click 'Export' in the calendar app to export your shifts!</text>
+        }
+
         <br><br>
+
         <button type="submit" class="btn btn-primary" style="position:fixed; bottom:0px; right:0px;">Save</button>
     </div>
+
+    
 }
 
 
-            
+
 @* SECTION COMMENTED BECAUSE IT HAS ERRORS
-<div>
-<a href="#" id="dnperm" class="btn btn-default">Enable Desktop Notifications</a>
-<a href="#" id="dntrigger" class="btn btn-warning">Test</a>
-<script>
-    var dnperm = document.getElementById('dnperm');
-    var dntrigger = document.getElementById('dntrigger');
+    <div>
+    <a href="#" id="dnperm" class="btn btn-default">Enable Desktop Notifications</a>
+    <a href="#" id="dntrigger" class="btn btn-warning">Test</a>
+    <script>
+        var dnperm = document.getElementById('dnperm');
+        var dntrigger = document.getElementById('dntrigger');
 
-    dnperm.addEventListener('click', function (e) {
-        e.preventDefault();
+        dnperm.addEventListener('click', function (e) {
+            e.preventDefault();
 
-        if (!window.Notification) {
-            alert('Notifications are not supported');
-        }
-        else {
-            Notification.requestPermission(function (p) {
-                if (p === 'denied') {
-                    alert('You have denied notifications');
-                }
-                else if (p === 'granted') {
-                    alert('You have accepted notifications');
-                }
-
-            });
-        }
-    });
-
-
-    dntrigger.addEventListener('click', function (e) {
-        var notify;
-
-        e.preventDefault();
-
-        if (Notification.permission === 'default') {
-            alert('Please allow notifications');
-        } else {
-            notify = new Notification('Test from ReadySetResource', {
-                body: 'Let\'s go back home!',
-                icon: '../../../../Content/Images/home/logo.png'
-            });
-
-            notify.onclick = function () {
-                window.location = '/Apps/Dashboard';
-                notify.close();
+            if (!window.Notification) {
+                alert('Notifications are not supported');
             }
-        }
+            else {
+                Notification.requestPermission(function (p) {
+                    if (p === 'denied') {
+                        alert('You have denied notifications');
+                    }
+                    else if (p === 'granted') {
+                        alert('You have accepted notifications');
+                    }
 
-    });
+                });
+            }
+        });
 
-</script>
-</div>
+
+        dntrigger.addEventListener('click', function (e) {
+            var notify;
+
+            e.preventDefault();
+
+            if (Notification.permission === 'default') {
+                alert('Please allow notifications');
+            } else {
+                notify = new Notification('Test from ReadySetResource', {
+                    body: 'Let\'s go back home!',
+                    icon: '../../../../Content/Images/home/logo.png'
+                });
+
+                notify.onclick = function () {
+                    window.location = '/Apps/Dashboard';
+                    notify.close();
+                }
+            }
+
+        });
+
+    </script>
+    </div>
 *@
 
-@* SECTION COMMENTED OUT AS IT HAS ERRORS
 
 <div class="col-md-6 animated fadeInUp" style="animation-duration:1s">
-<h2>Sync to Google Calendar</h2>
-@if (Model.User.GoogleCalendarFilePath == null)
-{
-    <text>Log In to Google Calendar to sync your shifts</text>
-    @Html.ActionLink("Log In", "LogIntoGoogleCalendar", "Calendar", null, new { @class = "btn btn-default" });
-}
-else
-{
-    <text>You have enabled Google Calendar sync. Click 'Export' in the calendar app to export your shifts!</text>
-}
+
 
 </div>
 
-*@
 
 
 
