@@ -122,7 +122,7 @@
         <br>
         @if (Model.User.GoogleCalendarFilePath == null)
         {
-            <a href="@Url.Action()" style="white-space:nowrap; text-decoration:none;" >
+            <a href="@Url.Action("LogIntoGoogle","GoogleAPI", new { area = "" })" style="white-space:nowrap; text-decoration:none;" >
                 <img src="~/Content/Images/myAccount/googleSignInButtonPressed.png"/>
             </a>
             @*Html.ActionLink("Log In", "LogIntoGoogleCalendar", "Calendar", null, new { @class = "btn btn-default" });*@

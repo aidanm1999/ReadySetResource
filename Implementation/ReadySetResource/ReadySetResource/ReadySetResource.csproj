@@ -265,6 +265,7 @@
   <ItemGroup>
     <Compile Include="Apis\GoogleAPI\AppFlowMetadata.cs" />
     <Compile Include="Apis\GoogleAPI\AuthCallbackController.cs" />
+    <Compile Include="Apis\GoogleAPI\GoogleAPIController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -734,6 +735,7 @@
     <Folder Include="Areas\Apps\Models\" />
     <Folder Include="Content\PDF\" />
     <Folder Include="Views\AuthCallback\" />
+    <Folder Include="Views\GoogleAPI\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
