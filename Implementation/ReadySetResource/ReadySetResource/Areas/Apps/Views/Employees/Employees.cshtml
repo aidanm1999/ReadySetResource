@@ -41,7 +41,7 @@
 <body>
     @foreach (var user in Model.Users)
     {
-        <a href="@Url.Action("Employee", new { user = user.Id })">
+        @*<a href="@Url.Action("Employee", new { user = user.Id })">*@
 
             <div class="col-md-3">
                 <div class="center">
@@ -53,7 +53,7 @@
                     </div>
                 </div>
             </div>
-        </a>
+        @*</a>*@
         {
             count = count + 1;
         }

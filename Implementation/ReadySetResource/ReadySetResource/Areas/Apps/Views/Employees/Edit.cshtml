@@ -37,8 +37,11 @@
 
     @Model.ErrorMessage
 
+
     @using (Html.BeginForm("EditTypePost", "Employees"))
     {
+
+
         @Html.ValidationSummary(true, "Please fix the following errors.")
         <div class="form-inlne col-md-4" style="padding-bottom:10px;">
             @Html.LabelFor(m => m.BusinessUserType.Name)
@@ -47,7 +50,7 @@
         </div>
         <div class="form-inlne col-md-4" style="padding-bottom:10px;">
             @Html.LabelFor(m => m.BusinessUserType.Colour)
-            @Html.TextBoxFor(m => m.BusinessUserType.Colour, new { @class = "form-control", style = "width:150px;" })
+            # @Html.TextBoxFor(m => m.BusinessUserType.Colour, new { @class = "form-control", style = "width:150px;", placeholder = "Hex Colour" })
             @Html.ValidationMessageFor(m => m.BusinessUserType.Colour)
         </div>
         <div class="form-inlne col-md-4" style="padding-bottom:10px;padding-top:25px;">
@@ -92,7 +95,7 @@
             </div>
         }
 
-        
+
 
         @Html.AntiForgeryToken()
 
@@ -109,7 +112,7 @@
             @Html.HiddenFor(m => m.Accesses[i].BusinessUserType)
 
         }
-                                    
+
 
     }
 </div>

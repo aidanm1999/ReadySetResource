@@ -12,6 +12,7 @@
         width: 100%;
         border-radius: 5px;
         word-wrap: break-word;
+        overflow:hidden;
     }
 
         .card:hover {
@@ -33,14 +34,14 @@
     }
 </style>
 
-<h2>Employee Types</h2>
+<h2>Employees</h2>
 @Model.ErrorMessage
 
 
 <body>
     @foreach (var user in Model.Users)
     {
-        <a href="@Url.Action("Employee", new { user = user.Id })">
+        @*<a href="@Url.Action("Employee", new { user = user.Id })">*@
 
             <div class="col-md-3">
                 <div class="center">
@@ -52,7 +53,7 @@
                     </div>
                 </div>
             </div>
-        </a>
+        @*</a>*@
         {
             count = count + 1;
         }

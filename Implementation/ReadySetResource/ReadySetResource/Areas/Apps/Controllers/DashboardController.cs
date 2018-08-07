@@ -89,6 +89,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
             {
                 FirstName = user.FirstName,
                 LastName = user.LastName,
+                Avitar = user.Avitar,
                 Apps = new List<App>(),
             };
 

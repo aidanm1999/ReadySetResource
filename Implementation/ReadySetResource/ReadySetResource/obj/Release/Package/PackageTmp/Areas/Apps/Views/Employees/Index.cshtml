@@ -12,6 +12,7 @@
         width: 100%;
         border-radius: 5px;
         word-wrap: break-word;
+        border-radius:  10px 10px 10px 10px;
     }
 
         .card:hover {
@@ -19,11 +20,12 @@
         }
 
     img {
-        border-radius: 5px 5px 0 0;
+        border-radius: 10px 10px 0 0;
     }
 
     .container {
         padding: 2px 16px;
+        border-radius: 10px 10px 0 0;
     }
 
     .center {
@@ -33,7 +35,11 @@
     }
 </style>
 
-<h2>Employee Types</h2>
+
+<h2>
+    Employee Types
+    @Html.ActionLink("Add Type", "AddType", null, new { @class = "btn btn-default", style = "float:right;" })
+</h2>
 @Model.ErrorMessage
 
 
@@ -44,9 +50,10 @@
 
             <div class="col-md-3">
                 <div class="center">
-                    <div class="card">
-                        <img src="~/Content/Images/dashboard/user.png" alt="@type.Name" style="width:100%">
-                        <div class="container">
+                    <div class="card" style="background-color:#@type.Colour;">
+                        <div style="background-color:#@type.Colour; width:100%;height:40px;border-radius: 10px 10px 0 0;">
+                        </div>
+                        <div class="container" style="background-color:white;">
                             <h4><b>@type.Name</b> </h4>
                             <p>
 
@@ -74,17 +81,4 @@
         }
     }
 
-    <a href="@Url.Action("AddType")">
-
-        <div class="col-md-3">
-            <div class="center">
-                <div class="card">
-                    <img src="~/Content/Images/dashboard/addUser.png" alt="Add Employee Type" style="width:100%">
-                    <div class="container">
-                        <h4><b>Add Type</b></h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </a>
 </body>

@@ -281,6 +281,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
                 }
 
                 businessUserTypeInDb.Name = typeVM.BusinessUserType.Name;
+                businessUserTypeInDb.Colour = typeVM.BusinessUserType.Colour;
 
 
                 _context.SaveChanges();
@@ -341,7 +342,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
             }
             else
             {
-                return RedirectToAction("EditType", "Dashboard", new { type, errorMessage = "Some employees have this type. Please modify before deleting this." });
+                return RedirectToAction("Edit", "Employees", new { type, errorMessage = "Some employees have this type. Please modify before deleting this." });
             }
 
         }

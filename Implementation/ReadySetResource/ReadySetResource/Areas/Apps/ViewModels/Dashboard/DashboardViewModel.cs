@@ -10,6 +10,7 @@ namespace ReadySetResource.Areas.Apps.ViewModels.Dashboard
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string Avitar { get; set; }
 
         public List<App> Apps { get; set; }
 
