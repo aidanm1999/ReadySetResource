@@ -280,11 +280,12 @@
     <Compile Include="Areas\Apps\ViewModels\Calendar\MyChartsViewModel.cs" />
     <Compile Include="Areas\Apps\ViewModels\Calendar\ChartsViewModel.cs" />
     <Compile Include="Areas\Apps\ViewModels\Dashboard\BusinessSettingsViewModel.cs" />
-    <Compile Include="Areas\Apps\ViewModels\Dashboard\BusinessUserTypeViewModel.cs" />
+    <Compile Include="Areas\Apps\ViewModels\Employees\BusinessUserTypeViewModel.cs" />
     <Compile Include="Areas\Apps\ViewModels\Dashboard\BusinessUserViewModel.cs" />
-    <Compile Include="Areas\Apps\ViewModels\Dashboard\BusinessUserTypesViewModel.cs" />
+    <Compile Include="Areas\Apps\ViewModels\Employees\BusinessUserTypesViewModel.cs" />
     <Compile Include="Areas\Apps\ViewModels\Dashboard\DashboardViewModel.cs" />
     <Compile Include="Areas\Apps\ViewModels\Dashboard\SettingsViewModel.cs" />
+    <Compile Include="Areas\Apps\ViewModels\Employees\EmployeesViewModel.cs" />
     <Compile Include="Areas\Apps\ViewModels\Holidays\HolidaysViewModel.cs" />
     <Compile Include="Areas\Apps\ViewModels\Holidays\HolidayViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -324,6 +325,10 @@
     <Compile Include="Migrations\201807282203548_AddAvitarToUser.cs" />
     <Compile Include="Migrations\201807282203548_AddAvitarToUser.Designer.cs">
       <DependentUpon>201807282203548_AddAvitarToUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808071403182_AddColourToBusinessUserType.cs" />
+    <Compile Include="Migrations\201808071403182_AddColourToBusinessUserType.Designer.cs">
+      <DependentUpon>201808071403182_AddColourToBusinessUserType.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\App.cs" />
     <Compile Include="Models\Business.cs" />
@@ -366,7 +371,6 @@
     <Content Include="Content\Images\apps\Holidays.png" />
     <Content Include="Content\Images\apps\Employees.png" />
     <Content Include="Content\Images\apps\RSRStore.png" />
-    <Content Include="Content\Images\apps\BusinessSettings.png" />
     <Content Include="Content\Images\apps\MyAccount.png" />
     <Content Include="Content\Images\dashboard\addUser.png" />
     <Content Include="Content\Images\avitars\boy-1.png" />
@@ -517,7 +521,7 @@
     <Content Include="Areas\Apps\Views\Holidays\Edit.cshtml" />
     <Content Include="Areas\Apps\Views\Dashboard\AddType.cshtml" />
     <Content Include="Areas\Apps\Views\Dashboard\AddUser.cshtml" />
-    <Content Include="Areas\Apps\Views\Dashboard\EditType.cshtml" />
+    <Content Include="Areas\Apps\Views\Employees\Edit.cshtml" />
     <Content Include="Areas\Apps\Views\Dashboard\NotAuthorised.cshtml" />
     <Content Include="Areas\Apps\Views\Calendar\MyCharts.cshtml" />
     <Content Include="Areas\Apps\Views\Dashboard\UserTypes.cshtml" />
@@ -532,6 +536,7 @@
     <Content Include="Areas\Apps\Views\MyAccount\SelectAvitar.cshtml" />
     <Content Include="Apis\GoogleAPI\client_secret.json" />
     <Content Include="Areas\Apps\Views\Calendar\IndexAsync2.cshtml" />
+    <Content Include="Areas\Apps\Views\Employees\Employees.cshtml" />
     <None Include="Properties\PublishProfiles\ReadySetResource3 - Web Deploy.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -780,6 +785,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807282203548_AddAvitarToUser.resx">
       <DependentUpon>201807282203548_AddAvitarToUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808071403182_AddColourToBusinessUserType.resx">
+      <DependentUpon>201808071403182_AddColourToBusinessUserType.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

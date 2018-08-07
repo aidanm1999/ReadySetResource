@@ -1,0 +1,136 @@
+﻿@model ReadySetResource.Areas.Apps.ViewModels.Employees.BusinessUserTypeViewModel
+@{
+    ViewBag.Title = "Edit Type";
+    Layout = "~/Areas/Apps/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .card {
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+        width: 100%;
+        border-radius: 5px;
+        word-wrap: break-word;
+    }
+
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        }
+
+    img {
+        border-radius: 5px 5px 0 0;
+    }
+
+    .container {
+        padding: 2px 16px;
+    }
+
+    .center {
+        margin: auto;
+        width: 80%;
+        padding: 10px;
+    }
+</style>
+
+
+<div class="col-md-12">
+
+    @Model.ErrorMessage
+
+    @using (Html.BeginForm("EditTypePost", "Dashboard"))
+    {
+        @Html.ValidationSummary(true, "Please fix the following errors.")
+        <div class="form-inlne col-md-6" style="padding-bottom:20px;">
+            @Html.LabelFor(m => m.BusinessUserType.Name)
+            @Html.TextBoxFor(m => m.BusinessUserType.Name, new { @class = "form-control", style = "width:150px; float:right;" })
+            @Html.ValidationMessageFor(m => m.BusinessUserType.Name)
+        </div>
+        <div class="form-inlne col-md-6" style="padding-bottom:20px;">
+            @Html.LabelFor(m => m.BusinessUserType.Colour)
+            @Html.TextBoxFor(m => m.BusinessUserType.Colour, new { @class = "form-control", style = "width:150px; float:right;" })
+            @Html.ValidationMessageFor(m => m.BusinessUserType.Colour)
+        </div>
+        <hr>
+        for (var counter = 0; counter < Model.Apps.Count(); counter++)
+        {
+            <div class="col-md-3 form-group">
+                <div class="center">
+                    <div class="card">
+                        <img src='@string.Format("/Content/Images/apps/{0}.png", Model.Apps[counter].Link)' alt="@Model.Apps[counter].Name" style="width:100%; padding:20px;">
+                        <div class="container">
+                            <p style="text-align:center;padding-bottom:40px;">
+                                @Html.DropDownListFor(m => m.PreviousName, Model.Options, new { @class = "form-control", style = "width:100%;float:right;" })
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        @*
+            @Html.DropDownListFor(m => m.PreviousName, Model.Options, new { @class = "form-control", style = "width:150px;" })
+
+            @{
+                    var access = Model.Accesses.FirstOrDefault(a => a.AppId == app.Id);
+                }
+
+                @Html.DropDownListFor(m => m.BusinessUserType.Administrator, Model.Options, new { style = "float:right;" })
+                @Html.ValidationMessageFor(m => m.Options)
+
+
+
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.BusinessUserType.Administrator)
+                @Html.DropDownListFor(m => m.BusinessUserType.Administrator, Model.Options, new { style = "float:right;" })
+                @Html.ValidationMessageFor(m => m.Options)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.BusinessUserType.Calendar)
+                @Html.DropDownListFor(m => m.BusinessUserType.Calendar, Model.Options, new { style = "float:right;" })
+                @Html.ValidationMessageFor(m => m.Options)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.BusinessUserType.Holidays)
+                @Html.DropDownListFor(m => m.BusinessUserType.Holidays, Model.Options, new { style = "float:right;" })
+                @Html.ValidationMessageFor(m => m.Options)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.BusinessUserType.Meetings)
+                @Html.DropDownListFor(m => m.BusinessUserType.Meetings, Model.Options, new { style = "float:right;" })
+                @Html.ValidationMessageFor(m => m.Options)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.BusinessUserType.Messenger)
+                @Html.DropDownListFor(m => m.BusinessUserType.Messenger, Model.Options, new { style = "float:right;" })
+                @Html.ValidationMessageFor(m => m.Options)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.BusinessUserType.Store)
+                @Html.DropDownListFor(m => m.BusinessUserType.Store, Model.Options, new { style = "float:right;" })
+                @Html.ValidationMessageFor(m => m.Options)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.BusinessUserType.Updates)
+                @Html.DropDownListFor(m => m.BusinessUserType.Updates, Model.Options, new { style = "float:right;" })
+                @Html.ValidationMessageFor(m => m.Options)
+            </div>*@
+
+        @Html.AntiForgeryToken()
+        <p>
+            @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default", style = "float:left" })
+            @Html.ActionLink("Delete", "DeleteType", new { type = Model.BusinessUserType.Id }, new { @class = "btn btn-danger", style = "margin-left: 20px;" })
+            <button type="submit" class="btn btn-primary" style="float:right;">Save</button>
+        </p>
+        @Html.HiddenFor(m => m.BusinessUserType.Id)
+        @Html.HiddenFor(m => m.BusinessUserType.BusinessId)
+        @Html.HiddenFor(m => m.PreviousName)
+
+    }
+</div>
+
+
+@*Generating client side validation*@
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}

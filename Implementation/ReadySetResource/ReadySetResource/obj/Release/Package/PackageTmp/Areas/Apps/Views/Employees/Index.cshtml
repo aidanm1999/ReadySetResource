@@ -1,4 +1,4 @@
-﻿@model ReadySetResource.Areas.Apps.ViewModels.Dashboard.BusinessUserTypesViewModel
+﻿@model ReadySetResource.Areas.Apps.ViewModels.Employees.BusinessUserTypesViewModel
 @{
     ViewBag.Title = "Employee Types";
     Layout = "~/Areas/Apps/Views/Shared/_Layout.cshtml";
@@ -40,15 +40,16 @@
 <body>
     @foreach (var type in Model.BusinessUserTypes)
     {
-        <a href="@Url.Action("BusinessSettings", new { type = type.Id })">
+        <a href="@Url.Action("Employees", new { type = type.Id })">
 
             <div class="col-md-3">
                 <div class="center">
                     <div class="card">
                         <img src="~/Content/Images/dashboard/user.png" alt="@type.Name" style="width:100%">
                         <div class="container">
-                            <h4><b>@type.Name</b></h4>
+                            <h4><b>@type.Name</b> </h4>
                             <p>
+
                                 @Model.EmployeeCounts[count]
 
                                 @if (@Model.EmployeeCounts[count] == 1)
@@ -59,6 +60,9 @@
                                 {
                                     <text>Employees</text>
                                 }
+                            </p>
+                            <p>
+                                @Html.ActionLink("Edit", "Edit", new { type = type.Id })
                             </p>
                         </div>
                     </div>
@@ -77,7 +81,7 @@
                 <div class="card">
                     <img src="~/Content/Images/dashboard/addUser.png" alt="Add Employee Type" style="width:100%">
                     <div class="container">
-                        <h4><b>Add Employee Type</b></h4>
+                        <h4><b>Add Type</b></h4>
                     </div>
                 </div>
             </div>

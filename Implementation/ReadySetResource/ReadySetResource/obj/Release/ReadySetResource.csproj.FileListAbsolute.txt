@@ -375,3 +375,4 @@ C:\Users\Aidan Marshall\Google Drive\ReadySetResource\Implementation\ReadySetRes
 C:\Users\Aidan Marshall\Google Drive\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\Google.Apis.Auth.Mvc.dll
 C:\Users\Aidan Marshall\Google Drive\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\Google.Apis.Auth.Mvc.pdb
 C:\Users\Aidan Marshall\Google Drive\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\Google.Apis.Auth.Mvc.xml
+C:\Users\Aidan Marshall\Google Drive\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\obj\Release\ReadySetResource.Migrations.AddColourToBusinessUserType.resources
