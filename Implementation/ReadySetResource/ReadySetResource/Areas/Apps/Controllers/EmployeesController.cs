@@ -180,6 +180,27 @@ namespace ReadySetResource.Areas.Apps.Controllers
             };
 
 
+            foreach(var app in typeVM.Apps)
+            {
+                var access = typeVM.Accesses.FirstOrDefault(a => a.AppId == app.Id);
+
+                if(access == null)
+                {
+                    var newAccess = new TypeAppAccess
+                    {
+                        AccessType = "N",
+                        App = app,
+                        AppId = app.Id,
+                        BusinessUserType = businessUserType,
+                        BusinessUserTypeId = businessUserType.Id,
+                    };
+
+                    typeVM.Accesses.Add(newAccess);
+                }
+                
+            }
+
+
 
             //Gets the list of all options and changes them to a SelectedListItem
             SelectListItem selectListItem = new SelectListItem() { Text = "View", Value = "V" };
@@ -227,18 +248,45 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
                 var businessUserTypeInDb = _context.BusinessUserTypes.FirstOrDefault(b => b.Id == typeVM.BusinessUserType.Id);
 
-                //businessUserTypeInDb.Administrator = typeVM.BusinessUserType.Administrator;
-                //businessUserTypeInDb.Calendar = typeVM.BusinessUserType.Calendar;
-                //businessUserTypeInDb.Holidays = typeVM.BusinessUserType.Holidays;
-                //businessUserTypeInDb.Meetings = typeVM.BusinessUserType.Meetings;
-                //businessUserTypeInDb.Messenger = typeVM.BusinessUserType.Messenger;
-                //businessUserTypeInDb.Store = typeVM.BusinessUserType.Store;
-                //businessUserTypeInDb.Updates = typeVM.BusinessUserType.Updates;
+                //Updates the TypeAppAccesses
+
+                //Delete any accesses that have 'N' as access type
+                var accessCount = typeVM.Accesses.Count;
+                for (var accessIndex =0; accessIndex < accessCount; accessIndex++)
+                {
+                    int accessId = typeVM.Accesses[accessIndex].Id;
+                    var accessInDb = _context.TypeAppAccesses.FirstOrDefault(t => t.Id == accessId);
+
+                    if (typeVM.Accesses[accessIndex].AccessType == "N" && typeVM.Accesses[accessIndex].Id != 0)
+                    {
+                        _context.TypeAppAccesses.Remove(accessInDb);
+                    }
+                    else if(accessInDb == null)
+                    {
+                        //This mean the user changed an access type from Neither to Edit or View
+                        //Type must be then added
+
+                        _context.TypeAppAccesses.Add(typeVM.Accesses[accessIndex]);
+
+                    }
+                    else 
+                    {
+                        if (accessInDb.AccessType != typeVM.Accesses[accessIndex].AccessType)
+                        {
+                            accessInDb.AccessType = typeVM.Accesses[accessIndex].AccessType;
+                            _context.SaveChanges();
+                        }
+                            
+                    }
+                }
+
+                businessUserTypeInDb.Name = typeVM.BusinessUserType.Name;
+
 
                 _context.SaveChanges();
 
 
-                return RedirectToAction("BusinessSettings", "Dashboard");
+                return RedirectToAction("Index", "Employees");
             }
             else
             {

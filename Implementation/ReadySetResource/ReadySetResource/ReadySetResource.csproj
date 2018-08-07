@@ -372,6 +372,8 @@
     <Content Include="Content\Images\apps\Employees.png" />
     <Content Include="Content\Images\apps\RSRStore.png" />
     <Content Include="Content\Images\apps\MyAccount.png" />
+    <Content Include="Content\Images\apps\BusinessSettings.png" />
+    <Content Include="Content\Images\apps\Dashboard.png" />
     <Content Include="Content\Images\dashboard\addUser.png" />
     <Content Include="Content\Images\avitars\boy-1.png" />
     <Content Include="Content\Images\avitars\boy-10.png" />

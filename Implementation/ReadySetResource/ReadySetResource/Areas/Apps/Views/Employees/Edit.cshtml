@@ -37,18 +37,26 @@
 
     @Model.ErrorMessage
 
-    @using (Html.BeginForm("EditTypePost", "Dashboard"))
+    @using (Html.BeginForm("EditTypePost", "Employees"))
     {
         @Html.ValidationSummary(true, "Please fix the following errors.")
-        <div class="form-inlne col-md-6" style="padding-bottom:20px;">
+        <div class="form-inlne col-md-4" style="padding-bottom:10px;">
             @Html.LabelFor(m => m.BusinessUserType.Name)
-            @Html.TextBoxFor(m => m.BusinessUserType.Name, new { @class = "form-control", style = "width:150px; float:right;" })
+            @Html.TextBoxFor(m => m.BusinessUserType.Name, new { @class = "form-control", style = "width:150px;" })
             @Html.ValidationMessageFor(m => m.BusinessUserType.Name)
         </div>
-        <div class="form-inlne col-md-6" style="padding-bottom:20px;">
+        <div class="form-inlne col-md-4" style="padding-bottom:10px;">
             @Html.LabelFor(m => m.BusinessUserType.Colour)
-            @Html.TextBoxFor(m => m.BusinessUserType.Colour, new { @class = "form-control", style = "width:150px; float:right;" })
+            @Html.TextBoxFor(m => m.BusinessUserType.Colour, new { @class = "form-control", style = "width:150px;" })
             @Html.ValidationMessageFor(m => m.BusinessUserType.Colour)
+        </div>
+        <div class="form-inlne col-md-4" style="padding-bottom:10px;padding-top:25px;">
+            <p>
+                <button type="submit" class="btn btn-primary" style="margin-left: 20px; float:right;">Save</button>
+                @Html.ActionLink("Delete", "DeleteType", new { type = Model.BusinessUserType.Id }, new { @class = "btn btn-danger", style = "margin-left: 20px; float:right;" })
+                @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default", style = " float:right;" })
+
+            </p>
         </div>
         <hr>
         for (var counter = 0; counter < Model.Apps.Count(); counter++)
@@ -58,72 +66,50 @@
                     <div class="card">
                         <img src='@string.Format("/Content/Images/apps/{0}.png", Model.Apps[counter].Link)' alt="@Model.Apps[counter].Name" style="width:100%; padding:20px;">
                         <div class="container">
-                            <p style="text-align:center;padding-bottom:40px;">
-                                @Html.DropDownListFor(m => m.PreviousName, Model.Options, new { @class = "form-control", style = "width:100%;float:right;" })
+                            <p style="text-align:center;padding-bottom:5px;">
+                                @{
+                                    var access = Model.Accesses.FirstOrDefault(a => a.AppId == Model.Apps[counter].Id);
+
+
+                                    if (access == null)
+                                    {
+
+                                        <text>Neither</text>
+                                    }
+                                    else
+                                    {
+                                        var accessIndex = Model.Accesses.IndexOf(access);
+
+                                        @Html.DropDownListFor(model => model.Accesses[accessIndex].AccessType,
+                                        Model.Options.Select(x => new SelectListItem() { Value = x.Value, Text = x.Text, Selected = (x.Value == Model.Accesses[accessIndex].AccessType.ToString()) }).ToList(),
+                                        new { @class = "form-control", style = "width:100%;" })
+                                    }
+                                }
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
         }
-        @*
-            @Html.DropDownListFor(m => m.PreviousName, Model.Options, new { @class = "form-control", style = "width:150px;" })
 
-            @{
-                    var access = Model.Accesses.FirstOrDefault(a => a.AppId == app.Id);
-                }
-
-                @Html.DropDownListFor(m => m.BusinessUserType.Administrator, Model.Options, new { style = "float:right;" })
-                @Html.ValidationMessageFor(m => m.Options)
-
-
-
-
-            <div class="form-group">
-                @Html.LabelFor(m => m.BusinessUserType.Administrator)
-                @Html.DropDownListFor(m => m.BusinessUserType.Administrator, Model.Options, new { style = "float:right;" })
-                @Html.ValidationMessageFor(m => m.Options)
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.BusinessUserType.Calendar)
-                @Html.DropDownListFor(m => m.BusinessUserType.Calendar, Model.Options, new { style = "float:right;" })
-                @Html.ValidationMessageFor(m => m.Options)
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.BusinessUserType.Holidays)
-                @Html.DropDownListFor(m => m.BusinessUserType.Holidays, Model.Options, new { style = "float:right;" })
-                @Html.ValidationMessageFor(m => m.Options)
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.BusinessUserType.Meetings)
-                @Html.DropDownListFor(m => m.BusinessUserType.Meetings, Model.Options, new { style = "float:right;" })
-                @Html.ValidationMessageFor(m => m.Options)
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.BusinessUserType.Messenger)
-                @Html.DropDownListFor(m => m.BusinessUserType.Messenger, Model.Options, new { style = "float:right;" })
-                @Html.ValidationMessageFor(m => m.Options)
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.BusinessUserType.Store)
-                @Html.DropDownListFor(m => m.BusinessUserType.Store, Model.Options, new { style = "float:right;" })
-                @Html.ValidationMessageFor(m => m.Options)
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.BusinessUserType.Updates)
-                @Html.DropDownListFor(m => m.BusinessUserType.Updates, Model.Options, new { style = "float:right;" })
-                @Html.ValidationMessageFor(m => m.Options)
-            </div>*@
+        
 
         @Html.AntiForgeryToken()
-        <p>
-            @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default", style = "float:left" })
-            @Html.ActionLink("Delete", "DeleteType", new { type = Model.BusinessUserType.Id }, new { @class = "btn btn-danger", style = "margin-left: 20px;" })
-            <button type="submit" class="btn btn-primary" style="float:right;">Save</button>
-        </p>
+
         @Html.HiddenFor(m => m.BusinessUserType.Id)
         @Html.HiddenFor(m => m.BusinessUserType.BusinessId)
         @Html.HiddenFor(m => m.PreviousName)
+
+        for (var i = 0; i < Model.Accesses.Count; i++)
+        {
+            @Html.HiddenFor(m => m.Accesses[i].Id)
+            @Html.HiddenFor(m => m.Accesses[i].AppId)
+            @Html.HiddenFor(m => m.Accesses[i].BusinessUserTypeId)
+            @Html.HiddenFor(m => m.Accesses[i].App)
+            @Html.HiddenFor(m => m.Accesses[i].BusinessUserType)
+
+        }
+                                    
 
     }
 </div>
