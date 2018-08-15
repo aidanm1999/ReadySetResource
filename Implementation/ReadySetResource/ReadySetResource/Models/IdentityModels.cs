@@ -123,6 +123,7 @@ namespace ReadySetResource.Models
         public DbSet<Holiday> Holidays { get; set; }
         public DbSet<App> Apps { get; set; }
         public DbSet<TypeAppAccess> TypeAppAccesses { get; set; }
+        public DbSet<AppSetting> AppSettings { get; set; }
 
 
 

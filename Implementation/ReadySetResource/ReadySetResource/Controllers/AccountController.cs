@@ -27,6 +27,8 @@ namespace ReadySetResource.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+
+        #region Initialization and StartUp
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private ApplicationDbContext _context;
@@ -69,8 +71,11 @@ namespace ReadySetResource.Controllers
                 _userManager = value;
             }
         }
+        #endregion
 
+        
 
+        #region Login
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
@@ -107,8 +112,11 @@ namespace ReadySetResource.Controllers
                     return View(model);
             }
         }
+        #endregion
 
 
+
+        #region Verify Code
         [AllowAnonymous]
         public async Task<ActionResult> VerifyCode(string provider, string returnUrl, bool rememberMe)
         {
@@ -148,8 +156,11 @@ namespace ReadySetResource.Controllers
                     return View(model);
             }
         }
+        #endregion
 
 
+
+        #region Register
         [AllowAnonymous]
         public ActionResult Register()
         {
@@ -186,8 +197,11 @@ namespace ReadySetResource.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+        #endregion
 
 
+
+        #region Confirm Email
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {
@@ -198,8 +212,11 @@ namespace ReadySetResource.Controllers
             var result = await UserManager.ConfirmEmailAsync(userId, code);
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
+        #endregion
 
 
+
+        #region Forgot Password
         [AllowAnonymous]
         public ActionResult ForgotPassword()
         {
@@ -270,15 +287,18 @@ namespace ReadySetResource.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-
+        
 
         [AllowAnonymous]
         public ActionResult ForgotPasswordConfirmation()
         {
             return View();
         }
+        #endregion
 
 
+
+        #region Reset Password
         [AllowAnonymous]
         public ActionResult ResetPassword(string code)
         {
@@ -319,27 +339,18 @@ namespace ReadySetResource.Controllers
             return View();
         }
 
-        //
-        // GET: /Account/ResetPasswordConfirmation
+
+        
         [AllowAnonymous]
         public ActionResult ResetPasswordConfirmation()
         {
             return View();
         }
+        #endregion
 
-        //
-        // POST: /Account/ExternalLogin
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public ActionResult ExternalLogin(string provider, string returnUrl)
-        {
-            // Request a redirect to the external login provider
-            return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
-        }
 
-        //
-        // GET: /Account/SendCode
+
+        #region Send Code
         [AllowAnonymous]
         public async Task<ActionResult> SendCode(string returnUrl, bool rememberMe)
         {
@@ -353,7 +364,7 @@ namespace ReadySetResource.Controllers
             return View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
 
-        
+
         // POST: /Account/SendCode
         [HttpPost]
         [AllowAnonymous]
@@ -372,8 +383,21 @@ namespace ReadySetResource.Controllers
             }
             return RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });
         }
+        #endregion
 
+
+
+        #region External Login
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult ExternalLogin(string provider, string returnUrl)
+        {
+            // Request a redirect to the external login provider
+            return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
+        }
         
+
         // GET: /Account/ExternalLoginCallback
         [AllowAnonymous]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
@@ -439,9 +463,11 @@ namespace ReadySetResource.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View(model);
         }
+        #endregion
 
 
-        // POST: /Account/LogOff
+
+        #region Log Off
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
@@ -477,11 +503,9 @@ namespace ReadySetResource.Controllers
 
             base.Dispose(disposing);
         }
+        #endregion
 
-
-
-
-
+        
 
         #region User Invite
 
@@ -603,12 +627,35 @@ namespace ReadySetResource.Controllers
             }
             else
             {
-                //Something went wrong
-                return RedirectToAction("Error", "Shared");
+                inviteVM.ErrorMsg = resetResult.Errors.ToString();
+                return View("InviteSetPassword", inviteVM);
             }
             
         }
 
+        #endregion
+
+
+
+        #region NotAuthorised
+        [HttpGet]
+        [Authorize]
+        public ActionResult NotAuthorised(string Uri)
+        {
+
+            if (Uri == null || Uri == "")
+            {
+                ViewBag.Message = "You are not authorised to use this app";
+            }
+            else
+            {
+                string app = Uri.Split('/').Last();
+                ViewBag.Message = "You are not allowed to use the " + app + " app.";
+            }
+
+
+            return View("NotAuthorised");
+        }
         #endregion
 
 

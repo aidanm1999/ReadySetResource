@@ -9,7 +9,8 @@ namespace ReadySetResource.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(ReadySetResource.Models.ApplicationDbContext context)
@@ -29,7 +30,7 @@ namespace ReadySetResource.Migrations
 
             //context.Apps.AddOrUpdate(
             //    a => a.IconLocation,
-            //    new Models.App { IconLocation = "Location", HomeLocation = "Locayion", Name = "App" }
+            //    new Models.App { IconLocation = "Location", HomeLocation = "Location", Name = "App" }
             //    );
         }
     }

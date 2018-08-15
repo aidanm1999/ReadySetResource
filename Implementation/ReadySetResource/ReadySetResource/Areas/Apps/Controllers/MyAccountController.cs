@@ -78,8 +78,21 @@ namespace ReadySetResource.Areas.Apps.Controllers
         [Authorize]
         public ActionResult Index()
         {
+
+            #region Authorise App
             var userId = User.Identity.GetUserId();
-            ApplicationUser user = _context.Users.SingleOrDefault(c => c.Id == userId);
+            var user = _context.Users.FirstOrDefault(u => u.Id == userId);
+            var userType = _context.BusinessUserTypes.FirstOrDefault(t => t.Id == user.BusinessUserTypeId);
+            var appName = this.ControllerContext.RouteData.Values["controller"].ToString();
+            var app = _context.Apps.FirstOrDefault(a => a.Link == appName);
+            var accessType = _context.TypeAppAccesses.Where(t => t.AppId == app.Id).Where(t => t.BusinessUserTypeId == userType.Id).ToList();
+
+            if (accessType.Count == 0)
+            {
+                return RedirectToAction("NotAuthorised", "Account", new { area = "" });
+            }
+            #endregion
+
             user.BusinessUserType = _context.BusinessUserTypes.SingleOrDefault(c => c.Id == user.BusinessUserTypeId);
 
             SettingsViewModel settingsVM = new SettingsViewModel
@@ -106,6 +119,20 @@ namespace ReadySetResource.Areas.Apps.Controllers
         [Authorize]
         public ActionResult UpdateSettings(SettingsViewModel settingsVM)
         {
+
+            #region Authorise App
+            var userId = User.Identity.GetUserId();
+            var user = _context.Users.FirstOrDefault(u => u.Id == userId);
+            var userType = _context.BusinessUserTypes.FirstOrDefault(t => t.Id == user.BusinessUserTypeId);
+            var appName = this.ControllerContext.RouteData.Values["controller"].ToString();
+            var app = _context.Apps.FirstOrDefault(a => a.Link == appName);
+            var accessType = _context.TypeAppAccesses.Where(t => t.AppId == app.Id).Where(t => t.BusinessUserTypeId == userType.Id).ToList();
+
+            if (accessType.Count == 0)
+            {
+                return RedirectToAction("NotAuthorised", "Account", new { area = "" });
+            }
+            #endregion
             //Finds the user and sets the user
 
             ApplicationUser userInDb = _context.Users.SingleOrDefault(u => u.Id == settingsVM.User.Id);
@@ -192,6 +219,8 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
         #endregion
 
+
+
         #region SelectAvitar
 
         #region Get
@@ -199,9 +228,21 @@ namespace ReadySetResource.Areas.Apps.Controllers
         [Authorize]
         public ActionResult SelectAvitar(string gender)
         {
-            
+
+            #region Authorise App
             var userId = User.Identity.GetUserId();
-            ApplicationUser user = _context.Users.SingleOrDefault(c => c.Id == userId);
+            var user = _context.Users.FirstOrDefault(u => u.Id == userId);
+            var userType = _context.BusinessUserTypes.FirstOrDefault(t => t.Id == user.BusinessUserTypeId);
+            var appName = this.ControllerContext.RouteData.Values["controller"].ToString();
+            var app = _context.Apps.FirstOrDefault(a => a.Link == appName);
+            var accessType = _context.TypeAppAccesses.Where(t => t.AppId == app.Id).Where(t => t.BusinessUserTypeId == userType.Id).ToList();
+
+            if (accessType.Count == 0)
+            {
+                return RedirectToAction("NotAuthorised", "Account", new { area = "" });
+            }
+            #endregion
+
 
             String path = Server.MapPath(@"~\Content\Images\avitars\");
             String[] avitarNames = new DirectoryInfo(path).GetFiles().Select(o => o.Name).ToArray();
@@ -238,6 +279,20 @@ namespace ReadySetResource.Areas.Apps.Controllers
         [Authorize]
         public ActionResult SelectAvitar(SettingsViewModel settingsVM)
         {
+            #region Authorise App
+            var userId = User.Identity.GetUserId();
+            var user = _context.Users.FirstOrDefault(u => u.Id == userId);
+            var userType = _context.BusinessUserTypes.FirstOrDefault(t => t.Id == user.BusinessUserTypeId);
+            var appName = this.ControllerContext.RouteData.Values["controller"].ToString();
+            var app = _context.Apps.FirstOrDefault(a => a.Link == appName);
+            var accessType = _context.TypeAppAccesses.Where(t => t.AppId == app.Id).Where(t => t.BusinessUserTypeId == userType.Id).ToList();
+
+            if (accessType.Count == 0)
+            {
+                return RedirectToAction("NotAuthorised", "Account", new { area = "" });
+            }
+            #endregion
+
             //Finds the user and sets the user
 
             ApplicationUser userInDb = _context.Users.SingleOrDefault(u => u.Id == settingsVM.User.Id);
@@ -326,10 +381,23 @@ namespace ReadySetResource.Areas.Apps.Controllers
         [Authorize]
         public ActionResult AvitarAssign(string avitar)
         {
+
+            #region Authorise App
+            var userId = User.Identity.GetUserId();
+            var user = _context.Users.FirstOrDefault(u => u.Id == userId);
+            var userType = _context.BusinessUserTypes.FirstOrDefault(t => t.Id == user.BusinessUserTypeId);
+            var appName = this.ControllerContext.RouteData.Values["controller"].ToString();
+            var app = _context.Apps.FirstOrDefault(a => a.Link == appName);
+            var accessType = _context.TypeAppAccesses.Where(t => t.AppId == app.Id).Where(t => t.BusinessUserTypeId == userType.Id).ToList();
+
+            if (accessType.Count == 0)
+            {
+                return RedirectToAction("NotAuthorised", "Account", new { area = "" });
+            }
+            #endregion
+
             avitar = avitar.Substring(0, avitar.Length - 4);
 
-            var userId = User.Identity.GetUserId();
-            ApplicationUser user = _context.Users.SingleOrDefault(c => c.Id == userId);
 
             user.Avitar = avitar;
 

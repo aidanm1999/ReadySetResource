@@ -11,8 +11,7 @@
         transition: 0.3s;
         width: 100%;
         border-radius: 5px;
-        word-wrap: break-word;
-        overflow:hidden;
+        overflow: hidden;
     }
 
         .card:hover {
@@ -48,7 +47,7 @@
                     <div class="card">
                         <img src='@string.Format("/Content/Images/avitars/{0}.png", user.Avitar)' alt="@user.FirstName @user.LastName" style="width:100%">
                         <div class="container">
-                            <h4><b>@user.FirstName @user.LastName</b></h4>
+                            <h4><b style="white-space: nowrap;">@user.FirstName @user.LastName</b></h4>
                         </div>
                     </div>
                 </div>
@@ -59,7 +58,7 @@
         }
     }
 
-    <a href="@Url.Action("AddUser")">
+    <a href="@Url.Action("Add", "Employees")">
 
         <div class="col-md-3">
             <div class="center">

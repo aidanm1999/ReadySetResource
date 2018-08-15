@@ -39,7 +39,6 @@ namespace ReadySetResource.Apis.GoogleAPI
         #endregion
 
 
-        #region Calendar API
 
         #region Log Into Google
         [Authorize]
@@ -72,6 +71,10 @@ namespace ReadySetResource.Apis.GoogleAPI
             }
         }
         #endregion
+
+
+
+        #region Calendar API
 
         #region Export Shifts
         [Authorize]
@@ -184,14 +187,28 @@ namespace ReadySetResource.Apis.GoogleAPI
                         string deleteEvent = service.Events.Delete("primary", googleShift.Id).Execute();
                     }
 
+                    string locationString;
+
+                    //Remove AddressLine2 if not necessary
+                    if (currBusiness.AddressLine2 == null)
+                    {
+                        locationString = currBusiness.AddressLine1 + ", " + currBusiness.Country + ", " + currBusiness.Postcode;
+
+                    }
+                    else
+                    {
+                        locationString = currBusiness.AddressLine1 + ", " + currBusiness.AddressLine2 + ", " + currBusiness.Country + ", " + currBusiness.Postcode;
+                    }
 
 
                     foreach (var currShift in currShifts)
                     {
+
+
                         Event myEvent = new Event
                         {
                             Summary = "Work",
-                            Location = currBusiness.AddressLine1 + ", " + currBusiness.AddressLine2 + ", " + currBusiness.Country + ", " + currBusiness.Postcode,
+                            Location = locationString,
                             Start = new EventDateTime()
                             {
                                 DateTime = currShift.StartDateTime,
@@ -215,14 +232,18 @@ namespace ReadySetResource.Apis.GoogleAPI
             {
                 return new RedirectResult(result.RedirectUri);
             }
-            #endregion
-
-            #endregion
-
-
-            #region Places API
-
-            #endregion
+            
         }
+        #endregion
+
+        #endregion
+
+
+
+        #region Places API
+
+        #endregion
+
+
     }
 }

@@ -281,7 +281,7 @@
     <Compile Include="Areas\Apps\ViewModels\Calendar\ChartsViewModel.cs" />
     <Compile Include="Areas\Apps\ViewModels\Dashboard\BusinessSettingsViewModel.cs" />
     <Compile Include="Areas\Apps\ViewModels\Employees\BusinessUserTypeViewModel.cs" />
-    <Compile Include="Areas\Apps\ViewModels\Dashboard\BusinessUserViewModel.cs" />
+    <Compile Include="Areas\Apps\ViewModels\Employees\BusinessUserViewModel.cs" />
     <Compile Include="Areas\Apps\ViewModels\Employees\BusinessUserTypesViewModel.cs" />
     <Compile Include="Areas\Apps\ViewModels\Dashboard\DashboardViewModel.cs" />
     <Compile Include="Areas\Apps\ViewModels\Dashboard\SettingsViewModel.cs" />
@@ -330,7 +330,36 @@
     <Compile Include="Migrations\201808071403182_AddColourToBusinessUserType.Designer.cs">
       <DependentUpon>201808071403182_AddColourToBusinessUserType.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808091919164_AddAppSettings.cs" />
+    <Compile Include="Migrations\201808091919164_AddAppSettings.Designer.cs">
+      <DependentUpon>201808091919164_AddAppSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808091929502_AddAppSettings2.cs" />
+    <Compile Include="Migrations\201808091929502_AddAppSettings2.Designer.cs">
+      <DependentUpon>201808091929502_AddAppSettings2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808091937320_AddAppSettings3.cs" />
+    <Compile Include="Migrations\201808091937320_AddAppSettings3.Designer.cs">
+      <DependentUpon>201808091937320_AddAppSettings3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808112100015_AddAppSettings4.cs" />
+    <Compile Include="Migrations\201808112100015_AddAppSettings4.Designer.cs">
+      <DependentUpon>201808112100015_AddAppSettings4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808112105191_AddAppSettings5.cs" />
+    <Compile Include="Migrations\201808112105191_AddAppSettings5.Designer.cs">
+      <DependentUpon>201808112105191_AddAppSettings5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808112109389_AddAppSettings51.cs" />
+    <Compile Include="Migrations\201808112109389_AddAppSettings51.Designer.cs">
+      <DependentUpon>201808112109389_AddAppSettings51.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808112115537_AddAppSettings52.cs" />
+    <Compile Include="Migrations\201808112115537_AddAppSettings52.Designer.cs">
+      <DependentUpon>201808112115537_AddAppSettings52.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\App.cs" />
+    <Compile Include="Models\AppSetting.cs" />
     <Compile Include="Models\Business.cs" />
     <Compile Include="Models\BusinessUserType.cs" />
     <Compile Include="Models\EmployeeType.cs" />
@@ -521,13 +550,9 @@
     <Content Include="Areas\Apps\Views\Holidays\Index.cshtml" />
     <Content Include="Areas\Apps\Views\Holidays\Add.cshtml" />
     <Content Include="Areas\Apps\Views\Holidays\Edit.cshtml" />
-    <Content Include="Areas\Apps\Views\Dashboard\AddType.cshtml" />
-    <Content Include="Areas\Apps\Views\Dashboard\AddUser.cshtml" />
-    <Content Include="Areas\Apps\Views\Employees\Edit.cshtml" />
-    <Content Include="Areas\Apps\Views\Dashboard\NotAuthorised.cshtml" />
+    <Content Include="Areas\Apps\Views\Employees\EditType.cshtml" />
     <Content Include="Areas\Apps\Views\Calendar\MyCharts.cshtml" />
     <Content Include="Areas\Apps\Views\Dashboard\UserTypes.cshtml" />
-    <Content Include="Areas\Apps\Views\Holidays\Test.cshtml" />
     <Content Include="Content\Images\home\Thumbs.db" />
     <Content Include="Areas\Apps\Views\Employees\Index.cshtml" />
     <Content Include="Areas\Apps\Views\MyAccount\Index.cshtml" />
@@ -539,6 +564,8 @@
     <Content Include="Apis\GoogleAPI\client_secret.json" />
     <Content Include="Areas\Apps\Views\Calendar\IndexAsync2.cshtml" />
     <Content Include="Areas\Apps\Views\Employees\Employees.cshtml" />
+    <Content Include="Areas\Apps\Views\Employees\AddType.cshtml" />
+    <Content Include="Areas\Apps\Views\Employees\Add.cshtml" />
     <None Include="Properties\PublishProfiles\ReadySetResource3 - Web Deploy.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -738,6 +765,7 @@
     <Content Include="Views\Home\Donate.cshtml" />
     <Content Include="Views\Account\Invite.cshtml" />
     <Content Include="Views\Account\InviteSetPassword.cshtml" />
+    <Content Include="Views\Account\NotAuthorised.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -792,6 +820,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808071403182_AddColourToBusinessUserType.resx">
       <DependentUpon>201808071403182_AddColourToBusinessUserType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808091919164_AddAppSettings.resx">
+      <DependentUpon>201808091919164_AddAppSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808091929502_AddAppSettings2.resx">
+      <DependentUpon>201808091929502_AddAppSettings2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808091937320_AddAppSettings3.resx">
+      <DependentUpon>201808091937320_AddAppSettings3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808112100015_AddAppSettings4.resx">
+      <DependentUpon>201808112100015_AddAppSettings4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808112105191_AddAppSettings5.resx">
+      <DependentUpon>201808112105191_AddAppSettings5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808112109389_AddAppSettings51.resx">
+      <DependentUpon>201808112109389_AddAppSettings51.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808112115537_AddAppSettings52.resx">
+      <DependentUpon>201808112115537_AddAppSettings52.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

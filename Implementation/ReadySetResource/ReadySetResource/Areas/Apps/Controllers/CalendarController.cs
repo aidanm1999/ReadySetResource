@@ -57,6 +57,21 @@ namespace ReadySetResource.Areas.Apps.Controllers
         [Authorize]
         public ActionResult Index(DateTime? week)
         {
+            #region Authorise App
+            var userId = User.Identity.GetUserId();
+            var user = _context.Users.SingleOrDefault(c => c.Id == userId);
+            var userType = _context.BusinessUserTypes.FirstOrDefault(t => t.Id == user.BusinessUserTypeId);
+            var appName = this.ControllerContext.RouteData.Values["controller"].ToString();
+            var app = _context.Apps.FirstOrDefault(a => a.Link == appName);
+            var accessType = _context.TypeAppAccesses.Where(t => t.AppId == app.Id).Where(t => t.BusinessUserTypeId == userType.Id).ToList();
+
+            if (accessType.Count == 0)
+            {
+                return RedirectToAction("NotAuthorised", "Account", new { area = "" });
+            }
+            #endregion
+
+
             DateTime weekBeginDate;
             if (week != null) { weekBeginDate = week.Value; }
             else { weekBeginDate = DateTime.Now.Date; }
@@ -74,6 +89,21 @@ namespace ReadySetResource.Areas.Apps.Controllers
         [Authorize]
         public ActionResult Add(DateTime? date)
         {
+
+            #region Authorise App
+            var userId = User.Identity.GetUserId();
+            var user = _context.Users.SingleOrDefault(c => c.Id == userId);
+            var userType = _context.BusinessUserTypes.FirstOrDefault(t => t.Id == user.BusinessUserTypeId);
+            var appName = this.ControllerContext.RouteData.Values["controller"].ToString();
+            var app = _context.Apps.FirstOrDefault(a => a.Link == appName);
+            var accessType = _context.TypeAppAccesses.Where(t => t.AppId == app.Id).Where(t => t.BusinessUserTypeId == userType.Id).ToList();
+
+            if (accessType.Count == 0)
+            {
+                return RedirectToAction("NotAuthorised", "Account", new { area = "" });
+            }
+            #endregion
+
             DateTime shiftDate;
             if (date != null) { shiftDate = date.Value; }
             else { shiftDate = DateTime.Now.Date; }
@@ -128,6 +158,20 @@ namespace ReadySetResource.Areas.Apps.Controllers
         [Authorize]
         public ActionResult Edit(int shift)
         {
+
+            #region Authorise App
+            var userId = User.Identity.GetUserId();
+            var user = _context.Users.SingleOrDefault(c => c.Id == userId);
+            var userType = _context.BusinessUserTypes.FirstOrDefault(t => t.Id == user.BusinessUserTypeId);
+            var appName = this.ControllerContext.RouteData.Values["controller"].ToString();
+            var app = _context.Apps.FirstOrDefault(a => a.Link == appName);
+            var accessType = _context.TypeAppAccesses.Where(t => t.AppId == app.Id).Where(t => t.BusinessUserTypeId == userType.Id).ToList();
+
+            if (accessType.Count == 0)
+            {
+                return RedirectToAction("NotAuthorised", "Account", new { area = "" });
+            }
+            #endregion
 
 
             //1 - Get BusinessUserType from current user and sets current user as .cshtml needs to check for business user type
@@ -188,6 +232,20 @@ namespace ReadySetResource.Areas.Apps.Controllers
         [Authorize]
         public ActionResult MyCharts(string user, DateTime? week)
         {
+
+            #region Authorise App
+            var userId = User.Identity.GetUserId();
+            var currUser = _context.Users.SingleOrDefault(c => c.Id == userId);
+            var userType = _context.BusinessUserTypes.FirstOrDefault(t => t.Id == currUser.BusinessUserTypeId);
+            var appName = this.ControllerContext.RouteData.Values["controller"].ToString();
+            var app = _context.Apps.FirstOrDefault(a => a.Link == appName);
+            var accessType = _context.TypeAppAccesses.Where(t => t.AppId == app.Id).Where(t => t.BusinessUserTypeId == userType.Id).ToList();
+
+            if (accessType.Count == 0)
+            {
+                return RedirectToAction("NotAuthorised", "Account", new { area = "" });
+            }
+            #endregion
             //This method gets the personal charts of the individual
             //If a user is passed in, and the user is not the same user as the current user, 
             //This means that the current user is trying to access someone else's account and 
@@ -264,17 +322,23 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
 
         #region Charts (View)
-        // GET: Apps/Calendar/Charts
-        /// <summary>
-        /// Creates an instance of the charts view
-        /// </summary>
-        /// <param name="user">The user.</param>
-        /// <param name="week">The week.</param>
-        /// <returns>The view</returns>
         [HttpGet]
         [Authorize]
         public ActionResult Charts(string user, DateTime? week)
         {
+            #region Authorise App
+            var userId = User.Identity.GetUserId();
+            var currUser = _context.Users.SingleOrDefault(c => c.Id == userId);
+            var userType = _context.BusinessUserTypes.FirstOrDefault(t => t.Id == currUser.BusinessUserTypeId);
+            var appName = this.ControllerContext.RouteData.Values["controller"].ToString();
+            var app = _context.Apps.FirstOrDefault(a => a.Link == appName);
+            var accessType = _context.TypeAppAccesses.Where(t => t.AppId == app.Id).Where(t => t.BusinessUserTypeId == userType.Id).ToList();
+
+            if (accessType.Count == 0)
+            {
+                return RedirectToAction("NotAuthorised", "Account", new { area = "" });
+            }
+            #endregion
 
             return View();
         }
@@ -286,6 +350,8 @@ namespace ReadySetResource.Areas.Apps.Controllers
         #region Populate Calendar Method
         private CalendarViewModel PopulateCalendar(DateTime weekBeginDate)
         {
+
+
             //1 - Get BusinessUserType from current user and sets current user as Calendar.cshtml needs to check for business user type
             var currUserId = User.Identity.GetUserId();
             var currBusinessUser = _context.Users.SingleOrDefault(c => c.Id == currUserId);
@@ -544,8 +610,8 @@ namespace ReadySetResource.Areas.Apps.Controllers
         #region Populate MyCharts
 
         private MyChartsViewModel PopulateUserCharts(ApplicationUser user, DateTime weekBeginDate)
-
         {
+
             MyChartsViewModel chartsVM = new MyChartsViewModel();
 
             #region Populates Doughnut Chart
@@ -679,13 +745,23 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
 
         #region Copy To Next Week
-        /// <summary>
-        /// Copies to next week.
-        /// </summary>
-        /// <param name="week">The week.</param>
-        /// <returns>Redirects to Index action with next week passed in</returns>
         public ActionResult CopyToNextWeek (DateTime week)
         {
+            #region Authorise App
+            var userId = User.Identity.GetUserId();
+            var user = _context.Users.FirstOrDefault(u => u.Id == userId);
+            var userType = _context.BusinessUserTypes.FirstOrDefault(t => t.Id == user.BusinessUserTypeId);
+            var appName = this.ControllerContext.RouteData.Values["controller"].ToString();
+            var app = _context.Apps.FirstOrDefault(a => a.Link == appName);
+            var accessType = _context.TypeAppAccesses.Where(t => t.AppId == app.Id).Where(t => t.BusinessUserTypeId == userType.Id).ToList();
+
+            if (accessType.Count == 0)
+            {
+                return RedirectToAction("NotAuthorised", "Account", new { area = "" });
+            }
+            #endregion
+
+
             //Get all of next week's data
 
             //Delete all of next week's data
@@ -701,17 +777,26 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
 
         #region AddShift
-        // POST: Calendar/AddShift
-        /// <summary>
-        /// Adds the shift.
-        /// </summary>
-        /// <param name="shiftVM">The shift vm.</param>
-        /// <returns>The index view</returns>
         [HttpPost]
         [Authorize]
         public ActionResult AddShift(ShiftViewModel shiftVM)
         {
-            ApplicationUser user = new ApplicationUser();
+            #region Authorise App
+            var userId = User.Identity.GetUserId();
+            var user = _context.Users.FirstOrDefault(u => u.Id == userId);
+            var userType = _context.BusinessUserTypes.FirstOrDefault(t => t.Id == user.BusinessUserTypeId);
+            var appName = this.ControllerContext.RouteData.Values["controller"].ToString();
+            var app = _context.Apps.FirstOrDefault(a => a.Link == appName);
+            var accessType = _context.TypeAppAccesses.Where(t => t.AppId == app.Id).Where(t => t.BusinessUserTypeId == userType.Id).ToList();
+
+            if (accessType.Count == 0)
+            {
+                return RedirectToAction("NotAuthorised", "Account", new { area = "" });
+            }
+            #endregion
+
+
+            user = new ApplicationUser();
             user = _context.Users.SingleOrDefault(u => u.Id == shiftVM.UserId);
             Shift shift = new Shift();
             shift.User = user;
@@ -857,15 +942,28 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
 
 
-
         #region EditShift
         [HttpPost]
         [Authorize]
         public ActionResult EditShift(ShiftViewModel shiftVM)
         {
 
+            #region Authorise App
+            var userId = User.Identity.GetUserId();
+            var user = _context.Users.FirstOrDefault(u => u.Id == userId);
+            var userType = _context.BusinessUserTypes.FirstOrDefault(t => t.Id == user.BusinessUserTypeId);
+            var appName = this.ControllerContext.RouteData.Values["controller"].ToString();
+            var app = _context.Apps.FirstOrDefault(a => a.Link == appName);
+            var accessType = _context.TypeAppAccesses.Where(t => t.AppId == app.Id).Where(t => t.BusinessUserTypeId == userType.Id).ToList();
+
+            if (accessType.Count == 0)
+            {
+                return RedirectToAction("NotAuthorised", "Account", new { area = "" });
+            }
+            #endregion
+
             //Finds the user and sets the shift user and its id
-            ApplicationUser user = new ApplicationUser();
+            user = new ApplicationUser();
             user = _context.Users.SingleOrDefault(u => u.Id == shiftVM.UserId);
             Shift shift = new Shift();
             shift.User = user;
@@ -990,6 +1088,20 @@ namespace ReadySetResource.Areas.Apps.Controllers
         [Authorize]
         public ActionResult DeleteShift(int shift)
         {
+            #region Authorise App
+            var userId = User.Identity.GetUserId();
+            var user = _context.Users.FirstOrDefault(u => u.Id == userId);
+            var userType = _context.BusinessUserTypes.FirstOrDefault(t => t.Id == user.BusinessUserTypeId);
+            var appName = this.ControllerContext.RouteData.Values["controller"].ToString();
+            var app = _context.Apps.FirstOrDefault(a => a.Link == appName);
+            var accessType = _context.TypeAppAccesses.Where(t => t.AppId == app.Id).Where(t => t.BusinessUserTypeId == userType.Id).ToList();
+
+            if (accessType.Count == 0)
+            {
+                return RedirectToAction("NotAuthorised", "Account", new { area = "" });
+            }
+            #endregion
+
             Shift ActualShift = _context.Shifts.SingleOrDefault(s => s.Id == shift);
             _context.Shifts.Remove(ActualShift);
             _context.SaveChanges();
@@ -1306,285 +1418,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
         }
         #endregion
-
-
-
-
-        #region Google Calendar API
-
-        #region Global Variables
-        // If modifying these scopes, delete your previously saved credentials
-        // at ~/.credentials/calendar-dotnet-quickstart.json
-        static string[] Scopes = { CalendarService.Scope.Calendar };
-        string ApplicationName = "ReadySetResource";
-        #endregion
-
-
-        #region Log In To Google Calendar
-        [Authorize]
-        public ActionResult LogIntoGoogleCalendar()
-        {
-
-            UserCredential credential;
-
-            var path = Server.MapPath(@"~/Api/client_secret.json");
-
-            var currUserId = User.Identity.GetUserId();
-
-            using (var stream =
-                new FileStream(path, FileMode.Open, FileAccess.Read))
-            {
-                string credPath = Server.MapPath(@"~/.credentials/token.json");
-                
-                credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
-                    GoogleClientSecrets.Load(stream).Secrets,
-                    Scopes,
-                    currUserId,
-                    CancellationToken.None,
-                    new FileDataStore(credPath, true)).Result;
-                
-                Console.WriteLine("Credential file saved to: " + credPath);
-                var userInDb = _context.Users.SingleOrDefault(u => u.Id == currUserId);
-
-                userInDb.GoogleCalendarFilePath = credPath;
-
-                _context.SaveChanges();
-
-                return RedirectToAction("Settings", "Dashboard");
-            }
-        }
-        #endregion
-
-
-        #region Log Out Of Google Calendar (MUST COMPLETE)
-        [Authorize]
-        public ActionResult LogOutOfGoogleCalendar()
-        {
-            //MUST DELETE FILE CREATED
-            return RedirectToAction("Settings", "Dashboard");
-        }
-        #endregion
-
-
-        #region Export To Calendar (MUST COMPLETE)
-        [Authorize]
-        public ActionResult ExportToCalendar(DateTime week)
-        {
-            //THIS METHOD IS CALLED WHEN USERS CLICK THE EXPORT BUTTON.
-            //IT WILL CHECK IF THE USER HAS THE GOOGLE CALENDAR FEATURE ENABLED
-            //AND IT WILL CHECK IF THE SHIFTS HAVE BEEN PREVIUSLY UPLOADED TO THE CALENDAR
-            //IF THE SHIFTS ARE IN THE CALENDAR DO
-            //IF THE SHIFTS HAVE CHANGED DO
-            //UPDATE THE SHIFTS
-            //IF THE SHIFTS HAVENT CHANGED DO
-            //NOTHING
-            //IF THE SHIFTS ARE NOT IN THE CALENDAR
-            //ADD SHIFTS TO THE CALENDAR
-
-            #region Get All Events
-            var currUserId = User.Identity.GetUserId();
-            var currUser = _context.Users.SingleOrDefault(u => u.Id == currUserId);
-            var currBusinessType = _context.BusinessUserTypes.SingleOrDefault(t => t.Id == currUser.BusinessUserTypeId);
-            var endWeek = week.AddDays(7);
-            var currShifts = _context.Shifts.Where(s => s.UserId == currUserId).Where(s => s.StartDateTime >= week && s.EndDateTime <= endWeek).OrderBy(s => s.StartDateTime).ToList();
-            var currBusiness = _context.Businesses.SingleOrDefault(b => b.Id == currBusinessType.BusinessId);
-
-
-
-            UserCredential credential;
-
-            var path = Server.MapPath(@"~/Api/client_secret.json");
-            
-
-            using (var stream =
-                new FileStream(path, FileMode.Open, FileAccess.Read))
-            {
-                string credPath = Server.MapPath(@"~/Content/.credentials/token.json");
-
-                credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
-                    GoogleClientSecrets.Load(stream).Secrets,
-                    Scopes,
-                    currUserId,
-                    CancellationToken.None,
-                    new FileDataStore(credPath, true)).Result;
-            }
-
-            // Create Google Calendar API service.
-            var service = new CalendarService(new BaseClientService.Initializer()
-            {
-                HttpClientInitializer = credential,
-                ApplicationName = ApplicationName,
-            });
-
-            // Define parameters of request.
-            EventsResource.ListRequest request = service.Events.List("primary");
-            request.TimeMin = week;
-            request.TimeMax = week.AddDays(7);
-            request.ShowDeleted = false;
-            request.SingleEvents = true;
-            request.MaxResults = 100;
-            request.OrderBy = EventsResource.ListRequest.OrderByEnum.StartTime;
-
-            // List events.
-            Events events = request.Execute();
-            Console.WriteLine("Upcoming events:");
-            if (events.Items != null && events.Items.Count > 0)
-            {
-                foreach (var eventItem in events.Items)
-                {
-                    string when = eventItem.Start.DateTime.ToString();
-                    if (String.IsNullOrEmpty(when))
-                    {
-                        when = eventItem.Start.Date;
-                    }
-
-                }
-            }
-
-            #endregion
-
-            #region Get Shifts From Events
-
-            var googleShifts = new List<Event>();
-
-            foreach(var currEvent in events.Items)
-            {
-                if(currEvent.Summary == "Work")
-                {
-                    googleShifts.Add(currEvent);
-                }
-            }
-            #endregion
-
-            #region Create/Update/Delete Shifts
-            if(googleShifts.Count() == 0)
-            {
-                //This means that the user has not yet exported their calendar
-                //All that needs to be done is to export all the shifts
-                foreach(var currShift in currShifts)
-                {
-                    Event myEvent = new Event
-                    {
-                        Summary = "Work",
-                        Location = currBusiness.AddressLine1 + ", " + currBusiness.AddressLine2 + ", " + currBusiness.Country + ", " + currBusiness.Postcode,
-                        Start = new EventDateTime()
-                        {
-                            DateTime = currShift.StartDateTime,
-                        },
-                        End = new EventDateTime()
-                        {
-                            DateTime = currShift.EndDateTime,
-                        },
-                    };
-                    Event insertEvent = service.Events.Insert(myEvent, "primary").Execute();
-                }
-            }
-            else
-            {
-                //This means that the user has exported their calendar for this week
-                //All shifts are deleted from the google calendar
-                //Then they are readded to the calendar
-                foreach(Event googleShift in googleShifts)
-                {
-                    string deleteEvent = service.Events.Delete("primary", googleShift.Id).Execute();
-                }
-
-
-
-                foreach (var currShift in currShifts)
-                {
-                    Event myEvent = new Event
-                    {
-                        Summary = "Work",
-                        Location = currBusiness.AddressLine1 + ", " + currBusiness.AddressLine2 + ", " + currBusiness.Country + ", " + currBusiness.Postcode,
-                        Start = new EventDateTime()
-                        {
-                            DateTime = currShift.StartDateTime,
-                        },
-                        End = new EventDateTime()
-                        {
-                            DateTime = currShift.EndDateTime,
-                        },
-                    };
-                    Event insertEvent = service.Events.Insert(myEvent, "primary").Execute();
-                    
-                }
-            }
-            #endregion
-
-
-            return RedirectToAction("Index", "Calendar", new { week });
-        }
-        #endregion
-
-        #region IndexAsync
-
-        public async Task<ActionResult> IndexAsync2(CancellationToken cancellationToken)
-        {
-            var result = await new AuthorizationCodeMvcApp(this, new AppFlowMetadata()).
-                AuthorizeAsync(cancellationToken);
-
-            if (result.Credential != null)
-            {
-                var service = new CalendarService(new BaseClientService.Initializer
-                {
-                    HttpClientInitializer = result.Credential,
-                    ApplicationName = "ReadySetResource"
-                });
-
-                // YOUR CODE SHOULD BE HERE..
-                // SAMPLE CODE:
-                // Define parameters of request.
-                EventsResource.ListRequest request = service.Events.List("primary");
-                request.TimeMin = DateTime.Now;
-                request.TimeMax = DateTime.Now.AddDays(7);
-                request.ShowDeleted = false;
-                request.SingleEvents = true;
-                request.MaxResults = 100;
-                request.OrderBy = EventsResource.ListRequest.OrderByEnum.StartTime;
-
-                // List events.
-                Events events = request.Execute();
-                Console.WriteLine("Upcoming events:");
-                if (events.Items != null && events.Items.Count > 0)
-                {
-                    foreach (var eventItem in events.Items)
-                    {
-                        string when = eventItem.Start.DateTime.ToString();
-                        if (String.IsNullOrEmpty(when))
-                        {
-                            when = eventItem.Start.Date;
-                        }
-
-                    }
-                }
-                return View();
-            }
-            else
-            {
-                return new RedirectResult(result.RedirectUri);
-            }
-        }
-
-
-        #endregion
-        #endregion
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
 
 
 

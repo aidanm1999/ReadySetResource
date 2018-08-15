@@ -13,125 +13,54 @@
     a:visited {
         color: inherit;
     }
+
+    
+    .card {
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+        width: 100%;
+        border-radius: 5px;
+        overflow: hidden;
+        border-radius: 10px 10px 10px 10px;
+    }
+
+    .card:hover {
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }
+
+    img {
+        border-radius: 10px 10px 0 0;
+    }
+
+    .container {
+        padding: 2px 16px;
+    }
+
+    .center {
+        margin: auto;
+        width: 80%;
+        padding: 10px;
+    }
 </style>
-<link rel="stylesheet" type="text/css" href="~/Content/Site.css">
+
+<br>
 
 
-<h2>
-    Holidays - For Week @Model.ActiveWeekCommenceDate.Day/@Model.ActiveWeekCommenceDate.Month to @Model.ActiveWeekCommenceDate.AddDays(6).Day/@Model.ActiveWeekCommenceDate.AddDays(6).Month
-    @Html.ActionLink("Add Holiday", "Add", "Holidays", null, new { @class = "btn btn-default" })
-</h2>
+
+<a href="@Url.Action("Holiday")">
+    <div class="col-md-6">
+        <div class="center">
+            <div class="card" style="background-color:white;">
+                <div style="background:url('https://maps.googleapis.com/maps/api/staticmap?center=220+Buchanan+St,Glasgow&zoom=13&size=600x200&maptype=roadmap&key=AIzaSyBeMqj8dnwp7BnS8DOWLVA0rJyT0yx_imo') no-repeat center; width:100%;height:200px;border-radius: 10px 10px 0 0;">
+                </div>
+                <div class="container" style="background-color:#F2F2F2;">
+                    <h4><b style="white-space: nowrap;">Duration + Location</b> </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</a>
 
 
-@if (Model.Employees.Count() == 0)
-{
-    <text>You have no employees!</text>
-}
-else if (Model.Holidays.Count() == 0)
-{
-    <text>You have no holidays for this week!</text>
-}
-else
-{
-    if (Model.AccessType.AccessType == "E")
-    {
-        <table id="rota">
-            <thead>
-                <tr>
-                    <th>Employee</th>
-                    <th colspan="2">Holiday</th>
-                    <th rowspan="2">Status</th>
-                    <th colspan="3">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var holiday in Model.Holidays)
-                {
-                    
-                    <tr>
-                        <td>
-                            @holiday.User.FirstName
+@Html.ActionLink("Add Holiday", "Add", "Holidays", null, new { @class = "btn btn-default" })
 
-                            @holiday.User.LastName
-                        </td>
-                        <td>
-                            @Html.ActionLink(holiday.StartDateTime.ToString(), "Edit", new { holiday = holiday.Id })
-                        </td>
-                        <td>
-                            @Html.ActionLink(holiday.EndDateTime.ToString(), "Edit", new { holiday = holiday.Id })
-                        </td>
-                        <td>
-                            @holiday.Accepted
-
-                        </td>
-
-                        @if (holiday.Accepted != "Accepted")
-                        {
-                            <td>
-                                @Html.ActionLink("Accept", "AcceptHoliday", new { holiday = holiday.Id })
-                            </td>
-                        }
-                        else
-                        {
-                            <td>
-                                @Html.ActionLink("Rescind", "DeclineHoliday", new { holiday = holiday.Id })
-                            </td>
-                        }
-
-                        <td>
-                            @if (holiday.Accepted == "Pending")
-                            {
-                                @Html.ActionLink("Decline", "DeclineHoliday", new { holiday = holiday.Id })
-                            }
-                        </td>
-                        <td>
-                            @Html.ActionLink("Delete", "DeleteHoliday", new { holiday = holiday.Id })
-                        </td>
-                     </tr>
-                }
-            </tbody>
-        </table>
-    }
-    else
-    {
-        <table id="rota">
-            <thead>
-                <tr>
-                    <th colspan="2">Holiday</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var holiday in Model.Holidays)
-                {
-                    if (holiday.UserId == Model.CurrentUser.Id)
-                    {
-                        <tr>
-                            <td>
-                                @Html.ActionLink(holiday.StartDateTime.ToString(), "Edit", new { holiday = holiday.Id })
-                            </td>
-                            <td>
-                                @Html.ActionLink(holiday.EndDateTime.ToString(), "Edit", new { holiday = holiday.Id })
-                            </td>
-                            <td>
-                                @holiday.Accepted
-                            </td>
-                            <td>
-                                @Html.ActionLink("Delete", "DeleteHoliday", new { holiday = holiday.Id })
-                            </td>
-                        </tr>
-                    }
-                }
-            </tbody>
-        </table>
-    }
-
-}
-
-
-<footer style="text-align:center; color:white; align-content:center; padding-top:20px">
-    @Html.ActionLink("< Last Week", "Index", "Holidays", new { week = (Model.ActiveWeekCommenceDate.AddDays(-7).Date) }, new { @class = "btn btn-primary" })
-    @Html.ActionLink("Today", "Index", "Holidays", null, new { @class = "btn btn-primary" })
-    @Html.ActionLink("Next Week >", "Index", "Holidays", new { week = (Model.ActiveWeekCommenceDate.AddDays(7).Date) }, new { @class = "btn btn-primary" })
-</footer>

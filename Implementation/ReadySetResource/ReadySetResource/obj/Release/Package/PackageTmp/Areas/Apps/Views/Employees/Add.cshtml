@@ -1,0 +1,61 @@
+﻿@model ReadySetResource.Areas.Apps.ViewModels.Employees.BusinessUserViewModel
+@{
+    ViewBag.Title = "Add Empoyee";
+    Layout = "~/Areas/Apps/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Add Employee</h2>
+
+<div class="col-md-7 animated bounceInUp" style="font: 20px Helvetica, sans-serif; padding-top:20px; padding-bottom:20px; border:1px double #428bca;">
+
+    @Model.ErrorMessage
+
+    @using (Html.BeginForm("AddUserPost", "Employees"))
+    {
+        @Html.ValidationSummary(true, "Please fix the following errors:")
+        @Html.ValidationMessageFor(m => m.BusinessUser.FirstName)
+        <span>
+            <text>To:</text> @Html.TextBoxFor(m => m.BusinessUser.Email, new { placeholder = "Email Address", style = "width:200px;" })
+            <text> as a </text> @Html.DropDownListFor(m => m.BusinessUser.BusinessUserTypeId, Model.TypeOptions)
+        </span>
+        <div style="padding:10px;"></div>
+        <span style="padding:10px;">
+            <text>Dear </text> @Html.DropDownListFor(m => m.BusinessUser.Title, Model.Honorifics)
+            @Html.TextBoxFor(m => m.BusinessUser.FirstName, new { placeholder = "First Name", style = "width:120px;" })
+            @Html.TextBoxFor(m => m.BusinessUser.LastName, new { placeholder = "Last Name", style = "width:120px;" }) <text>,  </text>
+        </span>
+        <div style="padding-left:40px">
+            <div style="padding-top:20px">
+                @Html.DropDownListFor(m => m.Sender, Model.SenderOptions) <text>
+                    has invited you to RSR,
+                    where you can see your shifts, book holidays and more! Please click the following link to get started:
+                </text>
+            </div>
+            <div style="width:100%; padding:20px;" align="center">
+                ( Link )
+            </div>
+            <div width="100%">
+                <p>Add an additional message here if you wish:</p>
+
+                @Html.TextBoxFor(m => m.AdditionalText, new { style = "width:100%;" })
+            </div>
+        </div>
+
+
+
+        @Html.AntiForgeryToken()
+        <p style="padding-top:20px;">
+            @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default", style = "float:left" })
+            <button type="submit" class="btn btn-primary" style="float:right">Send Invite</button>
+        </p>
+        @Html.HiddenFor(m => m.BusinessUser.Id)
+
+    }
+</div>
+
+
+@*Generating client side validation*@
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
