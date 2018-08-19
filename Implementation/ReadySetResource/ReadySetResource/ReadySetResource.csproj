@@ -358,6 +358,10 @@
     <Compile Include="Migrations\201808112115537_AddAppSettings52.Designer.cs">
       <DependentUpon>201808112115537_AddAppSettings52.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808161730352_AddLocationToHoliday.cs" />
+    <Compile Include="Migrations\201808161730352_AddLocationToHoliday.Designer.cs">
+      <DependentUpon>201808161730352_AddLocationToHoliday.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\App.cs" />
     <Compile Include="Models\AppSetting.cs" />
     <Compile Include="Models\Business.cs" />
@@ -552,7 +556,6 @@
     <Content Include="Areas\Apps\Views\Holidays\Edit.cshtml" />
     <Content Include="Areas\Apps\Views\Employees\EditType.cshtml" />
     <Content Include="Areas\Apps\Views\Calendar\MyCharts.cshtml" />
-    <Content Include="Areas\Apps\Views\Dashboard\UserTypes.cshtml" />
     <Content Include="Content\Images\home\Thumbs.db" />
     <Content Include="Areas\Apps\Views\Employees\Index.cshtml" />
     <Content Include="Areas\Apps\Views\MyAccount\Index.cshtml" />
@@ -562,10 +565,12 @@
     <Content Include="Content\bootstrap-datepicker.css.map" />
     <Content Include="Areas\Apps\Views\MyAccount\SelectAvitar.cshtml" />
     <Content Include="Apis\GoogleAPI\client_secret.json" />
-    <Content Include="Areas\Apps\Views\Calendar\IndexAsync2.cshtml" />
     <Content Include="Areas\Apps\Views\Employees\Employees.cshtml" />
     <Content Include="Areas\Apps\Views\Employees\AddType.cshtml" />
     <Content Include="Areas\Apps\Views\Employees\Add.cshtml" />
+    <Content Include="Areas\Apps\Views\Shared\_DashboardLayout.cshtml" />
+    <Content Include="Areas\Apps\Views\Shared\_CalendarLayout.cshtml" />
+    <Content Include="Areas\Apps\Views\Calendar\Export.cshtml" />
     <None Include="Properties\PublishProfiles\ReadySetResource3 - Web Deploy.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -759,8 +764,6 @@
     <Content Include="Areas\Apps\Views\Dashboard\UnderConstruction.cshtml" />
     <Content Include="Views\Get\EmailVerification.cshtml" />
     <Content Include="Areas\Apps\Views\Calendar\Index.cshtml" />
-    <Content Include="Areas\Apps\Views\Dashboard\BusinessSettings.cshtml" />
-    <Content Include="Areas\Apps\Views\Dashboard\Settings.cshtml" />
     <Content Include="Areas\Apps\Views\Calendar\Add.cshtml" />
     <Content Include="Views\Home\Donate.cshtml" />
     <Content Include="Views\Account\Invite.cshtml" />
@@ -771,8 +774,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Apps\Models\" />
     <Folder Include="Content\PDF\" />
-    <Folder Include="Views\AuthCallback\" />
-    <Folder Include="Views\GoogleAPI\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -841,6 +842,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808112115537_AddAppSettings52.resx">
       <DependentUpon>201808112115537_AddAppSettings52.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808161730352_AddLocationToHoliday.resx">
+      <DependentUpon>201808161730352_AddLocationToHoliday.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

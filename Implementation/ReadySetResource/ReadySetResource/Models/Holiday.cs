@@ -20,6 +20,9 @@ namespace ReadySetResource.Models
         public DateTime EndDateTime { get; set; }
 
 
+        public string Location { get; set; }
+
+
         [Required]
         public string Accepted { get; set; }
 

@@ -1114,9 +1114,39 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
 
 
-        #region CreatePDF
+        #region Export (View)
+        [HttpGet]
         [Authorize]
-        public void PDF(DateTime? week)
+        public ActionResult Export (DateTime? week)
+        {
+            #region Authorise App
+            var userId = User.Identity.GetUserId();
+            var user = _context.Users.SingleOrDefault(c => c.Id == userId);
+            var userType = _context.BusinessUserTypes.FirstOrDefault(t => t.Id == user.BusinessUserTypeId);
+            var appName = this.ControllerContext.RouteData.Values["controller"].ToString();
+            var app = _context.Apps.FirstOrDefault(a => a.Link == appName);
+            var accessType = _context.TypeAppAccesses.Where(t => t.AppId == app.Id).Where(t => t.BusinessUserTypeId == userType.Id).ToList();
+
+            if (accessType.Count == 0)
+            {
+                return RedirectToAction("NotAuthorised", "Account", new { area = "" });
+            }
+            #endregion
+
+            if(week == null)
+            {
+                week = DateTime.Now;
+            }
+
+            return View(week);
+        }
+        #endregion
+
+
+
+        #region PDFDownload
+        [Authorize]
+        public FileResult PDFDownload(DateTime? week)
         {
 
             #region 1 -Populates CalendarVM
@@ -1397,13 +1427,317 @@ namespace ReadySetResource.Areas.Apps.Controllers
             #region 4 - Creates Table With MigraDoc 
             PdfDocumentRenderer pdfRenderer = new PdfDocumentRenderer(false);
             pdfRenderer.Document = migraDocument;
+            pdfRenderer.RenderDocument();
+            #endregion
+
+            #region 5 - Streams the PDF to the customer
+            byte[] fileBytes;
+
+            using (MemoryStream stream = new MemoryStream())
+            {
+                pdfRenderer.PdfDocument.Save(stream, false);
+                fileBytes = stream.ToArray();
+            }
+
+            string fileName = "Calendar.pdf";
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+            #endregion
+
+
+        }
+        #endregion
+
+
+
+        #region PDFPrint
+        [Authorize]
+        public void PDFPrint(DateTime? week)
+        {
+
+            #region 1 -Populates CalendarVM
+            DateTime weekBeginDate;
+            if (week != null) { weekBeginDate = week.Value; }
+            else { weekBeginDate = DateTime.Now.Date; }
+            CalendarViewModel calendarVM = PopulateCalendar(weekBeginDate);
+            #endregion
+
+            #region 2 - Creates migraDocument
+
+            #region 2.0 - Creates Document Main Method
+            Document CreateDocument()
+            {
+
+                // Create a new migraDocument 
+                migraDocument = new Document();
+                migraDocument.Info.Title = "Calendar - For Week " + calendarVM.ActiveWeekCommenceDate.Day + "/" + calendarVM.ActiveWeekCommenceDate.Month + " to " + calendarVM.ActiveWeekCommenceDate.AddDays(6).Day + "/" + calendarVM.ActiveWeekCommenceDate.AddDays(6).Month;
+                migraDocument.Info.Subject = "Calendar for the week between " + calendarVM.ActiveWeekCommenceDate.Day + "/" + calendarVM.ActiveWeekCommenceDate.Month + " and " + calendarVM.ActiveWeekCommenceDate.AddDays(6).Day + "/" + calendarVM.ActiveWeekCommenceDate.AddDays(6).Month;
+                migraDocument.Info.Author = "ReadySetResource";
+                migraDocument.DefaultPageSetup.Orientation = Orientation.Landscape;
+
+                DefineStyles();
+
+                CreatePage();
+
+                FillContent();
+
+                return migraDocument;
+            }
+            #endregion
+
+            #region 2.1 - DefineStyles
+            void DefineStyles()
+            {
+                // Get the predefined style Normal.
+                Style style = migraDocument.Styles["Normal"];
+                // Because all styles are derived from Normal, the next line changes the 
+                // font of the whole document. Or, more exactly, it changes the font of
+                // all styles and paragraphs that do not redefine the font.
+                style.Font.Name = "Verdana";
+
+                style = migraDocument.Styles[StyleNames.Header];
+                style.ParagraphFormat.AddTabStop("1cm", TabAlignment.Right);
+
+                style = migraDocument.Styles[StyleNames.Footer];
+                style.ParagraphFormat.AddTabStop("8cm", TabAlignment.Center);
+
+                // Create a new style called Table based on style Normal
+                style = migraDocument.Styles.AddStyle("Table", "Normal");
+                style.Font.Name = "Verdana";
+                style.Font.Size = 12;
+
+                // Create a new style called Reference based on style Normal
+                style = migraDocument.Styles.AddStyle("Reference", "Normal");
+                style.ParagraphFormat.SpaceBefore = "5mm";
+                style.ParagraphFormat.SpaceAfter = "5mm";
+                style.ParagraphFormat.TabStops.AddTabStop("1cm", TabAlignment.Right);
+            }
+            #endregion
+
+            #region 2.2 - CreatePage
+            void CreatePage()
+            {
+                // Each MigraDoc document needs at least one section.
+                Section section = migraDocument.AddSection();
+
+                // Create footer
+                Paragraph paragraph = section.Footers.Primary.AddParagraph();
+                paragraph.AddText("Powered by ReadySetResource");
+                paragraph.Format.Font.Size = 9;
+                paragraph.Format.Alignment = ParagraphAlignment.Center;
+
+                // Create the text frame for the address
+                addressFrame = section.AddTextFrame();
+                addressFrame.Height = "1.0cm";
+                addressFrame.Width = "20.0cm";
+                addressFrame.Left = ShapePosition.Left;
+                addressFrame.RelativeHorizontal = RelativeHorizontal.Margin;
+                addressFrame.Top = "1.2cm";
+                addressFrame.RelativeVertical = RelativeVertical.Page;
+
+                // Put sender in address frame
+                paragraph = addressFrame.AddParagraph("Calendar - For Week " + calendarVM.ActiveWeekCommenceDate.Day + "/" + calendarVM.ActiveWeekCommenceDate.Month + " to " + calendarVM.ActiveWeekCommenceDate.AddDays(6).Day + "/" + calendarVM.ActiveWeekCommenceDate.AddDays(6).Month);
+                paragraph.Format.Font.Name = "Verdana";
+                paragraph.Format.Font.Size = 18;
+                paragraph.Format.SpaceAfter = 3;
+
+                // Create the item table
+                this.table = section.AddTable();
+                this.table.Style = "Table";
+                table.Format.Font.Color = new Color(255, 255, 255);
+                this.table.Borders.Color = new Color(170, 170, 170);
+                this.table.Borders.Width = 0.25;
+                this.table.Borders.Left.Width = 0.5;
+                this.table.Borders.Right.Width = 0.5;
+                this.table.Rows.LeftIndent = 0;
+
+                // Before you can add a row, you must define the columns
+                Column column = this.table.AddColumn("4cm");
+                column.Format.Alignment = ParagraphAlignment.Left;
+
+                column = this.table.AddColumn("1.5cm");
+                column.Format.Alignment = ParagraphAlignment.Center;
+
+                column = this.table.AddColumn("1.5cm");
+                column.Format.Alignment = ParagraphAlignment.Center;
+
+                column = this.table.AddColumn("1.5cm");
+                column.Format.Alignment = ParagraphAlignment.Center;
+
+                column = this.table.AddColumn("1.5cm");
+                column.Format.Alignment = ParagraphAlignment.Center;
+
+                column = this.table.AddColumn("1.5cm");
+                column.Format.Alignment = ParagraphAlignment.Center;
+
+                column = this.table.AddColumn("1.5cm");
+                column.Format.Alignment = ParagraphAlignment.Center;
+
+                column = this.table.AddColumn("1.5cm");
+                column.Format.Alignment = ParagraphAlignment.Center;
+
+                column = this.table.AddColumn("1.5cm");
+                column.Format.Alignment = ParagraphAlignment.Center;
+
+                column = this.table.AddColumn("1.5cm");
+                column.Format.Alignment = ParagraphAlignment.Center;
+
+                column = this.table.AddColumn("1.5cm");
+                column.Format.Alignment = ParagraphAlignment.Center;
+
+                column = this.table.AddColumn("1.5cm");
+                column.Format.Alignment = ParagraphAlignment.Center;
+
+                column = this.table.AddColumn("1.5cm");
+                column.Format.Alignment = ParagraphAlignment.Center;
+
+                column = this.table.AddColumn("1.5cm");
+                column.Format.Alignment = ParagraphAlignment.Center;
+
+                column = this.table.AddColumn("1.5cm");
+                column.Format.Alignment = ParagraphAlignment.Center;
+
+                // Create the header of the table
+                Row row = table.AddRow();
+                row.HeadingFormat = true;
+                row.Format.Alignment = ParagraphAlignment.Center;
+                row.Format.Font.Bold = true;
+                row.Shading.Color = new Color(66, 139, 202);
+                row.Cells[0].AddParagraph("Employee");
+                row.Cells[0].VerticalAlignment = MigraDoc.DocumentObjectModel.Tables.VerticalAlignment.Center;
+                row.Cells[0].MergeDown = 1;
+                row.Cells[1].AddParagraph("Monday");
+                row.Cells[1].Format.Alignment = ParagraphAlignment.Center;
+                row.Cells[1].MergeRight = 1;
+                row.Cells[3].AddParagraph("Tuesday");
+                row.Cells[3].Format.Alignment = ParagraphAlignment.Center;
+                row.Cells[3].MergeRight = 1;
+                row.Cells[5].AddParagraph("Wednesday");
+                row.Cells[5].Format.Alignment = ParagraphAlignment.Center;
+                row.Cells[5].MergeRight = 1;
+                row.Cells[7].AddParagraph("Thursday");
+                row.Cells[7].Format.Alignment = ParagraphAlignment.Center;
+                row.Cells[7].MergeRight = 1;
+                row.Cells[9].AddParagraph("Friday");
+                row.Cells[9].Format.Alignment = ParagraphAlignment.Center;
+                row.Cells[9].MergeRight = 1;
+                row.Cells[11].AddParagraph("Saturday");
+                row.Cells[11].Format.Alignment = ParagraphAlignment.Center;
+                row.Cells[11].MergeRight = 1;
+                row.Cells[13].AddParagraph("Sunday");
+                row.Cells[13].Format.Alignment = ParagraphAlignment.Center;
+                row.Cells[13].MergeRight = 1;
+
+                row = table.AddRow();
+                row.HeadingFormat = true;
+                row.Format.Alignment = ParagraphAlignment.Center;
+                row.Format.Font.Bold = true;
+                row.Shading.Color = new Color(66, 139, 202);
+                row.Cells[1].AddParagraph("Start");
+                row.Cells[1].Format.Alignment = ParagraphAlignment.Left;
+                row.Cells[2].AddParagraph("End");
+                row.Cells[2].Format.Alignment = ParagraphAlignment.Left;
+                row.Cells[3].AddParagraph("Start");
+                row.Cells[3].Format.Alignment = ParagraphAlignment.Left;
+                row.Cells[4].AddParagraph("End");
+                row.Cells[4].Format.Alignment = ParagraphAlignment.Left;
+                row.Cells[5].AddParagraph("Start");
+                row.Cells[5].Format.Alignment = ParagraphAlignment.Left;
+                row.Cells[6].AddParagraph("End");
+                row.Cells[6].Format.Alignment = ParagraphAlignment.Left;
+                row.Cells[7].AddParagraph("Start");
+                row.Cells[7].Format.Alignment = ParagraphAlignment.Left;
+                row.Cells[8].AddParagraph("End");
+                row.Cells[8].Format.Alignment = ParagraphAlignment.Left;
+                row.Cells[9].AddParagraph("Start");
+                row.Cells[9].Format.Alignment = ParagraphAlignment.Left;
+                row.Cells[10].AddParagraph("End");
+                row.Cells[10].Format.Alignment = ParagraphAlignment.Left;
+                row.Cells[11].AddParagraph("Start");
+                row.Cells[11].Format.Alignment = ParagraphAlignment.Left;
+                row.Cells[12].AddParagraph("End");
+                row.Cells[12].Format.Alignment = ParagraphAlignment.Left;
+                row.Cells[13].AddParagraph("Start");
+                row.Cells[13].Format.Alignment = ParagraphAlignment.Left;
+                row.Cells[14].AddParagraph("End");
+                row.Cells[14].Format.Alignment = ParagraphAlignment.Left;
+                table.Rows.Height = 20;
+
+                this.table.SetEdge(0, 0, 6, 2, Edge.Box, BorderStyle.Single, 0.75, Color.Empty);
+            }
+            #endregion
+
+            #region 2.3 - FillContent
+            void FillContent()
+            {
+
+                foreach (var employee in calendarVM.Employees)
+                {
+                    Row newRow = this.table.AddRow();
+                    newRow.Cells[0].AddParagraph(employee.FirstName + " " + employee.LastName);
+                    newRow.Cells[0].Format.Font.Color = new Color(66, 139, 202);
+                    int index = 1;
+
+                    var empShifts = calendarVM.Shifts;
+                    int currEmpIndex = calendarVM.Employees.IndexOf(employee);
+                    int prevEmpIndex = calendarVM.Employees.IndexOf(employee) - 1;
+                    int currMinElement = (prevEmpIndex * 7) + 7;
+                    empShifts = calendarVM.Shifts.ToList().GetRange(currMinElement, 7);
+
+                    foreach (var shift in empShifts)
+                    {
+                        if (shift == null)
+                        {
+                            newRow.Cells[index].AddParagraph("  ");
+                            newRow.Cells[index + 1].AddParagraph("  ");
+                        }
+                        else if (shift.UserId == employee.Id)
+                        {
+                            string startMinute;
+                            string endMinute;
+                            if (shift.StartDateTime.Minute < 10)
+                            { startMinute = "0" + shift.StartDateTime.Minute.ToString(); }
+                            else { startMinute = shift.StartDateTime.Minute.ToString(); }
+                            if (shift.EndDateTime.Minute < 10)
+                            { endMinute = "0" + shift.EndDateTime.Minute.ToString(); }
+                            else { endMinute = shift.EndDateTime.Minute.ToString(); }
+
+
+                            newRow.Cells[index].AddParagraph(shift.StartDateTime.Hour + ":" + startMinute);
+                            newRow.Cells[index].Format.Font.Color = new Color(66, 139, 202);
+                            newRow.Cells[index + 1].AddParagraph(shift.EndDateTime.Hour + ":" + endMinute);
+                            newRow.Cells[index + 1].Format.Font.Color = new Color(66, 139, 202);
+                        }
+
+                        index += 2;
+                    }
+
+                }
+
+                this.table.SetEdge(0, this.table.Rows.Count - 2, 6, 2, Edge.Box, BorderStyle.Single, 0.75);
+                //}
+
+                // Add an invisible row as a space line to the table
+                Row row = this.table.AddRow();
+                row.Borders.Visible = false;
+
+            }
+            #endregion
+
+            #endregion
+
+            #region 3 - Gets migraDocument
+            migraDocument = CreateDocument();
+            #endregion
+
+            #region 4 - Creates Table With MigraDoc 
+            PdfDocumentRenderer pdfRenderer = new PdfDocumentRenderer(false);
+            pdfRenderer.Document = migraDocument;
             // Renders the document
             pdfRenderer.RenderDocument();
             #endregion
 
             #region 5 - Streams the PDF to the customer
-            //string fileName = "heyfile.pdf";
-            //pdfRenderer.PdfDocument.Save("C:/Users/Aidan Marshall/Documents/Projects/ReadySetResource/Implementation/ReadySetResource/ReadySetResource/Content/PDF/" + fileName);
+            
             using (MemoryStream stream = new MemoryStream())
             {
                 pdfRenderer.PdfDocument.Save(stream, false);
@@ -1411,14 +1745,14 @@ namespace ReadySetResource.Areas.Apps.Controllers
                 Response.AddHeader("Content-Length", stream.Length.ToString());
                 stream.WriteTo(Response.OutputStream);
             }
-            //Process.Start("C:/Users/Aidan Marshall/Documents/Projects/ReadySetResource/Implementation/ReadySetResource/ReadySetResource/Content/PDF/" + fileName);
             Response.End();
             #endregion
-
+            
+            
 
         }
         #endregion
-        
+
 
 
 

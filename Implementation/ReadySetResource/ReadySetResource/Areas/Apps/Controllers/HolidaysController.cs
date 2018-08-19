@@ -56,11 +56,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
             }
             #endregion
 
-            DateTime weekBeginDate;
-            if (week != null) { weekBeginDate = week.Value; }
-            else { weekBeginDate = DateTime.Now.Date; }
-
-            HolidaysViewModel holidaysVM = PopulateHolidays(weekBeginDate);
+            HolidaysViewModel holidaysVM = PopulateHolidays();
             //1 - Start view with the ViewModel (holidaysVM) 
             return View(holidaysVM);
         }
@@ -210,7 +206,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
         //Methods for Holidays
         #region Populate Holidays Method
-        private HolidaysViewModel PopulateHolidays(DateTime weekBeginDate)
+        private HolidaysViewModel PopulateHolidays()
         {
 
             //1 - Get BusinessUserType from current user and sets current user as holidays.cshtml needs to check for business user type
@@ -229,41 +225,47 @@ namespace ReadySetResource.Areas.Apps.Controllers
             var holidaysVM = new HolidaysViewModel
             {
                 Holidays = new List<Holiday>(),
-                Employees = _context.Users.Where(e => e.BusinessUserType.BusinessId == currBusiness.Id).ToList(),
+                
                 CurrentUserType = currBusinessUserType,
                 CurrentUser = currBusinessUser,
             };
+
+
 
             var holidayApp = _context.Apps.FirstOrDefault(a => a.Name == "Calendar");
             var holidayVMAccessType = _context.TypeAppAccesses.Where(t => t.AppId == holidayApp.Id).Where(t => t.BusinessUserTypeId == currBusinessUserTypeId).ToList();
 
             holidaysVM.AccessType = holidayVMAccessType[0];
 
-            //4 - Get current day and set to CalendarVM.ActiveWeekCommenceDate
-            holidaysVM.ActiveWeekCommenceDate = weekBeginDate;
 
 
-
-            //5 - Get start date of the week and set to CalendarVM.ActiveWeekCommenceDate
-            while (holidaysVM.ActiveWeekCommenceDate.DayOfWeek.ToString() != "Monday")
+            if (holidaysVM.AccessType.AccessType == "E")
             {
-                holidaysVM.ActiveWeekCommenceDate = holidaysVM.ActiveWeekCommenceDate.AddDays(-1);
-            }
+                holidaysVM.Employees = _context.Users.Where(e => e.BusinessUserType.BusinessId == currBusiness.Id).ToList();
 
-
-
-            //6 - Load all holidays from those employees in that business in that week (activeWeekCommenceDate)
-            var activeWeekEndDate = holidaysVM.ActiveWeekCommenceDate.AddDays(7).AddSeconds(-1);
-            var tempHolidays = _context.Holidays.Where(s => s.StartDateTime >= holidaysVM.ActiveWeekCommenceDate && s.EndDateTime <= activeWeekEndDate).ToList();
-            foreach (var employee in holidaysVM.Employees)
-            {
-                foreach (var holiday in tempHolidays)
+                //This means it is an admin/manager
+                foreach (var employee in holidaysVM.Employees)
                 {
-                    if (employee.Id == holiday.UserId)
+                    var tempHolidays = _context.Holidays.Where(h => h.UserId == employee.Id).ToList();
+
+                    foreach (var tempHoliday in tempHolidays)
                     {
-                        holidaysVM.Holidays.Add(holiday);
+                        holidaysVM.Holidays.Add(tempHoliday);
                     }
+
                 }
+
+
+            }
+            else
+            {
+                //This means it can only see their details
+
+                holidaysVM.Employees = new List<ApplicationUser> { currBusinessUser };
+
+                var tempHolidays = _context.Holidays.Where(h => h.UserId == currBusinessUser.Id).ToList();
+
+                foreach (var tempHoliday in tempHolidays) { holidaysVM.Holidays.Add(tempHoliday); }
             }
 
 

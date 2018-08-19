@@ -23,6 +23,5 @@ namespace ReadySetResource.ViewModels
         public List<ApplicationUser> Employees { get; set; }
         public TypeAppAccess AccessType { get; set; }
         public List<Holiday> Holidays { get; set; }
-        public DateTime ActiveWeekCommenceDate { get; set; }
     }
 }
