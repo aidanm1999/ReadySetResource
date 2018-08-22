@@ -556,7 +556,6 @@
     <Content Include="Areas\Apps\Views\Holidays\Edit.cshtml" />
     <Content Include="Areas\Apps\Views\Employees\EditType.cshtml" />
     <Content Include="Areas\Apps\Views\Calendar\MyCharts.cshtml" />
-    <Content Include="Content\Images\home\Thumbs.db" />
     <Content Include="Areas\Apps\Views\Employees\Index.cshtml" />
     <Content Include="Areas\Apps\Views\MyAccount\Index.cshtml" />
     <Content Include="Content\bootstrap-datepicker3.standalone.css.map" />
@@ -824,18 +823,23 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808091919164_AddAppSettings.resx">
       <DependentUpon>201808091919164_AddAppSettings.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808091929502_AddAppSettings2.resx">
       <DependentUpon>201808091929502_AddAppSettings2.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808091937320_AddAppSettings3.resx">
       <DependentUpon>201808091937320_AddAppSettings3.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808112100015_AddAppSettings4.resx">
       <DependentUpon>201808112100015_AddAppSettings4.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808112105191_AddAppSettings5.resx">
       <DependentUpon>201808112105191_AddAppSettings5.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808112109389_AddAppSettings51.resx">
       <DependentUpon>201808112109389_AddAppSettings51.cs</DependentUpon>
@@ -845,6 +849,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808161730352_AddLocationToHoliday.resx">
       <DependentUpon>201808161730352_AddLocationToHoliday.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

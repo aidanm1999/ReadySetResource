@@ -13,9 +13,7 @@ using System.Web;
 
 namespace ReadySetResource.Areas.Apps.ViewModels.Calendar
 {
-    /// <summary>
-    /// Not used
-    /// </summary>
+
     public class ChartsViewModel
     {
 

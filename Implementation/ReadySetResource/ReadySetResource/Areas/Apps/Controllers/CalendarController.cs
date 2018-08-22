@@ -877,7 +877,7 @@ namespace ReadySetResource.Areas.Apps.Controllers
             //Checks to see if any of that employee's holidays overlaps with that week
             //shiftVM. 
 
-            ////6 - Load all holidays from those employees in that business in that week (activeWeekCommenceDate)
+            //6 - Load all holidays from those employees in that business in that week (activeWeekCommenceDate)
 
             var tempHolidays = _context.Holidays.Where(s => s.StartDateTime >= activeWeekCommenceDate || s.EndDateTime <= activeWeekEndDate).ToList();
 

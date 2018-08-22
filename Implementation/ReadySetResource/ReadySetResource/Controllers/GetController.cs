@@ -76,10 +76,6 @@ namespace ReadySetResource.Controllers
 
         //Step 1 - Solutions (HttpGet) - Manager One will pick a solution
         #region Solutions
-        /// <summary>
-        /// Solutionses this instance.
-        /// </summary>
-        /// <returns>The view</returns>
         [HttpGet]
         [AllowAnonymous]
         public ActionResult Solutions()
@@ -101,12 +97,6 @@ namespace ReadySetResource.Controllers
 
         //Step 2 - BusinessInfo (HttpGet) - Manager One adds company details
         #region Business Info
-        /// <summary>
-        /// Businesses the information.
-        /// </summary>
-        /// <param name="plan">The plan.</param>
-        /// <param name="errorMsg">The error MSG.</param>
-        /// <returns>The view with the model</returns>
         [HttpGet]
         [AllowAnonymous]
         public ActionResult BusinessInfo(int plan, string errorMsg)
@@ -221,11 +211,6 @@ namespace ReadySetResource.Controllers
 
         //Step 3 - AddBusiness (HttpPost) - Company details are added to DB
         #region Add Business
-        /// <summary>
-        /// Adds the business.
-        /// </summary>
-        /// <param name="businessVM">The business vm.</param>
-        /// <returns>Redirects to the manager details</returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -658,10 +643,6 @@ namespace ReadySetResource.Controllers
 
         //Step 8 - Welcome
         #region Welcome
-        /// <summary>
-        /// Welcomes this instance.
-        /// </summary>
-        /// <returns></returns>
         [HttpGet]
         [Authorize]
         public ActionResult Welcome()
