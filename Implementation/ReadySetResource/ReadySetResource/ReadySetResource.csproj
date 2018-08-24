@@ -734,15 +734,9 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Home\LogIn.cshtml" />
-    <Content Include="Views\Home\LogInStage2.cshtml" />
-    <Content Include="Views\Home\ForgotPassword.cshtml" />
-    <Content Include="Views\Home\CreateNewPassword.cshtml" />
-    <Content Include="Views\Home\SecurityQuestions.cshtml" />
     <Content Include="Views\Home\JobOpportunities.cshtml" />
     <Content Include="Views\Home\Credits.cshtml" />
     <Content Include="Views\Home\SiteMap.cshtml" />
-    <Content Include="Views\Home\ConfirmEmail.cshtml" />
     <Content Include="Views\Legal\Index.cshtml" />
     <Content Include="Views\Get\ManagerDetails.cshtml" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />

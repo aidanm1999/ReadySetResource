@@ -65,56 +65,6 @@ namespace ReadySetResource.Controllers
         #endregion
 
 
-        #region LogIn
-        [HttpGet]
-        [AllowAnonymous]
-        public ViewResult LogIn()
-        {
-            return View();
-        }
-        #endregion
-
-
-        #region LogInStage2
-        [HttpGet]
-        [AllowAnonymous]
-        public ViewResult LogInStage2()
-        {
-            return View();
-        }
-        #endregion
-
-
-        #region ForgotPassword
-        [HttpGet]
-        [AllowAnonymous]
-        public ViewResult ForgotPassword()
-        {
-            return View();
-        }
-        #endregion
-
-
-        #region CreateNewPassword
-        [HttpGet]
-        [AllowAnonymous]
-        public ViewResult CreateNewPassword()
-        {
-            return View();
-        }
-        #endregion
-
-
-        #region SecurityQuestions
-        [HttpGet]
-        [AllowAnonymous]
-        public ViewResult SecurityQuestions()
-        {
-            return View();
-        }
-        #endregion
-
-
         #region JobOpportunities
         [HttpGet]
         [AllowAnonymous]
@@ -145,16 +95,6 @@ namespace ReadySetResource.Controllers
         #endregion
 
 
-        #region ConfirmEmail
-        [HttpGet]
-        [AllowAnonymous]
-        public ViewResult ConfirmEmail()
-        {
-            return View();
-        }
-        #endregion
-
-
         #region Donate
         [HttpGet]
         [AllowAnonymous]
@@ -170,6 +110,6 @@ namespace ReadySetResource.Controllers
 
             return View(user);
         }
-#endregion
+        #endregion
     }
 }
