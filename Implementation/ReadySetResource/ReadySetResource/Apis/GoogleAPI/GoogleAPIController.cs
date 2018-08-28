@@ -17,6 +17,8 @@ using Google.Apis.Auth.OAuth2;
 using System.Threading.Tasks;
 using Google.Apis.Calendar.v3;
 using Google.Apis.Calendar.v3.Data;
+using Google.Apis.Sheets.v4;
+using Google.Apis.Sheets.v4.Data;
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
 using System.Threading;
@@ -76,7 +78,7 @@ namespace ReadySetResource.Apis.GoogleAPI
 
         #region Calendar API
 
-        #region Export Shifts
+        #region Export Shifts To Calendar
         [Authorize]
         public async Task<ActionResult> ExportShifts(CancellationToken cancellationToken, DateTime week)
         {
@@ -240,7 +242,61 @@ namespace ReadySetResource.Apis.GoogleAPI
 
 
 
-        #region Places API
+        #region Sheets API
+
+        #region Export Shifts To Sheets
+        [Authorize]
+        public async Task<ActionResult> ExportSheets(CancellationToken cancellationToken, DateTime? week)
+        {
+            var result = await new AuthorizationCodeMvcApp(this, new AppFlowMetadata()).
+                AuthorizeAsync(cancellationToken);
+
+            if (result.Credential != null)
+            {
+                var service = new SheetsService(new BaseClientService.Initializer()
+                {
+                    HttpClientInitializer = result.Credential,
+                    ApplicationName = "ReadySetResource"
+                });
+
+
+                // Define request parameters.
+                String spreadsheetId = "1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms";
+                String range = "Class Data!A2:E";
+                SpreadsheetsResource.ValuesResource.GetRequest request =
+                        service.Spreadsheets.Values.Get(spreadsheetId, range);
+
+                // Prints the names and majors of students in a sample spreadsheet:
+                // https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
+                ValueRange response = request.Execute();
+                IList<IList<Object>> values = response.Values;
+                if (values != null && values.Count > 0)
+                {
+                    Console.WriteLine("Name, Major");
+                    foreach (var row in values)
+                    {
+                        // Print columns A and E, which correspond to indices 0 and 4.
+                        Console.WriteLine("{0}, {1}", row[0], row[4]);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("No data found.");
+                }
+                Console.Read();
+
+
+                Console.WriteLine("Shifts exported");
+
+                return RedirectToAction("Index", "Calendar", new { area = "Apps" });
+            }
+            else
+            {
+                return new RedirectResult(result.RedirectUri);
+            }
+
+        }
+        #endregion
 
         #endregion
 
