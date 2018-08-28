@@ -101,7 +101,16 @@ namespace ReadySetResource.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    if (returnUrl == null || returnUrl == "")
+                    {
+                        returnUrl = "/Apps/Dashboard";
+                        return RedirectToLocal(returnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToLocal(returnUrl);
+                    }
+                    
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:

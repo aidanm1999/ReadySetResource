@@ -27,7 +27,6 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Add Shift", "Add", "Calendar", null, new { style = "color: #ffffff" })</li>
-                    <li>@Html.ActionLink("Print", "PDF", "Calendar", new { week = Model.ActiveWeekCommenceDate }, new { style = "color: #ffffff" })</li>
                     <li>@Html.ActionLink("Copy To Next Week", "CopyToNextWeek", "Calendar", new { week = Model.ActiveWeekCommenceDate.AddDays(7) }, new { title = "This button copies all shifts from this week to the next week and deletes all shifts on that week!", style = "color: #ffffff" })</li>
                     <li>@Html.ActionLink("Export", "Export", "Calendar", new { week = Model.ActiveWeekCommenceDate }, new { style = "color: #ffffff" })</li>
                 </ul>
