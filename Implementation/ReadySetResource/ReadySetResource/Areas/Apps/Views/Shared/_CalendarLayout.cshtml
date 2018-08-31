@@ -4,9 +4,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - RSR</title>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/modernizr")
     <link rel="stylesheet" href="~/Content/animate.css">
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <link rel="stylesheet" type="text/css" href="~/Content/Site.css">
 
 
 </head>
@@ -27,6 +31,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Add Shift", "Add", "Calendar", null, new { style = "color: #ffffff" })</li>
+                    <li>@Html.ActionLink("Today", "Index", "Calendar", null, new { style = "color: #ffffff" })</li>
                     <li>@Html.ActionLink("Copy To Next Week", "CopyToNextWeek", "Calendar", new { week = Model.ActiveWeekCommenceDate.AddDays(7) }, new { title = "This button copies all shifts from this week to the next week and deletes all shifts on that week!", style = "color: #ffffff" })</li>
                     <li>@Html.ActionLink("Export", "Export", "Calendar", new { week = Model.ActiveWeekCommenceDate }, new { style = "color: #ffffff" })</li>
                 </ul>
@@ -39,8 +44,5 @@
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
 </body>
 </html>

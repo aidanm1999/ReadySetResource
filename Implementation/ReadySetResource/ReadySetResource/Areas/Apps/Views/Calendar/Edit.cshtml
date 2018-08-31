@@ -36,7 +36,7 @@
 
         <div class="form-group" style="padding-top:20px">
             @Html.LabelFor(m => m.Employees)
-            @Html.DropDownListFor(m => m.UserId, Model.Employees)
+            @Html.DropDownListFor(m => m.UserId, Model.Employees, new { @class = "form-control", style = "width:100%;" })
             @Html.ValidationMessageFor(m => m.Employees)
         </div>
 

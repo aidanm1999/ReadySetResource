@@ -21,8 +21,18 @@ namespace ReadySetResource.ViewModels
 
         [Display(Name = "Date")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime TempDate { get; set; }
+
+        
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:HH/mm}", ApplyFormatInEditMode = true)]
+        public DateTime StartTime { get; set; }
+
+        
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:HH/mm}", ApplyFormatInEditMode = true)]
+        public DateTime EndTime { get; set; }
 
 
         [Display(Name = "Start")]
@@ -41,8 +51,9 @@ namespace ReadySetResource.ViewModels
         public String EndMinute { get; set; }
         public string UserId { get; set; }
         public int ShiftId { get; set; }
-        [Display(Name = "Select Employee")]
+        [Display(Name = "Employee")]
         public List<SelectListItem> Employees { get; set; }
+        public ApplicationUser ChosenEmployee { get; set; }
         public List<Holiday> EmployeesHolidays { get; set; }
         public string ErrorMessage { get; set; }
         public List<Shift> Shifts { get; set; }

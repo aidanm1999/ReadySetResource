@@ -1,4 +1,4 @@
-﻿@model DateTime?
+﻿@*@model DateTime?
 @{
     var value = "";
     if (Model.HasValue)
@@ -11,4 +11,4 @@
     }
 
 }
-@Html.TextBox("", value, new { @class = "datefield", type = "text" })
+@Html.TextBox("", value, new { @class = "datetimepicker", type = "text" })*@

@@ -6,7 +6,10 @@
 }
 
 
-
+<script type="text/javascript" src="~/Scripts/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="~/Scripts/jquery-ui-1.12.1.js"></script>
+<script type="text/javascript" src="~/Scripts/modernizr-2.8.3.js"></script>
+<script type="text/javascript" src="~/Scripts/jquery.validate.js"></script>
 
 <h2>Add Holiday</h2>
 
@@ -41,14 +44,7 @@
             @Html.TextBoxFor(m => m.EndHour, new { @class = "form-control", style = "width: 50px" }) :
             @Html.TextBoxFor(m => m.EndMinute, new { @class = "form-control", style = "width: 50px" })
         </div>
-        if (Model.User.BusinessUserType.Holidays == "E")
-        {
-            <div class="form-group" style="padding-top:20px">
-                @Html.LabelFor(m => m.Employees)
-                @Html.DropDownListFor(m => m.UserId, Model.Employees)
-                @Html.ValidationMessageFor(m => m.Employees)
-            </div>
-        }
+
 
         @Html.AntiForgeryToken()
         <p>
@@ -59,6 +55,20 @@
     }
 </div>
 
+<div class="container">
+    <div class="row">
+        <div class='col-sm-6'>
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker1'>
+                    <input type='text' class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 @*Generating client side validation*@
 @section scripts

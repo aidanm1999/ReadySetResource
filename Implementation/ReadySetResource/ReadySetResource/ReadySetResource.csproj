@@ -573,6 +573,7 @@
     <Content Include="Areas\Apps\Views\Shared\_DashboardLayout.cshtml" />
     <Content Include="Areas\Apps\Views\Shared\_CalendarLayout.cshtml" />
     <Content Include="Areas\Apps\Views\Calendar\Export.cshtml" />
+    <Content Include="Areas\Apps\Views\Shared\_HolidaysLayout.cshtml" />
     <None Include="Properties\PublishProfiles\ReadySetResource3 - Web Deploy.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -594,6 +595,7 @@
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\example.php" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -601,6 +603,8 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
+    <Content Include="Scripts\jquery.tabledit.js" />
+    <Content Include="Scripts\jquery.tabledit.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
