@@ -1,0 +1,61 @@
+﻿@model List<string>
+@{
+    ViewBag.Title = "Select Avitar";
+    Layout = "~/Areas/Apps/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .card {
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+        width: 210px;
+        border-radius: 5px;
+        word-wrap: break-word;
+        background-color: #eee9e9;
+    }
+
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        }
+
+    img {
+        border-radius: 5px 5px 0 0;
+    }
+
+    .container {
+        padding: 2px 16px;
+    }
+
+    .center {
+        margin: auto;
+        width: 80%;
+        padding: 10px;
+    }
+</style>
+
+<h2>Select Avitar</h2>
+<div class="row">
+    
+    @if (Model.Count > 0)
+    {
+        foreach (var avitar in Model)
+        {
+            <div class="col-md-3">
+                <div class="center">
+                    <a href="@Url.Action("AvitarAssign","MyAccount",new { avitar })">
+                        <div class="card" style="text-align:center;">
+                            <img src='@string.Format("/Content/Images/avitars/{0}", avitar)' style=" padding-top:20px; padding-bottom:10px; height: 235px;" />
+                        </div>
+                    </a>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <text> An error occurred. Please return to previous page and try again. If the problem persists, contact your system administrator.  </text>
+    }
+    
+
+
+</div>

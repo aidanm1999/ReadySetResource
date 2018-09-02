@@ -1,0 +1,35 @@
+﻿@model ReadySetResource.Areas.Apps.ViewModels.Dashboard.DashboardViewModel
+@{
+    Layout = "~/Areas/Apps/Views/Shared/_DashboardLayout.cshtml";
+    ViewBag.Title = "Dashboard";
+}
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>Dashboard</title>
+    </head>
+    
+    <body id="Apps">
+        <h2 style="text-align:center; ">Welcome, @Model.FirstName @Model.LastName</h2>
+        <div class="row" style="text-align:center">
+            @foreach (var app in Model.Apps)
+            {
+            <div class="col-md-3 animated fadeIn" style="animation-delay:0.2s">
+                <a href="@Url.Action("Index", app.Link)">
+                    @if (app.Name == "My Account")
+                    {
+                        <img src='@string.Format("/Content/Images/avitars/{0}.png", Model.Avitar)' alt="@app.Name" style=" padding-top:10px; padding-bottom:40px; width: 170px; display:block; margin-left:auto; margin-right:auto;" />
+                    }
+                    else
+                    {
+                        <img src='@string.Format("/Content/Images/apps/{0}.png", app.Link)' alt="@app.Name" style=" padding-top:10px; padding-bottom:40px; width: 170px; display:block; margin-left:auto; margin-right:auto;" />
+                    }
+                </a>
+            </div>
+            }
+        </div>
+    </body>
+</html>

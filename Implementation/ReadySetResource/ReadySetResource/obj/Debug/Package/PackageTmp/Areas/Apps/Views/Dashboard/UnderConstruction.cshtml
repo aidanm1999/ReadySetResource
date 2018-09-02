@@ -1,0 +1,52 @@
+﻿
+@{
+    Layout = null;
+}
+<!doctype html>
+<link rel="stylesheet" href="~/Content/animate.css">
+<title>Coming Soon</title>
+<style>
+    body {
+        text-align: center;
+        padding: 150px;
+    }
+
+
+    h1 {
+        font-size: 50px;
+    }
+
+    body {
+        font: 20px Helvetica, sans-serif;
+        color: #333;
+    }
+
+    article {
+        display: block;
+        text-align: left;
+        width: 650px;
+        margin: 0 auto;
+    }
+
+    a {
+        color: #428bca;
+        text-decoration: none;
+    }
+
+        a:hover {
+            color: #333;
+            text-decoration: none;
+        }
+</style>
+<article class="animated bounceInDown">
+    <h1>Coming soon!</h1>
+    <div>
+        <p>
+            We are working hard to make this website as good as we can launching many apps very soon!
+            If you need to you can always <a href="mailto:help@readysetresource.com">contact us</a>, otherwise come back soon for a surprise!
+        </p>
+        <p>&mdash; The RSR Team</p>
+
+        @Html.ActionLink("Let's go home", "Index", "Dashboard")
+    </div>
+</article>

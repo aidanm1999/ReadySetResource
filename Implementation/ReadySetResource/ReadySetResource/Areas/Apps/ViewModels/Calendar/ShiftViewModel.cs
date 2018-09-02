@@ -25,12 +25,12 @@ namespace ReadySetResource.ViewModels
         public DateTime TempDate { get; set; }
 
         
-        [DataType(DataType.Date)]
+        [DataType(DataType.Time)]
         [DisplayFormat(DataFormatString = "{0:HH/mm}", ApplyFormatInEditMode = true)]
         public DateTime StartTime { get; set; }
 
         
-        [DataType(DataType.Date)]
+        [DataType(DataType.Time)]
         [DisplayFormat(DataFormatString = "{0:HH/mm}", ApplyFormatInEditMode = true)]
         public DateTime EndTime { get; set; }
 

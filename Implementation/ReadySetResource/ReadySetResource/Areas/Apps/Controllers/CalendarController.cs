@@ -196,13 +196,11 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
             ShiftViewModel shiftVM = new ShiftViewModel()
             {
-                EndHour = ActualShift.EndDateTime.Hour.ToString(),
-                EndMinute = ActualShift.EndDateTime.Minute.ToString(),
-
-                StartHour = ActualShift.StartDateTime.Hour.ToString(),
-                StartMinute = ActualShift.StartDateTime.Minute.ToString(),
+                EndTime = ActualShift.EndDateTime,
+                StartTime = ActualShift.StartDateTime,
 
                 TempDate = ActualShift.EndDateTime.Date,
+                
 
                 UserId = ActualShift.UserId,
 
