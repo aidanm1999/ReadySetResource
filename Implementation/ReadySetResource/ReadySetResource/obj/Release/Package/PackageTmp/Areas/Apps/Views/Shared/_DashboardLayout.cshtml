@@ -7,10 +7,12 @@
     <link rel="stylesheet" href="~/Content/animate.css">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
 
 </head>
 <body>
+
     <div class="navbar navbar-inverse navbar-fixed-top navbar" style="background-color:#428bca; border-color:#428bca">
         <div class="container">
             <div class="navbar-header">
@@ -19,31 +21,29 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="@Url.Action("Index", "Home", new { area = "" })">
+                <a href="@Url.Action("Index", "Home" , new { area="" })">
                     <img src="~/Content/Images/home/logoWhite.png" width="50" style="margin-right:15px; margin-left:15px;" />
                 </a>
-                
+
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                </ul>
-                    @using (Html.BeginForm(actionName: "LogOff", controllerName: "Account", method: FormMethod.Post, routeValues: new { area = "" }, htmlAttributes: new { id = "logoutForm", @class = "navbar-right", style= "color:#ffffff" }))
-                    {
+                <ul class="nav navbar-nav"></ul>
+                @using (Html.BeginForm(actionName: "LogOff", controllerName: "Account", method: FormMethod.Post, routeValues: new { area = "" }, htmlAttributes: new { id = "logoutForm", @class = "navbar-right", style = "color:#ffffff" }))
+                {
                     @Html.AntiForgeryToken()
 
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="javascript:document.getElementById('logoutForm').submit()" style="color:#ffffff">Log off</a></li>
                     </ul>
-                    }
+                }
 
             </div>
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
-        <footer>
-        </footer>
     </div>
+
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

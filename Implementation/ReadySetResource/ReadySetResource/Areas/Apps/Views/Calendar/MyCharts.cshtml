@@ -7,13 +7,15 @@
 <script src="~/Scripts/Chart.min.js"></script>
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
 <h2>My Charts</h2>
 
 <div class="col-md-12" style="height:260px;border-color:black; border-width:4px;">
     <div class="col-md-6">
         <canvas id="doughnut-chart"></canvas>
     </div>
-    <div class="col-md-6" style="text-align:center; font-family:Tahoma;">
+    <div class="col-md-6" style="text-align:center; font-family: 'Roboto', sans-serif;">
         <div style="font-size:84px">
 
             @if(Model.UpOrDownHours < 0)

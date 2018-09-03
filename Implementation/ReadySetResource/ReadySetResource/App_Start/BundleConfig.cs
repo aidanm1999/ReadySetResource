@@ -35,7 +35,7 @@ namespace ReadySetResource
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Scripts/bootstrap-datepicker3.css",
-                      "~/Content/site.css"));
+                      "~/Content/Site.css"));
         }
     }
 }

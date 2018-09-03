@@ -4,11 +4,50 @@
     ViewBag.Title = "Log In";
 }
 
+<script>
+    function growDiv() {
+        var growDiv = document.getElementById('grow');
+        if (growDiv.clientHeight) {
+            growDiv.style.height = 0;
+        } else {
+            var wrapper = document.querySelector('.measuringWrapper');
+            growDiv.style.height = wrapper.clientHeight + "px";
+        }
+        document.getElementById("more-button").value = document.getElementById("more-button").value == 'Options' ? 'Close' : 'Options';
+    }
+</script>
 
 <style>
     form {
         margin: 0 auto;
         width: 260px;
+    }
+    #more-button {
+        border-style: none;
+        background: none;
+        font: 16px Serif;
+        width:100%;
+        color: #428bca;
+        text-align:right;
+        margin: 0 0 10px 0;
+    }
+
+    #grow input:checked {
+        color: red;
+    }
+
+    #more-button:hover {
+        color: black;
+    }
+
+    #grow {
+        -moz-transition: height .5s;
+        -ms-transition: height .5s;
+        -o-transition: height .5s;
+        -webkit-transition: height .5s;
+        transition: height .5s;
+        height: 0;
+        overflow: hidden;
     }
 </style>
 <body>
@@ -35,23 +74,34 @@
                         @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
 
                     </div>
-                    <p>
-                        @Html.ActionLink("Forgot password?", "ForgotPassword")
-                    </p>
-                    <p>
-                        @Html.CheckBoxFor(m => m.RememberMe) <text>  </text>
-                        @Html.LabelFor(m => m.RememberMe)
-                    </p>
 
+                    <div class="form-group" style="padding-right:10px">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @Html.ActionLink("Go To Dashboard", "Index", "Dashboard", new { area = "Apps" }, new { @class = "btn btn-primary btn-block" })
+                    }
+                    else
+                    {
 
-                    <div class="form-group">
                         <input type="submit" value="Log in" class="btn btn-primary btn-block" />
+                    }
                     </div>
-
-
-
-
                 }
+
+                <input type="button" onclick="growDiv()" value="Options" id="more-button">
+                <div id="grow">
+                    <div class='measuringWrapper'>
+                        <div class="text">
+                            <p style="padding-top:4px;">
+                                @Html.ActionLink("Forgot password?", "ForgotPassword")
+                            </p>
+                            <p>
+                                @Html.CheckBoxFor(m => m.RememberMe) <text>  </text>
+                                @Html.LabelFor(m => m.RememberMe)
+                            </p>
+                        </div>
+                    </div>
+                </div>
 
             </section>
         </div>

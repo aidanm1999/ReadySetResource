@@ -10,26 +10,89 @@
     <head>
         <meta name="viewport" content="width=device-width" />
         <title>Dashboard</title>
+        <style>
+            #Card {
+                background-color: white;
+                border-color: #C8C8C8;
+                border-style: solid;
+                border-width: 1px;
+                border-radius: 6px;
+                padding: 5px 20px 5px 20px;
+            }
+            #CardHeader {
+                background-color: #428bca;
+                border-color: #C8C8C8;
+                color:white;
+                border-style: solid;
+                border-width: 1px 1px 0px 1px;
+                border-radius: 6px 6px 0px 0px;
+                padding: 5px 20px 5px 20px;
+            }
+            #CardBody {
+                background-color: white;
+                border-color: #C8C8C8;
+                text-align:right;
+                border-style: solid;
+                border-width: 1px;
+                border-radius: 0px 0px 6px 6px;
+                padding: 5px 20px 5px 20px;
+                margin-bottom:20px;
+            }
+        </style>
     </head>
     
-    <body id="Apps">
-        <h2 style="text-align:center; ">Welcome, @Model.FirstName @Model.LastName</h2>
-        <div class="row" style="text-align:center">
-            @foreach (var app in Model.Apps)
-            {
-            <div class="col-md-3 animated fadeIn" style="animation-delay:0.2s">
-                <a href="@Url.Action("Index", app.Link)">
-                    @if (app.Name == "My Account")
-                    {
-                        <img src='@string.Format("/Content/Images/avitars/{0}.png", Model.Avitar)' alt="@app.Name" style=" padding-top:10px; padding-bottom:40px; width: 170px; display:block; margin-left:auto; margin-right:auto;" />
-                    }
-                    else
-                    {
-                        <img src='@string.Format("/Content/Images/apps/{0}.png", app.Link)' alt="@app.Name" style=" padding-top:10px; padding-bottom:40px; width: 170px; display:block; margin-left:auto; margin-right:auto;" />
-                    }
-                </a>
+    <body style="background:#F0F0F0" >
+        <div class="row" style="padding-top:20px;">
+            <div class="col-md-3" id="Card" style="margin-left: 30px;margin-right: 40px;">
+                <h2 style="text-align:center">Apps</h2>
+                <hr style="color:lightgray"/>
+                @foreach (var app in Model.Apps)
+                {
+                    <div class="animated fadeIn" style="animation-delay:0.2s">
+                        <a href="@Url.Action("Index", app.Link)">
+                            <div>
+                                @if (app.Name == "My Account")
+                                {
+                                    <h4><img src='@string.Format("/Content/Images/avitars/{0}.png", Model.Avitar)' alt="@app.Name" style="height:40px; width:40px; margin-right:20px;" /> @app.Name</h4>
+                                }
+                                else
+                                {
+                                    <h4><img src='@string.Format("/Content/Images/apps/{0}.png", app.Link)' alt="@app.Name" style="height:40px; width:40px;margin-right:20px;" /> @app.Name</h4>
+                                }
+                            </div>
+                        </a>
+                    </div>
+                }
             </div>
-            }
+            <div class="col-md-8">
+                <h1>Dashboard</h1>
+                <hr />
+
+                <div class="col-md-5 col-md-offset-1">
+                    <div id="CardHeader">Next Shift</div>
+                    <div id="CardBody">
+                        <div>Coming</div>
+                        <div>soon...</div>
+                    </div>
+                </div>
+
+                <div class="col-md-5 col-md-offset-1">
+                    <div id="CardHeader">Hours Worked</div>
+                    <div id="CardBody">
+                        <div>Coming</div>
+                        <div>soon...</div>
+                    </div>
+                </div>
+
+                <div class="col-md-5 col-md-offset-1">
+                    <div id="CardHeader">Export Shifts</div>
+                    <div id="CardBody">
+                        <div>@Html.ActionLink("This week", "Export", "Calendar")</div>
+                        <div>@Html.ActionLink("Next week", "Export", "Calendar", new { week = DateTime.Now.AddDays(7).Date }, null)</div>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </body>
 </html>

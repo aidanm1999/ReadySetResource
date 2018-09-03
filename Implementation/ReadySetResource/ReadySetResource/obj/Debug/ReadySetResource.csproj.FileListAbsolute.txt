@@ -197,8 +197,8 @@ C:\Users\Aidan Marshall\Google Drive\ReadySetResource\Implementation\ReadySetRes
 C:\Users\Aidan Marshall\Google Drive\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\roslyn\Microsoft.CodeAnalysis.dll
 C:\Users\Aidan Marshall\Google Drive\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
 C:\Users\Aidan Marshall\Google Drive\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
-C:\Users\Aidan Marshall\Google Drive\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\roslyn\VBCSCompiler.exe
 C:\Users\Aidan Marshall\Google Drive\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\roslyn\System.IO.Compression.dll
+C:\Users\Aidan Marshall\Google Drive\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\roslyn\VBCSCompiler.exe
 C:\Users\Aidan Marshall\Google Drive\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\ApplicationInsights.config
 C:\Users\Aidan Marshall\Google Drive\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\ReadySetResource.dll.config
 C:\Users\Aidan Marshall\Google Drive\ReadySetResource\Implementation\ReadySetResource\ReadySetResource\bin\ReadySetResource.dll
