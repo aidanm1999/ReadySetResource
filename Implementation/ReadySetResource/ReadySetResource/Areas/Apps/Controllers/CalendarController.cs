@@ -978,16 +978,16 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
 
             //Sets remaining attributes for the shift
-            shift.StartDateTime = shift.StartDateTime.AddHours(Convert.ToDouble(shiftVM.StartHour));
-            shift.StartDateTime = shift.StartDateTime.AddMinutes(Convert.ToDouble(shiftVM.StartMinute));
+            shift.StartDateTime = shift.StartDateTime.AddHours(Convert.ToDouble(shiftVM.StartTime.Hour));
+            shift.StartDateTime = shift.StartDateTime.AddMinutes(Convert.ToDouble(shiftVM.StartTime.Minute));
 
             shift.StartDateTime = shift.StartDateTime.AddDays(shiftVM.TempDate.Day - 1);
             shift.StartDateTime = shift.StartDateTime.AddMonths(shiftVM.TempDate.Month - 1);
             shift.StartDateTime = shift.StartDateTime.AddYears(shiftVM.TempDate.Year - 1);
 
 
-            shift.EndDateTime = shift.EndDateTime.AddHours(Convert.ToDouble(shiftVM.EndHour));
-            shift.EndDateTime = shift.EndDateTime.AddMinutes(Convert.ToDouble(shiftVM.EndMinute));
+            shift.EndDateTime = shift.EndDateTime.AddHours(Convert.ToDouble(shiftVM.EndTime.Hour));
+            shift.EndDateTime = shift.EndDateTime.AddMinutes(Convert.ToDouble(shiftVM.EndTime.Minute));
 
             shift.EndDateTime = shift.EndDateTime.AddDays(shiftVM.TempDate.Day - 1);
             shift.EndDateTime = shift.EndDateTime.AddMonths(shiftVM.TempDate.Month - 1);
@@ -1054,19 +1054,9 @@ namespace ReadySetResource.Areas.Apps.Controllers
                     shiftVM.ErrorMessage = "Shift already there.";
                     return View("Edit", shiftVM);
                 }
-                else if (Int32.Parse(shiftVM.EndMinute) >= 60 | Int32.Parse(shiftVM.StartMinute) >= 60)
-                {
-                    shiftVM.ErrorMessage = "Minute must be between 0 and 59";
-                    return View("Add", shiftVM);
-                }
-                else if (Int32.Parse(shiftVM.EndHour) >= 24 | Int32.Parse(shiftVM.StartHour) >= 24)
-                {
-                    shiftVM.ErrorMessage = "Hour must be between 0 and 23";
-                    return View("Add", shiftVM);
-                }
                 else if (shift.EndDateTime <= shift.StartDateTime)
                 {
-                    shiftVM.ErrorMessage = "Start date is later than end date";
+                    shiftVM.ErrorMessage = "Start time is later than end time";
                     return View("Edit", shiftVM);
                 }
                 else
