@@ -1004,6 +1004,8 @@ namespace ReadySetResource.Areas.Apps.Controllers
 
             Shift shiftInDb = _context.Shifts.SingleOrDefault(s => s.Id == shift.Id);
 
+            shiftInDb.User = _context.Users.FirstOrDefault(u => u.Id == shiftInDb.UserId);
+
             if (shiftInDb.Id != shift.Id | shiftInDb.StartDateTime != shift.StartDateTime | shiftInDb.EndDateTime != shift.EndDateTime | shiftInDb.User.Id != shift.User.Id | shiftInDb.UserId != shift.UserId)
             {
                 changesMade = true;

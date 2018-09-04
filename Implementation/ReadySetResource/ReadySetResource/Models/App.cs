@@ -15,8 +15,9 @@ namespace ReadySetResource.Models
         [Required]
         public string Name { get; set; }
 
-        public string Link { get; set; }
-        
-        
+        public string Link { get; set; } 
+        public string Mini { get; set; }
+
+
     }
 }

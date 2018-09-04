@@ -404,12 +404,17 @@
     <Content Include="Content\bootstrap-datepicker3.standalone.css" />
     <Content Include="Content\bootstrap-datepicker3.standalone.min.css" />
     <Content Include="Content\Images\apps\Calendar.png" />
+    <Content Include="Content\Images\apps\CalendarIcon.png" />
+    <Content Include="Content\Images\apps\EmployeesIcon.png" />
     <Content Include="Content\Images\apps\Holidays.png" />
     <Content Include="Content\Images\apps\Employees.png" />
+    <Content Include="Content\Images\apps\HolidaysIcon.png" />
+    <Content Include="Content\Images\apps\MyAccountIcon.png" />
     <Content Include="Content\Images\apps\RSRStore.png" />
     <Content Include="Content\Images\apps\MyAccount.png" />
     <Content Include="Content\Images\apps\BusinessSettings.png" />
     <Content Include="Content\Images\apps\Dashboard.png" />
+    <Content Include="Content\Images\apps\BusinessSettingsIcon.png" />
     <Content Include="Content\Images\dashboard\addUser.png" />
     <Content Include="Content\Images\avitars\boy-1.png" />
     <Content Include="Content\Images\avitars\boy-10.png" />
