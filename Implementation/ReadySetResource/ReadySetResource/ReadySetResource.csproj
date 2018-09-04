@@ -83,6 +83,9 @@
     <Reference Include="Google.Apis.Sheets.v4, Version=1.35.1.1327, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Apis.Sheets.v4.1.35.1.1327\lib\net45\Google.Apis.Sheets.v4.dll</HintPath>
     </Reference>
+    <Reference Include="MarkdownDeep, Version=1.1.4117.36784, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MarkdownDeep.NET.1.4\lib\.NetFramework 3.5\MarkdownDeep.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.4.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
     </Reference>
@@ -297,6 +300,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LegalController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Helpers\MarkdownHelper.cs" />
     <Compile Include="Migrations\201807252259106_InitialMigration.cs" />
     <Compile Include="Migrations\201807252259106_InitialMigration.Designer.cs">
       <DependentUpon>201807252259106_InitialMigration.cs</DependentUpon>
