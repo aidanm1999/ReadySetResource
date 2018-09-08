@@ -3,6 +3,7 @@
     Layout = "~/Areas/Apps/Views/Shared/_DashboardLayout.cshtml";
     ViewBag.Title = "Dashboard";
 }
+@using ReadySetResource.MarkdownEditor
 
 <!DOCTYPE html>
 
@@ -91,6 +92,8 @@
                         <div>@Html.ActionLink("Next week", "Export", "Calendar", new { week = DateTime.Now.AddDays(7).Date }, null)</div>
                     </div>
                 </div>
+
+                @Html.Markdown("")
 
             </div>
         </div>

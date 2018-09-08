@@ -112,8 +112,12 @@ namespace ReadySetResource.Areas.Apps.Controllers
             var currUserId = User.Identity.GetUserId();
             var currBusinessUser = _context.Users.SingleOrDefault(c => c.Id == currUserId);
             var currBusinessUserTypeId = currBusinessUser.BusinessUserTypeId;
+            var appId = _context.Apps.SingleOrDefault(a => a.Name == "Calendar").Id;
+            var currAccessType = _context.TypeAppAccesses.SingleOrDefault(t => t.BusinessUserTypeId == currBusinessUserTypeId && t.AppId == appId);
             var currBusinessUserType = _context.BusinessUserTypes.SingleOrDefault(c => c.Id == currBusinessUserTypeId);
             var currBusinessId = currBusinessUserType.BusinessId;
+
+            if(currAccessType.AccessType == "V") { return RedirectToAction("NotAuthorised", "Account", new { area = "" }); }
 
             var employeePassedIn = _context.Users.FirstOrDefault(u => u.Id == emp);
 
@@ -188,8 +192,12 @@ namespace ReadySetResource.Areas.Apps.Controllers
             var currUserId = User.Identity.GetUserId();
             var currBusinessUser = _context.Users.SingleOrDefault(c => c.Id == currUserId);
             var currBusinessUserTypeId = currBusinessUser.BusinessUserTypeId;
+            var appId = _context.Apps.SingleOrDefault(a => a.Name == "Calendar").Id;
+            var currAccessType = _context.TypeAppAccesses.SingleOrDefault(t => t.BusinessUserTypeId == currBusinessUserTypeId && t.AppId == appId);
             var currBusinessUserType = _context.BusinessUserTypes.SingleOrDefault(c => c.Id == currBusinessUserTypeId);
             var currBusinessId = currBusinessUserType.BusinessId;
+
+            if (currAccessType.AccessType == "V") { return RedirectToAction("NotAuthorised", "Account", new { area = "" }); }
 
             Models.Shift ActualShift = _context.Shifts.SingleOrDefault(s => s.Id == shift);
 

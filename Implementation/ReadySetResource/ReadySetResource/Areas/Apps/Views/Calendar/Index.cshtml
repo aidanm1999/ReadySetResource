@@ -7,7 +7,7 @@
 
 
 
-@if (Model.AccessType.AccessType == "E")
+@if (Model.AccessType.AccessType == "E" || Model.AccessType.AccessType == "V")
 {
     string GetDaySuffix(int dayPassedIn)
     {
@@ -47,13 +47,6 @@
             </a>
         </div>
     </h2>
-}
-else if (Model.AccessType.AccessType == "V")
-{
-    <h2>
-        @Model.ActiveWeekCommenceDate.Day/@Model.ActiveWeekCommenceDate.Month to @Model.ActiveWeekCommenceDate.AddDays(6).Day/@Model.ActiveWeekCommenceDate.AddDays(6).Month
-    </h2>
-
 }
 else
 {
