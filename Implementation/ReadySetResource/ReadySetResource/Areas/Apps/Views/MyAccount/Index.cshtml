@@ -13,7 +13,7 @@
             var wrapper = document.querySelector('.measuringWrapper');
             growDiv.style.height = wrapper.clientHeight + "px";
         }
-        document.getElementById("more-button").value = document.getElementById("more-button").value == 'Read more' ? 'Read less' : 'Read more';
+        document.getElementById("more-button").value = document.getElementById("more-button").value === 'Read more' ? 'Read less' : 'Read more';
     }
 </script>
 
@@ -74,9 +74,9 @@
 
     <div class="col-md-9 animated fadeInUp" style="animation-duration:1s; height:100%; padding-top:40px;">
 
+        @Html.LabelFor(m => m.User.Title, new { style = "font-size:large;" })
+        <br>
         <div class="form-inline">
-            @Html.LabelFor(m => m.User.Title, new { style = "font-size:large;" })
-            <br>
             @Html.DropDownListFor(m => m.User.Title, Model.TitleOptions, new { @class = "form-control", style = "width:75px;" })
             @Html.TextBoxFor(m => m.User.FirstName, new { @class = "form-control", style = "width:100px;" })
             @Html.TextBoxFor(m => m.User.LastName, new { @class = "form-control", style = "width:100px;" })
